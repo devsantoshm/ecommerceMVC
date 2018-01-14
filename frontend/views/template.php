@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximun-scale=1.0, user-scalable=no">
+	<meta name="title" content="Tienda Virtual">
+	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.">
+	<meta name="keyword" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.">
 	<title>Tienda virtual</title>
-</head>
+	<link rel="stylesheet" type="text/css" href="views/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="views/css/plugins/font-awesome.min.css">
+	<script src="views/js/plugins/jquery.min.js"></script>
+	<script src="views/js/plugins/bootstrap.min.js"></script>
 <body>
-	<h1>Mi Tienda Online</h1>
+<?php  
+include 'modules/header.php';	
+
+?>
 </body>
 </html>
