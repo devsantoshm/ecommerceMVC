@@ -11,6 +11,10 @@
 	<title>Tienda virtual</title>
 	<link rel="stylesheet" type="text/css" href="views/css/plugins/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="views/css/plugins/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="views/css/template.css">
+	<link rel="stylesheet" type="text/css" href="views/css/header.css">
 	<script src="views/js/plugins/jquery.min.js"></script>
 	<script src="views/js/plugins/bootstrap.min.js"></script>
 <body>

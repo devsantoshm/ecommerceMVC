@@ -1,0 +1,46 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	text-decoration: none;
+	font-family: 'Ubuntu', sans-serif; 
+}
+
+ul, ol{
+	padding: 0px;
+}
+
+a:visited, a:link, a:focus, a:hover, a:active{
+	list-style: none;
+	text-decoration: none;
+}
+
+.barraSuperior, .barraSuperior a{
+	background: black;
+	color:white;
+}
+
+.backColor, .backColor a{
+	background: #47bac1;
+	color:white;
+}
+
+.redSocial{
+	width:30px;
+	height:30px;
+	text-align: center;
+	line-height: 30px;
+}
+
+.facebookBlanco{
+	color:white;
+}
+
+.facebookNegro{
+	color:black;
+}
+
+.facebookColor{
+	color:white;
+	background:#46639f;
+}
