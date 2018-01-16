@@ -74,5 +74,59 @@
 				<p>TU CESTA <span class="cantidadCesta"></span><br>USD$<span class="sumaCesta"></span></p>
 			</div>
 		</div>
+		<div class="col-xs-12 backColor" id="categorias">
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+				<h4>
+					<a href="#" class="pixelCategorias">Categorias</a>
+				</h4>
+				<hr>
+				<ul>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+				<h4>
+					<a href="#" class="pixelCategorias">Categorias</a>
+				</h4>
+				<hr>
+				<ul>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+				<h4>
+					<a href="#" class="pixelCategorias">Categorias</a>
+				</h4>
+				<hr>
+				<ul>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+				<h4>
+					<a href="#" class="pixelCategorias">Categorias</a>
+				</h4>
+				<hr>
+				<ul>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </header>
