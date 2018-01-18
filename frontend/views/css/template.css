@@ -44,3 +44,31 @@ a:visited, a:link, a:focus, a:hover, a:active{
 	color:white;
 	background:#46639f;
 }
+
+/* EScritorio grande */
+@media (min-width: 1200px) {
+	.col-lg-0{
+		display: none;
+	}
+}
+
+/* EScritorio mediano o tablet horizontal */
+@media (max-width: 1199px) and (min-width: 992px) {
+	.col-md-0{
+		display: none;
+	}	
+}
+
+/* Tablet vertical */
+@media (max-width: 991px) and (min-width: 768px) {
+	.col-sm-0{
+		display: none;
+	}
+}
+
+/* Movil */
+@media (max-width: 767px) {
+	.col-xs-0{
+		display: none;
+	}
+}
