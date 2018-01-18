@@ -5,6 +5,13 @@ Class TemplateController
 	{
 		include "views/template.php";
 	}
+
+	public function templateStyle()
+	{
+		$table = "template";
+		$response = TemplateModel::templateStyle($table);
+		return $response;
+	}
 }
 
 ?>
