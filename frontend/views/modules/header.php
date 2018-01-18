@@ -5,7 +5,7 @@
 				<ul>
 					<?php  
 					$social = TemplateController::templateStyle();
-					$jsonRedesSociales = json_decode($social["redesSociales"], true);
+					$jsonRedesSociales = json_decode($social["redesSociales"], true); // convierte el string en un array
 					foreach ($jsonRedesSociales as $item) {
 						echo '<li>
 								<a href="'.$item["url"].'" target="_blank">

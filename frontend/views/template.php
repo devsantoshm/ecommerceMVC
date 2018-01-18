@@ -23,5 +23,6 @@ include 'modules/header.php';
 
 ?>
 <script src="views/js/header.js"></script>
+<script src="views/js/template.js"></script>
 </body>
 </html>
