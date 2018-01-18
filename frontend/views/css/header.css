@@ -65,7 +65,7 @@ header #carrito p{
 }
 
 header #categorias{
-	display: block;
+	display: none;
 	margin-top: -10px;
 	position: relative;
 }
