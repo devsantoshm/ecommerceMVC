@@ -31,7 +31,7 @@
 		<div class="row" id="cabezote">
 			<div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
 				<a href="#">
-					<img src="http://localhost/ecommerce/backend/views/img/plantilla/logo.png" class="img-responsive">
+					<img src="http://localhost/ecommerce/backend/<?php echo $social["logo"] ?>" class="img-responsive">
 				</a>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">

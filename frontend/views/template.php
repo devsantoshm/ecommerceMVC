@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximun-scale=1.0, user-scalable=no">
 	<meta name="title" content="Tienda Virtual">
+	<?php  
+		$icon = TemplateController::templateStyle();
+	?>
+	<link rel="icon" href="http://localhost/ecommerce/backend/<?php echo $icon["icono"] ?>">
 	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 	tempor incididunt ut labore et dolore magna aliqua.">
 	<meta name="keyword" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
