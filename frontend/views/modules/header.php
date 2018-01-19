@@ -67,14 +67,14 @@
 			?>
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 				<h4>
-					<a href="#" class="pixelCategorias"><?php echo $cat["categoria"] ?></a>
+					<a href="<?php echo $cat["ruta"] ?>" class="pixelCategorias"><?php echo $cat["categoria"] ?></a>
 				</h4>
 				<hr>
 				<ul>
 					<?php $subcategories = ProductController::showSubCategories($cat["id"]); 
 					foreach ($subcategories as $subcat) {
 					?>
-					<li><a href="" class="pixelSubCategorias"><?php echo $subcat["subcategoria"] ?></a></li>
+					<li><a href="<?php echo $subcat["ruta"] ?>" class="pixelSubCategorias"><?php echo $subcat["subcategoria"] ?></a></li>
 					<?php } ?>
 				</ul>
 			</div>

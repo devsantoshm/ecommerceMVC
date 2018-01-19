@@ -8,25 +8,36 @@
 		$icon = TemplateController::templateStyle();
 	?>
 	<link rel="icon" href="http://localhost/ecommerce/backend/<?php echo $icon["icono"] ?>">
+	<?php 
+		$url = new Route(); 
+		$route = $url->route();
+		//var_dump($route);
+	?>
 	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 	tempor incididunt ut labore et dolore magna aliqua.">
 	<meta name="keyword" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 	tempor incididunt ut labore et dolore magna aliqua.">
 	<title>Tienda virtual</title>
-	<link rel="stylesheet" type="text/css" href="views/css/plugins/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="views/css/plugins/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="views/css/template.css">
-	<link rel="stylesheet" type="text/css" href="views/css/header.css">
-	<script src="views/js/plugins/jquery.min.js"></script>
-	<script src="views/js/plugins/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/template.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/header.css">
+	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
+	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
 <body>
 <?php  
-include 'modules/header.php';	
+include 'modules/header.php';
+
+$rutas = array();
+if (isset($_GET["ruta"])) {
+	$rutas = explode("/", $_GET["ruta"]);
+	var_dump($rutas);
+}	
 
 ?>
-<script src="views/js/header.js"></script>
-<script src="views/js/template.js"></script>
+<script src="<?php echo $route; ?>views/js/header.js"></script>
+<script src="<?php echo $route; ?>views/js/template.js"></script>
 </body>
 </html>
