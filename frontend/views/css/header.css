@@ -68,6 +68,7 @@ header #categorias{
 	display: none;
 	margin-top: -10px;
 	position: relative;
+	padding-bottom: 18px;
 }
 
 header #categorias h4{

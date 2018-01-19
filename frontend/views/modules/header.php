@@ -61,58 +61,24 @@
 			</div>
 		</div>
 		<div class="col-xs-12 backColor" id="categorias">
+			<?php  
+			$categories = ProductController::showCategories();
+			foreach ($categories as $cat) {
+			?>
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 				<h4>
-					<a href="#" class="pixelCategorias">Categorias</a>
+					<a href="#" class="pixelCategorias"><?php echo $cat["categoria"] ?></a>
 				</h4>
 				<hr>
 				<ul>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
+					<?php $subcategories = ProductController::showSubCategories($cat["id"]); 
+					foreach ($subcategories as $subcat) {
+					?>
+					<li><a href="" class="pixelSubCategorias"><?php echo $subcat["subcategoria"] ?></a></li>
+					<?php } ?>
 				</ul>
 			</div>
-			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-				<h4>
-					<a href="#" class="pixelCategorias">Categorias</a>
-				</h4>
-				<hr>
-				<ul>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-				</ul>
-			</div>
-			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-				<h4>
-					<a href="#" class="pixelCategorias">Categorias</a>
-				</h4>
-				<hr>
-				<ul>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-				</ul>
-			</div>
-			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-				<h4>
-					<a href="#" class="pixelCategorias">Categorias</a>
-				</h4>
-				<hr>
-				<ul>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-					<li><a href="" class="pixelSubCategorias">llllll|</a></li>
-				</ul>
-			</div>
+			<?php } ?>
 		</div>
 	</div>
 </header>
