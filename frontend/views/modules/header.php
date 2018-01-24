@@ -62,7 +62,9 @@
 		</div>
 		<div class="col-xs-12 backColor" id="categorias">
 			<?php  
-			$categories = ProductController::showCategories();
+			$item = null;
+			$valor = null;
+			$categories = ProductController::showCategories($item, $valor);
 			foreach ($categories as $cat) {
 			?>
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
@@ -71,7 +73,11 @@
 				</h4>
 				<hr>
 				<ul>
-					<?php $subcategories = ProductController::showSubCategories($cat["id"]); 
+
+					<?php
+					$item = 'id_categoria';
+					$valor = $cat["id"];
+					$subcategories = ProductController::showSubCategories($item, $valor); 
 					foreach ($subcategories as $subcat) {
 					?>
 					<li><a href="<?php echo $subcat["ruta"] ?>" class="pixelSubCategorias"><?php echo $subcat["subcategoria"] ?></a></li>

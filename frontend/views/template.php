@@ -31,9 +31,30 @@
 include 'modules/header.php';
 
 $rutas = array();
+$ruta = null;
+
 if (isset($_GET["ruta"])) {
 	$rutas = explode("/", $_GET["ruta"]);
-	var_dump($rutas);
+	//var_dump($rutas[0]);
+	$item = "ruta"; // es la columna de una tabla determinada en la BD
+	$valor = $rutas[0]; //$valor = $_GET["ruta"];
+	$rutaCategorias = ProductController::showCategories($item, $valor);
+	//var_dump($rutaCategorias['ruta']);
+	if ($valor == $rutaCategorias['ruta']) 
+		$ruta = $valor;
+
+	$rutaSubCategorias = ProductController::showSubCategories($item, $valor);
+	//var_dump($rutaSubCategorias[0]['ruta']);
+	// este foreach se realiza por que estoy enviando un fetchAll
+	foreach ($rutaSubCategorias as $subCat) {
+		if ($valor == $subCat['ruta']) 
+			$ruta = $valor;
+	}
+
+	if ($ruta != null) 
+		include "modules/products.php";
+	else
+		include "modules/error404.php";	
 }	
 
 ?>

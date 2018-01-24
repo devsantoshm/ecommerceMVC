@@ -1,17 +1,17 @@
 <?php  
 class ProductController
 {
-	public function showCategories()
+	static public function showCategories($item, $valor)
 	{
 		$table = "categories";
-		$response = ProductModel::showCategories($table);
+		$response = ProductModel::showCategories($table, $item, $valor);
 		return $response;
 	}
 
-	static public function showSubCategories($id)
+	static public function showSubCategories($item, $valor)
 	{
 		$table = "subcategories";
-		$response = ProductModel::showSubCategories($table, $id);
+		$response = ProductModel::showSubCategories($table, $item, $valor);
 		return $response;
 	}
 }

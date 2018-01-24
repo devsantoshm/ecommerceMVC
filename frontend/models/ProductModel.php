@@ -3,18 +3,24 @@ require_once "conexion.php";
 
 class ProductModel
 {
-	static public function showCategories($table)
+	static public function showCategories($table, $item, $valor)
 	{
-		$stmt = Conexion::conectar()->prepare("select * from $table");
-		$stmt->execute();
-
-		return $stmt->fetchAll();
+		if ($item != null) {
+			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor");
+			$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt->fetch();
+		} else {
+			$stmt = Conexion::conectar()->prepare("select * from $table");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}
 	}
 
-	static public function showSubCategories($table, $id)
+	static public function showSubCategories($table, $item, $valor)
 	{
-		$stmt = Conexion::conectar()->prepare("select * from $table where id_categoria = :id_categoria");
-		$stmt->bindParam(":id_categoria", $id, PDO::PARAM_INT);
+		$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor");
+		$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
 		$stmt->execute();
 
 		return $stmt->fetchAll();
