@@ -8,10 +8,10 @@
 
 #slide ul{
 	position: relative;
-	left: 0%;
+	left: -300%;
 	margin: auto;
 	height: auto;
-	width: 100%;
+	width: 400%;
 	clear: both;
 	display: table;
 }
@@ -19,13 +19,13 @@
 #slide ul li{
 	position: relative;
 	float: left;
-	width: 100%;
+	width: 25%;
 }
 
 #slide ul li img{
 	width: 100%;
 }
-
+/* SLIDE OCION 1 */
 #slide .slideOpcion1 img{
 	position: absolute;
 	opacity: 1;
@@ -60,6 +60,49 @@
 }
 
 #slide .slideOpcion1 h3{
+	text-transform: uppercase;
+	font-size: 30px;
+	font-family: 'Ubuntu Condensed', sans-serif;
+	opacity: 1;
+	top: -10%;
+	color: #888;
+}
+/* SLIDE OPCION 2 */
+#slide .slideOpcion2 img{
+	position: absolute;
+	opacity: 1;
+	top: 5%;
+	left: 15%;
+	width: 25%;
+}
+
+#slide .slideOpcion2 .textosSlide{
+	position: absolute;
+	text-align: right;
+	width: 40%;
+	top: 15%;
+	right: 15%;
+}
+
+#slide .slideOpcion2 h1{
+	text-transform: uppercase;
+	font-size: 50px;
+	font-family: 'Ubuntu Condensed', sans-serif;
+	opacity: 1;
+	top: -10%;
+	color: #333;
+}
+
+#slide .slideOpcion2 h2{
+	text-transform: uppercase;
+	font-size: 35px;
+	font-family: 'Ubuntu Condensed', sans-serif;
+	opacity: 1;
+	top: -10%;
+	color: #777;
+}
+
+#slide .slideOpcion2 h3{
 	text-transform: uppercase;
 	font-size: 30px;
 	font-family: 'Ubuntu Condensed', sans-serif;

@@ -18,6 +18,54 @@
 					</div>
 				</div>
 			</li>
+			<li>
+				<img src="http://localhost/ecommerce/backend/views/img/slide/default/back_default.jpg" alt="">
+				<div class="slideOpciones slideOpcion2">
+					<img class="imgProducto" src="http://localhost/ecommerce/backend/views/img/slide/slide2/curso.png" alt="">
+					<div class="textosSlide">
+						<h1>Lorem ipsum</h1>
+						<h2>dolor sit amet, consectetur</h2>
+						<h3>dolor sit amet, consectetur</h3>
+						<a href="#">
+							<button class="btn btn-default backColor text-uppercase">
+								VER PRODUCTO <span class="fa fa-chevron-right"></span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<img src="http://localhost/ecommerce/backend/views/img/slide/slide3/fondo2.jpg" alt="">
+				<div class="slideOpciones slideOpcion2">
+					<img class="imgProducto" src="http://localhost/ecommerce/backend/views/img/slide/slide3/iphone.png" alt="">
+					<div class="textosSlide">
+						<h1>Lorem ipsum</h1>
+						<h2>dolor sit amet, consectetur</h2>
+						<h3>dolor sit amet, consectetur</h3>
+						<a href="#">
+							<button class="btn btn-default backColor text-uppercase">
+								VER PRODUCTO <span class="fa fa-chevron-right"></span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<img src="http://localhost/ecommerce/backend/views/img/slide/slide4/fondo3.jpg" alt="">
+				<div class="slideOpciones slideOpcion1">
+					<img class="imgProducto" src="" alt="">
+					<div class="textosSlide">
+						<h1>Lorem ipsum</h1>
+						<h2>dolor sit amet, consectetur</h2>
+						<h3>dolor sit amet, consectetur</h3>
+						<a href="#">
+							<button class="btn btn-default backColor text-uppercase">
+								VER PRODUCTO <span class="fa fa-chevron-right"></span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</li>
 		</ul>
 	</div>
 </div>
