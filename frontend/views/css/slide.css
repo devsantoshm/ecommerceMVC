@@ -8,7 +8,7 @@
 
 #slide ul{
 	position: relative;
-	left: -300%;
+	left: 0%;
 	margin: auto;
 	height: auto;
 	width: 400%;
@@ -127,4 +127,64 @@
 
 #slide .slideOpciones button span{
 	margin-left: 10px;
+}
+
+#slide .flechas{
+	position: absolute;
+	font-size: 2em;
+	color: white;
+	cursor: pointer;
+	z-index: 2;
+}
+
+#slide #retroceder{
+	background: #666;
+	padding: 40px 15px 40px 10px;
+	top: 37%;
+	left: 0;
+	font-size: 22px;
+	opacity: 1;
+}
+
+#slide #avanzar{
+	background: #666;
+	padding: 40px 10px 40px 15px;
+	top: 37%;
+	right: 0;
+	font-size: 22px;
+	opacity: 1;
+}
+
+#slide #retroceder:hover, #slide #avanzar:hover{
+	background: #777;
+}
+
+#slide #retroceder:active, #slide #avanzar:active{
+	background: #444;
+}
+
+#slide #paginacion{
+	position: absolute;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	line-height: 40px;
+	font-size: 12px;
+	bottom: 0px;
+	left: 0px;
+	z-index: 1;
+	background: rgba(0,0,0,.05);
+}
+
+#slide #paginacion li{
+	display: inline-block;
+	margin: 0px 5px;
+	cursor: pointer;
+	opacity: 5;
+	color: white;
+	text-shadow: 0px 0px 5px #333;
+}
+
+#slide #paginacion li:first-child{
+	opacity: 1;
 }
