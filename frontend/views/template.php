@@ -24,6 +24,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/template.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/header.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/slide.css">
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
 <body>
@@ -55,6 +56,8 @@ if (isset($_GET["ruta"])) {
 		include "modules/products.php";
 	else
 		include "modules/error404.php";	
+}else{
+	include "modules/slide.php";	
 }	
 
 ?>
