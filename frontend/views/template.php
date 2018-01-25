@@ -27,6 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/slide.css">
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
+	<script src="<?php echo $route; ?>views/js/plugins/jquery.easing.js"></script>
 <body>
 <?php  
 include 'modules/header.php';

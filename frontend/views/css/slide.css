@@ -143,7 +143,7 @@
 	top: 37%;
 	left: 0;
 	font-size: 22px;
-	opacity: 1;
+	opacity: 0;
 }
 
 #slide #avanzar{
@@ -152,7 +152,7 @@
 	top: 37%;
 	right: 0;
 	font-size: 22px;
-	opacity: 1;
+	opacity: 0;
 }
 
 #slide #retroceder:hover, #slide #avanzar:hover{
