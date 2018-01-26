@@ -9,6 +9,9 @@ var btnVerProducto = $("#slide button")
 var detenerIntervalo = false;
 var toggle = false;
 
+$("#slide ul li").css({"width":100 / $("#slide ul li").length + "%"})
+$("#slide ul").css({"width":$("#slide ul li").length * 100 + "%"})
+
 $(imgProducto[item]).animate({"top": -10 +"%", "opacity": 0}, 100, "easeOutBounce")
 $(imgProducto[item]).animate({"top": 30 +"px", "opacity": 1}, 600, "easeOutBounce")
 
@@ -28,7 +31,7 @@ $("#paginacion li").click(function(){
 });
 
 function avanzar(){
-	if(item == 3)
+	if(item == $("#slide ul li").length - 1)
 		item = 0;
 	else
 		item++
@@ -42,7 +45,7 @@ $("#slide #avanzar").click(function(){
 
 $("#slide #retroceder").click(function(){
 	if(item == 0)
-		item = 3;
+		item = $("#slide ul li").length - 1;
 	else
 		item--
 

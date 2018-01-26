@@ -2,76 +2,36 @@
 <div class="container-fluid" id="slide">
 	<div class="row">
 		<ul>
+			<?php 
+			$slides = SlideController::showSlide();
+			foreach ($slides as $slide) {
+				//Cuando es TRUE, los object devueltos serán convertidos a array asociativos
+				$estiloImgProducto = json_decode($slide["estiloImgProducto"], true);
+				$estiloTextoSlide = json_decode($slide["estiloTextoSlide"], true);
+				$titulo1 = json_decode($slide["titulo1"], true);
+				$titulo2 = json_decode($slide["titulo2"], true);
+				$titulo3 = json_decode($slide["titulo3"], true);
+			?>
 			<li>
-				<img src="http://localhost/ecommerce/backend/views/img/slide/default/back_default.jpg" alt="">
-				<div class="slideOpciones slideOpcion1">
-					<img class="imgProducto" src="http://localhost/ecommerce/backend/views/img/slide/slide1/calzado.png" alt="">
-					<div class="textosSlide">
-						<h1>Lorem ipsum</h1>
-						<h2>dolor sit amet, consectetur</h2>
-						<h3>dolor sit amet, consectetur</h3>
-						<a href="#">
-							<button class="btn btn-default backColor text-uppercase">
-								VER PRODUCTO <span class="fa fa-chevron-right"></span>
-							</button>
+				<img src="http://localhost/ecommerce/backend/<?php echo $slide["imgFondo"] ?>" alt="">
+				<div class="slideOpciones <?php echo $slide["tipoSlide"] ?>">
+					<img class="imgProducto" src="http://localhost/ecommerce/backend/<?php echo $slide["imgProducto"] ?>" style="top:<?php echo $estiloImgProducto["top"] ?>; right: <?php echo $estiloImgProducto["right"] ?>; width: <?php echo $estiloImgProducto["width"] ?>; left: <?php echo $estiloImgProducto["left"] ?>;">
+					<div class="textosSlide" style="top:<?php echo $estiloTextoSlide["top"] ?>; left: <?php echo $estiloTextoSlide["left"] ?>; width: <?php echo $estiloTextoSlide["width"] ?>; right: <?php echo $estiloTextoSlide["right"] ?>;">
+						<h1 style="color: <?php echo $titulo1["color"] ?>"><?php echo $titulo1["texto"] ?></h1>
+						<h2 style="color: <?php echo $titulo2["color"] ?>"><?php echo $titulo2["texto"] ?></h2>
+						<h3 style="color: <?php echo $titulo3["color"] ?>"><?php echo $titulo3["texto"] ?></h3>
+						<a href="<?php echo $slide["url"] ?>">
+							<?php echo $slide["boton"] ?>
 						</a>
 					</div>
 				</div>
 			</li>
-			<li>
-				<img src="http://localhost/ecommerce/backend/views/img/slide/default/back_default.jpg" alt="">
-				<div class="slideOpciones slideOpcion2">
-					<img class="imgProducto" src="http://localhost/ecommerce/backend/views/img/slide/slide2/curso.png" alt="">
-					<div class="textosSlide">
-						<h1>Lorem ipsum</h1>
-						<h2>dolor sit amet, consectetur</h2>
-						<h3>dolor sit amet, consectetur</h3>
-						<a href="#">
-							<button class="btn btn-default backColor text-uppercase">
-								VER PRODUCTO <span class="fa fa-chevron-right"></span>
-							</button>
-						</a>
-					</div>
-				</div>
-			</li>
-			<li>
-				<img src="http://localhost/ecommerce/backend/views/img/slide/slide3/fondo2.jpg" alt="">
-				<div class="slideOpciones slideOpcion2">
-					<img class="imgProducto" src="http://localhost/ecommerce/backend/views/img/slide/slide3/iphone.png" alt="">
-					<div class="textosSlide">
-						<h1>Lorem ipsum</h1>
-						<h2>dolor sit amet, consectetur</h2>
-						<h3>dolor sit amet, consectetur</h3>
-						<a href="#">
-							<button class="btn btn-default backColor text-uppercase">
-								VER PRODUCTO <span class="fa fa-chevron-right"></span>
-							</button>
-						</a>
-					</div>
-				</div>
-			</li>
-			<li>
-				<img src="http://localhost/ecommerce/backend/views/img/slide/slide4/fondo3.jpg" alt="">
-				<div class="slideOpciones slideOpcion1">
-					<img class="imgProducto" src="" alt="">
-					<div class="textosSlide">
-						<h1>Lorem ipsum</h1>
-						<h2>dolor sit amet, consectetur</h2>
-						<h3>dolor sit amet, consectetur</h3>
-						<a href="#">
-							<button class="btn btn-default backColor text-uppercase">
-								VER PRODUCTO <span class="fa fa-chevron-right"></span>
-							</button>
-						</a>
-					</div>
-				</div>
-			</li>
+			<?php } ?>
 		</ul>
 		<ol id="paginacion">
-			<li item="1"><span class="fa fa-circle"></span></li>
-			<li item="2"><span class="fa fa-circle"></span></li>
-			<li item="3"><span class="fa fa-circle"></span></li>
-			<li item="4"><span class="fa fa-circle"></span></li>
+			<?php for ($i=1; $i <= count($slides); $i++) { ?>
+			<li item="<?php echo $i ?>"><span class="fa fa-circle"></span></li>
+			<?php } ?>
 		</ol>
 		<div class="flechas" id="retroceder"><span class="fa fa-chevron-left"></span></div>
 		<div class="flechas" id="avanzar"><span class="fa fa-chevron-right"></span></div>
