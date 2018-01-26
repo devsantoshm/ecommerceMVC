@@ -7,6 +7,7 @@ var titulo2 = $("#slide h2")
 var titulo3 = $("#slide h3")
 var btnVerProducto = $("#slide button")
 var detenerIntervalo = false;
+var toggle = false;
 
 $(imgProducto[item]).animate({"top": -10 +"%", "opacity": 0}, 100, "easeOutBounce")
 $(imgProducto[item]).animate({"top": 30 +"px", "opacity": 1}, 600, "easeOutBounce")
@@ -95,4 +96,18 @@ setInterval(function(){
 	}
 
 }, 3000)
+
+$("#btnSlide").click(function(){
+
+	if (!toggle) {
+		toggle = true
+		$("#slide").slideUp("fast");
+		$("#btnSlide").html('<i class="fa fa-angle-down"></i>')	
+	} else {
+		toggle = false
+		$("#slide").slideDown("fast");
+		$("#btnSlide").html('<i class="fa fa-angle-up"></i>')
+	}
+	
+})
 

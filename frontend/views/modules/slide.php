@@ -77,3 +77,8 @@
 		<div class="flechas" id="avanzar"><span class="fa fa-chevron-right"></span></div>
 	</div>
 </div>
+<center>
+	<button id="btnSlide" class="backColor">
+		<i class="fa fa-angle-up"></i>
+	</button>
+</center>
