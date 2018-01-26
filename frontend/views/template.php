@@ -4,10 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximun-scale=1.0, user-scalable=no">
 	<meta name="title" content="Tienda Virtual">
-	<?php  
+	<?php 
+		$urlBack = Route::routeServer(); 
 		$icon = TemplateController::templateStyle();
 	?>
-	<link rel="icon" href="http://localhost/ecommerce/backend/<?php echo $icon["icono"] ?>">
+	<link rel="icon" href="<?php echo $urlBack . $icon["icono"]; ?>">
 	<?php 
 		$url = new Route(); 
 		$route = $url->route();

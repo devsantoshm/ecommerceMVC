@@ -3,6 +3,7 @@
 	<div class="row">
 		<ul>
 			<?php 
+			$urlBack = Route::routeServer();
 			$slides = SlideController::showSlide();
 			foreach ($slides as $slide) {
 				//Cuando es TRUE, los object devueltos serán convertidos a array asociativos
@@ -13,9 +14,9 @@
 				$titulo3 = json_decode($slide["titulo3"], true);
 			?>
 			<li>
-				<img src="http://localhost/ecommerce/backend/<?php echo $slide["imgFondo"] ?>" alt="">
+				<img src="<?php echo $urlBack.$slide["imgFondo"] ?>" alt="">
 				<div class="slideOpciones <?php echo $slide["tipoSlide"] ?>">
-					<img class="imgProducto" src="http://localhost/ecommerce/backend/<?php echo $slide["imgProducto"] ?>" style="top:<?php echo $estiloImgProducto["top"] ?>; right: <?php echo $estiloImgProducto["right"] ?>; width: <?php echo $estiloImgProducto["width"] ?>; left: <?php echo $estiloImgProducto["left"] ?>;">
+					<img class="imgProducto" src="<?php echo $urlBack.$slide["imgProducto"] ?>" style="top:<?php echo $estiloImgProducto["top"] ?>; right: <?php echo $estiloImgProducto["right"] ?>; width: <?php echo $estiloImgProducto["width"] ?>; left: <?php echo $estiloImgProducto["left"] ?>;">
 					<div class="textosSlide" style="top:<?php echo $estiloTextoSlide["top"] ?>; left: <?php echo $estiloTextoSlide["left"] ?>; width: <?php echo $estiloTextoSlide["width"] ?>; right: <?php echo $estiloTextoSlide["right"] ?>;">
 						<h1 style="color: <?php echo $titulo1["color"] ?>"><?php echo $titulo1["texto"] ?></h1>
 						<h2 style="color: <?php echo $titulo2["color"] ?>"><?php echo $titulo2["texto"] ?></h2>
