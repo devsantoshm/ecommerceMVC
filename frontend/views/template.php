@@ -26,6 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/template.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/header.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/slide.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/products.css">
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.easing.js"></script>
@@ -59,7 +60,8 @@ if (isset($_GET["ruta"])) {
 	else
 		include "modules/error404.php";	
 }else{
-	include "modules/slide.php";	
+	include "modules/slide.php";
+	include "modules/featured.php";
 }	
 
 ?>
