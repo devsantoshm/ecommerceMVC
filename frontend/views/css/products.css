@@ -93,3 +93,13 @@ se aplica un overflow hidden */
 	color: #999;
 	font-size: 12px;
 }
+
+.oferta{
+	text-decoration: line-through;
+	color: #ccc;
+	font-size: 15px;
+}
+
+.fontSize{
+	font-size: 11px;
+}
