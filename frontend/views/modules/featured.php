@@ -43,7 +43,7 @@
 			<div class="clearfix"></div>
 			<hr>
 		</div>
-		<ul class="grid0">
+		<ul class="grid0" style="display: none;">
 			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
 			<li class="col-md-3 col-sm-6 col-xs-12">
 				<figure>
@@ -116,6 +116,85 @@
 				</div>
 			</li>
 		</ul>
+		<ul class="list0">
+			<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
+			<li class="col-xs-12">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+					<figure>
+						<a href="#" class="pixelProducto"><img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio04.jpg" class="img-responsive"></a>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+					<h1><small><a href="#" class="pixelProducto">Collar de diamantes</a></small></h1>
+					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde. sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde</p>
+					<h2><small>GRATIS</small></h2>
+					<div class="btn-group pull-left enlaces">
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<a href="#" class="pixelProducto">
+							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12"><hr></div>
+			</li>
+			<li class="col-xs-12">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+					<figure>
+						<a href="#" class="pixelProducto"><img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio03.jpg" class="img-responsive"></a>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+					<h1><small><a href="#" class="pixelProducto">Bolso deportivo</a></small></h1>
+					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde. sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde</p>
+					<h2><small>GRATIS</small></h2>
+					<div class="btn-group pull-left enlaces">
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<a href="#" class="pixelProducto">
+							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12"><hr></div>
+			</li>
+			<li class="col-xs-12">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+					<figure>
+						<a href="#" class="pixelProducto"><img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio02.jpg" class="img-responsive"></a>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+					<h1><small><a href="#" class="pixelProducto">Bolso militar</a></small></h1>
+					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde. sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde</p>
+					<h2><small>GRATIS</small></h2>
+					<div class="btn-group pull-left enlaces">
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<a href="#" class="pixelProducto">
+							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12"><hr></div>
+			</li>
+			<li class="col-xs-12">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+					<figure>
+						<a href="#" class="pixelProducto"><img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio01.jpg" class="img-responsive"></a>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+					<h1><small><a href="#" class="pixelProducto">Pulsera de diamantes</a></small></h1>
+					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde. sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde</p>
+					<h2><small>GRATIS</small></h2>
+					<div class="btn-group pull-left enlaces">
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<a href="#" class="pixelProducto">
+							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12"><hr></div>
+			</li>
+		</ul>
 	</div>
 </div>
 <div class="container-fluid well well-sm barraProductos">
@@ -156,7 +235,7 @@
 			<div class="clearfix"></div>
 			<hr>
 		</div>
-		<ul class="grid1">
+		<ul class="grid1" style="display: none;">
 			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
 			<li class="col-md-3 col-sm-6 col-xs-12">
 				<figure>
@@ -246,6 +325,34 @@
 				</div>
 			</li>
 		</ul>
+		<ul class="list1">
+			<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
+			<li class="col-xs-12">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+					<figure>
+						<a href="falda-de-flores-1" class="pixelProducto"><img src="http://localhost/ecommerce/backend/views/img/productos/ropa/ropa03.jpg" class="img-responsive"></a>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+					<h1><small><a href="falda-de-flores-1" class="pixelProducto">Falda de flores
+						<span class="label label-warning">Nuevo</span>
+						<span class="label label-warning">40% off</span>
+					</a></small></h1>
+					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde. sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde</p>
+					<h2>
+						<small><strong class="oferta">USD $29</strong></small>
+						<small>$11</small>
+					</h2>
+					<div class="btn-group pull-left enlaces">
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<a href="#" class="pixelProducto">
+							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12"><hr></div>
+			</li>
+		</ul>
 	</div>
 </div>
 <div class="container-fluid well well-sm barraProductos">
@@ -286,7 +393,7 @@
 			<div class="clearfix"></div>
 			<hr>
 		</div>
-		<ul class="grid1">
+		<ul class="grid2" style="display: none;">
 			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
 			<li class="col-md-3 col-sm-6 col-xs-12">
 				<figure>
@@ -387,6 +494,36 @@
 						</a>
 					</div>
 				</div>
+			</li>
+		</ul>
+		<ul class="list2">
+			<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
+			<li class="col-xs-12">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+					<figure>
+						<a href="falda-de-flores-1" class="pixelProducto"><img src="http://localhost/ecommerce/backend/views/img/productos/cursos/curso05.jpg" class="img-responsive"></a>
+					</figure>
+				</div>
+				<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+					<h1><small><a href="falda-de-flores-1" class="pixelProducto">Curso de bootstrap
+						<span class="label label-warning">90% off</span>
+					</a></small></h1>
+					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde. sit amet, consectetur adipisicing elit. Culpa placeat, tempore maiores labore odio minima repellendus et unde</p>
+					<h2>
+						<small><strong class="oferta">USD $100</strong></small>
+						<small>$10</small>
+					</h2>
+					<div class="btn-group pull-left enlaces">
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="444" imagen="http://localhost/ecommerce/backend/views/img/productos/cursos/curso05.jpg" titulo="Curso de Bootstrap" precio="10" tipo="virtual" peso="0" data-toggle="tooltip" title="Agregar al carrito de compras">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+						</button>
+						<a href="#" class="pixelProducto">
+							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-12"><hr></div>
 			</li>
 		</ul>
 	</div>
