@@ -117,3 +117,87 @@ se aplica un overflow hidden */
 .fontSize{
 	font-size: 11px;
 }
+
+/* EScritorio grande */
+@media (min-width: 1200px) {
+	
+}
+
+/* EScritorio mediano o tablet horizontal */
+@media (max-width: 1199px) and (min-width: 992px) {
+	
+	.banner{
+		height: 260px;
+	}
+}
+
+/* Tablet vertical */
+@media (max-width: 991px) and (min-width: 768px) {
+	
+	.banner{
+		height: 180px;
+	}
+
+	.banner .textoDer, .banner .textoCentro, .banner .textoIzq{
+		top: 35px;
+	}
+
+	.textoBanner h1{
+		font-size: 30px;
+		line-height: 15px;
+	}
+
+	.textoBanner h2{
+		font-size: 25px;
+		line-height: 15px;
+	}
+
+	.textoBanner h3{
+		font-size: 25px;
+		line-height: 15px;
+	}
+
+}
+
+/* Movil */
+@media (max-width: 767px) {
+	
+	.banner{
+		height: 100px;
+	}
+
+	.banner .textoDer, .banner .textoCentro, .banner .textoIzq{
+		top: 7px;
+		left: 50%;
+		width: 800px;
+		margin-left: -400px;
+		text-align: center;
+		text-shadow: 2px 2px 20px black;
+	}
+
+	.textoBanner h1{
+		font-size: 20px;
+		line-height: 5px;
+	}
+
+	.textoBanner h2{
+		font-size: 20px;
+		line-height: 5px;
+	}
+
+	.textoBanner h3{
+		font-size: 15px;
+		line-height: 5px;
+	}
+
+	.tituloDestacado h1{
+		text-align: center;
+	}
+
+	.tituloDestacado button{
+		position: absolute;
+		left: 50%;
+		width: 40%;
+		margin-left: -20%;
+	}
+}
