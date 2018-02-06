@@ -30,6 +30,7 @@
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.easing.js"></script>
+	<script src="<?php echo $route; ?>views/js/plugins/jquery.scrollUp.js"></script>
 <body>
 <?php  
 include 'modules/header.php';

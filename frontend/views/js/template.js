@@ -37,3 +37,20 @@ for (var i = 0; i < btnList.length; i++) {
 		$("#btnList"+numero).addClass("backColor");
 	})
 }
+
+$(window).scroll(function(){
+	var scrollY = window.pageYOffset;
+	//console.log("scrollY", scrollY); posición de la altura del scroll
+	if (window.matchMedia("(min-width:768px)").matches) {
+		if(scrollY < ($(".banner").offset().top)-150)
+			$(".banner img").css({"margin-top": -scrollY/3+"px"})
+		else
+			scrollY = 0
+	} 
+})
+
+$.scrollUp({
+	scrollText: "",
+	scrollSpeed: 2000, //2 seg
+	easingType: "easeOutQuint"
+})
