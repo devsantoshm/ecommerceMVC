@@ -14,5 +14,12 @@ class ProductController
 		$response = ProductModel::showSubCategories($table, $item, $valor);
 		return $response;
 	}
+
+	static public function showProducts($ordenar, $item, $valor)
+	{
+		$table = "products";
+		$response = ProductModel::showProducts($table, $ordenar, $item, $valor);
+		return $response;
+	}
 }
 ?>

@@ -6,16 +6,45 @@
 		<h3 style="color:#fff">Termina el 31 de octubre</h3>
 	</div>
 </figure>
+<?php 
+	$titulosModulos = array("ARTÍCULOS GRATUITOS", "LO MÁS VENDIDO", "LO MÁS VISTO");
+	$rutaModulos = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
+
+	if ($titulosModulos[0] == "ARTÍCULOS GRATUITOS") {
+		$ordenar = "id";
+		$item = "precio";
+		$valor = 0;
+		$gratis = ProductController::showProducts($ordenar, $item, $valor);
+	}
+
+	if ($titulosModulos[1] == "LO MÁS VENDIDO") {
+		$ordenar = "ventas";
+		$item = null;
+		$valor = null;
+		$ventas = ProductController::showProducts($ordenar, $item, $valor);
+	}
+
+	if ($titulosModulos[2] == "LO MÁS VISTO") {
+		$ordenar = "vistas";
+		$item = null;
+		$valor = null;
+		$vistas = ProductController::showProducts($ordenar, $item, $valor);
+	}
+
+	$modulos = array($gratis, $ventas, $vistas);
+	
+	for ($i=0; $i < count($titulosModulos); $i++) { 
+?>
 <div class="container-fluid well well-sm barraProductos">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 organizarProductos">
 				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-default btnGrid" id="btnGrid0">
+					<button type="button" class="btn btn-default btnGrid" id="btnGrid<?php echo $i ?>">
 						<!-- col-xs-0 se ocultarar en los dispositivos pequeños -->
 						<i class="fa fa-th" aria-hidden="true"></i><span class="col-xs-0"> GRID</span>
 					</button>
-					<button type="button" class="btn btn-default btnList" id="btnList0">
+					<button type="button" class="btn btn-default btnList" id="btnList<?php echo $i ?>">
 						<!-- col-xs-0 se ocultarar en los dispositivos pequeños -->
 						<i class="fa fa-list" aria-hidden="true"></i><span class="col-xs-0"> LIST</span>
 					</button>
@@ -30,10 +59,10 @@
 			<div class="col-xs-12 tituloDestacado">
 				<!-- con solo poner col-sm-6 ya toma las demás dispositivos con col-6 -->
 				<div class="col-sm-6 col-xs-12">
-					<h1><small>ARTÍCULOS GRATUITOS</small></h1>
+					<h1><small><?php  echo $titulosModulos[$i] ?></small></h1>
 				</div>
 				<div class="col-sm-6 col-xs-12">
-					<a href="articulos-gratis">
+					<a href="<?php echo $rutaModulos[$i] ?>">
 						<button class="btn btn-default backColor pull-right">
 							VER MÁS <span class="fa fa-chevron-right"></span>
 						</button>
@@ -43,80 +72,29 @@
 			<div class="clearfix"></div>
 			<hr>
 		</div>
-		<ul class="grid0" style="display: none;">
+		<ul class="grid<?php echo $i ?>">
 			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
+			<?php foreach ($modulos[$i] as $key => $value) { ?>
 			<li class="col-md-3 col-sm-6 col-xs-12">
 				<figure>
 					<a href="#" class="pixelProducto">
-						<img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio04.jpg" class="img-responsive">
+						<img src="http://localhost/ecommerce/backend/<?php echo $value['portada'] ?>" class="img-responsive">
 					</a>	
 				</figure>
-				<h4><small><a href="" class="pixelProducto">Collar de diamantes<br><br></a></small></h4>
-				<div class="col-xs-6 precio"><h2><small>GRATIS</small></h2></div>
+				<h4><small><a href="" class="pixelProducto"><?php echo $value['titulo'] ?><br><br></a></small></h4>
+				<div class="col-xs-6 precio"><h2><small><?php echo $value['precio'] ?></small></h2></div>
 				<div class="col-xs-6 enlaces">
 					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="<?php echo $value['id'] ?>" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
 						<a href="" class="pixelProducto">
 							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
 						</a>
 					</div>
 				</div>
 			</li>
-			<li class="col-md-3 col-sm-6 col-xs-12">
-				<figure>
-					<a href="#" class="pixelProducto">
-						<img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio03.jpg" class="img-responsive">
-					</a>	
-				</figure>
-				<h4><small><a href="" class="pixelProducto">Bolso deportivo gris<br><br></a></small></h4>
-				<div class="col-xs-6 precio"><h2><small>GRATIS</small></h2></div>
-				<div class="col-xs-6 enlaces">
-					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
-						<a href="" class="pixelProducto">
-							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
-						</a>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3 col-sm-6 col-xs-12">
-				<figure>
-					<a href="#" class="pixelProducto">
-						<img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio02.jpg" class="img-responsive">
-					</a>	
-				</figure>
-				<h4><small><a href="" class="pixelProducto">Bolso militar<br><br></a></small></h4>
-				<div class="col-xs-6 precio"><h2><small>GRATIS</small></h2></div>
-				<div class="col-xs-6 enlaces">
-					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
-						<a href="" class="pixelProducto">
-							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
-						</a>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3 col-sm-6 col-xs-12">
-				<figure>
-					<a href="#" class="pixelProducto">
-						<img src="http://localhost/ecommerce/backend/views/img/productos/accesorios/accesorio01.jpg" class="img-responsive">
-					</a>	
-				</figure>
-				<h4><small><a href="" class="pixelProducto">Pulsera de diamantes<br>
-					<span class="label label-warning fontSize">Nuevo</span>
-				</a></small></h4>
-				<div class="col-xs-6 precio"><h2><small>GRATIS</small></h2></div>
-				<div class="col-xs-6 enlaces">
-					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default btn-xs deseos" idProductos="34" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
-						<a href="" class="pixelProducto">
-							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
-						</a>
-					</div>
-				</div>
-			</li>
+			<?php } ?>
 		</ul>
-		<ul class="list0">
+		<ul class="list<?php echo $i ?>" style="display: none;">
 			<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
 			<li class="col-xs-12">
 				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
@@ -197,6 +175,7 @@
 		</ul>
 	</div>
 </div>
+<?php } ?>
 <div class="container-fluid well well-sm barraProductos">
 	<div class="container">
 		<div class="row">
@@ -235,7 +214,7 @@
 			<div class="clearfix"></div>
 			<hr>
 		</div>
-		<ul class="grid1" style="display: none;">
+		<ul class="grid1">
 			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
 			<li class="col-md-3 col-sm-6 col-xs-12">
 				<figure>
@@ -325,7 +304,7 @@
 				</div>
 			</li>
 		</ul>
-		<ul class="list1">
+		<ul class="list1" style="display: none;">
 			<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
 			<li class="col-xs-12">
 				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
@@ -393,7 +372,7 @@
 			<div class="clearfix"></div>
 			<hr>
 		</div>
-		<ul class="grid2" style="display: none;">
+		<ul class="grid2">
 			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
 			<li class="col-md-3 col-sm-6 col-xs-12">
 				<figure>
@@ -496,7 +475,7 @@
 				</div>
 			</li>
 		</ul>
-		<ul class="list2">
+		<ul class="list2" style="display: none;">
 			<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
 			<li class="col-xs-12">
 				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">

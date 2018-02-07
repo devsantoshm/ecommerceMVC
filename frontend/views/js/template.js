@@ -1,3 +1,5 @@
+$('[data-toggle="tooltip"]').tooltip({placement: "top"});
+
 $.ajax({
 	url: "ajax/AjaxTemplate.php",
 	success: function(response){

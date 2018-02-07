@@ -25,5 +25,20 @@ class ProductModel
 
 		return $stmt->fetchAll();
 	}
+
+	static public function showProducts($table, $ordenar, $item, $valor)
+	{
+		if ($item != null) {
+			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor order by $ordenar desc limit 4");
+			$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt->fetchAll();
+		//traer cuatro productos ordenados por los mas vistos o vendidos
+		}else{
+			$stmt = Conexion::conectar()->prepare("select * from $table order by $ordenar desc limit 4");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}
+	}
 }
 ?>
