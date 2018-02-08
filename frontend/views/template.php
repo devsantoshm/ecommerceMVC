@@ -37,6 +37,7 @@ include 'modules/header.php';
 
 $rutas = array();
 $ruta = null;
+$infoProducto = null;
 
 if (isset($_GET["ruta"])) {
 	$rutas = explode("/", $_GET["ruta"]);
@@ -56,8 +57,14 @@ if (isset($_GET["ruta"])) {
 			$ruta = $valor;
 	}
 
+	$rutaProductos = ProductController::showInfoProduct($item, $valor);
+	if ($rutas[0] == $rutaProductos['ruta']) 
+		$infoProducto = $rutas[0];
+
 	if ($ruta != null || $rutas[0] == "articulos-gratis" || $rutas[0] == "lo-mas-vendido" || $rutas[0] == "lo-mas-visto") 
 		include "modules/products.php";
+	else if($infoProducto != null)
+		include "modules/infoproduct.php";
 	else
 		include "modules/error404.php";	
 }else{
