@@ -35,7 +35,7 @@ class ProductModel
 			return $stmt->fetchAll();
 		//traer cuatro productos ordenados por los mas vistos o vendidos
 		}else{
-			$stmt = Conexion::conectar()->prepare("select * from $table order by $ordenar desc limit 4");
+			$stmt = Conexion::conectar()->prepare("select * from $table order by $ordenar desc limit $base, $tope");
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}
