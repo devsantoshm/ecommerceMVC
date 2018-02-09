@@ -26,10 +26,10 @@ class ProductModel
 		return $stmt->fetchAll();
 	}
 
-	static public function showProducts($table, $ordenar, $item, $valor)
+	static public function showProducts($table, $ordenar, $item, $valor, $base, $tope)
 	{
 		if ($item != null) {
-			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor order by $ordenar desc limit 4");
+			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor order by $ordenar desc limit $base, $tope");
 			$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetchAll();
