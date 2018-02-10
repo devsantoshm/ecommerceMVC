@@ -1,4 +1,7 @@
-<?php $urlBack = Route::routeServer();  ?>
+<?php 
+$urlBack = Route::routeServer();  
+$urlFron = Route::urlFront();
+?>
 <div class="container-fluid barraSuperior" id="top">
 	<div class="container">
 		<div class="row">
@@ -31,7 +34,7 @@
 	<div class="container">
 		<div class="row" id="cabezote">
 			<div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
-				<a href="#">
+				<a href="<?php echo $urlFron ?>">
 					<img src="<?php echo $urlBack.$social["logo"] ?>" class="img-responsive">
 				</a>
 			</div>

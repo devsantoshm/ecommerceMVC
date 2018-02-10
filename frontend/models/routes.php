@@ -1,7 +1,7 @@
 <?php 
 class Route
 {
-	public function route()
+	public function urlFront()
 	{
 		return "http://localhost/ecommerce/frontend/";
 	}

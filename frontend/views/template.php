@@ -11,7 +11,7 @@
 	<link rel="icon" href="<?php echo $urlBack . $icon["icono"]; ?>">
 	<?php 
 		$url = new Route(); 
-		$route = $url->route();
+		$route = $url->urlFront();
 		//var_dump($route);
 	?>
 	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

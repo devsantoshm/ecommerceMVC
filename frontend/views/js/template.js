@@ -56,3 +56,10 @@ $.scrollUp({
 	scrollSpeed: 2000, //2 seg
 	easingType: "easeOutQuint"
 })
+
+var pagActiva = $(".pagActiva").html();
+if (pagActiva != null) {
+	// la g me permite reemplazar más de un guion con el caracter vacio
+	var regPagActiva = pagActiva.replace(/-/g, " ");
+	$(".pagActiva").html(regPagActiva);
+}

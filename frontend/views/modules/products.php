@@ -1,3 +1,7 @@
+<?php 
+$urlBack = Route::routeServer(); 
+$urlFron = Route::urlFront();
+?>
 <figure class="banner">
 	<img src="http://localhost/ecommerce/backend/views/img/banner/default.jpg" class="img-responsive" width="100%">
 	<div class="textoBanner textoDer">
@@ -36,9 +40,9 @@
 <div class="container-fluid productos">
 	<div class="container">
 		<div class="row">
-			<ul class="breadcrumb fondoBreadcrumb lead">
-				<li><a href="#">INICIO</a></li>
-				<li class="active"><?php echo $rutas[0] ?></li>
+			<ul class="breadcrumb text-uppercase fondoBreadcrumb">
+				<li><a href="<?php echo $urlFron ?>">INICIO</a></li>
+				<li class="active pagActiva"><?php echo $rutas[0] ?></li>
 			</ul>
 			<?php  
 			if ($rutas[0] == "articulos-gratis") {
