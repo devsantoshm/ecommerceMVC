@@ -48,5 +48,20 @@ class ProductModel
 		$stmt->execute();
 		return $stmt->fetch();
 	}
+
+	static public function listProducts($table, $ordenar, $item, $valor)
+	{
+		if ($item != null) {
+			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor order by $ordenar desc");
+			$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt->fetchAll();
+		//traer cuatro productos ordenados por los mas vistos o vendidos
+		}else{
+			$stmt = Conexion::conectar()->prepare("select * from $table order by $ordenar desc");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}
+	}
 }
 ?>

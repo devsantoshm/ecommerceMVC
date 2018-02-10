@@ -28,5 +28,12 @@ class ProductController
 		$response = ProductModel::showInfoProduct($table, $item, $valor);
 		return $response;
 	}
+
+	static public function listProducts($ordenar, $item, $valor)
+	{
+		$table = "products";
+		$response = ProductModel::listProducts($table, $ordenar, $item, $valor);
+		return $response;
+	}
 }
 ?>

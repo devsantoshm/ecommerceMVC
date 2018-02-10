@@ -77,6 +77,8 @@ $urlFron = Route::urlFront();
 			$base = 0;
 			$tope = 12;
 			$products = ProductController::showProducts($ordenar, $item2, $valor2, $base, $tope);
+			$listProducts = ProductController::listProducts($ordenar, $item2, $valor2);
+
 			if(!$products){
 				echo '<div class="col-xs-12 text-center error404">
 						<h1><small>¡Oops!</small></h1>
@@ -204,6 +206,30 @@ $urlFron = Route::urlFront();
 					<?php } ?>
 				</ul>
 			<?php } ?>
+			<center>
+			<?php 
+			if (count($listProducts) != 0) {
+				$pagProducts = ceil(count($listProducts)/12); //redondea de 23.333 a 24 páginas
+				if ($pagProducts > 4) {
+					
+				} else {
+					echo '<ul class="pagination">';
+					for ($i=1; $i <= $pagProducts; $i++) { 
+						echo '<li><a href="">'.$i.'</a></li>';
+					}
+					echo '</ul>';
+				}		
+			}
+			?>
+			<ul class="pagination">
+				<li><a href="">1</a></li>
+				<li><a href="">2</a></li>
+				<li><a href="">3</a></li>
+				<li class="disabled"><a href="">...</a></li>
+				<li><a href="">20</a></li>
+				<li><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+			</ul>
+			</center>
 		</div>
 	</div>
 </div>
