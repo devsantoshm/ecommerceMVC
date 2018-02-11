@@ -45,6 +45,16 @@ $urlFron = Route::urlFront();
 				<li class="active pagActiva"><?php echo $rutas[0] ?></li>
 			</ul>
 			<?php  
+			//var_dump($rutas[1]);
+			if (isset($rutas[1])) {
+				$base = ($rutas[1] - 1)*12;
+				$tope = 12;
+			} else {
+				$rutas[1] = 1;
+				$base = 0;
+				$tope = 12;
+			}
+			
 			if ($rutas[0] == "articulos-gratis") {
 				$item2 = "precio";
 				$valor2 = 0;
@@ -74,8 +84,6 @@ $urlFron = Route::urlFront();
 				}
 			}
 
-			$base = 0;
-			$tope = 12;
 			$products = ProductController::showProducts($ordenar, $item2, $valor2, $base, $tope);
 			$listProducts = ProductController::listProducts($ordenar, $item2, $valor2);
 
@@ -211,7 +219,16 @@ $urlFron = Route::urlFront();
 			if (count($listProducts) != 0) {
 				$pagProducts = ceil(count($listProducts)/12); //redondea de 23.333 a 24 páginas
 				if ($pagProducts > 4) {
-					
+					if($rutas[1] == 1){
+						echo '<ul class="pagination">';
+						for ($i=1; $i <= 4; $i++) { 
+							echo '<li><a href="'.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+						}
+						echo '<li class="disabled"><a>...</a></li>
+							  <li><a href="'.$rutas[0].'/'.$pagProducts.'">'.$pagProducts.'</a></li>
+							  <li><a href="'.$rutas[0].'/2"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+							</ul>';
+					}
 				} else {
 					echo '<ul class="pagination">';
 					for ($i=1; $i <= $pagProducts; $i++) { 
@@ -221,15 +238,6 @@ $urlFron = Route::urlFront();
 				}		
 			}
 			?>
-			<ul class="pagination">
-				<li><a href="">1</a></li>
-				<li><a href="">2</a></li>
-				<li><a href="">3</a></li>
-				<li class="disabled"><a href="">...</a></li>
-				<li><a href="">20</a></li>
-				<li><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-			</ul>
-			</center>
 		</div>
 	</div>
 </div>
