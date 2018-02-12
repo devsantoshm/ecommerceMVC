@@ -47,8 +47,14 @@ $urlFron = Route::urlFront();
 			<?php  
 			//var_dump($rutas[1]);
 			if (isset($rutas[1])) {
-				$base = ($rutas[1] - 1)*12;
-				$tope = 12;
+				if (is_numeric($rutas[1])) {
+					$base = ($rutas[1] - 1)*12;
+					$tope = 12;	
+				}else{
+					$rutas[1] = 1;
+					$base = 0;
+					$tope = 12;
+				}
 			} else {
 				$rutas[1] = 1;
 				$base = 0;
@@ -214,6 +220,8 @@ $urlFron = Route::urlFront();
 					<?php } ?>
 				</ul>
 			<?php } ?>
+			<!-- clearfix, permite formatear el float left y mantener la paginacion centrada -->
+			<div class="clearfix"></div>
 			<center>
 			<?php 
 			if (count($listProducts) != 0) {
@@ -222,22 +230,72 @@ $urlFron = Route::urlFront();
 					if($rutas[1] == 1){
 						echo '<ul class="pagination">';
 						for ($i=1; $i <= 4; $i++) { 
-							echo '<li><a href="'.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+							echo '<li><a href="'.$urlFron.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
 						}
 						echo '<li class="disabled"><a>...</a></li>
-							  <li><a href="'.$rutas[0].'/'.$pagProducts.'">'.$pagProducts.'</a></li>
-							  <li><a href="'.$rutas[0].'/2"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+							  <li><a href="'.$urlFron.$rutas[0].'/'.$pagProducts.'">'.$pagProducts.'</a></li>
+							  <li><a href="'.$urlFron.$rutas[0].'/2"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 							</ul>';
+					} else if($rutas[1] == $pagProducts){
+						echo '<ul class="pagination">
+								<li><a href="'.$urlFron.$rutas[0].'/'.($pagProducts-1).'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+								<li><a href="'.$urlFron.$rutas[0].'/1">1</a></li>
+								<li class="disabled"><a>...</a></li>';
+						for ($i=($pagProducts-3); $i <= $pagProducts; $i++) { 
+							echo '<li><a href="'.$urlFron.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+						}
+						echo '</ul>';
+					} else if($rutas[1] != $pagProducts && $rutas[1] != 1 
+							  && $rutas[1] < ($pagProducts/2) && $rutas[1] < ($pagProducts-3)){
+						
+						$numPagActual = $rutas[1];
+
+						echo '<ul class="pagination">
+								<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
+						for ($i=$numPagActual; $i <= ($numPagActual+3); $i++) { 
+							echo '<li><a href="'.$urlFron.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+						}
+						echo '<li class="disabled"><a>...</a></li>
+							  <li><a href="'.$urlFron.$rutas[0].'/'.$pagProducts.'">'.$pagProducts.'</a></li>
+							  <li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual+1).'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+							</ul>';
+					} else if($rutas[1] != $pagProducts && $rutas[1] != 1 
+							  && $rutas[1] >= ($pagProducts/2) && $rutas[1] < ($pagProducts-3)){
+						
+						$numPagActual = $rutas[1];
+
+						echo '<ul class="pagination">
+								<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+								<li><a href="'.$urlFron.$rutas[0].'/1">1</a></li>
+								<li class="disabled"><a>...</a></li>';
+						for ($i=$numPagActual; $i <= ($numPagActual+3); $i++) { 
+							echo '<li><a href="'.$urlFron.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+						}
+						echo '<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual+1).'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+							</ul>';
+					} else {
+						
+						$numPagActual = $rutas[1];
+
+						echo '<ul class="pagination">
+								<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+								<li><a href="'.$urlFron.$rutas[0].'/1">1</a></li>
+								<li class="disabled"><a>...</a></li>';
+						for ($i=($pagProducts-3); $i <= $pagProducts; $i++) { 
+							echo '<li><a href="'.$urlFron.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
+						}
+						echo '</ul>';
 					}
 				} else {
 					echo '<ul class="pagination">';
 					for ($i=1; $i <= $pagProducts; $i++) { 
-						echo '<li><a href="">'.$i.'</a></li>';
+						echo '<li><a href="'.$urlFron.$rutas[0].'/'.$i.'">'.$i.'</a></li>';
 					}
 					echo '</ul>';
 				}		
 			}
 			?>
+			</center>
 		</div>
 	</div>
 </div>
