@@ -73,6 +73,9 @@ if (isset($_GET["ruta"])) {
 }	
 
 ?>
+
+<input type="hidden" value="<?php echo $route; ?>" id="rutaFron">
+
 <script src="<?php echo $route; ?>views/js/header.js"></script>
 <script src="<?php echo $route; ?>views/js/template.js"></script>
 <script src="<?php echo $route; ?>views/js/slide.js"></script>

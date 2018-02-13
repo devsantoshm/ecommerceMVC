@@ -1,7 +1,9 @@
+var rutaFron = $("#rutaFron").val();
+
 $('[data-toggle="tooltip"]').tooltip({placement: "top"});
 
 $.ajax({
-	url: "ajax/AjaxTemplate.php",
+	url: rutaFron + "ajax/AjaxTemplate.php",
 	success: function(response){
 		//console.log(JSON.parse(response)); //convertir un string en formato json
 		var colorFondo = JSON.parse(response).colorFondo;
@@ -63,3 +65,12 @@ if (pagActiva != null) {
 	var regPagActiva = pagActiva.replace(/-/g, " ");
 	$(".pagActiva").html(regPagActiva);
 }
+
+var url = window.location.href;
+//console.log("url",url); url http://localhost/ecommerce/frontend/telefonos-movil/2
+//method is used to split a string into an array of substrings, and returns the new array
+//The pop() method removes the last element of an array, and returns that element.
+var indice = url.split("/");
+//if(indice.pop() != "#"){
+$("#item"+indice.pop()).addClass("active");
+//}
