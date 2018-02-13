@@ -26,16 +26,16 @@ class ProductModel
 		return $stmt->fetchAll();
 	}
 
-	static public function showProducts($table, $ordenar, $item, $valor, $base, $tope)
+	static public function showProducts($table, $ordenar, $item, $valor, $base, $tope, $modo)
 	{
 		if ($item != null) {
-			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor order by $ordenar desc limit $base, $tope");
+			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor order by $ordenar $modo limit $base, $tope");
 			$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetchAll();
 		//traer cuatro productos ordenados por los mas vistos o vendidos
 		}else{
-			$stmt = Conexion::conectar()->prepare("select * from $table order by $ordenar desc limit $base, $tope");
+			$stmt = Conexion::conectar()->prepare("select * from $table order by $ordenar $modo limit $base, $tope");
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}

@@ -17,8 +17,8 @@ $urlFron = Route::urlFront();
 				<div class="btn-group">
 					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ordenar Productos <span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							<li><a href="#">Más reciente</a></li>
-							<li><a href="#">Más antiguo</a></li>
+							<li><a href="<?php echo $urlFron.$rutas[0].'/1/recientes'; ?>">Más reciente</a></li>
+							<li><a href="<?php echo $urlFron.$rutas[0].'/1/antiguos'; ?>">Más antiguo</a></li>
 					  	</ul>
 				</div>	
 			</div>
@@ -47,6 +47,19 @@ $urlFron = Route::urlFront();
 			<?php  
 			//var_dump($rutas[1]);
 			if (isset($rutas[1])) {
+				//$_SESSION["ordenar"] = "DESC";
+				if (isset($rutas[2])) {
+					if ($rutas[2] == "antiguos") {
+						$modo = "ASC";
+						$_SESSION["ordenar"] = $modo;
+					} else {
+						$modo = "DESC";
+						$_SESSION["ordenar"] = $modo;
+					}
+				} else {
+					$modo = $_SESSION["ordenar"];
+				}
+				
 				if (is_numeric($rutas[1])) {
 					$base = ($rutas[1] - 1)*12;
 					$tope = 12;	
@@ -54,11 +67,13 @@ $urlFron = Route::urlFront();
 					$rutas[1] = 1;
 					$base = 0;
 					$tope = 12;
+					$modo = "DESC";
 				}
 			} else {
 				$rutas[1] = 1;
 				$base = 0;
 				$tope = 12;
+				$modo = "DESC";
 			}
 			
 			if ($rutas[0] == "articulos-gratis") {
@@ -89,8 +104,8 @@ $urlFron = Route::urlFront();
 					$valor2 = $category['id']; 
 				}
 			}
-
-			$products = ProductController::showProducts($ordenar, $item2, $valor2, $base, $tope);
+			//$modo = "ASC";
+			$products = ProductController::showProducts($ordenar, $item2, $valor2, $base, $tope, $modo);
 			$listProducts = ProductController::listProducts($ordenar, $item2, $valor2);
 
 			if(!$products){
@@ -108,6 +123,7 @@ $urlFron = Route::urlFront();
 								<img src="<?php echo $urlBack.$value['portada']; ?>" class="img-responsive">
 							</a>	
 						</figure>
+						<?php echo $value['id'] ?>
 						<h4><small>
 							<a href="<?php echo $value['ruta'] ?>" class="pixelProducto"><?php echo $value['titulo'] ?>
 								<br><span style="color: rgba(0,0,0,0);">-</span>

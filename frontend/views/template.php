@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximun-scale=1.0, user-scalable=no">
 	<meta name="title" content="Tienda Virtual">
 	<?php 
+		session_start(); //Para inicializar variables de sesión en cualquiera de nuestras páginas
 		$urlBack = Route::routeServer(); 
 		$icon = TemplateController::templateStyle();
 	?>

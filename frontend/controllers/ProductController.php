@@ -15,10 +15,10 @@ class ProductController
 		return $response;
 	}
 
-	static public function showProducts($ordenar, $item, $valor, $base, $tope)
+	static public function showProducts($ordenar, $item, $valor, $base, $tope, $modo)
 	{
 		$table = "products";
-		$response = ProductModel::showProducts($table, $ordenar, $item, $valor, $base, $tope);
+		$response = ProductModel::showProducts($table, $ordenar, $item, $valor, $base, $tope, $modo);
 		return $response;
 	}
 

@@ -17,21 +17,24 @@
 		$ordenar = "id";
 		$item = "precio";
 		$valor = 0;
-		$gratis = ProductController::showProducts($ordenar, $item, $valor, $base, $tope);
+		$modo = "DESC";
+		$gratis = ProductController::showProducts($ordenar, $item, $valor, $base, $tope, $modo);
 	}
 
 	if ($titulosModulos[1] == "LO MÁS VENDIDO") {
 		$ordenar = "ventas";
 		$item = null;
 		$valor = null;
-		$ventas = ProductController::showProducts($ordenar, $item, $valor, $base, $tope);
+		$modo = "DESC";
+		$ventas = ProductController::showProducts($ordenar, $item, $valor, $base, $tope, $modo);
 	}
 
 	if ($titulosModulos[2] == "LO MÁS VISTO") {
 		$ordenar = "vistas";
 		$item = null;
 		$valor = null;
-		$vistas = ProductController::showProducts($ordenar, $item, $valor, $base, $tope);
+		$modo = "DESC";
+		$vistas = ProductController::showProducts($ordenar, $item, $valor, $base, $tope, $modo);
 	}
 
 	$modulos = array($gratis, $ventas, $vistas);
