@@ -35,5 +35,12 @@ class ProductController
 		$response = ProductModel::listProducts($table, $ordenar, $item, $valor);
 		return $response;
 	}
+
+	static public function showBanner($ruta)
+	{
+		$table = "banner";
+		$response = ProductModel::showBanner($table, $ruta);
+		return $response;
+	}
 }
 ?>

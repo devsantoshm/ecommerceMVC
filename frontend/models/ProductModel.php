@@ -63,5 +63,14 @@ class ProductModel
 			return $stmt->fetchAll();
 		}
 	}
+
+	static public function showBanner($table, $ruta)
+	{
+		$stmt = Conexion::conectar()->prepare("select * from $table where ruta = :valor");
+		$stmt->bindParam(":valor", $ruta, PDO::PARAM_STR);
+		$stmt->execute();
+
+		return $stmt->fetch();
+	}
 }
 ?>

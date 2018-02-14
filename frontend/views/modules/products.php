@@ -1,15 +1,23 @@
 <?php 
 $urlBack = Route::routeServer(); 
 $urlFron = Route::urlFront();
+$ruta = $rutas[0];
+$banner = ProductController::showBanner($ruta);
+
+$titulo1 = json_decode($banner["titulo1"], true);
+$titulo2 = json_decode($banner["titulo2"], true);
+$titulo3 = json_decode($banner["titulo3"], true);
 ?>
+<?php if($banner != null){ ?>
 <figure class="banner">
-	<img src="http://localhost/ecommerce/backend/views/img/banner/default.jpg" class="img-responsive" width="100%">
-	<div class="textoBanner textoDer">
-		<h1 style="color:#fff">OFERTAS ESPECIALES</h1>
-		<h2 style="color:#fff"><strong>50% off</strong></h2>
-		<h3 style="color:#fff">Termina el 31 de octubre</h3>
+	<img src="<?php echo $urlBack.$banner['img'] ?>" class="img-responsive" width="100%">
+	<div class="textoBanner <?php echo $banner['estilo'] ?>">
+		<h1 style="color:<?php echo $titulo1['color'] ?>"><?php echo $titulo1['texto'] ?></h1>
+		<h2 style="color:<?php echo $titulo2['color'] ?>"><strong><?php echo $titulo2['texto'] ?></strong></h2>
+		<h3 style="color:<?php echo $titulo3['color'] ?>"><?php echo $titulo3['texto'] ?></h3>
 	</div>
 </figure>
+<?php } ?>
 <div class="container-fluid well well-sm barraProductos">
 	<div class="container">
 		<div class="row">
