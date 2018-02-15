@@ -47,7 +47,7 @@ $urlFron = Route::urlFront();
 				<div class="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12" id="buscador">
 					<input type="search" name="buscar" class="form-control" placeholder="Buscar...">
 					<span class="input-group-btn">
-						<a href="<?php echo $urlFron ?>buscador">
+						<a href="<?php echo $urlFron ?>buscador/1/recientes">
 							<button class="btn btn-default backColor" type="submit">
 								<i class="fa fa-search"></i>
 							</button>

@@ -42,5 +42,19 @@ class ProductController
 		$response = ProductModel::showBanner($table, $ruta);
 		return $response;
 	}
+
+	static public function searchProducts($busqueda, $ordenar, $modo, $base, $tope)
+	{
+		$table = "products";
+		$response = ProductModel::searchProducts($table, $busqueda, $ordenar, $modo, $base, $tope);
+		return $response;
+	}
+
+	static public function listProductsSearch($busqueda)
+	{
+		$table = "products";
+		$response = ProductModel::listProductsSearch($table, $busqueda);
+		return $response;
+	}
 }
 ?>

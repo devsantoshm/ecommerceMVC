@@ -72,5 +72,21 @@ class ProductModel
 
 		return $stmt->fetch();
 	}
+
+	static public function searchProducts($table, $busqueda, $ordenar, $modo, $base, $tope)
+	{
+		$stmt = Conexion::conectar()->prepare("select * from $table where ruta like '%$busqueda%' or titulo like '%$busqueda%' or titular like '%$busqueda%' or descripcion like '%$busqueda%' order by $ordenar $modo limit $base, $tope");
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+	}
+
+	static public function listProductsSearch($table, $busqueda)
+	{
+		$stmt = Conexion::conectar()->prepare("select * from $table where ruta like '%$busqueda%' or titulo like '%$busqueda%' or titular like '%$busqueda%' or descripcion like '%$busqueda%'");
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+	}
 }
 ?>

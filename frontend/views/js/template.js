@@ -70,7 +70,24 @@ var url = window.location.href;
 //console.log("url",url); url http://localhost/ecommerce/frontend/telefonos-movil/2
 //method is used to split a string into an array of substrings, and returns the new array
 //The pop() method removes the last element of an array, and returns that element.
+//The isNaN() function determines whether a value is an illegal number (Not-a-Number).
+//This function returns true if the value equates to NaN. Otherwise it returns false.
 var indice = url.split("/");
-//if(indice.pop() != "#"){
-$("#item"+indice.pop()).addClass("active");
-//}
+var pagActual = indice.pop();
+
+//console.log("indice", indice[6]);
+var pagSearch = indice[6];
+
+if(pagActual != "#"){
+	if (isNaN(pagActual)) {
+		$("#item1").addClass("active");
+		$("#item1 a").removeAttr("href");
+	} else if (pagSearch != null) {
+		$("#item"+pagSearch).addClass("active");
+		$("#item"+pagSearch+" a").removeAttr("href");
+	} else {
+		$("#item"+pagActual).addClass("active");
+		$("#item"+pagActual+" a").removeAttr("href");
+	}
+	//$("#item"+indice.pop()).addClass("active");
+}
