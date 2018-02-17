@@ -21,3 +21,20 @@ $("#buscador input").focus(function(){
 		}
 	})
 })
+
+var indice = url.split("/");
+var pagActual = indice[6];
+
+/*console.log("indice", indice[6]);
+var pagSearch = indice[6];*/
+
+if(pagActual != "#"){
+	if (isNaN(pagActual)) {
+		//$("#item1").addClass("active");
+		//$("#item1 a").removeAttr("href");
+	} else {
+		$("#item1").removeClass("active");
+		$("#item"+pagActual).addClass("active");
+		$("#item"+pagActual+" a").removeAttr("href");
+	}
+}

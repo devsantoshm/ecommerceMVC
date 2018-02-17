@@ -46,10 +46,12 @@ $(window).scroll(function(){
 	var scrollY = window.pageYOffset;
 	//console.log("scrollY", scrollY); posición de la altura del scroll
 	if (window.matchMedia("(min-width:768px)").matches) {
-		if(scrollY < ($(".banner").offset().top)-150)
-			$(".banner img").css({"margin-top": -scrollY/3+"px"})
-		else
-			scrollY = 0
+		if ($(".banner").html() != null) {
+			if(scrollY < ($(".banner").offset().top)-150)
+				$(".banner img").css({"margin-top": -scrollY/3+"px"})
+			else
+				scrollY = 0
+		}
 	} 
 })
 
@@ -75,19 +77,15 @@ var url = window.location.href;
 var indice = url.split("/");
 var pagActual = indice.pop();
 
-//console.log("indice", indice[6]);
-var pagSearch = indice[6];
+/*console.log("indice", indice[6]);
+var pagSearch = indice[6];*/
 
 if(pagActual != "#"){
 	if (isNaN(pagActual)) {
 		$("#item1").addClass("active");
-		$("#item1 a").removeAttr("href");
-	} else if (pagSearch != null) {
-		$("#item"+pagSearch).addClass("active");
-		$("#item"+pagSearch+" a").removeAttr("href");
+		//$("#item1 a").removeAttr("href");
 	} else {
 		$("#item"+pagActual).addClass("active");
 		$("#item"+pagActual+" a").removeAttr("href");
 	}
-	//$("#item"+indice.pop()).addClass("active");
 }
