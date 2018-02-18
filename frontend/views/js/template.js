@@ -81,9 +81,13 @@ var pagActual = indice.pop();
 var pagSearch = indice[6];*/
 
 if(pagActual != "#"){
-	if (isNaN(pagActual)) {
+	if (indice[5] == "buscador") {
+		var paginador = indice[6];
+		$("#item"+paginador).addClass("active");
+		$("#item"+paginador+" a").removeAttr("href");
+	} else if (isNaN(pagActual)) {
 		$("#item1").addClass("active");
-		//$("#item1 a").removeAttr("href");
+		$("#item1 a").removeAttr("href");
 	} else {
 		$("#item"+pagActual).addClass("active");
 		$("#item"+pagActual+" a").removeAttr("href");

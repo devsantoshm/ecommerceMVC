@@ -15,6 +15,12 @@ $urlFron = Route::urlFront();
 <div class="container-fluid infoproducto">
 	<div class="container">
 		<div class="row">
+			<?php  
+			$item = "ruta";
+			$valor = $rutas[0];
+			$infoproducto = ProductController::showInfoProduct($item, $valor);
+			?>
+			<?php if($infoproducto["tipo"] == "fisico"){ ?>
 			<div class="col-md-5 col-sm-6 col-xs-12 visorImg">
 				<figure class="visor">
 					<img id="lupa1" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-01.jpg" alt="tennis verde 11"></img>
@@ -33,7 +39,39 @@ $urlFron = Route::urlFront();
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-7 col-sm-6 col-xs-12">
+			<?php }else{ ?>
+			<!-- con col-sm-6, también se ven afectados los md y lg en 6 columnas -->
+			<div class="col-sm-6 col-xs-12">
+				<iframe class="videoPresentacion" src="https://www.youtube.com/embed/N4aY6yX-MaM?rel=0&autoplay=1" width="100%" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<?php } 
+			if($infoproducto["tipo"] == "fisico")
+				echo '<div class="col-md-7 col-sm-6 col-xs-12">';
+			else
+				echo '<div class="col-sm-6 col-xs-12">';	
+			?>	
+				<div class="col-xs-6">
+					<h6><a href="javascript:history.back()" class="text-muted">
+						<i class="fa fa-reply"></i> Continuar comprando
+					</a></h6>
+				</div>
+				<div class="col-xs-6">
+					<h6>
+						<a href="#" class="dropdown-toggle pull-right text-muted" data-toggle="dropdown"><i class="fa fa-plus"></i> Compartir</a>
+						<ul class="dropdown-menu pull-right compartirRedes">
+							<li>
+								<p class="btnFacebook">
+									<i class="fa fa-facebook"></i> Facebook
+								</p>
+							</li>
+							<li>
+								<p class="btnGoogle">
+									<i class="fa fa-google"></i> Google
+								</p>
+							</li>
+						</ul>
+					</h6>
+				</div>
 				<figure class="lupa">
 					<img src="">
 				</figure>
