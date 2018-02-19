@@ -132,13 +132,13 @@ $titulo3 = json_decode($banner["titulo3"], true);
 					<?php foreach ($products as $key => $value) { ?>
 					<li class="col-md-3 col-sm-6 col-xs-12">
 						<figure>
-							<a href="<?php echo $value['ruta'] ?>" class="pixelProducto">
+							<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto">
 								<img src="<?php echo $urlBack.$value['portada']; ?>" class="img-responsive">
 							</a>	
 						</figure>
 						<?php echo $value['id'] ?>
 						<h4><small>
-							<a href="<?php echo $value['ruta'] ?>" class="pixelProducto"><?php echo $value['titulo'] ?>
+							<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto"><?php echo $value['titulo'] ?>
 								<br><span style="color: rgba(0,0,0,0);">-</span>
 								<?php 
 									if($value['nuevo'] != 0)
@@ -180,7 +180,7 @@ $titulo3 = json_decode($banner["titulo3"], true);
 										}
 									}	
 								?>
-								<a href="<?php echo $value['ruta'] ?>" class="pixelProducto">
+								<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto">
 									<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
 								</a>
 							</div>
@@ -194,12 +194,12 @@ $titulo3 = json_decode($banner["titulo3"], true);
 					<li class="col-xs-12">
 						<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 							<figure>
-								<a href="<?php echo $value['ruta'] ?>" class="pixelProducto"><img src="<?php echo $urlBack.$value['portada']; ?>" class="img-responsive"></a>
+								<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto"><img src="<?php echo $urlBack.$value['portada']; ?>" class="img-responsive"></a>
 							</figure>
 						</div>
 						<div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
 							<h1><small>
-								<a href="<?php echo $value['ruta'] ?>" class="pixelProducto">
+								<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto">
 									<?php 
 										echo $value['titulo'].'<br>';
 										if($value['nuevo'] != 0)
@@ -239,7 +239,7 @@ $titulo3 = json_decode($banner["titulo3"], true);
 										}
 									}	
 								?>
-								<a href="<?php echo $value['ruta'] ?>" class="pixelProducto">
+								<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto">
 									<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
 								</a>
 							</div>

@@ -216,6 +216,36 @@ $urlFron = Route::urlFront();
 				  
 				?>	
 				</div>
+				<div class="row">
+					<?php  
+					if ($infoproducto["precio"] == 0) {
+						echo '<div class="col-md-6 col-xs-12">';
+							if ($infoproducto["tipo"] == "virtual")	
+								echo '<button class="btn btn-default btn-block btn-lg backColor">ACCEDER AHORA</button>';
+							else
+								echo '<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button>';
+						echo '</div>';
+					} else {
+						if ($infoproducto["tipo"] == "virtual") {
+							echo '<div class="col-md-6 col-xs-12">
+									<button class="btn btn-default btn-block btn-lg">COMPRAR AHORA</button>
+								</div>
+								<div class="col-md-6 col-xs-12">
+									<button class="btn btn-default btn-block btn-lg backColor">
+										ADICIONAR AL CARRITO <i class="fa fa-shopping-cart"></i>
+									</button>
+								</div>';
+						} else {
+							echo '<div class="col-md-6 col-xs-12">
+									<button class="btn btn-default btn-block btn-lg backColor">
+										ADICIONAR AL CARRITO <i class="fa fa-shopping-cart"></i>
+									</button>
+								</div>';
+						}
+					}
+					
+					?>	
+				</div>
 
 				<figure class="lupa">
 					<img src="">
