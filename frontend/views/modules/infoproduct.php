@@ -294,5 +294,86 @@ $urlFron = Route::urlFront();
 				</figure>
 			</div>
 		</div>
+		<br>
+		<div class="row">
+			<ul class="nav nav-tabs">
+				<li class="active"><a>COMENTARIOS 22</a></li>
+				<li><a href="">Ver más</a></li>
+				<li class="pull-right"><a class="text-muted">PROMEDIO DE CALIFICACIÓN: 3.5 | 
+					<i class="fa fa-star text-success"></i>
+					<i class="fa fa-star text-success"></i>
+					<i class="fa fa-star text-success"></i>
+					<i class="fa fa-star-half-o text-success"></i>
+					<i class="fa fa-star-o text-success"></i>
+				</a></li>
+			</ul>
+			<br>
+		</div>
+		<div class="row comentarios">
+			<div class="panel-group col-md-3 col-sm-6 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading text-uppercase">
+						Andrés Felipe 
+						<span class="text-right"><img class="img-circle" src="<?php echo $urlFron ?>views/img/usuarios/40/944.jpg" width="20%"></span>
+					</div>
+					<div class="panel-body"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, dolor, in sequi ad placeat ab ratione aliquam incidunt recusandae et quam asperiores quidem consectetur aut! Delectus accusamus quas animi quo.</small></div>
+					<div class="panel-footer">
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star-half-o text-success"></i>
+						<i class="fa fa-star-o text-success"></i>
+					</div>
+				</div>
+			</div>
+			<div class="panel-group col-md-3 col-sm-6 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading text-uppercase">
+						Andrés Felipe 
+						<span class="text-right"><img class="img-circle" src="<?php echo $urlFron ?>views/img/usuarios/40/944.jpg" width="20%"></span>
+					</div>
+					<div class="panel-body"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, dolor, in sequi ad placeat ab ratione aliquam incidunt recusandae et quam asperiores quidem consectetur aut! Delectus accusamus quas animi quo.</small></div>
+					<div class="panel-footer">
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star-half-o text-success"></i>
+						<i class="fa fa-star-o text-success"></i>
+					</div>
+				</div>
+			</div>
+			<div class="panel-group col-md-3 col-sm-6 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading text-uppercase">
+						Andrés Felipe 
+						<span class="text-right"><img class="img-circle" src="<?php echo $urlFron ?>views/img/usuarios/40/944.jpg" width="20%"></span>
+					</div>
+					<div class="panel-body"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, dolor, in sequi ad placeat ab ratione aliquam incidunt recusandae et quam asperiores quidem consectetur aut! Delectus accusamus quas animi quo.</small></div>
+					<div class="panel-footer">
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star-half-o text-success"></i>
+						<i class="fa fa-star-o text-success"></i>
+					</div>
+				</div>
+			</div>
+			<div class="panel-group col-md-3 col-sm-6 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading text-uppercase">
+						Andrés Felipe 
+						<span class="text-right"><img class="img-circle" src="<?php echo $urlFron ?>views/img/usuarios/40/944.jpg" width="20%"></span>
+					</div>
+					<div class="panel-body"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, dolor, in sequi ad placeat ab ratione aliquam incidunt recusandae et quam asperiores quidem consectetur aut! Delectus accusamus quas animi quo.</small></div>
+					<div class="panel-footer">
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star text-success"></i>
+						<i class="fa fa-star-half-o text-success"></i>
+						<i class="fa fa-star-o text-success"></i>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
