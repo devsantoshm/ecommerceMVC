@@ -19,30 +19,28 @@ $urlFron = Route::urlFront();
 			$item = "ruta";
 			$valor = $rutas[0];
 			$infoproducto = ProductController::showInfoProduct($item, $valor);
+			$multimedia = json_decode($infoproducto["multimedia"], true);
+			//var_dump(json_decode($infoproducto["multimedia"],true));
 			?>
 			<?php if($infoproducto["tipo"] == "fisico"){ ?>
 			<div class="col-md-5 col-sm-6 col-xs-12 visorImg">
 				<figure class="visor">
-					<img id="lupa1" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-01.jpg" alt="tennis verde 11"></img>
-					<img id="lupa2" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-02.jpg" alt="tennis verde 11"></img>
-					<img id="lupa3" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-03.jpg" alt="tennis verde 11"></img>
-					<img id="lupa4" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-04.jpg" alt="tennis verde 11"></img>
-					<img id="lupa5" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-05.jpg" alt="tennis verde 11"></img>
+					<?php for ($i=0; $i < count($multimedia); $i++) { 
+					echo '<img id="lupa'.($i+1).'" class="img-thumbnail" src="'.$urlBack.$multimedia[$i]["foto"].'" alt="'.$infoproducto["titulo"].'"></img>';	
+					} ?>
 				</figure>
 				<div class="flexslider">
 					<ul class="slides">
-						<li><img value="1" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-01.jpg" alt="tennis verde 11"></img></li>
-						<li><img value="2" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-02.jpg" alt="tennis verde 11"></img></li>
-						<li><img value="3" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-03.jpg" alt="tennis verde 11"></img></li>
-						<li><img value="4" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-04.jpg" alt="tennis verde 11"></img></li>
-						<li><img value="5" class="img-thumbnail" src="http://localhost/ecommerce/backend/views/img/multimedia/tennis-verde/img-05.jpg" alt="tennis verde 11"></img></li>
+						<?php for ($i=0; $i < count($multimedia); $i++) { 
+						echo '<li><img value="'.($i+1).'" class="img-thumbnail" src="'.$urlBack.$multimedia[$i]["foto"].'" alt="'.$infoproducto["titulo"].'"></img></li>';	
+						} ?>
 					</ul>
 				</div>
 			</div>
 			<?php }else{ ?>
 			<!-- con col-sm-6, también se ven afectados los md y lg en 6 columnas -->
 			<div class="col-sm-6 col-xs-12">
-				<iframe class="videoPresentacion" src="https://www.youtube.com/embed/N4aY6yX-MaM?rel=0&autoplay=1" width="100%" frameborder="0" allowfullscreen></iframe>
+				<iframe class="videoPresentacion" src="https://www.youtube.com/embed/<?php echo $infoproducto["multimedia"] ?>?rel=0&autoplay=1" width="100%" frameborder="0" allowfullscreen></iframe>
 			</div>
 			<?php } 
 			if($infoproducto["tipo"] == "fisico")
