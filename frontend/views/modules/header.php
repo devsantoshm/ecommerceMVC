@@ -98,10 +98,47 @@ $urlFron = Route::urlFront();
 		<div class="modal-body modalTitulo">
 			<h3 class="backColor">REGISTRARSE</h3>
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<div class="col-sm-6 col-xs-12 facebook" id="btnFacebookRegistro">
+				<p><i class="fa fa-facebook"></i> Registro con Facebook</p>
+			</div>
+			<div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
+				<p><i class="fa fa-google"></i> Registro con Google</p>
+			</div>
+			<form method="post" onsubmit="return registroUsuario()">
+				<hr>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input type="text" name="regUsuario" id="regUsuario" class="form-control text-uppercase" placeholder="Nombre Completo" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						<input type="email" name="regEmail" id="regEmail" class="form-control text-uppercase" placeholder="Correo Electrónico" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input type="password" name="regPassword" id="regPassword" class="form-control" placeholder="Contraseña" required>
+					</div>
+				</div>
+				<!-- iubenda condiciones de uso y politicas de privacidad -->
+				<div class="checkBox">
+					<label>
+						<input type="checkbox" id="regTerminos">
+						<small>
+							Acepta nuestras condiciones de uso y políticas de privacidad 
+							<a href="//www.iubenda.com/privacy-policy/37220716" class="iubenda-white iubenda-embed" title="Condiciones de uso y políticas de privacidad">Leer más</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+						</small>
+					</label>
+				</div>
+				<input type="submit" class="btn btn-default btn-block backColor" value="ENVIAR">
+			</form>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Save changes</button>
+			¿Ya tienes una cuenta registrada? | <strong><a href="#modalIngreso" data-dismiss="modal" data-toggle="modal">Ingresar</a></strong>
 		</div>
 	</div>
 </div>

@@ -97,6 +97,50 @@ header #categorias hr{
 	color: white;
 }
 
+.modalFormulario .facebook, .modalFormulario .google{
+	cursor: pointer;
+}
+
+.modalFormulario .facebook p{
+	background: #46639f;
+}
+
+.modalFormulario .google p{
+	background: #d6513e;
+}
+
+.modalFormulario .facebook p, .modalFormulario .google p{
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	padding: 8px;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.modalFormulario p i{
+	margin-left: -25px;
+	margin-right: 25px;
+	font-size: 25px;
+}
+
+.modalFormulario form{
+	padding: 20px;
+}
+
+.modalFormulario form hr{
+	border: 1px solid #eee;
+}
+
+.modalFormulario form input[type="text"], .modalFormulario form input[type="email"], .modalFormulario form input[type="password"]{
+	padding: 25px;
+}
+
+.modalFormulario form input[type="submit"]{
+	padding: 15px;
+}
+
 /* EScritorio grande */
 @media (min-width: 1200px) {
 	
@@ -107,6 +151,10 @@ header #categorias hr{
 
 	header #carrito{
 		padding-left: 100px;
+	}
+
+	.modalFormulario .facebook p{
+		margin-right: -15px;
 	}
 }
 
@@ -120,6 +168,10 @@ header #categorias hr{
 
 	header #carrito{
 		padding-left: 70px;
+	}
+
+	.modalFormulario .facebook p{
+		margin-right: -15px;
 	}	
 }
 
@@ -136,6 +188,10 @@ header #categorias hr{
 
 	header #carrito p{
 		display: none;
+	}
+
+	.modalFormulario .facebook p{
+		margin-right: -15px;
 	}
 }
 
@@ -165,5 +221,9 @@ header #categorias hr{
 
 	header #carrito{
 		margin: 0px;
+	}
+
+	.modalFormulario .google p{
+		margin-top: -15px;
 	}
 }
