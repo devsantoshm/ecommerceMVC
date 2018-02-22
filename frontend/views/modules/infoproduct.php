@@ -168,7 +168,7 @@ $urlFron = Route::urlFront();
 									<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 									'.$infoproducto["ventasGratis"].' inscritos |
 									<i class="fa fa-eye" style="margin: 0px 5px"></i>
-									Visto por '.$infoproducto["vistasGratis"].' personas
+									Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistasGratis"].'</span> personas
 								</span>
 							</h4>
 							<h4 class="col-lg-0 col-md-0 col-xs-12">
@@ -179,7 +179,7 @@ $urlFron = Route::urlFront();
 									<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 									'.$infoproducto["ventasGratis"].' inscritos <br>
 									<i class="fa fa-eye" style="margin: 0px 5px"></i>
-									Visto por '.$infoproducto["vistasGratis"].' personas
+									Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistasGratis"].'</span> personas
 								</span>
 							</h4>';
 					} else {
@@ -191,7 +191,7 @@ $urlFron = Route::urlFront();
 									<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 									'.$infoproducto["ventas"].' ventas |
 									<i class="fa fa-eye" style="margin: 0px 5px"></i>
-									Visto por '.$infoproducto["vistas"].' personas
+									Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistas"].'</span> personas
 								</span>
 							</h4>
 							<h4 class="col-lg-0 col-md-0 col-xs-12">
@@ -202,7 +202,7 @@ $urlFron = Route::urlFront();
 									<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 									'.$infoproducto["ventas"].' ventas <br>
 									<i class="fa fa-eye" style="margin: 0px 5px"></i>
-									Visto por '.$infoproducto["vistas"].' personas
+									Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistas"].'</span> personas
 								</span>
 							</h4>';
 					}
@@ -216,7 +216,7 @@ $urlFron = Route::urlFront();
 									<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 									'.$infoproducto["ventasGratis"].' solicitudes |
 									<i class="fa fa-eye" style="margin: 0px 5px"></i>
-									Visto por '.$infoproducto["vistasGratis"].' personas
+									Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistasGratis"].'</span> personas
 								</span>
 							</h4>
 							<h4 class="col-lg-0 col-md-0 col-xs-12">
@@ -227,7 +227,7 @@ $urlFron = Route::urlFront();
 									<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 									'.$infoproducto["ventasGratis"].' solicitudes <br>
 									<i class="fa fa-eye" style="margin: 0px 5px"></i>
-									Visto por '.$infoproducto["vistasGratis"].' personas
+									Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistasGratis"].'</span> personas
 								</span>
 							</h4>';	
 					} else {
@@ -239,7 +239,7 @@ $urlFron = Route::urlFront();
 								<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 								'.$infoproducto["ventas"].' ventas |
 								<i class="fa fa-eye" style="margin: 0px 5px"></i>
-								Visto por '.$infoproducto["vistas"].' personas
+								Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistas"].'</span> personas
 							</span>
 						</h4>
 						<h4 class="col-lg-0 col-md-0 col-xs-12">
@@ -250,7 +250,7 @@ $urlFron = Route::urlFront();
 								<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>
 								'.$infoproducto["ventas"].' ventas <br>
 								<i class="fa fa-eye" style="margin: 0px 5px"></i>
-								Visto por '.$infoproducto["vistas"].' personas
+								Visto por <span class="vistas" tipo="'.$infoproducto["precio"].'">'.$infoproducto["vistas"].'</span> personas
 							</small>
 						</h4>';
 					}
@@ -375,5 +375,109 @@ $urlFron = Route::urlFront();
 				</div>
 			</div>
 		</div>
+		<hr>
+	</div>
+</div>
+<div class="container-fluid productos">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 tituloDestacado">
+				<!-- con solo poner col-sm-6 ya toma las demás dispositivos con col-6 -->
+				<div class="col-sm-6 col-xs-12">
+					<h1><small>PRODUCTOS RELACIONADOS</small></h1>
+				</div>
+				<div class="col-sm-6 col-xs-12">
+				<?php  
+					$item = "id";
+					$valor = $infoproducto["id_subcategoria"];
+					$rutaArticulosDestacados = ProductController::showSubCategories($item, $valor);
+				?>
+					<a href="<?php echo $urlFron.$rutaArticulosDestacados[0]["ruta"] ?>">
+						<button class="btn btn-default backColor pull-right">
+							VER MÁS <span class="fa fa-chevron-right"></span>
+						</button>
+					</a>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<hr>
+		</div>
+		<?php  
+		$ordenar = "";
+		$item = "id_subcategoria";
+		$valor = $infoproducto["id_subcategoria"];
+		$base = 0;
+		$tope = 4;
+		$modo = "Rand()";
+		$relacionados = ProductController::showProducts($ordenar, $item, $valor, $base, $tope, $modo);
+
+		if (!$relacionados) {
+			echo '<div class="col-xs-12 error404">
+					<h1><small>!Oops¡</small></h1>
+					<h2>No hay productos relacionados</h2>
+				</div>';
+		} else {	
+		?>
+		<ul class="grid0">
+			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
+			<?php foreach ($relacionados as $key => $value) { ?>
+			<li class="col-md-3 col-sm-6 col-xs-12">
+				<figure>
+					<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto">
+						<img src="<?php echo $urlBack.$value['portada']; ?>" class="img-responsive">
+					</a>	
+				</figure>
+				<h4><small>
+					<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto"><?php echo $value['titulo'] ?>
+						<br><span style="color: rgba(0,0,0,0);">-</span>
+						<?php 
+							if($value['nuevo'] != 0)
+								echo '<span class="label label-warning fontSize">Nuevo</span> ';
+							if($value['oferta'] != 0)
+							  	echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
+						?>
+					</a>
+				</small></h4>
+				<div class="col-xs-6 precio">
+					<?php 
+						if($value['precio'] == 0)
+							echo '<h2><small>GRATIS</small></h2>';
+						else{
+							if($value['oferta'] != 0){
+								echo '<h2>
+										<small><strong class="oferta">USD $'.$value["precio"].'</strong></small>
+										<small>$'.$value["precioOferta"].'</small>
+									 </h2>';
+							}else{
+								echo '<h2><small>USD $'.$value['precio'].'</small></h2>';
+							}
+						}
+					?>
+				</div>
+				<div class="col-xs-6 enlaces">
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-default btn-xs deseos" idProductos="<?php echo $value['id'] ?>" data-toggle="tooltip" title="Agregar a mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+						<?php 
+							if ($value['tipo'] == 'virtual' && $value['precio'] != 0) {
+								if ($value['oferta'] != 0) {
+									echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="'.$value["id"].'" imagen="'.$urlBack.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precioOferta"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+										</button>';
+								} else {
+									echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="'.$value["id"].'" imagen="'.$urlBack.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precio"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+										</button>';
+								}
+							}	
+						?>
+						<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto">
+							<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+						</a>
+					</div>
+				</div>
+			</li>
+			<?php } ?>
+		</ul>
+		<?php } ?>
 	</div>
 </div>

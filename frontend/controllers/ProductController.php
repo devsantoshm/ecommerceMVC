@@ -56,5 +56,12 @@ class ProductController
 		$response = ProductModel::listProductsSearch($table, $busqueda);
 		return $response;
 	}
+
+	static public function updateViewProduct($datos, $item)
+	{
+		$table = "products";
+		$response = ProductModel::updateViewProduct($table, $datos, $item);
+		return $response;
+	}
 }
 ?>

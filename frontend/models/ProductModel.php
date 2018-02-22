@@ -88,5 +88,17 @@ class ProductModel
 
 		return $stmt->fetchAll();
 	}
+
+	static public function updateViewProduct($table, $datos, $item)
+	{
+		$stmt = Conexion::conectar()->prepare("update $table set $item = :valor where ruta = :ruta");
+		$stmt->bindParam(":ruta", $datos["ruta"], PDO::PARAM_STR);
+		$stmt->bindParam(":valor", $datos["valor"], PDO::PARAM_STR);
+		
+		if($stmt->execute())
+			return "ok";
+		else
+			return "error";
+	}
 }
 ?>
