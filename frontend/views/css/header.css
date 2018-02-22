@@ -80,6 +80,23 @@ header #categorias hr{
 	border: 1px solid rgba(255,255,255,.3);
 }
 
+.modalTitulo{
+	padding: 5px 0px;
+}
+.modalTitulo h3{
+	text-align: center;
+	margin-top: -5px;
+	padding: 15px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.modalFormulario .close{
+	position: absolute;
+	right: 27px;
+	top: 15px;
+	color: white;
+}
+
 /* EScritorio grande */
 @media (min-width: 1200px) {
 	

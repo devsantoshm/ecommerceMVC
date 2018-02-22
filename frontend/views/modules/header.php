@@ -92,3 +92,16 @@ $urlFron = Route::urlFront();
 		</div>
 	</div>
 </header>
+
+<div class="modal fade modalFormulario" id="modalRegistro">
+	<div class="modal-dialog modal-content">	
+		<div class="modal-body modalTitulo">
+			<h3 class="backColor">REGISTRARSE</h3>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+	</div>
+</div>
