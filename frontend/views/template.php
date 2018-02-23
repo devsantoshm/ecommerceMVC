@@ -87,5 +87,6 @@ if (isset($_GET["ruta"])) {
 <script src="<?php echo $route; ?>views/js/slide.js"></script>
 <script src="<?php echo $route; ?>views/js/search.js"></script>
 <script src="<?php echo $route; ?>views/js/infoproduct.js"></script>
+<script src="<?php echo $route; ?>views/js/users.js"></script>
 </body>
 </html>

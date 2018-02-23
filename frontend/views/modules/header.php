@@ -104,7 +104,7 @@ $urlFron = Route::urlFront();
 			<div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
 				<p><i class="fa fa-google"></i> Registro con Google</p>
 			</div>
-			<form method="post" onsubmit="return registroUsuario()">
+			<form method="post" action="formulario.php" onsubmit="return registroUsuario()">
 				<hr>
 				<div class="form-group">
 					<div class="input-group">
@@ -127,7 +127,7 @@ $urlFron = Route::urlFront();
 				<!-- iubenda condiciones de uso y politicas de privacidad -->
 				<div class="checkBox">
 					<label>
-						<input type="checkbox" id="regTerminos">
+						<input type="checkbox" id="regPoliticas">
 						<small>
 							Acepta nuestras condiciones de uso y políticas de privacidad 
 							<a href="//www.iubenda.com/privacy-policy/37220716" class="iubenda-white iubenda-embed" title="Condiciones de uso y políticas de privacidad">Leer más</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
