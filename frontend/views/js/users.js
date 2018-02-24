@@ -1,5 +1,7 @@
 function registroUsuario(){
 
+	$(".alert").remove();
+
 	var nombre = $("#regUsuario").val()
 	
 	if (nombre != "") {
