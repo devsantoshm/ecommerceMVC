@@ -8,6 +8,9 @@ require_once "models/ProductModel.php";
 require_once "controllers/SlideController.php";
 require_once "models/SlideModel.php";
 
+require_once "controllers/UserController.php";
+require_once "models/UserModel.php";
+
 require_once "models/routes.php";
 
 $template = new TemplateController();

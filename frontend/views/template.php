@@ -23,6 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/flexslider.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/sweetalert.css">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/template.css">
@@ -35,6 +36,7 @@
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.easing.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.scrollUp.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.flexslider.js"></script>
+	<script src="<?php echo $route; ?>views/js/plugins/sweetalert.min.js"></script>
 <body>
 <?php  
 include 'modules/header.php';

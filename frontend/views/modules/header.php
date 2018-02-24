@@ -104,7 +104,7 @@ $urlFron = Route::urlFront();
 			<div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
 				<p><i class="fa fa-google"></i> Registro con Google</p>
 			</div>
-			<form method="post" action="formulario.php" onsubmit="return registroUsuario()">
+			<form method="post" onsubmit="return registroUsuario()">
 				<hr>
 				<div class="form-group">
 					<div class="input-group">
@@ -115,7 +115,7 @@ $urlFron = Route::urlFront();
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input type="email" name="regEmail" id="regEmail" class="form-control text-uppercase" placeholder="Correo Electrónico" required>
+						<input type="email" name="regEmail" id="regEmail" class="form-control" placeholder="Correo Electrónico" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -134,6 +134,10 @@ $urlFron = Route::urlFront();
 						</small>
 					</label>
 				</div>
+				<?php  
+				$registro = new UserController();
+				$registro->registerUser();
+				?>
 				<input type="submit" class="btn btn-default btn-block backColor" value="ENVIAR">
 			</form>
 		</div>
