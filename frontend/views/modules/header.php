@@ -109,7 +109,7 @@ $urlFron = Route::urlFront();
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input type="text" name="regUsuario" id="regUsuario" class="form-control text-uppercase" placeholder="Nombre Completo" required>
+						<input type="text" name="regUsuario" id="regUsuario" class="form-control" placeholder="Nombre Completo" required>
 					</div>
 				</div>
 				<div class="form-group">
