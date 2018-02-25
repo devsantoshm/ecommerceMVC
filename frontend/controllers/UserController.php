@@ -27,6 +27,7 @@ class UserController
 					date_default_timezone_set("America/Lima");
 					$urlFron = Route::urlFront();
 					$mail = new PHPMailer;
+					$mail->CharSet = 'UTF-8';
 					$mail->isMail();
 					$mail->setFrom('cursos@developerplus.com', 'Cursos virtuales');
 					$mail->addReplyTo('cursos@developerplus.com', 'Cursos virtuales');

@@ -50,3 +50,34 @@ function registroUsuario(){
 
 	return true;
 }
+
+var validerEmailRepetido = false;
+
+$("#regEmail").change(function(){
+
+	var email = $("#regEmail").val();
+	var datos = new FormData();
+	datos.append("validarEmail", email);
+
+	$.ajax({
+		url: rutaFron+"ajax/AjaxUser.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(response){
+			//console.log("resp", response)
+			if (!response) {
+
+			} else {
+				var modo = JSON.parse(response).modo;
+				if (modo == "directo") {
+					modo = "esta página";
+				}
+
+				$("#regEmail").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> El correo electrónico ya existe, fue registrado en '+modo+'</div>')
+			}
+		}
+	})
+})

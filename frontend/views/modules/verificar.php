@@ -1,18 +1,21 @@
 <?php 
 
+$usuarioVerificado = false;
 $urlFron = Route::urlFront();
 $item = "emailEncriptado";
 $valor = $rutas[1];
 $response = UserController::showUser($item, $valor);
 
-$id = $response["id"];
-$item2 = "verificacion";
-$valor2 = 0;
-$response2 = UserController::updateUser($id, $item2, $valor2); 
-$usuarioVerificado = false;
+if($valor == $response["emailEncriptado"]){
 
-if($response2 == "ok")
-	$usuarioVerificado = true;
+	$id = $response["id"];
+	$item2 = "verificacion";
+	$valor2 = 0;
+	$response2 = UserController::updateUser($id, $item2, $valor2); 
+
+	if($response2 == "ok")
+		$usuarioVerificado = true;
+}
 
 ?>
 
