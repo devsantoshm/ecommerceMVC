@@ -1,3 +1,45 @@
+
+$("input").focus(function(){
+	$(".alert").remove()
+})
+
+var validerEmailRepetido = false;
+
+$("#regEmail").change(function(){
+
+	var email = $("#regEmail").val();
+	var datos = new FormData();
+	datos.append("validarEmail", email);
+
+	$.ajax({
+		url: rutaFron+"ajax/AjaxUser.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(response){
+			//console.log("resp", response)
+			if (response == "false") {
+				
+				$(".alert").remove();
+				validerEmailRepetido = false
+
+			} else {
+				
+				var modo = JSON.parse(response).modo;	
+				if (modo == "directo") {
+					modo = "esta página";
+				}
+
+				$("#regEmail").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> El correo electrónico ya existe, fue registrado en '+modo+'</div>')
+
+				validerEmailRepetido = true
+			}
+		}
+	})
+})
+
 function registroUsuario(){
 
 	$(".alert").remove();
@@ -21,6 +63,11 @@ function registroUsuario(){
 		var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 		if (!expresion.test(email)) {
 			$("#regEmail").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> Escrib correctamente el correo electrónico</div>')
+			return false;
+		}
+
+		if (validerEmailRepetido) {
+			$("#regEmail").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> El correo electrónico ya existe</div>')
 			return false;
 		}
 	} else {
@@ -50,34 +97,3 @@ function registroUsuario(){
 
 	return true;
 }
-
-var validerEmailRepetido = false;
-
-$("#regEmail").change(function(){
-
-	var email = $("#regEmail").val();
-	var datos = new FormData();
-	datos.append("validarEmail", email);
-
-	$.ajax({
-		url: rutaFron+"ajax/AjaxUser.php",
-		method: "POST",
-		data: datos,
-		cache: false,
-		contentType: false,
-		processData: false,
-		success: function(response){
-			//console.log("resp", response)
-			if (!response) {
-
-			} else {
-				var modo = JSON.parse(response).modo;
-				if (modo == "directo") {
-					modo = "esta página";
-				}
-
-				$("#regEmail").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> El correo electrónico ya existe, fue registrado en '+modo+'</div>')
-			}
-		}
-	})
-})
