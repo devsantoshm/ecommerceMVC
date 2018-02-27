@@ -71,7 +71,7 @@ if (isset($_GET["ruta"])) {
 		include "modules/products.php";
 	else if($infoProducto != null)
 		include "modules/infoproduct.php";
-	else if($rutas[0] == "buscador" || $rutas[0] == "verificar")
+	else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir")
 		include "modules/".$rutas[0].".php";
 	else
 		include "modules/error404.php";	

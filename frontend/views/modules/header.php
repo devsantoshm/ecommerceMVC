@@ -22,9 +22,32 @@ $urlFron = Route::urlFront();
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 registro">
 				<ul>
-					<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
-					<li>|</li>
-					<li><a href="#modalRegistro" data-toggle="modal">Crear una cuenta</a></li>
+					<?php  
+					if (isset($_SESSION["validarSesion"])) {
+						if ($_SESSION["validarSesion"] == "ok") {
+							if ($_SESSION["modo"] == "directo") {
+								if ($_SESSION["foto"] != "") {
+									echo '<li>
+											<img class="img-circle" src="'.$urlFron.$_SESSION["foto"].'" width="10%">
+										</li>';
+								} else {
+									echo '<li>
+											<img class="img-circle" src="'.$urlBack.'views/img/usuarios/default/anonymous.png" width="10%">
+										</li>';
+								}
+
+								echo '<li>|</li>
+									<li><a href="'.$urlFron.'perfil">Ver Perfil</a></li>
+									<li>|</li>
+									<li><a href="'.$urlFron.'salir">Salir</a></li>';
+							}
+						}
+					} else {
+						echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
+							<li>|</li>
+							<li><a href="#modalRegistro" data-toggle="modal">Crear una cuenta</a></li>';
+					}
+					?>
 				</ul>
 			</div>
 		</div>
@@ -143,6 +166,74 @@ $urlFron = Route::urlFront();
 		</div>
 		<div class="modal-footer">
 			¿Ya tienes una cuenta registrada? | <strong><a href="#modalIngreso" data-dismiss="modal" data-toggle="modal">Ingresar</a></strong>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modalFormulario" id="modalIngreso">
+	<div class="modal-dialog modal-content">	
+		<div class="modal-body modalTitulo">
+			<h3 class="backColor">INGRESAR</h3>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<div class="col-sm-6 col-xs-12 facebook" id="btnFacebookRegistro">
+				<p><i class="fa fa-facebook"></i> Registro con Facebook</p>
+			</div>
+			<div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
+				<p><i class="fa fa-google"></i> Registro con Google</p>
+			</div>
+			<form method="post">
+				<hr>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						<input type="email" name="ingEmail" id="ingEmail" class="form-control" placeholder="Correo Electrónico" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input type="password" name="ingPassword" id="ingPassword" class="form-control" placeholder="Contraseña" required>
+					</div>
+				</div>
+				<?php  
+				$ingreso = new UserController();
+				$ingreso->loginUser();
+				?>
+				<input type="submit" class="btn btn-default btn-block backColor btnIngreso" value="ENVIAR">
+				<br>
+				<center>
+					<a href="#modalPassword" data-dismiss="modal" data-toggle="modal">¿Olvidaste tu Contraseña?</a>
+				</center>
+			</form>
+		</div>
+		<div class="modal-footer">
+			¿No tienes una cuenta registrada? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modalFormulario" id="modalPassword">
+	<div class="modal-dialog modal-content">	
+		<div class="modal-body modalTitulo">
+			<h3 class="backColor">SOLICITUD DE NUEVA CONTRASEÑA</h3>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<form method="post">
+				<label>Escribe el correo Electrónico con el que estás registrado y te enviaremos una nueva Contraseña:</label>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						<input type="email" name="passEmail" id="passEmail" class="form-control" placeholder="Correo Electrónico" required>
+					</div>
+				</div>
+				<?php  
+				$password = new UserController();
+				$password->forgetPassword();
+				?>
+				<input type="submit" class="btn btn-default btn-block backColor" value="ENVIAR">
+			</form>
+		</div>
+		<div class="modal-footer">
+			¿No tienes una cuenta registrada? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
 		</div>
 	</div>
 </div>

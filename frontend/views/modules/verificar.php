@@ -6,7 +6,7 @@ $item = "emailEncriptado";
 $valor = $rutas[1];
 $response = UserController::showUser($item, $valor);
 
-if($valor == $response["emailEncriptado"]){
+if($valor == $response["emailEncriptado"] && $valor != ""){
 
 	$id = $response["id"];
 	$item2 = "verificacion";

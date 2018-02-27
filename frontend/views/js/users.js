@@ -1,4 +1,10 @@
 
+var rutaActual = location.href;
+
+$(".btnIngreso").click(function(){
+	localStorage.setItem("rutaActual", rutaActual);
+})
+
 $("input").focus(function(){
 	$(".alert").remove()
 })
