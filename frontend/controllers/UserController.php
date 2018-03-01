@@ -14,6 +14,7 @@ class UserController
 				$datos = array("nombre" => $_POST["regUsuario"],
 								"password" => $encriptar,
 								"email" => $_POST["regEmail"],
+								"foto" => "",
 								"modo" => "directo",
 								"verificacion" => 1,
 								"emailEncriptado" => $encriptarEmail
@@ -345,6 +346,14 @@ class UserController
 			}
 			
 		}
+	}
+
+	static public function registerNetworkSocial($datos)
+	{
+		$table = "users";
+		$response = UserModel::registerUser($table, $datos);
+		return $response;
+
 	}
 }
 ?>

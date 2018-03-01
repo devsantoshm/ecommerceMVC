@@ -121,10 +121,10 @@ $urlFron = Route::urlFront();
 		<div class="modal-body modalTitulo">
 			<h3 class="backColor">REGISTRARSE</h3>
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<div class="col-sm-6 col-xs-12 facebook" id="btnFacebookRegistro">
+			<div class="col-sm-6 col-xs-12 facebook">
 				<p><i class="fa fa-facebook"></i> Registro con Facebook</p>
 			</div>
-			<div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
+			<div class="col-sm-6 col-xs-12 google">
 				<p><i class="fa fa-google"></i> Registro con Google</p>
 			</div>
 			<form method="post" onsubmit="return registroUsuario()">
@@ -175,11 +175,11 @@ $urlFron = Route::urlFront();
 		<div class="modal-body modalTitulo">
 			<h3 class="backColor">INGRESAR</h3>
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<div class="col-sm-6 col-xs-12 facebook" id="btnFacebookRegistro">
-				<p><i class="fa fa-facebook"></i> Registro con Facebook</p>
+			<div class="col-sm-6 col-xs-12 facebook">
+				<p><i class="fa fa-facebook"></i> Ingreso con Facebook</p>
 			</div>
-			<div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
-				<p><i class="fa fa-google"></i> Registro con Google</p>
+			<div class="col-sm-6 col-xs-12 google">
+				<p><i class="fa fa-google"></i> Ingreso con Google</p>
 			</div>
 			<form method="post">
 				<hr>
