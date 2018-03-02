@@ -35,12 +35,16 @@ $urlFron = Route::urlFront();
 											<img class="img-circle" src="'.$urlBack.'views/img/usuarios/default/anonymous.png" width="10%">
 										</li>';
 								}
-
-								echo '<li>|</li>
-									<li><a href="'.$urlFron.'perfil">Ver Perfil</a></li>
-									<li>|</li>
-									<li><a href="'.$urlFron.'salir">Salir</a></li>';
 							}
+							if ($_SESSION["modo"] == "facebook") {
+								echo '<li>
+										<img class="img-circle" src="'.$_SESSION["foto"].'" width="10%">
+									</li>';	
+							}
+							echo '<li>|</li>
+								<li><a href="'.$urlFron.'perfil">Ver Perfil</a></li>
+								<li>|</li>
+								<li><a href="'.$urlFron.'salir" class="salir">Salir</a></li>';
 						}
 					} else {
 						echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>

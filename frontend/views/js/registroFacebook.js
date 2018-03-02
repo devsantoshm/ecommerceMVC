@@ -64,9 +64,55 @@ function testApi(){
 				contentType: false,
 				processData: false,
 				success: function(response){
-					
+					if (response == "ok") {
+						window.location = localStorage.getItem("rutaActual");
+					}else{
+						swal({
+						  title:"¡ERROR!",
+						  text: "¡El correo electrónico "+email+" ya está registrado con un método diferente a Facebook!",
+						  type: "error",
+						  confirmButtonText: "Cerrar",
+						  closeOnConfirm: false
+						},
+						function(isConfirm){
+							if(isConfirm){
+								FB.getLoginStatus(function(response){
+									if (response.status === 'connected') {
+										FB.logout(function(response){
+											deleteCookie("fblo_599927650349517")
+											setTimeout(function(){
+												window.location = rutaFron+"salir";
+											}, 500)
+										})
+
+										function deleteCookie(name){
+											document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+										}
+									}
+								})
+							}
+						});
+					}
 				}
 			})
 		}
 	})
 }
+
+$(".salir").click(function(e){
+	e.preventDefault();
+	FB.getLoginStatus(function(response){
+		if (response.status === 'connected') {
+			FB.logout(function(response){
+				deleteCookie("fblo_599927650349517")
+				setTimeout(function(){
+					window.location = rutaFron+"salir";
+				}, 500)
+			})
+
+			function deleteCookie(name){
+				document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			}
+		}
+	})
+})
