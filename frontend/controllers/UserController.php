@@ -358,6 +358,24 @@ class UserController
 		$respuesta0 = UserModel::showUser($table, $item, $valor);
 
 		if ($respuesta0) {
+			if ($respuesta0["modo"] != $datos["modo"]) {
+				echo '<script>
+						swal({
+							  title:"¡ERROR!",
+							  text: "¡El correo electrónico '.$datos["email"].', ya está registrado en el sistema con un método diferente a Google!",
+							  type: "error",
+							  confirmButtonText: "Cerrar",
+							  closeOnConfirm: false
+							},
+							function(isConfirm){
+								if(isConfirm){
+									history.back();
+								}
+							}
+						);
+					</script>';
+					$emailRepetido = false;
+			}
 			$emailRepetido = true;
 		} else {
 			$response1 = UserModel::registerUser($table, $datos);
@@ -368,7 +386,7 @@ class UserController
 			$respuesta2 = UserModel::showUser($table, $item, $valor);
 
 			if ($respuesta2["modo"] == "facebook") {
-				session_start();
+				session_start();// si necesitamos session_start() por que estamos traendo desde javascript
 				$_SESSION["validarSesion"] = "ok";
 				$_SESSION["id"] = $respuesta2["id"];
 				$_SESSION["nombre"] = $respuesta2["nombre"];
@@ -378,7 +396,21 @@ class UserController
 				$_SESSION["modo"] = $respuesta2["modo"];
 
 				echo "ok";
-			}else{
+
+			} else if ($respuesta2["modo"] == "google") {
+				// no necesitamos session_start() por que lo estamos haciendo desde php
+				$_SESSION["validarSesion"] = "ok";
+				$_SESSION["id"] = $respuesta2["id"];
+				$_SESSION["nombre"] = $respuesta2["nombre"];
+				$_SESSION["foto"] = $respuesta2["foto"];
+				$_SESSION["email"] = $respuesta2["email"];
+				$_SESSION["password"] = $respuesta2["password"];
+				$_SESSION["modo"] = $respuesta2["modo"];
+
+				echo "<span style='display:none'>ok</span>";
+
+			} else {
+				
 				echo "";
 			}
 		}

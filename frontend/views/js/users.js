@@ -1,7 +1,7 @@
 
 var rutaActual = location.href;
 
-$(".btnIngreso", ".facebook").click(function(){
+$(".btnIngreso, .facebook, .google").click(function(){
 	localStorage.setItem("rutaActual", rutaActual);
 })
 

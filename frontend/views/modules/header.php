@@ -1,6 +1,39 @@
 <?php 
 $urlBack = Route::routeServer();  
 $urlFron = Route::urlFront();
+
+$cliente = new Google_Client();
+$cliente->setAuthConfig('models/credencia.json');
+$cliente->setAccessType("offline");
+$cliente->setScopes(['profile', 'email']);
+
+$rutaGoogle = $cliente->createAuthUrl();
+
+if (isset($_GET["code"])) {
+	$token = $cliente->authenticate($_GET["code"]); //generar un token de autenticacion
+	$_SESSION['id_token_google'] = $token;
+	$cliente->setAccessToken($token);
+}
+
+if ($cliente->getAccessToken()) {
+	$item = $cliente->verifyIdToken();
+	//var_dump($item);
+	$datos = array("nombre" => $item["name"],
+					"email" => $item["email"],
+					"foto" => $item["picture"],
+					"password" => "null",
+					"modo" => "google",
+					"verificacion" => 0,
+					"emailEncriptado" => "null");
+
+	$respuesta = UserController::registerNetworkSocial($datos);
+
+	echo '<script>
+	setTimeout(function(){
+		window.location = localStorage.getItem("rutaActual");
+	}, 1000);
+	</script>';
+}
 ?>
 <div class="container-fluid barraSuperior" id="top">
 	<div class="container">
@@ -35,16 +68,32 @@ $urlFron = Route::urlFront();
 											<img class="img-circle" src="'.$urlBack.'views/img/usuarios/default/anonymous.png" width="10%">
 										</li>';
 								}
-							}
+								echo '<li>|</li>
+									<li><a href="'.$urlFron.'perfil">Ver Perfil</a></li>
+									<li>|</li>
+									<li><a href="'.$urlFron.'salir">Salir</a></li>';
+
+							} 
+
 							if ($_SESSION["modo"] == "facebook") {
 								echo '<li>
 										<img class="img-circle" src="'.$_SESSION["foto"].'" width="10%">
-									</li>';	
+									</li>
+									<li>|</li>
+									<li><a href="'.$urlFron.'perfil">Ver Perfil</a></li>
+									<li>|</li>
+									<li><a href="'.$urlFron.'salir" class="salir">Salir</a></li>';	
 							}
-							echo '<li>|</li>
-								<li><a href="'.$urlFron.'perfil">Ver Perfil</a></li>
-								<li>|</li>
-								<li><a href="'.$urlFron.'salir" class="salir">Salir</a></li>';
+
+							if ($_SESSION["modo"] == "google") {
+								echo '<li>
+										<img class="img-circle" src="'.$_SESSION["foto"].'" width="10%">
+									</li>
+									<li>|</li>
+									<li><a href="'.$urlFron.'perfil">Ver Perfil</a></li>
+									<li>|</li>
+									<li><a href="'.$urlFron.'salir">Salir</a></li>';	
+							}
 						}
 					} else {
 						echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
@@ -128,9 +177,11 @@ $urlFron = Route::urlFront();
 			<div class="col-sm-6 col-xs-12 facebook">
 				<p><i class="fa fa-facebook"></i> Registro con Facebook</p>
 			</div>
-			<div class="col-sm-6 col-xs-12 google">
-				<p><i class="fa fa-google"></i> Registro con Google</p>
-			</div>
+			<a href="<?php echo $rutaGoogle ?>">
+				<div class="col-sm-6 col-xs-12 google">
+					<p><i class="fa fa-google"></i> Registro con Google</p>
+				</div>
+			</a>
 			<form method="post" onsubmit="return registroUsuario()">
 				<hr>
 				<div class="form-group">
@@ -182,9 +233,11 @@ $urlFron = Route::urlFront();
 			<div class="col-sm-6 col-xs-12 facebook">
 				<p><i class="fa fa-facebook"></i> Ingreso con Facebook</p>
 			</div>
-			<div class="col-sm-6 col-xs-12 google">
-				<p><i class="fa fa-google"></i> Ingreso con Google</p>
-			</div>
+			<a href="<?php echo $rutaGoogle ?>">
+				<div class="col-sm-6 col-xs-12 google">
+					<p><i class="fa fa-google"></i> Ingreso con Google</p>
+				</div>
+			</a>
 			<form method="post">
 				<hr>
 				<div class="form-group">
