@@ -41,6 +41,11 @@ if (!isset($_SESSION["validarSesion"])) {
 							<br>
 							<figure id="imgPerfil">
 							<?php
+								echo '<input type="hidden" name="idUsuario" value="'.$_SESSION["id"].'">
+									<input type="hidden" name="passUsuario" value="'.$_SESSION["password"].'">
+									<input type="hidden" name="fotoUsuario" value="'.$_SESSION["foto"].'">
+									<input type="hidden" name="modoUsuario" value="'.$_SESSION["modo"].'">';
+
 								if ($_SESSION["modo"] == "directo") {
 								 	if ($_SESSION["foto"] != "") {
 								 		echo '<img src="'.$url.$_SESSION["foto"].'" class="img-thumbnail">';
@@ -87,25 +92,29 @@ if (!isset($_SESSION["validarSesion"])) {
 							echo '<label class="control-label text-muted text-uppercase" for="editarNombre">Cambiar Nombre:</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-									<input type="text" name="regUsuario" id="editarNombre" name="editarNombre" class="form-control" value="'.$_SESSION["nombre"].'">
+									<input type="text" id="editarNombre" name="editarNombre" class="form-control" value="'.$_SESSION["nombre"].'">
 								</div>
 								<br>
 								<label class="control-label text-muted text-uppercase" for="editarEmail">Cambiar Correo Electrónico:</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-									<input type="text" name="regUsuario" id="editarEmail" name="editarEmail" class="form-control" value="'.$_SESSION["email"].'">
+									<input type="text" id="editarEmail" name="editarEmail" class="form-control" value="'.$_SESSION["email"].'">
 								</div>
 								<br>
 								<label class="control-label text-muted text-uppercase" for="editarPassword">Cambiar Contraseña:</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-									<input type="text" name="regUsuario" id="editarPassword" name="editarPassword" class="form-control" placeholder="Escribe la nueva contraseña">
+									<input type="text" id="editarPassword" name="editarPassword" class="form-control" placeholder="Escribe la nueva contraseña">
 								</div>
 								<br>
 								<button type="submit" class="btn btn-default backColor btn-md pull-left">Actualizar Datos</button>';
 						}	
 						?>
 						</div>
+						<?php  
+						$actualizarPerfil = new UserController();
+						$actualizarPerfil->updatePerfil();
+						?>
 					</form>
 					<button class="btn btn-danger btn-md pull-right" id="eliminarUsuario">Eliminar cuenta</button>
 				</div>

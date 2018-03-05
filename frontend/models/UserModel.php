@@ -39,5 +39,20 @@ class UserModel
 		else 
 			return "error";
 	}
+
+	static public function updatePerfil($table, $data)
+	{
+		$stmt = Conexion::conectar()->prepare("update $table set nombre = :nombre, email = :email, password = :password, foto = :foto where id = :id");
+		$stmt->bindParam(":nombre", $data["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $data["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":password", $data["password"], PDO::PARAM_STR);
+		$stmt->bindParam(":foto", $data["foto"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $data["id"], PDO::PARAM_STR);
+		
+		if($stmt->execute())
+			return "ok";
+		else 
+			return "error";
+	}
 }
 ?>
