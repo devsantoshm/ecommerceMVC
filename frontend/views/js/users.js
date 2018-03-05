@@ -103,3 +103,54 @@ function registroUsuario(){
 
 	return true;
 }
+
+$("#btnCambiarFoto").click(function(){
+	$("#imgPerfil").toggle();
+	$("#subirImagen").toggle();
+})
+
+$("#datosImagen").change(function(){
+	var imagen = this.files[0];
+	//console.log("imagen", imagen)
+	if (imagen["type"] != "image/jpeg") {
+		$("#datosImagen").val("");
+		swal({
+			  title:"Error al subir la imagen",
+			  text: "¡La imagen debe estas en formato JPG!",
+			  type: "error",
+			  confirmButtonText: "Cerrar",
+			  closeOnConfirm: false
+			},
+			function(isConfirm){
+				if(isConfirm){
+					window.location = rutaFron+"perfil"
+				}
+			}
+		);		
+	} else if (Number(imagen["size"]) > 2000000) {//mayor a 2mb
+		
+		$("#datosImagen").val("");
+		swal({
+			  title:"Error al subir la imagen",
+			  text: "¡La imagen no debe pasar más de 2 MB!",
+			  type: "error",
+			  confirmButtonText: "Cerrar",
+			  closeOnConfirm: false
+			},
+			function(isConfirm){
+				if(isConfirm){
+					window.location = rutaFron+"perfil"
+				}
+			}
+		);		
+	} else {
+		var datosImagen = new FileReader;
+		datosImagen.readAsDataURL(imagen)
+
+		$(datosImagen).on("load", function(event){
+			var rutaImagen = event.target.result
+			$(".previsualizar").attr("src", rutaImagen)
+		})
+	}
+
+})

@@ -60,11 +60,15 @@ if (!isset($_SESSION["validarSesion"])) {
 							<br>
 							<?php 
 							if ($_SESSION["modo"] == "directo") {
-								echo '<button class="btn btn-default" id="btnCambiarFoto">
+								echo '<button type="button" class="btn btn-default" id="btnCambiarFoto">
 										Cambiar foto de perfil
 									</button>';
 							}	
 							?>
+							<div id="subirImagen">
+								<input type="file" name="datosImagen" id="datosImagen" class="form-control">
+								<img class="previsualizar"></img>
+							</div>
 						</div>
 						<div class="col-md-9 col-sm-8 col-xs-12">
 						<br>
