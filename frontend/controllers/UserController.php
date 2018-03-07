@@ -374,7 +374,10 @@ class UserController
 							}
 						);
 					</script>';
-					$emailRepetido = false;
+				
+				$emailRepetido = false;
+
+				return;
 			}
 			$emailRepetido = true;
 		} else {
@@ -420,6 +423,39 @@ class UserController
 	public function updatePerfil()
 	{
 		if (isset($_POST["editarNombre"])) {
+			//calidar imagen
+			$ruta = "";
+			if (isset(($_FILES["datosImagen"]["tmp_name"]))) {
+				//si existe una imagen en la BD
+				$directorio = "views/img/usuarios/".$_POST["idUsuario"];
+				if (!empty($_POST["fotoUsuario"])) {
+					unlink($_POST["fotoUsuario"]);// borra un fichero
+				}else{
+					mkdir($directorio, 0755);//crear carpeta con permisos de escritura y lectura
+				}
+				//Guardamos la imagen en el directorio
+				//produce números aleatorios cuatro veces más rápido que el promedio proporcionado por la libc rand().
+				$aleatorio = mt_rand(100, 999);
+				$ruta = "views/img/usuarios/".$_POST["idUsuario"]."/".$aleatorio.".jpg";
+
+				//Modificamos tamaño de la foto
+				/*$info = array('café', 'marrón', 'cafeína');
+				// Enumerar todas las variables
+				list($bebida, $color, $energía) = $info;
+				echo "El $bebida es $color y la $energía lo hace especial.\n";*/
+				list($ancho, $alto) = getimagesize($_FILES["datosImagen"]["tmp_name"]); //Obtener el tamaño de una imagen
+				$nuevoAncho = 500;
+				$nuevoAlto = 500;
+				//Crea una nueva imagen a partir de un fichero o de una URL
+				$origen = imagecreatefromjpeg($_FILES["datosImagen"]["tmp_name"]);
+				//Crear una nueva imagen de color verdadero
+				$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+				//Copia y cambia el tamaño de parte de una imagen copia una porción de una imagen a otra imagen, devuelve true
+				imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+				//imprimir la imagen
+				imagejpeg($destino, $ruta);
+
+			}
 			if ($_POST["editarPassword"] == "") {
 				$password = $_POST["passUsuario"];
 			} else {
@@ -429,7 +465,7 @@ class UserController
 			$datos = array("nombre" => $_POST["editarNombre"],
 							"email" => $_POST["editarEmail"],
 							"password" => $password,
-							"foto" => "",
+							"foto" => $ruta,
 							"id" => $_POST["idUsuario"]);
 			$tabla = "users";
 			$respuesta = UserModel::updatePerfil($tabla, $datos);
@@ -462,6 +498,13 @@ class UserController
 			}
 			
 		}
+	}
+
+	static public function showShopping($item, $valor)
+	{
+		$table = "shopping";
+		$response = UserModel::showShopping($table, $item, $valor);
+		return $response;
 	}
 }
 ?>

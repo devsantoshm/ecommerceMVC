@@ -2,6 +2,7 @@
 $urlBack = Route::routeServer();  
 $urlFron = Route::urlFront();
 
+//Crear el objeto de la API GOOGLE
 $cliente = new Google_Client();
 $cliente->setAuthConfig('models/credencia.json');
 $cliente->setAccessType("offline");

@@ -12,6 +12,11 @@
 	cursor: pointer;
 }
 
+#perfil #subirImagen img{
+	width: 100%;
+	padding: 10px;
+}
+
 #perfil #subirImagen #datosImagen{
 	height: 65px;
 }
