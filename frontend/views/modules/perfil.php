@@ -114,24 +114,117 @@ if (!isset($_SESSION["validarSesion"])) {
 												}
 											echo '<h4 class="pull-right"><small>Comprado el '.substr($value1["fecha"], 0, 10).'</small></h4>
 										</div>
-										<div class="col-md-4 col-xs-12">
-											<div class="pull-right">
-												<a href="#modalComentarios" data-toggle="modal" idComentario="">
+										<div class="col-md-4 col-xs-12">';
+
+										$datos = array("idUsuario" => $_SESSION["id"],
+														"idProducto" => $value2["id"]);
+										$comentarios = UserController::showCommentsProfile($datos);
+
+										echo '<div class="pull-right">
+												<a href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["id"].'">
 													<button class="btn btn-default backColor">Calificar Productos</button>
 												</a>
 											</div>
 											<br><br>
 											<div class="pull-right">
-												<h3 class="text-right">
-													<i class="fa fa-star text-success" aria-hidden="true"></i>
-													<i class="fa fa-star text-success" aria-hidden="true"></i>
-													<i class="fa fa-star text-success" aria-hidden="true"></i>
-													<i class="fa fa-star text-success" aria-hidden="true"></i>
-													<i class="fa fa-star text-success" aria-hidden="true"></i>
-												</h3>
+												<h3 class="text-right">';
+												if ($comentarios["calificacion"] == 0 && $comentarios["comentario"] == "") {
+													echo '<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+														<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+														<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+														<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+														<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+												} else {
+													switch ($comentarios["calificacion"]) {
+														case 0.5:
+															echo '<i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 1.0:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 1.5:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+														
+														case 2.0:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 2.5:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 3.0:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 3.5:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 4.0:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 4.5:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star-half-o text-success" aria-hidden="true"></i>';
+															break;
+
+														case 5.0:
+															echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>
+																<i class="fa fa-star text-success" aria-hidden="true"></i>';
+															break;
+
+														default:
+															
+															break;
+													}
+												}
+											echo '</h3>
 												<p class="panel panel-default" style="padding:5px">
 													<small>
-														Lorem ipsum dolor sit amet, consectetur adipisicingelit. Cupiditate minus, consectetur beatae fugit odio iure repudiandae quia distinctio, id ducimus molestiae. Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.
+														'.$comentarios["comentario"].'
 													</small>
 												</p>
 											</div>

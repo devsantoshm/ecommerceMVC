@@ -506,5 +506,12 @@ class UserController
 		$response = UserModel::showShopping($table, $item, $valor);
 		return $response;
 	}
+
+	static public function showCommentsProfile($data)
+	{
+		$table = "comments";
+		$response = UserModel::showCommentsProfile($table, $data);
+		return $response;
+	}
 }
 ?>

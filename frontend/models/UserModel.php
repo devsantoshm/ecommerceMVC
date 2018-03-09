@@ -62,5 +62,15 @@ class UserModel
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+
+	static public function showCommentsProfile($table, $data)
+	{
+		$stmt = Conexion::conectar()->prepare("select * from $table where id_usuario = :id_usuario and id_producto = :id_producto");
+		$stmt->bindParam(":id_usuario", $data["idUsuario"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_producto", $data["idProducto"], PDO::PARAM_STR);
+		$stmt->execute();
+		
+		return $stmt->fetch();
+	}
 }
 ?>
