@@ -72,5 +72,18 @@ class UserModel
 		
 		return $stmt->fetch();
 	}
+
+	static public function updateCommentary($table, $data)
+	{
+		$stmt = Conexion::conectar()->prepare("update $table set calificacion = :calificacion, comentario = :comentario where id = :id");
+		$stmt->bindParam(":calificacion", $data["calificacion"], PDO::PARAM_STR);
+		$stmt->bindParam(":comentario", $data["comentario"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $data["id"], PDO::PARAM_STR);
+		
+		if($stmt->execute())
+			return "ok";
+		else 
+			return "error";
+	}
 }
 ?>

@@ -513,5 +513,73 @@ class UserController
 		$response = UserModel::showCommentsProfile($table, $data);
 		return $response;
 	}
+
+	public function updateCommentary()
+	{
+		if (isset($_POST["idComentario"])) {
+			//Realiza una comparación con una expresión regular
+			//preg_match() devuelve 1 si pattern coincide con el subject dado, 0 si no, o FALSE si ocurrió un error.
+			if (preg_match('/^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["comentario"])) {
+				if ($_POST["comentario"] != "") {
+					$tabla = "comments";
+					$datos = array("id" => $_POST["idComentario"],
+									"calificacion" => $_POST["puntaje"],
+									"comentario" => $_POST["comentario"]);
+					$respuesta = UserModel::updateCommentary($tabla, $datos);
+					if ($respuesta == "ok") {
+						echo '<script>
+								swal({
+									  title:"¡GRACIAS POR COMPARTIR SU OPINIÓN!",
+									  text: "¡Su calificación y opinión ha sido guardado!",
+									  type: "success",
+									  confirmButtonText: "Cerrar",
+									  closeOnConfirm: false
+									},
+									function(isConfirm){
+										if(isConfirm){
+											history.back();
+										}
+									}
+								);
+							</script>';
+					}
+				} else {
+					echo '<script>
+						swal({
+							  title:"¡ERROR AL ENVIAR SU CALIFICACIÓN!",
+							  text: "¡El comentario no puede estar vacio!",
+							  type: "error",
+							  confirmButtonText: "Cerrar",
+							  closeOnConfirm: false
+							},
+							function(isConfirm){
+								if(isConfirm){
+									history.back();
+								}
+							}
+						);
+					</script>';
+				}
+				
+			} else {
+				echo '<script>
+						swal({
+							  title:"¡ERROR AL ENVIAR SU CALIFICACIÓN!",
+							  text: "¡El comentario no puede llevar caracteres especiales!",
+							  type: "error",
+							  confirmButtonText: "Cerrar",
+							  closeOnConfirm: false
+							},
+							function(isConfirm){
+								if(isConfirm){
+									history.back();
+								}
+							}
+						);
+					</script>';
+			}
+			
+		}
+	}
 }
 ?>

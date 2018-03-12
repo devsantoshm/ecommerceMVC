@@ -121,7 +121,7 @@ if (!isset($_SESSION["validarSesion"])) {
 										$comentarios = UserController::showCommentsProfile($datos);
 
 										echo '<div class="pull-right">
-												<a href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["id"].'">
+												<a class="calificarProducto" href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["id"].'">
 													<button class="btn btn-default backColor">Calificar Productos</button>
 												</a>
 											</div>
@@ -222,7 +222,7 @@ if (!isset($_SESSION["validarSesion"])) {
 													}
 												}
 											echo '</h3>
-												<p class="panel panel-default" style="padding:5px">
+												<p class="panel panel-default text-right" style="padding:5px">
 													<small>
 														'.$comentarios["comentario"].'
 													</small>
@@ -336,7 +336,8 @@ if (!isset($_SESSION["validarSesion"])) {
 		<div class="modal-body modalTitulo">
 			<h3 class="backColor">CALIFICA ESTE PRODUCTO</h3>
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<form method="post">
+			<form method="post" onsubmit="return validarComentario()">
+				<input type="hidden" value="" id="idComentario" name="idComentario">
 				<h1 class="text-center" id="estrellas">
 					<i class="fa fa-star text-success" aria-hidden="true"></i>
 					<i class="fa fa-star text-success" aria-hidden="true"></i>
@@ -362,6 +363,10 @@ if (!isset($_SESSION["validarSesion"])) {
 					<br>
 					<input type="submit" class="btn btn-default btn-block backColor" value="ENVIAR">
 				</div>
+				<?php  
+				$actualizarComentario = new UserController();
+				$actualizarComentario->updateCommentary();
+				?>
 			</form>
 		</div>
 		<div class="modal-footer">
