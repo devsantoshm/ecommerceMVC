@@ -51,6 +51,10 @@
 	background: #d6513e;
 }
 
+.alturaComentarios{
+	height: 300px;
+}
+
 /* Escritorio grande (LG revisamos en 1366px en adelante) */
 @media (min-width: 1200px) {
 	

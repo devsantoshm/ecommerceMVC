@@ -71,3 +71,21 @@ $(window).on("load", function(){
 		}
 	})
 })
+//hidden El contenido es recortado y no se muestran barras de posición.
+$(".comentarios").css({"height":$(".comentarios .alturaComentarios").height()+"px",
+						"overflow":"hidden",
+						"margin-bottom":"20px"})
+
+$("#verMas").click(function(e){
+	e.preventDefault() //Anula todas las acciones por defecto como recargar la pagina, etc
+
+	if ($("#verMas").html() == "Ver más") {
+		$(".comentarios").css({"overflow":"inherit"})
+		$("#verMas").html("Ver menos")
+	} else {
+		$(".comentarios").css({"height":$(".comentarios .alturaComentarios").height()+"px",
+						"overflow":"hidden",
+						"margin-bottom":"20px"})
+		$("#verMas").html("Ver más")
+	}
+})
