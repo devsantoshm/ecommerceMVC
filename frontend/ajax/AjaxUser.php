@@ -34,6 +34,18 @@ class AjaxUer
 
 		echo $respuesta;
 	}
+
+	public $idUsuario;
+	public $idProducto;
+
+	public function ajaxAgregarDeseo()
+	{
+		$datos = array("idUsuario" => $this->idUsuario,
+						"idProducto" => $this->idProducto);
+
+		$respuesta = UserController::addWish($datos);
+		echo $respuesta;
+	}
 }
 
 if (isset($_POST["validarEmail"])) {
@@ -49,5 +61,12 @@ if (isset($_POST["email"])) {
 	$regFacebook->nombre = $_POST["nombre"];
 	$regFacebook->foto = $_POST["foto"];
 	$regFacebook->ajaxRegistroFacebook();
+}
+
+if (isset($_POST["idUsuario"])) {
+	$deseo = new AjaxUer();
+	$deseo->idUsuario = $_POST["idUsuario"];
+	$deseo->idProducto = $_POST["idProducto"];
+	$deseo->ajaxAgregarDeseo();
 }
 ?>

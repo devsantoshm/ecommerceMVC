@@ -581,5 +581,21 @@ class UserController
 			
 		}
 	}
+
+	static public function addWish($data)
+	{
+		$table = "wishes";
+		$response = UserModel::addWish($table, $data);
+
+		return $response;
+	}
+
+	static public function showWishes($item)
+	{
+		$table = "wishes";
+		$response = UserModel::showWishes($table, $item);
+
+		return $response;
+	}
 }
 ?>

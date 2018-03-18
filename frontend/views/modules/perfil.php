@@ -237,7 +237,86 @@ if (!isset($_SESSION["validarSesion"])) {
 					?>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="deseos">...</div>
+			<div class="tab-pane fade" id="deseos">
+			<?php
+			$item = $_SESSION["id"];
+			$deseos = UserController::showWishes($item);
+
+			if (!$deseos) {
+			  	echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center error404">
+						<h1><small>¡Oops!</small></h1>
+						<h2>No tiene productos en su lista de deseos</h2>
+					</div>';
+			}else{ ?>
+				<?php foreach ($deseos as $key => $value1){ 
+					$ordenar = "id";
+					$valor = $value1["id_producto"];
+					$item = "id";
+					$productos = ProductController::listProducts($ordenar, $item, $valor);
+					?>
+					<ul class="grid0">
+						<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
+						<?php foreach ($productos as $key => $value2) { ?>
+						<li class="col-md-3 col-sm-6 col-xs-12">
+							<figure>
+								<a href="<?php echo $urlFron.$value2['ruta'] ?>" class="pixelProducto">
+									<img src="<?php echo $urlBack.$value2['portada']; ?>" class="img-responsive">
+								</a>	
+							</figure>
+							<h4><small>
+								<a href="<?php echo $urlFron.$value2['ruta'] ?>" class="pixelProducto"><?php echo $value2['titulo'] ?>
+									<br><span style="color: rgba(0,0,0,0);">-</span>
+									<?php 
+										if($value2['nuevo'] != 0)
+											echo '<span class="label label-warning fontSize">Nuevo</span> ';
+										if($value2['oferta'] != 0)
+										  	echo '<span class="label label-warning fontSize">'.$value2["descuentoOferta"].'% off</span>';
+									?>
+								</a>
+							</small></h4>
+							<div class="col-xs-6 precio">
+								<?php 
+									if($value2['precio'] == 0)
+										echo '<h2 style="margin-top:-10px"><small>GRATIS</small></h2>';
+									else{
+										if($value2['oferta'] != 0){
+											echo '<h2 style="margin-top:-10px">
+													<small><strong class="oferta" style="font-size:12px">USD $'.$value2["precio"].'</strong></small>
+													<small>$'.$value2["precioOferta"].'</small>
+												 </h2>';
+										}else{
+											echo '<h2 style="margin-top:-10px"><small>USD $'.$value2['precio'].'</small></h2>';
+										}
+									}
+								?>
+							</div>
+							<div class="col-xs-6 enlaces">
+								<div class="btn-group pull-right">
+									<button type="button" class="btn btn-danger btn-xs quitarDeseo" idDeseo="<?php echo $value1['id'] ?>" data-toggle="tooltip" title="Quitar de mi lista de deseos"><i class="fa fa-heart" aria-hidden="true"></i></button>
+									<?php 
+										if ($value2['tipo'] == 'virtual' && $value2['precio'] != 0) {
+											if ($value2['oferta'] != 0) {
+												echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="'.$value2["id"].'" imagen="'.$urlBack.$value2["portada"].'" titulo="'.$value2["titulo"].'" precio="'.$value2["precioOferta"].'" tipo="'.$value2["tipo"].'" peso="'.$value2["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+														<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+													</button>';
+											} else {
+												echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" idProducto="'.$value2["id"].'" imagen="'.$urlBack.$value2["portada"].'" titulo="'.$value2["titulo"].'" precio="'.$value2["precio"].'" tipo="'.$value2["tipo"].'" peso="'.$value2["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+														<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+													</button>';
+											}
+										}	
+									?>
+									<a href="<?php echo $urlFron.$value2['ruta'] ?>" class="pixelProducto">
+										<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto"><i class="fa fa-eye" aria-hidden="true"></i></button>	
+									</a>
+								</div>
+							</div>
+						</li>
+						<?php } ?>
+					</ul>
+				<?php } ?>
+			<?php } ?>  
+			</div>
 			<div class="tab-pane fade" id="perfil">
 				<div class="row">
 					<form method="post" enctype="multipart/form-data">

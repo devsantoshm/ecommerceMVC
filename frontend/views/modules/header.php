@@ -2,6 +2,14 @@
 $urlBack = Route::routeServer();  
 $urlFron = Route::urlFront();
 
+if (isset($_SESSION["validarSesion"])) {
+	if ($_SESSION["validarSesion"] == "ok") {
+		echo '<script>
+			localStorage.setItem("usuario", "'.$_SESSION["id"].'");
+		</script>';
+	}
+}
+
 //Crear el objeto de la API GOOGLE
 $cliente = new Google_Client();
 $cliente->setAuthConfig('models/credencia.json');

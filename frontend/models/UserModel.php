@@ -94,5 +94,25 @@ class UserModel
 		else 
 			return "error";
 	}
+
+	static public function addWish($table, $data)
+	{
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $table(id_usuario, id_producto) VALUES(:id_usuario, :id_producto)");
+		$stmt->bindParam(":id_usuario", $data["idUsuario"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_producto", $data["idProducto"], PDO::PARAM_INT);
+
+		if($stmt->execute())
+			return "ok";
+		else
+			return "error";
+	}
+
+	static public function showWishes($table, $item)
+	{
+		$stmt = Conexion::conectar()->prepare("select * from $table where id_usuario = :id_usuario");
+		$stmt->bindParam(":id_usuario", $item, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
 }
 ?>

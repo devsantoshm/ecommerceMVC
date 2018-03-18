@@ -263,3 +263,59 @@ function validarComentario(){
 
 	return true;
 }
+
+$(".deseos").click(function(){
+	var idProducto = $(this).attr("idProductos");
+	//console.log("idPR", idProducto)
+	var idUsuario = localStorage.getItem("usuario")
+
+	if (idUsuario == null) {
+		swal({
+			  title:"Debe ingresar al sistema",
+			  text: "¡Para agregar un producto a la 'lista de deseos' debe primero ingresar al sistema!",
+			  type: "warning",
+			  confirmButtonText: "Cerrar",
+			  closeOnConfirm: false
+			},
+			function(isConfirm){
+				if(isConfirm){
+					window.location = rutaFron;
+				}
+			}
+		);					
+	} else {
+
+		$(this).addClass("btn-danger")
+		var datos = new FormData();
+		datos.append("idUsuario", idUsuario);
+		datos.append("idProducto", idProducto);
+
+		$.ajax({
+			url: rutaFron+"ajax/AjaxUser.php",
+			method: "POST",
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(response){
+				//console.log("resp", response)
+				if (response == "false") {
+					
+					$(".alert").remove();
+					validerEmailRepetido = false
+
+				} else {
+					
+					var modo = JSON.parse(response).modo;	
+					if (modo == "directo") {
+						modo = "esta página";
+					}
+
+					$("#regEmail").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> El correo electrónico ya existe, fue registrado en '+modo+'</div>')
+
+					validerEmailRepetido = true
+				}
+			}
+		})
+	}
+})

@@ -7,6 +7,8 @@ if (!empty($_SESSION['id_token_google'])) {
 }
 
 echo '<script>
+		localStorage.removeItem("usuario");
+		localStorage.clear();
 		window.location = "'.$urlFron.'";
 	</script>';
 ?>
