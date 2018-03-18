@@ -322,3 +322,28 @@ $(".quitarDeseo").click(function(){
 			}
 		})
 })
+
+$("#eliminarUsuario").click(function(){
+	var id = $("#idUsuario").val();
+	if ($("#modoUsuario").val() == "directo") {
+		if ($("#fotoUsuario").val() != "") {
+			var foto = $("#fotoUsuario").val()
+		}
+	}
+
+	swal({
+		  title:"¿Está usted seguro(a) de eliminar su cuenta?",
+		  text: "¡Si borra esta cuenta ya no se puede recuperar los datos!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmbuttonColor: "#DD6B55",
+		  confirmButtonText: "¡Si, borrar cuenta!",
+		  closeOnConfirm: false
+		},
+		function(isConfirm){
+			if(isConfirm){
+				window.location = "index.php?ruta=perfil&id="+id+"&foto="+foto;
+			}
+		}
+	);
+})

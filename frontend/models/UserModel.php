@@ -125,5 +125,49 @@ class UserModel
 		else
 			return "error";
 	}
+
+	static public function deleteUser($table, $id)
+	{
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE id = :id");
+		$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+		if($stmt->execute())
+			return "ok";
+		else
+			return "error";
+	}
+
+	static public function deleteComments($table, $id)
+	{
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE id_usuario = :id_usuario");
+		$stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+
+		if($stmt->execute())
+			return "ok";
+		else
+			return "error";
+	}
+
+	static public function deleteShopping($table, $id)
+	{
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE id_usuario = :id_usuario");
+		$stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+
+		if($stmt->execute())
+			return "ok";
+		else
+			return "error";
+	}
+
+	static public function deleteListWishes($table, $id)
+	{
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE id_usuario = :id_usuario");
+		$stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+
+		if($stmt->execute())
+			return "ok";
+		else
+			return "error";
+	}
 }
 ?>

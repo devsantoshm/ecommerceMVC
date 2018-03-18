@@ -605,5 +605,46 @@ class UserController
 
 		return $response;
 	}
+
+	static public function deleteUser()
+	{
+		if (isset($_GET["id"])) {
+			$table1 = "users";
+			$table2 = "comments";
+			$table3 = "shopping";
+			$table4 = "wishes";		
+
+			$id = $_GET["id"];
+
+			if ($_GET["foto"] != "") {
+				unlink($_GET["foto"]); // elimina la foto
+				rmdir('views/img/usuarios/'.$_GET["id"]); //elimina la carpeta
+			}
+
+			$response = UserModel::deleteUser($table1, $id);
+			UserModel::deleteComments($table2, $id);
+			UserModel::deleteShopping($table3, $id);
+			UserModel::deleteListWishes($table4, $id);
+
+			if ($response == "ok") {
+				$urlFron = Route::urlFront();
+				echo '<script>
+						swal({
+							  title:"¡SU CUENTA HA SIDO BORRADA!",
+							  text: "¡Debe registrarse nuevamente si desea ingresar!",
+							  type: "success",
+							  confirmButtonText: "Cerrar",
+							  closeOnConfirm: false
+							},
+							function(isConfirm){
+								if(isConfirm){
+									window.location = "'.$urlFron.'salir";
+								}
+							}
+						);
+					</script>';
+			}
+		}
+	}
 }
 ?>

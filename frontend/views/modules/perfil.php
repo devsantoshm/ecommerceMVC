@@ -324,10 +324,10 @@ if (!isset($_SESSION["validarSesion"])) {
 							<br>
 							<figure id="imgPerfil">
 							<?php
-								echo '<input type="hidden" name="idUsuario" value="'.$_SESSION["id"].'">
+								echo '<input type="hidden" name="idUsuario" value="'.$_SESSION["id"].'" id="idUsuario">
 									<input type="hidden" name="passUsuario" value="'.$_SESSION["password"].'">
-									<input type="hidden" name="fotoUsuario" value="'.$_SESSION["foto"].'">
-									<input type="hidden" name="modoUsuario" value="'.$_SESSION["modo"].'">';
+									<input type="hidden" name="fotoUsuario" value="'.$_SESSION["foto"].'" id="fotoUsuario">
+									<input type="hidden" name="modoUsuario" value="'.$_SESSION["modo"].'" id="modoUsuario">';
 
 								if ($_SESSION["modo"] == "directo") {
 								 	if ($_SESSION["foto"] != "") {
@@ -404,6 +404,10 @@ if (!isset($_SESSION["validarSesion"])) {
 						?>
 					</form>
 					<button class="btn btn-danger btn-md pull-right" id="eliminarUsuario">Eliminar cuenta</button>
+					<?php  
+						$borrarUsuario = new UserController();
+						$borrarUsuario->deleteUser();
+					?>
 				</div>
 			</div>
 		</div>
