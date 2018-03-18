@@ -114,5 +114,16 @@ class UserModel
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+
+	static public function removeWish($table, $data)
+	{
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE id = :id");
+		$stmt->bindParam(":id", $data, PDO::PARAM_INT);
+
+		if($stmt->execute())
+			return "ok";
+		else
+			return "error";
+	}
 }
 ?>

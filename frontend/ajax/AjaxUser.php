@@ -46,6 +46,16 @@ class AjaxUer
 		$respuesta = UserController::addWish($datos);
 		echo $respuesta;
 	}
+
+	public $idDeseo;
+
+	public function ajaxQuitarDeseo()
+	{
+		$datos = $this->idDeseo;
+
+		$respuesta = UserController::removeWish($datos);
+		echo $respuesta;
+	}
 }
 
 if (isset($_POST["validarEmail"])) {
@@ -68,5 +78,11 @@ if (isset($_POST["idUsuario"])) {
 	$deseo->idUsuario = $_POST["idUsuario"];
 	$deseo->idProducto = $_POST["idProducto"];
 	$deseo->ajaxAgregarDeseo();
+}
+
+if (isset($_POST["idDeseo"])) {
+	$quitarDeseo = new AjaxUer();
+	$quitarDeseo->idDeseo = $_POST["idDeseo"];
+	$quitarDeseo->ajaxQuitarDeseo();
 }
 ?>

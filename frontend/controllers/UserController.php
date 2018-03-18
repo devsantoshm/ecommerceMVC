@@ -597,5 +597,13 @@ class UserController
 
 		return $response;
 	}
+
+	static public function removeWish($data)
+	{
+		$table = "wishes";
+		$response = UserModel::removeWish($table, $data);
+
+		return $response;
+	}
 }
 ?>
