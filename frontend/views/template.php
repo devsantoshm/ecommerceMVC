@@ -32,6 +32,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/products.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/infoproduct.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/perfil.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/carrito-de-compras.css">
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.easing.js"></script>
@@ -72,7 +73,7 @@ if (isset($_GET["ruta"])) {
 		include "modules/products.php";
 	else if($infoProducto != null)
 		include "modules/infoproduct.php";
-	else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil")
+	else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras")
 		include "modules/".$rutas[0].".php";
 	else
 		include "modules/error404.php";	
