@@ -93,6 +93,7 @@ if (isset($_GET["ruta"])) {
 <script src="<?php echo $route; ?>views/js/infoproduct.js"></script>
 <script src="<?php echo $route; ?>views/js/users.js"></script>
 <script src="<?php echo $route; ?>views/js/registroFacebook.js"></script>
+<script src="<?php echo $route; ?>views/js/carrito-de-compras.js"></script>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
