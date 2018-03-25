@@ -1,3 +1,11 @@
+if (localStorage.getItem("cantidadCesta") != null) {
+	$(".cantidadCesta").html(localStorage.getItem("cantidadCesta"))
+	$(".sumaCesta").html(localStorage.getItem("sumaCesta"))
+} else {
+	$(".cantidadCesta").html("0");
+	$(".sumaCesta").html("0");
+}
+
 //si localstorage viene con informacion entonces almacenamos en listacarrito
 if (localStorage.getItem("listaProductos") != null) {
 	//convertir el string en un objeto json
@@ -34,7 +42,7 @@ if (localStorage.getItem("listaProductos") != null) {
 					'<br>'+
 					'<div class="col-xs-8">'+
 						'<center>'+
-							'<input type="number" class="form-control" min="1" value="'+item.cantidad+'">'+
+							'<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'">'+
 						'</center>'+
 					'</div>'+
 				'</div>'+
@@ -45,7 +53,14 @@ if (localStorage.getItem("listaProductos") != null) {
 			'</div>'+
 			'<div class="clearfix"></div>'+
 			'<hr>');
+
+		//Evitar manipular la cantidad en productos virtuales
+		$(".cantidadItem[tipo='virtual']").attr("readonly", "true");
 	}
+}else{
+	$(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
+	$(".sumaCarrito").hide();
+	$(".cabeceraCheckout").hide();
 }
 
 $(".agregarCarrito").click(function(){
@@ -96,6 +111,16 @@ $(".agregarCarrito").click(function(){
 							"cantidad":"1"});
 
 		localStorage.setItem("listaProductos", JSON.stringify(listaCarrito)); //convertir a string
+
+		//actuzalizar la cesta
+		var cantidadCesta = Number($(".cantidadCesta").html()) + 1;
+		var sumaCesta = Number($(".sumaCesta").html()) + Number(precio);
+
+		$(".cantidadCesta").html(cantidadCesta)
+		$(".sumaCesta").html(sumaCesta)
+
+		localStorage.setItem("cantidadCesta", cantidadCesta)
+		localStorage.setItem("sumaCesta", sumaCesta)
 
 		swal({
 		  title:"",

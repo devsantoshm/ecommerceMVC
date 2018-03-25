@@ -146,7 +146,7 @@ if ($cliente->getAccessToken()) {
 						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 					</button>
 				</a>
-				<p>TU CESTA <span class="cantidadCesta">3</span><br>USD$<span class="sumaCesta"> 20</span></p>
+				<p>TU CESTA <span class="cantidadCesta"></span><br>USD$ <span class="sumaCesta"></span></p>
 			</div>
 		</div>
 		<div class="col-xs-12 backColor" id="categorias">
