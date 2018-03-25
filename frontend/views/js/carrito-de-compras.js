@@ -2,6 +2,50 @@
 if (localStorage.getItem("listaProductos") != null) {
 	//convertir el string en un objeto json
 	var listaCarrito = JSON.parse(localStorage.getItem("listaProductos"));
+	listaCarrito.forEach(funcionForEach);
+	//ejecuta la función indicada una vez por cada elemento del array.
+	function funcionForEach(item, index){
+		//console.log("item", item.idProducto);
+		$(".cuerpoCarrito").append(
+			'<div class="row itemCarrito">'+
+				/*<!-- ocupara para dispositivo grande, mediano y pequeño de una sola columna -->*/
+				'<div class="col-sm-1 col-xs-12">'+
+					'<br>'+
+					'<center>'+
+						'<button class="btn btn-default backColor">'+
+							'<i class="fa fa-times"></i>'+
+						'</button>'+
+					'</center>'+
+				'</div>'+
+				'<div class="col-sm-1 col-xs-12">'+
+					'<figure>'+
+						'<img src="'+item.imagen+'" class="img-thumbnail">'+
+					'</figure>'+
+				'</div>'+
+				'<div class="col-sm-4 col-xs-12">'+
+					'<br>'+
+					'<p class="tituloCarritoCompra text-left">'+item.titulo+'</p>'+
+				'</div>'+
+				'<div class="col-md-2 col-sm-1 col-xs-12">'+
+					'<br>'+
+					'<p class="precioCarritoCompra text-center">USD $<span>'+item.precio+'</span></p>'+
+				'</div>'+
+				'<div class="col-md-2 col-sm-3 col-xs-8">'+
+					'<br>'+
+					'<div class="col-xs-8">'+
+						'<center>'+
+							'<input type="number" class="form-control" min="1" value="'+item.cantidad+'">'+
+						'</center>'+
+					'</div>'+
+				'</div>'+
+				'<div class="col-md-2 col-sm-1 col-xs-4 text-center">'+
+					'<br>'+
+					'<p><strong>USD $<span>10</span></strong></p>'+
+				'</div>'+
+			'</div>'+
+			'<div class="clearfix"></div>'+
+			'<hr>');
+	}
 }
 
 $(".agregarCarrito").click(function(){
@@ -52,5 +96,22 @@ $(".agregarCarrito").click(function(){
 							"cantidad":"1"});
 
 		localStorage.setItem("listaProductos", JSON.stringify(listaCarrito)); //convertir a string
+
+		swal({
+		  title:"",
+		  text: "¡Se ha agregado un nuevo producto al carrito de compras!",
+		  type: "success",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  cancelButtonText: "¡Continuar comprando!",
+		  confirmButtonText: "¡Ir al carrito de compras!",
+		  closeOnConfirm: false
+		},
+		function(isConfirm){
+			if (isConfirm) {
+				window.location = rutaFron+"carrito-de-compras";
+			}
+		}
+		);
 	}
 })
