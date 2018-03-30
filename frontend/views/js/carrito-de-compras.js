@@ -321,6 +321,8 @@ $("#btnCheckout").click(function(){
 	var titulo = $(".cuerpoCarrito .tituloCarritoCompra")
 	var cantidad = $(".cuerpoCarrito .cantidadItem")
 	var subtotal = $(".cuerpoCarrito .subtotales span")
+	var tipoArray = []
+
 	for (var i = 0; i < titulo.length; i++) {
 		var pesoArray = $(peso[i]).attr("peso")
 		var tituloArray = $(titulo[i]).html()
@@ -333,5 +335,33 @@ $("#btnCheckout").click(function(){
 																'<td>'+cantidadArray+'</td>'+
 																'<td>$<span>'+subtotalArray+'</span></td>'+
 																'</tr>')
+		//seleccionar pais de envio si hay productos fisicos
+		tipoArray.push($(cantidad[i]).attr("tipo"))
+		
+		function checkTipo(tipo){
+			return tipo == "fisico"
+		} 
+
+		if (tipoArray.find(checkTipo) == "fisico") {
+			$(".formEnvio").show()
+
+			$.ajax({
+				url: rutaFron+"views/js/plugins/countries.json",
+				type: "GET",
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "json",
+				success: function(respuesta){
+					respuesta.forEach(seleccionarPais)
+					function seleccionarPais(item, indec){
+						var pais = item.name
+						var codPais = item.code
+
+						$("#seleccionarPais").append('<option value="'+codPais+'">'+pais+'</option>')
+					}
+				}
+			})
+		}
 	}
 })
