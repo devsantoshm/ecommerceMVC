@@ -42,13 +42,13 @@ if (localStorage.getItem("listaProductos") != null) {
 					'<br>'+
 					'<div class="col-xs-8">'+
 						'<center>'+
-							'<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'">'+
+							'<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'" precio="'+item.precio+'" idProducto="'+item.idProducto+'">'+
 						'</center>'+
 					'</div>'+
 				'</div>'+
 				'<div class="col-md-2 col-sm-1 col-xs-4 text-center">'+
 					'<br>'+
-					'<p><strong>USD $<span>10</span></strong></p>'+
+					'<p class="subTotal'+item.idProducto+' subtotales"><strong>USD $<span>'+item.precio+'</span></strong></p>'+
 				'</div>'+
 			'</div>'+
 			'<div class="clearfix"></div>'+
@@ -167,7 +167,7 @@ $(".quitarItemCarrito").click(function(){
 	//console.log("idProducto", idProducto)
 	var imagen = $(".cuerpoCarrito img") //encuentra todas las etiquetas img
 	var titulo = $(".cuerpoCarrito .tituloCarritoCompra")
-	var precio = $(".cuerpoCarrito .precioCarritoCompra")
+	var precio = $(".cuerpoCarrito .precioCarritoCompra span")
 	var cantidad = $(".cuerpoCarrito .cantidadItem")
 
 	//actualizar el localStorage
@@ -194,7 +194,7 @@ $(".quitarItemCarrito").click(function(){
 
 		localStorage.setItem("listaProductos", JSON.stringify(listaCarrito))
 
-		//actuzalizar la cesta
+		sumaSubtotales()
 
 	} else {
 		// si ya no quedan productos hay que remover todo
@@ -210,3 +210,82 @@ $(".quitarItemCarrito").click(function(){
 		$(".cabeceraCheckout").hide();
 	}
 })
+
+//Generar subtotal después de cambiar cantidad
+$(".cantidadItem").change(function(){
+	var cantidad = $(this).val()
+	var precio = $(this).attr("precio")
+	var idProducto = $(this).attr("idProducto")
+	//var cantidadItem = $(".cantidadItem") //captura el array de etiquetas con esa clase
+
+	$(".subTotal"+idProducto).html('<strong>USD $<span>'+(Math.abs(cantidad*precio))+'</span></strong>')
+
+	//actualizar la cantidad en el localstorage
+	var idProducto = $(".cuerpoCarrito button")
+	var imagen = $(".cuerpoCarrito img") //encuentra todas las etiquetas img
+	var titulo = $(".cuerpoCarrito .tituloCarritoCompra")
+	var precio = $(".cuerpoCarrito .precioCarritoCompra span")
+	var cantidad = $(".cuerpoCarrito .cantidadItem")
+
+	listaCarrito = []
+
+	for (var i = 0; i < idProducto.length; i++) {
+		var idProductoArray = $(idProducto[i]).attr("idProducto")
+		var imagenArray = $(imagen[i]).attr("src")
+		var tituloArray = $(titulo[i]).html()
+		var precioArray = $(precio[i]).html()
+		var pesoArray = $(idProducto[i]).attr("peso")
+		var tipoArray = $(cantidad[i]).attr("tipo")
+		var cantidadArray = $(cantidad[i]).val()
+
+		listaCarrito.push({"idProducto":idProductoArray,
+						"imagen":imagenArray,
+						"titulo":tituloArray,
+						"precio":precioArray,
+						"tipo":tipoArray,
+						"peso":pesoArray,
+						"cantidad":cantidadArray});
+	}
+
+	localStorage.setItem("listaProductos", JSON.stringify(listaCarrito))
+
+	sumaSubtotales()
+})
+
+//Actualizar subtotal
+var precioCarritoCompra = $(".cuerpoCarrito .precioCarritoCompra span")
+//console.log("preciocompra", precioCarritoCompra)
+var cantidadItem = $(".cuerpoCarrito .cantidadItem")
+
+for (var i = 0; i < precioCarritoCompra.length; i++) {
+	var precioCarritoCompraArray = $(precioCarritoCompra[i]).html()
+	var cantidadItemArray = $(cantidadItem[i]).val()
+	var idProductoArray = $(cantidadItem[i]).attr("idProducto")
+
+	$(".subTotal"+idProductoArray).html('<strong>USD $<span>'+(Math.abs(cantidadItemArray*precioCarritoCompraArray))+'</span></strong>')
+
+	sumaSubtotales()
+}
+
+//suma de todos los subtotales
+function sumaSubtotales(){
+	var subtotales = $(".subtotales span")
+	var arraySumaSubtotales = []
+
+	for (var i = 0; i < subtotales.length; i++) {
+		var subtotalesArray = $(subtotales[i]).html()
+		arraySumaSubtotales.push(Number(subtotalesArray))
+	}
+
+	function sumaArraySubtotales(total, numero){
+		return total + numero
+	}
+
+	//reduce() aplica una función a un acumulador y a cada valor de un array (de izquierda a derecha) para reducirlo a un único valor.
+	var sumaTotal = arraySumaSubtotales.reduce(sumaArraySubtotales)
+
+	$(".sumaSubTotal").html('<strong>USD $<span>'+sumaTotal+'</span></strong>')
+	$(".sumaCesta").html(sumaTotal)
+
+	localStorage.setItem("sumaCesta", sumaTotal)
+}
