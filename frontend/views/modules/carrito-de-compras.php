@@ -54,8 +54,101 @@ $urlFron = Route::urlFront();
 				</div>
 			</div>
 			<div class="panel-heading cabeceraCheckout">
-				<button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
+				<?php  
+				if (isset($_SESSION["validarSesion"])) {
+					if ($_SESSION["validarSesion"] == "ok") {
+						echo '<a id="btnCheckout" idUsuario="'.$_SESSION["id"].'" href="#modalCheckout" data-toggle="modal"><button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button></a>';
+					}
+				} else {
+					echo '<a href="#modalIngreso" data-toggle="modal"><button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button></a>';
+				}
+				
+				?>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modalCheckout" class="modal fade modalFormulario" role="dialog">
+	<div class="modal-content modal-dialog">
+		<div class="modal-body modalTitulo">
+			<h3 class="backColor">REALIZAR PAGO</h3>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="contenidoCheckout">
+				<div class="formEnvio row">
+					<h4 class="text-center well text-muted text-uppercase">Información de envío</h4>
+					<div class="col-xs-12 seleccionePais">
+						<select class="form-control" id="seleccionarPais" required>
+							<option value="">Seleccione el país</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="formaPago row">
+					<h4 class="text-center well text-muted text-uppercase">Elige la forma de pago</h4>
+					<figure class="col-xs-6">
+						<center>
+							<input type="radio" name="pago" id="checkPaypal" value="paypal" checked>
+						</center>
+						<img src="<?php echo $urlFron ?>views/img/plantilla/paypal.jpg" class="img-thumbnail">
+					</figure>
+					<figure class="col-xs-6">
+						<center>
+							<input type="radio" name="pago" id="checkPayu" value="payu">
+						</center>
+						<img src="<?php echo $urlFron ?>views/img/plantilla/payu.jpg" class="img-thumbnail">
+					</figure>
+				</div>
+				<br>
+				<div class="listaProductos row">
+					<h4 class="text-center well text-muted text-uppercase">Productos a comprar</h4>
+					<table class="table table-striped tablaProductos">
+						<thead>
+							<tr>
+								<th>Productos</th>
+								<th>Cantidad</th>
+								<th>Precio</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+					<div class="col-sm-6 col-xs-12 pull-right">
+						<table class="table table-striped tablaTasas">
+							<tbody>
+								<tr>
+									<td>subTotal</td>
+									<td>USD $20</td>
+								</tr>
+								<tr>
+									<td>Envío</td>
+									<td>USD $20</td>
+								</tr>
+								<tr>
+									<td>Impuesto</td>
+									<td>USD $20</td>
+								</tr>
+								<tr>
+									<td><strong>Total</strong></td>
+									<td><strong>USD $20</strong></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="divisa">
+							<select class="form-control" id="cambiarDivisa" name="divisa">
+								<option value="USD">USD</option>
+							</select>
+							<br>
+						</div>
+					</div>
+					<div class="clearfix"></div><!-- Formatea cajas flotantes -->
+					<button class="btn btn-block btn-lg btn-default backColor btnPagar">PAGAR</button>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			
 		</div>
 	</div>
 </div>

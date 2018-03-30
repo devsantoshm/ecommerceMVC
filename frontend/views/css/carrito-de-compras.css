@@ -9,3 +9,11 @@
 .cabeceraCheckout{
 	height: 66px;
 }
+
+.contenidoCheckout, .contenidoCheckout .row{
+	padding: 0px 20px;
+}
+
+.formEnvio{
+	display: none;
+}

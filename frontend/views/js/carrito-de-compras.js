@@ -314,3 +314,24 @@ function cestaCarrito(cantidadProductos){
 		localStorage.setItem("cantidadCesta", sumaTotalCantidades)
 	} 
 }
+
+$("#btnCheckout").click(function(){
+	var idUsuario = $(this).attr("idUsuario")
+	var peso = $(".cuerpoCarrito button")
+	var titulo = $(".cuerpoCarrito .tituloCarritoCompra")
+	var cantidad = $(".cuerpoCarrito .cantidadItem")
+	var subtotal = $(".cuerpoCarrito .subtotales span")
+	for (var i = 0; i < titulo.length; i++) {
+		var pesoArray = $(peso[i]).attr("peso")
+		var tituloArray = $(titulo[i]).html()
+		var cantidadArray = $(cantidad[i]).val()
+		var subtotalArray = $(subtotal[i]).html()
+
+		//mostrar productos definitivos a comprar
+		$(".listaProductos table.tablaProductos tbody").append('<tr>'+
+																'<td>'+tituloArray+'</td>'+
+																'<td>'+cantidadArray+'</td>'+
+																'<td>$<span>'+subtotalArray+'</span></td>'+
+																'</tr>')
+	}
+})
