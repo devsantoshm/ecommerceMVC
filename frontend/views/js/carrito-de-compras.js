@@ -195,6 +195,7 @@ $(".quitarItemCarrito").click(function(){
 		localStorage.setItem("listaProductos", JSON.stringify(listaCarrito))
 
 		sumaSubtotales()
+		cestaCarrito(listaCarrito.length)
 
 	} else {
 		// si ya no quedan productos hay que remover todo
@@ -250,6 +251,7 @@ $(".cantidadItem").change(function(){
 	localStorage.setItem("listaProductos", JSON.stringify(listaCarrito))
 
 	sumaSubtotales()
+	cestaCarrito(listaCarrito.length)
 })
 
 //Actualizar subtotal
@@ -265,6 +267,7 @@ for (var i = 0; i < precioCarritoCompra.length; i++) {
 	$(".subTotal"+idProductoArray).html('<strong>USD $<span>'+(Math.abs(cantidadItemArray*precioCarritoCompraArray))+'</span></strong>')
 
 	sumaSubtotales()
+	cestaCarrito(precioCarritoCompra.length)
 }
 
 //suma de todos los subtotales
@@ -288,4 +291,26 @@ function sumaSubtotales(){
 	$(".sumaCesta").html(sumaTotal)
 
 	localStorage.setItem("sumaCesta", sumaTotal)
+}
+
+//Actualizar cesta al cambiar cantidad
+function cestaCarrito(cantidadProductos){
+	//si hay productos en el carrito
+	if (cantidadProductos != 0) {
+		var cantidadItem = $(".cuerpoCarrito .cantidadItem")
+		var arraySumaCantidades = []
+
+		for (var i = 0; i < cantidadItem.length; i++) {
+			var cantidadItemArray = $(cantidadItem[i]).val()
+			arraySumaCantidades.push(Number(cantidadItemArray))
+		}
+
+		function sumaArrayCantidades(total, numero){
+			return total + numero
+		}
+
+		var sumaTotalCantidades = arraySumaCantidades.reduce(sumaArrayCantidades)
+		$(".cantidadCesta").html(sumaTotalCantidades)
+		localStorage.setItem("cantidadCesta", sumaTotalCantidades)
+	} 
 }
