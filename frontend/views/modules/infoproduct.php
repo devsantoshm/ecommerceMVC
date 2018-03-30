@@ -268,18 +268,23 @@ $urlFron = Route::urlFront();
 								echo '<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button>';
 						echo '</div>';
 					} else {
+						if ($infoproducto["oferta"] == 1) {
+							$precio = $infoproducto["precioOferta"];	
+						} else {
+							$precio = $infoproducto["precio"];
+						}
 						if ($infoproducto["tipo"] == "virtual") {
 							echo '<div class="col-md-6 col-xs-12">
 									<button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button>
 								</div>
 								<div class="col-md-6 col-xs-12">
-									<button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto="'.$infoproducto["id"].'" imagen="'.$urlBack.$infoproducto["portada"].'" titulo="'.$infoproducto["titulo"].'" precio="'.$infoproducto["precio"].'" tipo="'.$infoproducto["tipo"].'" peso="'.$infoproducto["peso"].'">
+									<button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto="'.$infoproducto["id"].'" imagen="'.$urlBack.$infoproducto["portada"].'" titulo="'.$infoproducto["titulo"].'" precio="'.$precio.'" tipo="'.$infoproducto["tipo"].'" peso="'.$infoproducto["peso"].'">
 										<small>ADICIONAR AL CARRITO</small> <i class="fa fa-shopping-cart col-md-0"></i>
 									</button>
 								</div>';
 						} else {
 							echo '<div class="col-md-6 col-xs-12">
-									<button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto="'.$infoproducto["id"].'" imagen="'.$urlBack.$infoproducto["portada"].'" titulo="'.$infoproducto["titulo"].'" precio="'.$infoproducto["precio"].'" tipo="'.$infoproducto["tipo"].'" peso="'.$infoproducto["peso"].'">
+									<button class="btn btn-default btn-block btn-lg backColor agregarCarrito" idProducto="'.$infoproducto["id"].'" imagen="'.$urlBack.$infoproducto["portada"].'" titulo="'.$infoproducto["titulo"].'" precio="'.$precio.'" tipo="'.$infoproducto["tipo"].'" peso="'.$infoproducto["peso"].'">
 										ADICIONAR AL CARRITO <i class="fa fa-shopping-cart"></i>
 									</button>
 								</div>';

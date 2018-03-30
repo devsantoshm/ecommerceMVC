@@ -20,7 +20,7 @@ if (localStorage.getItem("listaProductos") != null) {
 				'<div class="col-sm-1 col-xs-12">'+
 					'<br>'+
 					'<center>'+
-						'<button class="btn btn-default backColor">'+
+						'<button class="btn btn-default backColor quitarItemCarrito" idProducto="'+item.idProducto+'" peso="'+item.peso+'">'+
 							'<i class="fa fa-times"></i>'+
 						'</button>'+
 					'</center>'+
@@ -100,8 +100,26 @@ $(".agregarCarrito").click(function(){
 		if (localStorage.getItem("listaProductos") == null) {
 			listaCarrito = [];
 		} else {
+			var listaProductos = JSON.parse(localStorage.getItem("listaProductos"));
+			for (var i = 0; i < listaProductos.length; i++) {
+				if (listaProductos[i]["idProducto"] == idProducto) {
+					swal({
+					  title:"El producto ya está agregado al carrito de compras",
+					  text: "",
+					  type: "warning",
+					  showCancelButton: false,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "¡volver!",
+					  closeOnConfirm: false
+					})
+
+					return;
+				}
+			}
+
 			listaCarrito.concat(localStorage.getItem("listaProductos"))
 		}
+
 		listaCarrito.push({"idProducto":idProducto,
 							"imagen":imagen,
 							"titulo":titulo,
@@ -138,5 +156,57 @@ $(".agregarCarrito").click(function(){
 			}
 		}
 		);
+	}
+})
+
+$(".quitarItemCarrito").click(function(){
+	$(this).parent().parent().parent().remove()
+
+	//me trae todos los button que hay en cuerpoCarrito después de haber eliminado un item
+	var idProducto = $(".cuerpoCarrito button")
+	//console.log("idProducto", idProducto)
+	var imagen = $(".cuerpoCarrito img") //encuentra todas las etiquetas img
+	var titulo = $(".cuerpoCarrito .tituloCarritoCompra")
+	var precio = $(".cuerpoCarrito .precioCarritoCompra")
+	var cantidad = $(".cuerpoCarrito .cantidadItem")
+
+	//actualizar el localStorage
+	listaCarrito = []
+
+	if (idProducto.length != 0) {
+		for (var i = 0; i < idProducto.length; i++) {
+			var idProductoArray = $(idProducto[i]).attr("idProducto")
+			var imagenArray = $(imagen[i]).attr("src")
+			var tituloArray = $(titulo[i]).html()
+			var precioArray = $(precio[i]).html()
+			var pesoArray = $(idProducto[i]).attr("peso")
+			var tipoArray = $(cantidad[i]).attr("tipo")
+			var cantidadArray = $(cantidad[i]).val()
+
+			listaCarrito.push({"idProducto":idProductoArray,
+							"imagen":imagenArray,
+							"titulo":tituloArray,
+							"precio":precioArray,
+							"tipo":tipoArray,
+							"peso":pesoArray,
+							"cantidad":cantidadArray});
+		}
+
+		localStorage.setItem("listaProductos", JSON.stringify(listaCarrito))
+
+		//actuzalizar la cesta
+
+	} else {
+		// si ya no quedan productos hay que remover todo
+		localStorage.removeItem("listaProductos")
+		localStorage.setItem("cantidadCesta", "0")
+		localStorage.setItem("sumaCesta", "0")
+
+		$(".cantidadCesta").html("0");
+		$(".sumaCesta").html("0");
+
+		$(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
+		$(".sumaCarrito").hide();
+		$(".cabeceraCheckout").hide();
 	}
 })
