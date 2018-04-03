@@ -75,6 +75,15 @@ $urlFron = Route::urlFront();
 			<h3 class="backColor">REALIZAR PAGO</h3>
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
 			<div class="contenidoCheckout">
+				<?php  
+				$respuesta = CarController::showRates();
+				echo '<input type="hidden" id="tasaImpuesto" value="'.$respuesta["impuesto"].'">
+					<input type="hidden" id="envioNacional" value="'.$respuesta["envioNacional"].'">
+					<input type="hidden" id="envioInternacional" value="'.$respuesta["envioInternacional"].'">
+					<input type="hidden" id="tasaMinimaNal" value="'.$respuesta["tasaMinimaNal"].'">
+					<input type="hidden" id="tasaMinimaInt" value="'.$respuesta["tasaMinimaInt"].'">
+					<input type="hidden" id="tasaPais" value="'.$respuesta["pais"].'">';
+				?>
 				<div class="formEnvio row">
 					<h4 class="text-center well text-muted text-uppercase">Información de envío</h4>
 					<div class="col-xs-12 seleccionePais">
@@ -123,7 +132,7 @@ $urlFron = Route::urlFront();
 								</tr>
 								<tr>
 									<td>Envío</td>
-									<td>USD $20</td>
+									<td>USD $<span class="valorTotalEnvio">0</span></td>
 								</tr>
 								<tr>
 									<td>Impuesto</td>

@@ -11,6 +11,9 @@ require_once "models/SlideModel.php";
 require_once "controllers/UserController.php";
 require_once "models/UserModel.php";
 
+require_once "controllers/CarController.php";
+require_once "models/CarModel.php";
+
 require_once "models/routes.php";
 
 require_once "extensiones/PHPMailer/PHPMailerAutoload.php";

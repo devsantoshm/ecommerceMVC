@@ -52,7 +52,7 @@ if (localStorage.getItem("listaProductos") != null) {
 				'</div>'+
 			'</div>'+
 			'<div class="clearfix"></div>'+
-			'<hr>');
+			'<hr id="idhr'+item.idProducto+'">');
 
 		//Evitar manipular la cantidad en productos virtuales
 		$(".cantidadItem[tipo='virtual']").attr("readonly", "true");
@@ -161,6 +161,9 @@ $(".agregarCarrito").click(function(){
 
 $(".quitarItemCarrito").click(function(){
 	$(this).parent().parent().parent().remove()
+
+	var id=$(this).attr("idProducto")
+	$("#idhr"+id).remove()
 
 	//me trae todos los button que hay en cuerpoCarrito después de haber eliminado un item
 	var idProducto = $(".cuerpoCarrito button")
@@ -322,12 +325,23 @@ $("#btnCheckout").click(function(){
 	var cantidad = $(".cuerpoCarrito .cantidadItem")
 	var subtotal = $(".cuerpoCarrito .subtotales span")
 	var tipoArray = []
+	var cantidadPeso = []
 
 	for (var i = 0; i < titulo.length; i++) {
 		var pesoArray = $(peso[i]).attr("peso")
 		var tituloArray = $(titulo[i]).html()
 		var cantidadArray = $(cantidad[i]).val()
 		var subtotalArray = $(subtotal[i]).html()
+
+		//Evaluar el peso de acuerdo a la cantidad de productos
+		cantidadPeso[i] = pesoArray * cantidadArray;
+
+		function sumaArrayPeso(total, numero){
+			return total + numero
+		}
+
+		//reduce() aplica una función a un acumulador y a cada valor de un array (de izquierda a derecha) para reducirlo a un único valor.
+		var sumaTotalPeso = cantidadPeso.reduce(sumaArrayPeso)
 
 		//mostrar productos definitivos a comprar
 		$(".listaProductos table.tablaProductos tbody").append('<tr>'+
@@ -359,6 +373,28 @@ $("#btnCheckout").click(function(){
 						var codPais = item.code
 
 						$("#seleccionarPais").append('<option value="'+codPais+'">'+pais+'</option>')
+					}
+				}
+			})
+
+			//Evaluar tasas de envio si el producto es físico
+			$("#seleccionarPais").change(function(){
+				var pais = $(this).val()
+				var tasaPais = $("#tasaPais").val()
+
+				if (pais == tasaPais) {
+					var resultadoPeso = sumaTotalPeso * $("#envioNacional").val()
+					if (resultadoPeso < $("#tasaMinimaNal").val()) {
+						$(".valorTotalEnvio").html($("#tasaMinimaNal").val())
+					} else {
+						$(".valorTotalEnvio").html(resultadoPeso)
+					}
+				}else{
+					var resultadoPeso = sumaTotalPeso * $("#envioInternacional").val()
+					if (resultadoPeso < $("#tasaMinimaInt").val()) {
+						$(".valorTotalEnvio").html($("#tasaMinimaInt").val())
+					} else {
+						$(".valorTotalEnvio").html(resultadoPeso)
 					}
 				}
 			})
