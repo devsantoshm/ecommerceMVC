@@ -48,7 +48,7 @@ $urlFron = Route::urlFront();
 					</div>
 					<div class="col-xs-6">
 						<h4 class="sumaSubTotal">
-							<strong>USD $<span>21</span></strong>
+							
 						</h4>
 					</div>
 				</div>
@@ -128,7 +128,7 @@ $urlFron = Route::urlFront();
 							<tbody>
 								<tr>
 									<td>subTotal</td>
-									<td>USD $20</td>
+									<td>USD $<span class="valorSubtotal">0</span></td>
 								</tr>
 								<tr>
 									<td>Envío</td>
@@ -136,11 +136,11 @@ $urlFron = Route::urlFront();
 								</tr>
 								<tr>
 									<td>Impuesto</td>
-									<td>USD $20</td>
+									<td>USD $<span class="valorTotalImpuesto">0</span></td>
 								</tr>
 								<tr>
 									<td><strong>Total</strong></td>
-									<td><strong>USD $20</strong></td>
+									<td><strong>USD $<span class="valorTotalCompra">0</span></strong></td>
 								</tr>
 							</tbody>
 						</table>

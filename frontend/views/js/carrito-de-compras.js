@@ -319,6 +319,9 @@ function cestaCarrito(cantidadProductos){
 }
 
 $("#btnCheckout").click(function(){
+	//para limpiar la redundancia de datos en la ventana modal
+	$(".listaProductos table.tablaProductos tbody").html("");
+
 	var idUsuario = $(this).attr("idUsuario")
 	var peso = $(".cuerpoCarrito button")
 	var titulo = $(".cuerpoCarrito .tituloCarritoCompra")
@@ -326,6 +329,19 @@ $("#btnCheckout").click(function(){
 	var subtotal = $(".cuerpoCarrito .subtotales span")
 	var tipoArray = []
 	var cantidadPeso = []
+	var sumaSubTotal = $(".sumaSubTotal span")
+	//console.log("sumaSubTotal", $(sumaSubTotal).html());
+	//de esta forma asignamos el valor de subtotal
+	$(".valorSubtotal").html($(sumaSubTotal).html());
+
+	//tasas de impuesto del 19% del subtotal
+	/*var numero = 1.77777777;
+	numero = Number(numero.toFixed(2));
+	console.log(numero); // Muestra 1.78*/
+	var impuestoTotal = ($(".valorSubtotal").html() * $("#tasaImpuesto").val())/100;
+	$(".valorTotalImpuesto").html(impuestoTotal.toFixed(2));
+
+	sumaTotalCompra();
 
 	for (var i = 0; i < titulo.length; i++) {
 		var pesoArray = $(peso[i]).attr("peso")
@@ -359,6 +375,8 @@ $("#btnCheckout").click(function(){
 		if (tipoArray.find(checkTipo) == "fisico") {
 			$(".formEnvio").show()
 
+			$(".btnPagar").attr("tipo", "fisico");
+
 			$.ajax({
 				url: rutaFron+"views/js/plugins/countries.json",
 				type: "GET",
@@ -379,6 +397,10 @@ $("#btnCheckout").click(function(){
 
 			//Evaluar tasas de envio si el producto es físico
 			$("#seleccionarPais").change(function(){
+
+				//remover la alerta después de seleccionar país
+				$(".alert").remove();
+
 				var pais = $(this).val()
 				var tasaPais = $("#tasaPais").val()
 
@@ -397,7 +419,26 @@ $("#btnCheckout").click(function(){
 						$(".valorTotalEnvio").html(resultadoPeso)
 					}
 				}
+
+				sumaTotalCompra()
 			})
+		} else{
+			$(".btnPagar").attr("tipo", "virtual");
 		}
+	}
+})
+
+//SUMA TOTAL DE LA COMPRA
+function sumaTotalCompra(){
+	$(".valorTotalCompra").html(Number($(".valorSubtotal").html()) + Number($(".valorTotalEnvio").html()) + Number($(".valorTotalImpuesto").html()))
+}
+
+//boton pagar
+$(".btnPagar").click(function(){
+	var tipo = $(this).attr("tipo")
+	if (tipo == "fisico" && $("#seleccionarPais").val() == "") {
+		$(".btnPagar").after('<div class="alert alert-warning">No ha seleccionado el país de envío</div>')
+
+		return; //return para cancelar la compra, es decir, cancelar la acción que puede seguir el boton pagar
 	}
 })
