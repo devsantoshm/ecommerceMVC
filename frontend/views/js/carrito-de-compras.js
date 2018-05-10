@@ -333,6 +333,7 @@ $("#btnCheckout").click(function(){
 	//console.log("sumaSubTotal", $(sumaSubTotal).html());
 	//de esta forma asignamos el valor de subtotal
 	$(".valorSubtotal").html($(sumaSubTotal).html());
+	$(".valorSubtotal").attr("valor", $(sumaSubTotal).html());
 
 	//tasas de impuesto del 19% del subtotal
 	/*var numero = 1.77777777;
@@ -340,6 +341,7 @@ $("#btnCheckout").click(function(){
 	console.log(numero); // Muestra 1.78*/
 	var impuestoTotal = ($(".valorSubtotal").html() * $("#tasaImpuesto").val())/100;
 	$(".valorTotalImpuesto").html(impuestoTotal.toFixed(2));
+	$(".valorTotalImpuesto").attr("valor", impuestoTotal.toFixed(2));
 
 	sumaTotalCompra();
 
@@ -363,7 +365,7 @@ $("#btnCheckout").click(function(){
 		$(".listaProductos table.tablaProductos tbody").append('<tr>'+
 																'<td>'+tituloArray+'</td>'+
 																'<td>'+cantidadArray+'</td>'+
-																'<td>$<span>'+subtotalArray+'</span></td>'+
+																'<td>$<span class="valorItem" valor="'+subtotalArray+'">'+subtotalArray+'</span></td>'+
 																'</tr>')
 		//seleccionar pais de envio si hay productos fisicos
 		tipoArray.push($(cantidad[i]).attr("tipo"))
@@ -401,6 +403,8 @@ $("#btnCheckout").click(function(){
 				//remover la alerta después de seleccionar país
 				$(".alert").remove();
 
+				$("#cambiarDivisa").val("USD") //para que regrese a dolares despues de seleccionar el pais
+
 				var pais = $(this).val()
 				var tasaPais = $("#tasaPais").val()
 
@@ -408,15 +412,19 @@ $("#btnCheckout").click(function(){
 					var resultadoPeso = sumaTotalPeso * $("#envioNacional").val()
 					if (resultadoPeso < $("#tasaMinimaNal").val()) {
 						$(".valorTotalEnvio").html($("#tasaMinimaNal").val())
+						$(".valorTotalEnvio").attr("valor", $("#tasaMinimaNal").val())
 					} else {
 						$(".valorTotalEnvio").html(resultadoPeso)
+						$(".valorTotalEnvio").attr("valor", resultadoPeso)
 					}
 				}else{
 					var resultadoPeso = sumaTotalPeso * $("#envioInternacional").val()
 					if (resultadoPeso < $("#tasaMinimaInt").val()) {
 						$(".valorTotalEnvio").html($("#tasaMinimaInt").val())
+						$(".valorTotalEnvio").attr("valor", $("#tasaMinimaInt").val())
 					} else {
 						$(".valorTotalEnvio").html(resultadoPeso)
+						$(".valorTotalEnvio").attr("valor", resultadoPeso)
 					}
 				}
 
@@ -430,8 +438,96 @@ $("#btnCheckout").click(function(){
 
 //SUMA TOTAL DE LA COMPRA
 function sumaTotalCompra(){
-	$(".valorTotalCompra").html(Number($(".valorSubtotal").html()) + Number($(".valorTotalEnvio").html()) + Number($(".valorTotalImpuesto").html()))
+	var sumaTotalTasas = Number($(".valorSubtotal").html())+
+						 Number($(".valorTotalEnvio").html())+
+						 Number($(".valorTotalImpuesto").html());
+
+	$(".valorTotalCompra").html(sumaTotalTasas.toFixed(2));
+	$(".valorTotalCompra").attr("valor", sumaTotalTasas.toFixed(2));
 }
+
+var metodoPago = "paypal"
+divisas(metodoPago)
+
+//MÉTODO DE PAGO PARA CAMBIO DE DIVISA
+$("input[name='pago']").change(function(){
+	var metodoPago = $(this).val()
+	divisas(metodoPago)
+})
+
+function divisas(metodoPago){
+	$("#cambiarDivisa").html("")
+	if (metodoPago == "paypal") {
+		$("#cambiarDivisa").append('<option value="USD">USD</option>'+
+								   '<option value="EUR">EUR</option>'+
+								   '<option value="GBP">GBP</option>'+
+								   '<option value="MXN">MXN</option>'+
+								   '<option value="JPV">JPV</option>'+
+								   '<option value="CAD">CAD</option>'+
+								   '<option value="BRL">BRL</option>')
+	} else {
+		$("#cambiarDivisa").append('<option value="USD">USD</option>'+
+								   '<option value="PEN">PEN</option>'+
+								   '<option value="COP">COP</option>'+
+								   '<option value="MXN">MXN</option>'+
+								   '<option value="CLP">CLP</option>'+
+								   '<option value="ARS">ARS</option>'+
+								   '<option value="BRL">BRL</option>')
+	}
+}
+
+//CAMBIO DE DIVISA
+/*
+They are the inverse of each other. JSON.stringify() serializes a JS object into a JSON string, 
+whereas JSON.parse() will deserialize a JSON string into a JS object.
+*/
+var divisaBase = "USD"
+
+$("#cambiarDivisa").change(function(){
+	$(".alert").remove() //para eliminar los alert repetidos
+	
+	if ($("#seleccionarPais").val() == "") {
+		$("#cambiarDivisa").after('<div class="alert alert-warning">No ha seleccionado el país de envío</div>')
+
+		return; //return para cancelar la compra, es decir, cancelar la acción que puede seguir el boton pagar
+	}
+
+
+	var divisa = $(this).val()
+
+	$.ajax({
+		url: "http://free.currencyconverterapi.com/api/v3/convert?q="+divisaBase+"_"+divisa+"&compact=y",
+		type: "GET",
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "jsonp", //cruce de origen solicitado para traer informacion de otro servidor
+		success: function(respuesta){
+			//console.log("respuesta", respuesta);
+			var divisaString = JSON.stringify(respuesta)
+			console.log("divisaString", divisaString); //divisaString {"USD_GBP":{"val":0.73811}}
+			var conversion = divisaString.substr(18,4) //extract parts of the string
+			
+			// error von usd divisaString {"USD_USD":{"val":1}}
+			if (divisa == "USD") {
+				conversion = 1
+			}
+
+			$(".cambioDivisa").html(divisa)
+
+			$(".valorSubtotal").html((Number(conversion) * Number($(".valorSubtotal").attr("valor"))).toFixed(2))
+			$(".valorTotalEnvio").html((Number(conversion) * Number($(".valorTotalEnvio").attr("valor"))).toFixed(2))
+			$(".valorTotalImpuesto").html((Number(conversion) * Number($(".valorTotalImpuesto").attr("valor"))).toFixed(2))
+			$(".valorTotalCompra").html((Number(conversion) * Number($(".valorTotalCompra").attr("valor"))).toFixed(2))
+		
+			var valorItem = $(".valorItem")
+
+			for (var i = 0; i < valorItem.length; i++) {
+				$(valorItem[i]).html((Number(conversion) * Number($(valorItem[i]).attr("valor"))).toFixed(2))
+			}
+		}
+	})
+})
 
 //boton pagar
 $(".btnPagar").click(function(){
