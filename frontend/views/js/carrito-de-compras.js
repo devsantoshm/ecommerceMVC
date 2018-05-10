@@ -374,7 +374,13 @@ $("#btnCheckout").click(function(){
 			return tipo == "fisico"
 		} 
 
+		//EXISTEN PRODUCTOS FISICOS
 		if (tipoArray.find(checkTipo) == "fisico") {
+			//para que no siga mostrando el mensaje de divisa no selecciono pais
+			$(".seleccionePais").html('<select class="form-control" id="seleccionarPais" required>'+
+									'<option value="">Seleccione el país</option>'+
+									'</select>');
+
 			$(".formEnvio").show()
 
 			$(".btnPagar").attr("tipo", "fisico");
@@ -404,6 +410,18 @@ $("#btnCheckout").click(function(){
 				$(".alert").remove();
 
 				$("#cambiarDivisa").val("USD") //para que regrese a dolares despues de seleccionar el pais
+				$(".cambioDivisa").html("USD")
+				//retornar cambio de divisa a dolar luego de cambiar de país
+				$(".valorSubtotal").html((1 * Number($(".valorSubtotal").attr("valor"))).toFixed(2))
+				$(".valorTotalEnvio").html((1 * Number($(".valorTotalEnvio").attr("valor"))).toFixed(2))
+				$(".valorTotalImpuesto").html((1 * Number($(".valorTotalImpuesto").attr("valor"))).toFixed(2))
+				$(".valorTotalCompra").html((1 * Number($(".valorTotalCompra").attr("valor"))).toFixed(2))
+			
+				var valorItem = $(".valorItem")
+
+				for (var i = 0; i < valorItem.length; i++) {
+					$(valorItem[i]).html((1 * Number($(valorItem[i]).attr("valor"))).toFixed(2))
+				}
 
 				var pais = $(this).val()
 				var tasaPais = $("#tasaPais").val()

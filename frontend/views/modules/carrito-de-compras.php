@@ -87,9 +87,7 @@ $urlFron = Route::urlFront();
 				<div class="formEnvio row">
 					<h4 class="text-center well text-muted text-uppercase">Información de envío</h4>
 					<div class="col-xs-12 seleccionePais">
-						<select class="form-control" id="seleccionarPais" required>
-							<option value="">Seleccione el país</option>
-						</select>
+						
 					</div>
 				</div>
 				<br>
