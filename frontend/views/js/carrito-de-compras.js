@@ -363,8 +363,8 @@ $("#btnCheckout").click(function(){
 
 		//mostrar productos definitivos a comprar
 		$(".listaProductos table.tablaProductos tbody").append('<tr>'+
-																'<td>'+tituloArray+'</td>'+
-																'<td>'+cantidadArray+'</td>'+
+																'<td class="valorTitulo">'+tituloArray+'</td>'+
+																'<td class="valorCantidad">'+cantidadArray+'</td>'+
 																'<td>$<span class="valorItem" valor="'+subtotalArray+'">'+subtotalArray+'</span></td>'+
 																'</tr>')
 		//seleccionar pais de envio si hay productos fisicos
@@ -554,5 +554,27 @@ $(".btnPagar").click(function(){
 		$(".btnPagar").after('<div class="alert alert-warning">No ha seleccionado el país de envío</div>')
 
 		return; //return para cancelar la compra, es decir, cancelar la acción que puede seguir el boton pagar
+	}
+
+	var divisa = $("#cambiarDivisa").val()
+	var total = $(".valorTotalCompra").html()
+	var impuesto = $(".valorTotalImpuesto").html()
+	var envio = $(".valorTotalEnvio").html()
+	var subtotal = $(".valorSubtotal").html()
+	var titulo = $(".valorTitulo")
+	var cantidad = $(".valorCantidad")
+	var valorItem = $(".valorItem")
+	var idProducto = $(".cuerpoCarrito button")
+
+	var tituloArray = []
+	var cantidadArray = []
+	var valorItemArray = []
+	var idProductoArray = []
+
+	for (var i = 0; i < titulo.length; i++) {
+		tituloArray[i] = $(titulo[i]).html()
+		cantidadArray[i] = $(cantidad[i]).html()
+		valorItemArray[i] = $(valorItem[i]).html()
+		idProductoArray[i] = $(idProducto[i]).attr("idProducto")
 	}
 })
