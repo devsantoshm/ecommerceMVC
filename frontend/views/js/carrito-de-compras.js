@@ -577,4 +577,28 @@ $(".btnPagar").click(function(){
 		valorItemArray[i] = $(valorItem[i]).html()
 		idProductoArray[i] = $(idProducto[i]).attr("idProducto")
 	}
+
+	var datos = new FormData()
+
+	datos.append("divisa", divisa)
+	datos.append("total", total)
+	datos.append("impuesto", impuesto)
+	datos.append("envio", envio)
+	datos.append("subtotal", subtotal)
+	datos.append("tituloArray", tituloArray)
+	datos.append("cantidadArray", cantidadArray)
+	datos.append("valorItemArray", valorItemArray)
+	datos.append("idProductoArray", idProductoArray)
+
+	$.ajax({
+		url: rutaFron+"ajax/carrito.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta){
+			
+		}
+	})
 })
