@@ -1,16 +1,18 @@
 <?php  
 
+require_once "../extensiones/PaypalController.php";
+
 class AjaxCar
 {
-	private $divisa;
-	private $total;
-	private $impuesto;
-	private $envio;
-	private $subtotal;
-	private $tituloArray;
-	private $cantidadArray;
-	private $valorItemArray;
-	private $idProductoArray;
+	public $divisa;
+	public $total;
+	public $impuesto;
+	public $envio;
+	public $subtotal;
+	public $tituloArray;
+	public $cantidadArray;
+	public $valorItemArray;
+	public $idProductoArray;
 
 	public function ajaxSendPaypal()
 	{
@@ -26,7 +28,7 @@ class AjaxCar
 			"idProductoArray"=>$this->idProductoArray
 		);
 
-		$respuesta = Paypal::paymentPaypalModel($datos);
+		$respuesta = PaypalController::paymentPaypal($datos);
 
 		echo $respuesta;
 	}

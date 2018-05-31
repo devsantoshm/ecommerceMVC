@@ -591,7 +591,7 @@ $(".btnPagar").click(function(){
 	datos.append("idProductoArray", idProductoArray)
 
 	$.ajax({
-		url: rutaFron+"ajax/carrito.ajax.php",
+		url: rutaFron+"ajax/AjaxCar.php",
 		method: "POST",
 		data: datos,
 		cache: false,

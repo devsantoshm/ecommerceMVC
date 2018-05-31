@@ -1,9 +1,12 @@
 <?php  
 
 require __DIR__ . '/vendor/autoload.php';
+require_once "../models/CarModel.php";
 
 use Paypal\Rest\ApiContext;
 use Paypal\Auth\OAuthTokenCredential;
+
+$table = "commerce";
 
 $respuesta = CarModel::showRates($table); //de la tabla commerce
 
