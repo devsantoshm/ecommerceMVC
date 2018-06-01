@@ -14,14 +14,14 @@ $clienteIdPaypal = $respuesta["clienteIdPaypal"];
 $llaveSecretaPaypal = $respuesta["llaveSecretaPaypal"];
 $modoPaypal = $respuesta["modoPaypal"];
 
-$ApiContext = new ApiContext(
-	new OAuthTokenCredential(
+$apiContext = new \PayPal\Rest\ApiContext(
+  new \PayPal\Auth\OAuthTokenCredential(
 		$clienteIdPaypal,
 		$llaveSecretaPaypal
 	)
 );
 
-$ApiContext->setConfig(
+$apiContext->setConfig(
 	array(
 		'mode' => $modoPaypal,
 		'log.LogEnabled' => true,

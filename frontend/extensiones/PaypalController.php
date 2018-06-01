@@ -1,6 +1,5 @@
 <?php  
 
-require __DIR__ . '/bootstrap.php';
 require_once "../models/routes.php";
 
 use PayPal\Api\Amount;
@@ -16,11 +15,14 @@ class PaypalController
 {
 	static public function paymentPaypal($datos)
 	{
+		require __DIR__ . '/bootstrap.php';
+		
 		$tituloArray = explode(",", $datos["tituloArray"]);
 		//var_dump($tituloArray);
 		$cantidadArray = explode(",", $datos["cantidadArray"]);
 		$valorItemArray = explode(",", $datos["valorItemArray"]);
-		$idProductoArray = explode(",", $datos["idProductoArray"]);
+		//Reemplaza todas las apariciones del string buscado con el string de reemplazo y devuelve string o aaray
+		$idProductos = str_replace(",", "-", $datos["idProductoArray"]); // 34-55
 
 		//Seleccionamos el método de pago
 		$payer = new Payer();
@@ -64,10 +66,40 @@ class PaypalController
 
 		//Agregamos las URLs después de realizar el pago, o cuando el pago es cancelado
 		//importante agregar la url principal en la API developers de Paypal
-		$urlFron = Route::urlFront();
+		$urlFron = Route::urlFronPaypal();
+
 		$redirectUrls = new RedirectUrls();
-		$redirectUrls->setReturnUrl("$urlFron")
-		    ->setCancelUrl("$urlFron");
+		$redirectUrls->setReturnUrl("$urlFron/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos)
+		    ->setCancelUrl("$urlFron/carrito-de-compras");
+
+		//Agregamos todas las características del pago
+		$payment = new Payment();
+		$payment->setIntent("sale")
+		    ->setPayer($payer)
+		    ->setRedirectUrls($redirectUrls)
+		    ->setTransactions(array($transaction));
+
+		//Tratar de ejecutar un proceso y si falla ejecutar una rutina de error
+		try {
+		    $payment->create($apiContext);
+		    //var_dump($payment);
+
+		} catch (Paypal\Exception\PaypalConnectionException $ex) {
+		    echo $ex->getCode(); //Prints the Error getCode
+		    echo $ex->getData(); //Prints the detailed error message
+		    die($ex);
+		    return "$url/error";
+		}
+
+		#utilizamos un foreach para iterar sobre $payment, utilizamos el método llamado getLinks() para obtener todos los enlaces que aparecen en el array $payment  y caso de que $link->getRel() coincide con 'approval_url' extraemos dicho enlace, finalmente enviamos al usuario a esa dirección que guardamos en la variable $redirectUrl con el método getHref()	
+
+		foreach ($payment->getLinks() as $link) {
+			if ($link->getRel() == "approval_url") {
+				$redirectUrl = $link->getHref();
+			}
+		}
+		// retorna la url paypal para realizar el pago 
+		return $redirectUrl;
 	}
 }
 
