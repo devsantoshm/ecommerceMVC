@@ -37,12 +37,33 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 
 	//validamos con las credenciales que el id del pagador si coincide
 	$payment->execute($execution, $apiContext);
+	$datosTransaccion = $payment->toJSON();
+
+	//var_dump($datosTransaccion);
+
+	/*$datosTransaccion = '{"id":"PAY-8UL69754JE4975125LMI6F2Y","intent":"sale","state":"approved","cart":"5SN161781V640500A","payer":{"payment_method":"paypal","status":"VERIFIED","payer_info":{"email":"developerh69-buyer@gmail.com","first_name":"test","last_name":"buyer","payer_id":"HMF3TE5QT7MRN","shipping_address":{"recipient_name":"test buyer","line1":"1 Main St","city":"San Jose","state":"CA","postal_code":"95131","country_code":"US"},"country_code":"US"}},"transactions":[{"amount":{"total":"926.15","currency":"MXN","details":{"subtotal":"527.35","tax":"100.30","shipping":"298.50"}},"payee":{"merchant_id":"P3FSA9QMG5GZ4","email":"developerh69-facilitator@gmail.com"},"description":"Payment description","invoice_number":"5b11e2e80ef40","item_list":{"items":[{"name":"Tennis Verde-36-negro","price":"328.35","currency":"MXN","quantity":1},{"name":"Curso de jQuery","price":"199.00","currency":"MXN","quantity":1}],"shipping_address":{"recipient_name":"test buyer","line1":"1 Main St","city":"San Jose","state":"CA","postal_code":"95131","country_code":"US"}},"related_resources":[{"sale":{"id":"1XN143230X700333B","state":"pending","amount":{"total":"926.15","currency":"MXN","details":{"subtotal":"527.35","tax":"100.30","shipping":"298.50"}},"payment_mode":"INSTANT_TRANSFER","reason_code":"RECEIVING_PREFERENCE_MANDATES_MANUAL_ACTION","protection_eligibility":"ELIGIBLE","protection_eligibility_type":"ITEM_NOT_RECEIVED_ELIGIBLE,UNAUTHORIZED_PAYMENT_ELIGIBLE","parent_payment":"PAY-8UL69754JE4975125LMI6F2Y","create_time":"2018-06-02T00:21:40Z","update_time":"2018-06-02T00:21:40Z","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/sale/1XN143230X700333B","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/payments/sale/1XN143230X700333B/refund","rel":"refund","method":"POST"},{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAY-8UL69754JE4975125LMI6F2Y","rel":"parent_payment","method":"GET"}]}}]}],"redirect_urls":{"return_url":"http://localhost/ecommerce/frontend/index.php?ruta=finalizar-compra&paypal=true&productos=464-498&paymentId=PAY-8UL69754JE4975125LMI6F2Y","cancel_url":"http://localhost/ecommerce/frontend/carrito-de-compras"},"create_time":"2018-06-02T00:21:41Z","update_time":"2018-06-02T00:21:39Z","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAY-8UL69754JE4975125LMI6F2Y","rel":"self","method":"GET"}]}';*/
+
+	$datosUsuario = json_decode($datosTransaccion);//Convierte un string codificado en JSON a una variable de PHP
+	//print_r($datosUsuario->payer->payer_info);
+
+	$emailComprador = $datosUsuario->payer->payer_info->email;
+	$dir = $datosUsuario->payer->payer_info->shipping_address->line1;
+	$ciudad = $datosUsuario->payer->payer_info->shipping_address->city;
+	$estado = $datosUsuario->payer->payer_info->shipping_address->state;
+	$codigoPostal = $datosUsuario->payer->payer_info->shipping_address->postal_code;
+	$pais = $datosUsuario->payer->payer_info->shipping_address->country_code;
+
+	$direccion = $dir.", ".$ciudad.", ".$estado.", ".$codigoPostal;
 
 	//Actualizamos la base de datos
 	for($i = 0; $i < count($productos); $i++)
 	{
 		$datos = array("idUsuario" => $_SESSION["id"],
-						"idProducto" => $productos[$i]);
+						"idProducto" => $productos[$i],
+						"metodo" => "paypal",
+						"email" => $emailComprador,
+						"direccion" => $direccion,
+						"pais" => $pais);
 
 		$respuesta = CarController::newShopping($datos);
 	}
