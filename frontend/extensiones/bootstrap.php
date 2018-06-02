@@ -1,10 +1,10 @@
 <?php  
 
 require __DIR__ . '/vendor/autoload.php';
-require_once "../models/CarModel.php";
 
-use Paypal\Rest\ApiContext;
-use Paypal\Auth\OAuthTokenCredential;
+
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
 
 $table = "commerce";
 

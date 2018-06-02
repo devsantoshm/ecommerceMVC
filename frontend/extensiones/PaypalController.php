@@ -1,6 +1,7 @@
 <?php  
 
 require_once "../models/routes.php";
+require_once "../models/CarModel.php";
 
 use PayPal\Api\Amount;
 use PayPal\Api\Details;

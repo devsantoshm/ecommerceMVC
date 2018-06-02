@@ -7,4 +7,12 @@ class CarController
 		$response = CarModel::showRates($table);
 		return $response;
 	}
+
+	static public function newShopping($data)
+	{
+		$table = "shopping";
+		$response = CarModel::newShopping($table, $data);
+
+		return $response;
+	}
 }
