@@ -66,6 +66,31 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 						"pais" => $pais);
 
 		$respuesta = CarController::newShopping($datos);
+
+		$ordenar = "id";
+		$item = "id";
+		$valor = $productos[$i];
+
+		$productosCompra = ProductController::listProducts($ordenar, $item, $valor);
+
+		foreach ($productosCompra as $key => $value) {
+			
+			$item1 = "ventas";
+			$valor1 = $value["ventas"] + 1;
+			$item2 = "id";
+			$valor2 = $value["id"];
+
+			$actualizarCompra = ProductController::updateProduct($item1, $valor1, $item2, $valor2);
+		}
+
+		if ($respuesta == "ok" && $actualizarCompra == "ok") {
+			echo '<script>
+				localStorage.removeItem("listaProductos");
+				localStorage.removeItem("cantidadCesta");
+				localStorage.removeItem("sumaCesta");
+				window.location = "'.$urlFron.'perfil";
+			</script>';
+		}
 	}
 }
 

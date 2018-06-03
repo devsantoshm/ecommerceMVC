@@ -89,11 +89,11 @@ class ProductModel
 		return $stmt->fetchAll();
 	}
 
-	static public function updateViewProduct($table, $datos, $item)
+	static public function updateProduct($table, $item1, $valor1, $item2, $valor2)
 	{
-		$stmt = Conexion::conectar()->prepare("update $table set $item = :valor where ruta = :ruta");
-		$stmt->bindParam(":ruta", $datos["ruta"], PDO::PARAM_STR);
-		$stmt->bindParam(":valor", $datos["valor"], PDO::PARAM_STR);
+		$stmt = Conexion::conectar()->prepare("update $table set $item1 = :valor1 where $item2 = :valor2");
+		$stmt->bindParam(":valor1", $valor1, PDO::PARAM_STR);
+		$stmt->bindParam(":valor2", $valor2, PDO::PARAM_STR);
 		
 		if($stmt->execute())
 			return "ok";

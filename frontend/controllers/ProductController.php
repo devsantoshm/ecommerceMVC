@@ -57,10 +57,10 @@ class ProductController
 		return $response;
 	}
 
-	static public function updateViewProduct($datos, $item)
+	static public function updateProduct($item1, $valor1, $item2, $valor2)
 	{
 		$table = "products";
-		$response = ProductModel::updateViewProduct($table, $datos, $item);
+		$response = ProductModel::updateProduct($table, $item1, $valor1, $item2, $valor2);
 		return $response;
 	}
 }

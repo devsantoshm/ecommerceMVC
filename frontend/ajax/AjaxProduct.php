@@ -10,12 +10,13 @@ class AjaxProduct
 
 	public function ajaxViewProduct()
 	{
-		$data = array("valor" => $this->valor,
-					"ruta" => $this->ruta);
+		$item1 = $this->item;
+		$valor1 = $this->valor;
+		
+		$item2 = "ruta";
+		$valor2 = $this->ruta;
 
-		$item = $this->item;
-
-		$response = ProductController::updateViewProduct($data, $item);
+		$response = ProductController::updateProduct($item1, $valor1, $item2, $valor2);
 
 		echo $response; //convertir un array en un string
 	}
