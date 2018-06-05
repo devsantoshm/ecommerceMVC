@@ -65,7 +65,7 @@ if (!isset($_SESSION["validarSesion"])) {
 												<h1><small>'.$value2["titulo"].'</small></h1>
 												<p>'.$value2["titular"].'</p>';
 												if ($value2["tipo"] == "virtual") {
-													echo '<a href="'.$urlFron.'/curso">
+													echo '<a href="'.$urlFron.'curso/'.$value1["id"].'/'.$value1["id_usuario"].'/'.$value1["id_producto"].'/'.$value2["ruta"].'">
 															<button class="btn btn-default pull-left">Ir al curso</button>
 														</a>';
 												}else{

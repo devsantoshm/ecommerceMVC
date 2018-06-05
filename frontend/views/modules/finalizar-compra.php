@@ -24,6 +24,7 @@ use PayPal\Api\PaymentExecution;
 if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 	//recibo los productos comprados
 	$productos = explode("-", $_GET['productos']);
+	$cantidad = explode("-", $_GET['cantidad']);
 
 	//Capturamos el id del pago que arroja paypal
 	$paymentId = $_GET['paymentId'];
@@ -76,7 +77,7 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 		foreach ($productosCompra as $key => $value) {
 			
 			$item1 = "ventas";
-			$valor1 = $value["ventas"] + 1;
+			$valor1 = $value["ventas"] + $cantidad[$i];
 			$item2 = "id";
 			$valor2 = $value["id"];
 
@@ -84,6 +85,8 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 		}
 
 		if ($respuesta == "ok" && $actualizarCompra == "ok") {
+
+			// ENVIAR UN CORREO AL USUARIO QUE REALIZO LA COMPRA DE LOS PRODUCTOS
 			echo '<script>
 				localStorage.removeItem("listaProductos");
 				localStorage.removeItem("cantidadCesta");

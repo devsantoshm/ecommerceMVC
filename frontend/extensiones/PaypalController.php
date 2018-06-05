@@ -22,8 +22,9 @@ class PaypalController
 		//var_dump($tituloArray);
 		$cantidadArray = explode(",", $datos["cantidadArray"]);
 		$valorItemArray = explode(",", $datos["valorItemArray"]);
-		//Reemplaza todas las apariciones del string buscado con el string de reemplazo y devuelve string o aaray
+		//Reemplaza todas las apariciones del string buscado con el string de reemplazo y devuelve string o array
 		$idProductos = str_replace(",", "-", $datos["idProductoArray"]); // 34-55
+		$cantidadProductos = str_replace(",", "-", $datos["cantidadArray"]); // cantidad de cada producto
 
 		//Seleccionamos el método de pago
 		$payer = new Payer();
@@ -70,7 +71,7 @@ class PaypalController
 		$urlFron = Route::urlFronPaypal();
 
 		$redirectUrls = new RedirectUrls();
-		$redirectUrls->setReturnUrl("$urlFron/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos)
+		$redirectUrls->setReturnUrl("$urlFron/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos."&cantidad=".$cantidadProductos)
 		    ->setCancelUrl("$urlFron/carrito-de-compras");
 
 		//Agregamos todas las características del pago
