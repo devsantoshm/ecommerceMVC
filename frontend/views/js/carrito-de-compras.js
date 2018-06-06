@@ -323,10 +323,10 @@ $("#btnCheckout").click(function(){
 	$(".listaProductos table.tablaProductos tbody").html("");
 
 	var idUsuario = $(this).attr("idUsuario")
-	var peso = $(".cuerpoCarrito button")
-	var titulo = $(".cuerpoCarrito .tituloCarritoCompra")
-	var cantidad = $(".cuerpoCarrito .cantidadItem")
-	var subtotal = $(".cuerpoCarrito .subtotales span")
+	var peso = $(".cuerpoCarrito button, .comprarAhora button")
+	var titulo = $(".cuerpoCarrito .tituloCarritoCompra, .comprarAhora .tituloCarritoCompra")
+	var cantidad = $(".cuerpoCarrito .cantidadItem, .comprarAhora .cantidadItem")
+	var subtotal = $(".cuerpoCarrito .subtotales span, .comprarAhora .subtotales span")
 	var tipoArray = []
 	var cantidadPeso = []
 	var sumaSubTotal = $(".sumaSubTotal span")
@@ -564,7 +564,7 @@ $(".btnPagar").click(function(){
 	var titulo = $(".valorTitulo")
 	var cantidad = $(".valorCantidad")
 	var valorItem = $(".valorItem")
-	var idProducto = $(".cuerpoCarrito button")
+	var idProducto = $(".cuerpoCarrito button, .comprarAhora button")
 
 	var tituloArray = []
 	var cantidadArray = []
