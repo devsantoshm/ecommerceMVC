@@ -95,6 +95,29 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 			</script>';
 		}
 	}
+} else if (isset($_GET['gratis']) && $_GET['gratis'] === 'true') { //ADQUISICIONES GRATUITAS
+	
+	$producto = $_GET['producto'];
+	$titulo = $_GET['titulo']; //todavia no trabajado
+
+	$datos = array("id_usuario" => $_SESSION["id"],
+					"id_producto" => $producto,
+					"metodo" => "gratis",
+					"email" => $_SESSION["email"],
+					"direccion" => "",
+					"pais" => ""
+			);
+	$respuesta = CarController::newShopping($datos);
+
+	if ($respuesta == "ok") {
+		//enviar al correo de la persona con la información del producto adquirido o almacenar en la bd
+		echo '<script>
+			window.location = "'.$urlFron.'ofertas";
+		</script>';
+	}
+
+} else{
+
 }
 
 ?>

@@ -15,4 +15,12 @@ class CarController
 
 		return $response;
 	}
+
+	static public function verifyProduct($data)
+	{
+		$table = "shopping";
+		$response = CarModel::verifyProduct($table, $data);
+
+		return $response;
+	}
 }

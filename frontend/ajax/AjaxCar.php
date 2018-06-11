@@ -1,6 +1,8 @@
 <?php  
 
 require_once "../extensiones/PaypalController.php";
+require_once "../controllers/CarController.php";
+require_once "../models/CarModel.php";
 
 class AjaxCar
 {
@@ -32,6 +34,20 @@ class AjaxCar
 
 		echo $respuesta;
 	}
+
+	//VERIFICAR QUE NO TENGA EL PRODUCTO ADQUIRIDO
+	public $idUsuario;
+	public $idProducto;
+
+	public function ajaxVerifyProduct()
+	{
+		$datos = array("idUsuario" => $this->idUsuario,
+						"idProducto" => $this->idProducto);
+
+		$respuesta = CarController::verifyProduct($datos);
+
+		echo json_encode($respuesta); // por que me devuelve un array
+	}
 }
 
 if (isset($_POST["divisa"])) {
@@ -46,6 +62,13 @@ if (isset($_POST["divisa"])) {
 	$paypal->valorItemArray = $_POST["valorItemArray"];
 	$paypal->idProductoArray = $_POST["idProductoArray"];
 	$paypal->ajaxSendPaypal();
+}
+
+if (isset($_POST["idProducto"])) {
+	$producto = new AjaxCar();
+	$producto->idUsuario = $_POST["idUsuario"];
+	$producto->idProducto = $_POST["idProducto"];
+	$producto->ajaxVerifyProduct();
 }
 
 ?>

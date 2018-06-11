@@ -300,11 +300,23 @@ $urlFron = Route::urlFront();
 					<?php  
 					if ($infoproducto["precio"] == 0) {
 						echo '<div class="col-md-6 col-xs-12">';
+
+						if (isset($_SESSION["validarSesion"]) && $_SESSION["validarSesion"] == "ok") {
 							if ($infoproducto["tipo"] == "virtual")	
-								echo '<button class="btn btn-default btn-block btn-lg backColor">ACCEDER AHORA</button>';
+								echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoproducto["id"].'" idUsuario="'.$_SESSION["id"].'" tipo="'.$infoproducto["tipo"].'" titulo="'.$infoproducto["titulo"].'">ACCEDER AHORA</button>';
 							else
-								echo '<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button>';
+								echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoproducto["id"].'" idUsuario="'.$_SESSION["id"].'" tipo="'.$infoproducto["tipo"].'" titulo="'.$infoproducto["titulo"].'">SOLICITAR AHORA</button>
+									<br>
+									<div class="col-xs-12 alert alert-info text-left"><strong>¡Atención!</strong>
+										El producto a solicitar es totalmente gratuito y se enviará a la dirección solicitada, sólo se cobrará los cargos de envio.
+									</div>';
+						}else{
+							echo '<a href="#modalIngreso" data-toggle="modal">
+									<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button></a>';
+						}
+
 						echo '</div>';
+
 					} else {
 						if ($infoproducto["oferta"] == 1) {
 							$precio = $infoproducto["precioOferta"];	
