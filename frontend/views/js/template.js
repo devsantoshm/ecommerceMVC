@@ -93,3 +93,7 @@ if(pagActual != "#"){
 		$("#item"+pagActual+" a").removeAttr("href");
 	}
 }
+
+$(".cerrarOfertas").click(function(){
+	$(this).parent().remove();
+})

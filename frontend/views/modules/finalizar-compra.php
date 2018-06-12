@@ -107,17 +107,35 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 					"direccion" => "",
 					"pais" => ""
 			);
+
 	$respuesta = CarController::newShopping($datos);
 
-	if ($respuesta == "ok") {
+	$ordenar = "id";
+	$item = "id";
+	$valor = $producto;
+
+	$productosGratis = ProductController::listProducts($ordenar, $item, $valor);
+
+	foreach ($productosGratis as $key => $value) {
+		
+		$item1 = "ventasGratis";
+		$valor1 = $value["ventasGratis"] + 1;
+		$item2 = "id";
+		$valor2 = $value["id"];
+
+		$actualizarSolicitud = ProductController::updateProduct($item1, $valor1, $item2, $valor2);
+	}
+
+	if ($respuesta == "ok" && $actualizarSolicitud == "ok") {
 		//enviar al correo de la persona con la información del producto adquirido o almacenar en la bd
 		echo '<script>
-			window.location = "'.$urlFron.'ofertas";
+			window.location = "'.$urlFron.'ofertas/aviso";
 		</script>';
 	}
 
 } else{
 
+	echo '<script>window.location = "'.$urlFron.'cancelado"</script>';
 }
 
 ?>
