@@ -93,6 +93,8 @@
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.flexslider.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/sweetalert.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/dscountdown.min.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <body>
 <?php  
 include 'modules/header.php';
@@ -172,6 +174,25 @@ if (isset($_GET["ruta"])) {
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+
+	$(".btnFacebook").click(function(){
+	  	FB.ui({
+	  		method: 'share',
+	  		display: 'popup',
+	  		href: '<?php echo $route.$cabeceras["ruta"]; ?>',
+	  	}, function(response){});
+  	})
+
+	$(".btnGoogle").click(function(){
+		window.open(
+			'https://plus.google.com/share?url=<?php echo $route.$cabeceras["ruta"]; ?>',
+			'',
+			'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=400'
+		);
+
+		return false;
+	})
+
 </script>
 </body>
 </html>
