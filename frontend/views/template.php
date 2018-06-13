@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximun-scale=1.0, user-scalable=no">
-	<meta name="title" content="Tienda Virtual">
+	
 	<?php 
 		session_start(); //Para inicializar variables de sesión en cualquiera de nuestras páginas
 		$urlBack = Route::routeServer(); 
@@ -14,12 +14,63 @@
 		$url = new Route(); 
 		$route = $url->urlFront();
 		//var_dump($route);
+
+		//MARCADO DE CABECERA
+		$rutas = array();
+		if (isset($_GET["ruta"])) {
+			$rutas = explode("/", $_GET["ruta"]);
+			$ruta = $rutas[0];
+		} else {
+			$ruta = "inicio";
+		}
+
+		$cabeceras = TemplateController::getHeaders($ruta);
+
+		if (!$cabeceras["ruta"]) { // si no tengo una ruta definida
+			$ruta = "inicio";
+			$cabeceras = TemplateController::getHeaders($ruta);
+		}
+		
 	?>
-	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua.">
-	<meta name="keyword" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua.">
-	<title>Tienda virtual</title>
+	
+	<meta name="title" content="<?php echo $cabeceras['titulo']; ?>">
+	<meta name="description" content="<?php echo $cabeceras['descripcion']; ?>">
+	<meta name="keyword" content="<?php echo $cabeceras['palabrasClave']; ?>">
+	<title><?php echo $cabeceras['titulo']; ?></title>
+
+	<!--=====================================
+	Marcado de Open Graph FACEBOOK
+	======================================-->
+
+	<meta property="og:title"   content="<?php echo $cabeceras['titulo'];?>">
+	<meta property="og:url" content="<?php echo $route.$cabeceras['ruta'];?>">
+	<meta property="og:description" content="<?php echo $cabeceras['descripcion'];?>">
+	<meta property="og:image"  content="<?php echo $urlBack.$cabeceras['portada'];?>">
+	<meta property="og:type"  content="website">	
+	<meta property="og:site_name" content="Tu logo">
+	<meta property="og:locale" content="es_PE">
+
+	<!--=====================================
+	Marcado para DATOS ESTRUCTURADOS GOOGLE
+	======================================-->
+	
+	<meta itemprop="name" content="<?php echo $cabeceras['titulo'];?>">
+	<meta itemprop="url" content="<?php echo $route.$cabeceras['ruta'];?>">
+	<meta itemprop="description" content="<?php echo $cabeceras['descripcion'];?>">
+	<meta itemprop="image" content="<?php echo $urlBack.$cabeceras['portada'];?>">
+
+	<!--=====================================
+	Marcado de TWITTER
+	======================================-->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="<?php echo $cabeceras['titulo'];?>">
+	<meta name="twitter:url" content="<?php echo $route.$cabeceras['ruta'];?>">
+	<meta name="twitter:description" content="<?php echo $cabeceras['descripcion'];?>">
+	<meta name="twitter:image" content="<?php echo $urlBack.$cabeceras['portada'];?>">
+	<meta name="twitter:site" content="@tu-usuario">
+
+
+
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/flexslider.css">
@@ -78,6 +129,10 @@ if (isset($_GET["ruta"])) {
 		include "modules/infoproduct.php";
 	else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir" || $rutas[0] == "perfil" || $rutas[0] == "carrito-de-compras" || $rutas[0] == "error" || $rutas[0] == "finalizar-compra" || $rutas[0] == "curso" || $rutas[0] == "ofertas")
 		include "modules/".$rutas[0].".php";
+	else if($rutas[0] == "inicio"){
+		include "modules/slide.php";
+		include "modules/featured.php";
+	}
 	else
 		include "modules/error404.php";	
 }else{
