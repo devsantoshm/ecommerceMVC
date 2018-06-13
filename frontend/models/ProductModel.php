@@ -19,11 +19,19 @@ class ProductModel
 
 	static public function showSubCategories($table, $item, $valor)
 	{
-		$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor");
-		$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
-		$stmt->execute();
+		if ($item != null) {
 
-		return $stmt->fetchAll();
+			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor");
+			$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt->fetchAll();
+
+		} else{
+
+			$stmt = Conexion::conectar()->prepare("select * from $table");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}
 	}
 
 	static public function showProducts($table, $ordenar, $item, $valor, $base, $tope, $modo)

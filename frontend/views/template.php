@@ -24,6 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/flexslider.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/sweetalert.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/dscountdown.css">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/template.css">
@@ -33,12 +34,14 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/infoproduct.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/perfil.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/carrito-de-compras.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/ofertas.css">
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.easing.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.scrollUp.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.flexslider.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/sweetalert.min.js"></script>
+	<script src="<?php echo $route; ?>views/js/plugins/dscountdown.min.js"></script>
 <body>
 <?php  
 include 'modules/header.php';

@@ -97,3 +97,32 @@ if(pagActual != "#"){
 $(".cerrarOfertas").click(function(){
 	$(this).parent().remove();
 })
+
+//CONTADOR DE TIEMPO
+/*var finOferta = $(".countdown").attr("finOferta");
+
+$('.countdown').dsCountDown({
+	endDate: new Date(finOferta),
+	theme: 'black', // Set the theme 'white', 'black', 'red', 'flat', 'custom'
+	titleDays: 'Días', // Set the title of days
+	titleHours: 'Horas', // Set the title of hours
+	titleMinutes: 'Minutos', // Set the title of minutes
+	titleSeconds: 'Segundos', // Set the title of seconds
+});*/
+
+var finOferta = $(".countdown");
+var fechaFinOferta = [];
+
+for (var i = 0; i < finOferta.length; i++) {
+
+	fechaFinOferta[i] = $(finOferta[i]).attr("finOferta");
+
+	$(finOferta[i]).dsCountDown({
+		endDate: new Date(fechaFinOferta[i]),
+		theme: 'black', // Set the theme 'white', 'black', 'red', 'flat', 'custom'
+		titleDays: 'Días', // Set the title of days
+		titleHours: 'Horas', // Set the title of hours
+		titleMinutes: 'Minutos', // Set the title of minutes
+		titleSeconds: 'Segundos', // Set the title of seconds
+	});
+}
