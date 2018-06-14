@@ -93,6 +93,7 @@
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.flexslider.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/sweetalert.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/dscountdown.min.js"></script>
+	<script src="<?php echo $route; ?>views/js/plugins/knob.jquery.js"></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <body>
@@ -140,6 +141,7 @@ if (isset($_GET["ruta"])) {
 }else{
 	include "modules/slide.php";
 	include "modules/featured.php";
+	include "modules/visitas.php"; //lo incluye en todas las páginas
 }	
 
 ?>
@@ -154,6 +156,7 @@ if (isset($_GET["ruta"])) {
 <script src="<?php echo $route; ?>views/js/users.js"></script>
 <script src="<?php echo $route; ?>views/js/registroFacebook.js"></script>
 <script src="<?php echo $route; ?>views/js/carrito-de-compras.js"></script>
+<script src="<?php echo $route; ?>views/js/visitas.js"></script>
 <script>
   window.fbAsyncInit = function() {
     FB.init({

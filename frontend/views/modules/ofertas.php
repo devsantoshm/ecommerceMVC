@@ -95,7 +95,7 @@ $urlFron = Route::urlFront();
 								}
 							echo '<center>
 								<div class="countdown" finOferta="'.$value["finOferta"].'"></div>
-								<a href="'.$urlFron.$value["ruta"].'" class="pixelOferta">
+								<a href="'.$urlFron.$value["ruta"].'" class="pixelOferta" titulo="'.$value["categoria"].'">
 									<button class="btn backColor btn-lg text-uppercase">Ir a la Oferta</button>
 								</a>
 							</center>
