@@ -54,6 +54,20 @@ class VisitsController
 			}
 		}
 	}
+
+	static public function showTotalVisits()
+	{
+		$table = "visitscountry";
+		$response = VisitsModel::showTotalVisits($table);
+		return $response;
+	}
+
+	static public function showCountries()
+	{
+		$table = "visitscountry";
+		$response = VisitsModel::showCountries($table);
+		return $response;
+	}
 }
 
 ?>

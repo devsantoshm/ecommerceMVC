@@ -60,6 +60,20 @@ class VisitsModel
 		else
 			return "error";
 	}
+
+	static public function showTotalVisits($table)
+	{
+		$stmt = Conexion::conectar()->prepare("select sum(cantidad) as total from $table");
+		$stmt->execute();
+		return $stmt->fetch();
+	}
+
+	static public function showCountries($table)
+	{
+		$stmt = Conexion::conectar()->prepare("select * from $table order by cantidad desc limit 6");
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
 }
 
 ?>
