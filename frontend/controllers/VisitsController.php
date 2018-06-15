@@ -6,14 +6,53 @@ class VisitsController
 	{
 		$table = "visitspeople";
 		$visita = 1;
+		$respuestaInsertarIp = null;
+		$respuestaActualizarIp = null;
 
 		if ($pais == "") {
 			$pais = "Unknown";
 		}
 
-		$response = VisitsModel::saveIp($table, $ip, $pais, $visita);
+		//BUSCAR IP EXISTENTE
+		$buscarIpExistente = VisitsModel::selectIp($table, $ip);
 
-		return $response;
+		if (!$buscarIpExistente) {
+			//Guardar ip nueva
+			$respuestaInsertarIp = VisitsModel::saveIp($table, $ip, $pais, $visita);
+			
+		} else {
+			//SI LA IP EXISTE Y ES OTRO DIA VOLVERA A Guardar
+			date_default_timezone_set('America/Lima');
+			$fechaActual = date('Y-m-d');
+			$encontroFecha = false;
+	
+			foreach ($buscarIpExistente as $key => $value) {
+				$compararFecha = substr($value["fecha"], 0, 10);
+				if ($fechaActual == $compararFecha) {
+					$encontroFecha = true;
+				}
+			}
+
+			if (!$encontroFecha) {
+				$respuestaActualizarIp = VisitsModel::saveIp($table, $ip, $pais, $visita);
+			}
+		}
+
+		if ($respuestaInsertarIp == "ok" || $respuestaActualizarIp == "ok") {
+			$tableCountry = "visitscountry";
+			//SELECCIONAR PAIS
+			$seleccionarPais = VisitsModel::selectCountry($tableCountry, $pais);
+
+			if (!$seleccionarPais) {
+				//SI NO EXISTE PAIS AGREGAR NUEVO PAIS
+				$cantidad = 1;
+				$insertarPais = VisitsModel::insertCountry($tableCountry, $pais, $cantidad);
+			} else {
+				//SI EXISTE EL PAIS ACTUALIZAR UNA NUEVA VISITA
+				$actualizarCantidad = $seleccionarPais["cantidad"] + 1;
+				$actualizarPais = VisitsModel::updateCountry($tableCountry, $pais, $actualizarCantidad);
+			}
+		}
 	}
 }
 
