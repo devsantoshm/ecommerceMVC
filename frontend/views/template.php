@@ -86,6 +86,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/perfil.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/carrito-de-compras.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/ofertas.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/footer.css">
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/bootstrap.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.easing.js"></script>
@@ -141,8 +142,11 @@ if (isset($_GET["ruta"])) {
 }else{
 	include "modules/slide.php";
 	include "modules/featured.php";
-	include "modules/visitas.php"; //lo incluye en todas las páginas
-}	
+	include "modules/visitas.php"; 
+}
+
+//lo incluye en todas las páginas
+include "modules/footer.php";	
 
 ?>
 
