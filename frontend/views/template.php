@@ -7,9 +7,9 @@
 	<?php 
 		session_start(); //Para inicializar variables de sesión en cualquiera de nuestras páginas
 		$urlBack = Route::routeServer(); 
-		$icon = TemplateController::templateStyle();
+		$template = TemplateController::templateStyle();
 	?>
-	<link rel="icon" href="<?php echo $urlBack . $icon["icono"]; ?>">
+	<link rel="icon" href="<?php echo $urlBack . $template["icono"]; ?>">
 	<?php 
 		$url = new Route(); 
 		$route = $url->urlFront();
@@ -69,8 +69,6 @@
 	<meta name="twitter:image" content="<?php echo $urlBack.$cabeceras['portada'];?>">
 	<meta name="twitter:site" content="@tu-usuario">
 
-
-
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $route; ?>views/css/plugins/flexslider.css">
@@ -97,6 +95,25 @@
 	<script src="<?php echo $route; ?>views/js/plugins/knob.jquery.js"></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
+	<!-- pixel de facebook -->
+	<!-- <script> 	  
+	 	!function(f,b,e,v,n,t,s) 	  
+	 	{if(f.fbq)return;n=f.fbq=function(){n.callMethod? 	  
+	 	n.callMethod.apply(n,arguments):n.queue.push(arguments)}; 	  
+	 	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version=\'2.0\'; 	  
+	 	n.queue=[];t=b.createElement(e);t.async=!0; 	  
+	 	t.src=v;s=b.getElementsByTagName(e)[0]; 	  
+	 	s.parentNode.insertBefore(t,s)}(window, document,'script', 	  
+	 	'https://connect.facebook.net/en_US/fbevents.js'); 	  
+	 	fbq('init', '131737410786111'); 	  
+	 	fbq('track', 'PageView'); 	
+	 </script> 	
+	 <noscript><img height="1" width="1" style="display:none" 	  
+	 	src="https://www.facebook.com/tr?id=149877372404434&ev=PageView&noscript=1"/>
+	 </noscript> --> 
+	 <?php echo $template["pixelFacebook"]; ?>
+	 
+</head>
 <body>
 <?php  
 include 'modules/header.php';
@@ -161,27 +178,10 @@ include "modules/footer.php";
 <script src="<?php echo $route; ?>views/js/registroFacebook.js"></script>
 <script src="<?php echo $route; ?>views/js/carrito-de-compras.js"></script>
 <script src="<?php echo $route; ?>views/js/visitas.js"></script>
+
+<?php echo $template["apiFacebook"]; ?>
+
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '599927650349517',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v2.12'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-
 	$(".btnFacebook").click(function(){
 	  	FB.ui({
 	  		method: 'share',
@@ -201,5 +201,15 @@ include "modules/footer.php";
 	})
 
 </script>
+
+<?php echo $template["googleAnalytics"]; ?>
+<!-- google analytics -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-999999-1"></script>
+<script> 	  
+	window.dataLayer = window.dataLayer || []; 	  
+	function gtag(){dataLayer.push(arguments);} 	  
+	gtag('js', new Date());  	  
+	gtag('config', 'UA-9999999-1');
+</script> -->
 </body>
 </html>

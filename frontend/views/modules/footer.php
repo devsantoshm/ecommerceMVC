@@ -49,7 +49,7 @@
 			<!-- FORMULARIO CONTACTO -->
 			<div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 formContacto">
 				<h4>RESUELVA SU INQUIETUD</h4>
-				<form role="form" method="POST">
+				<form role="form" method="POST" onsubmit="return validarContactenos()">
 					<input type="text" name="nombreContactenos" id="nombreContactenos" class="form-control" placeholder="Escriba su nombre" required>
 					<br>
 					<input type="email" name="emailContactenos" id="emailContactenos" class="form-control" placeholder="Escriba su correo electrónico" required>
@@ -58,6 +58,10 @@
 					<br>
 					<input type="submit" value="Enviar" class="btn btn-default backColor pull-right" id="Enviar">
 				</form>
+				<?php  
+				$contactenos = new UserController();
+				$contactenos->formContact();
+				?>
 			</div>
 		</div>
 	</div>	
