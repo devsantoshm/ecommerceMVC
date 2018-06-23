@@ -15,7 +15,7 @@ class ManagersController
 				$respuesta = ManagersModel::loginManager($table, $item, $valor);
 
 				if ($respuesta["email"] == $_POST["ingEmail"] && $respuesta["password"] == $_POST["ingPassword"]) {
-					$_SESSION["validarSesion"] = "ok";
+					$_SESSION["validarSesionBackend"] = "ok";
 					$_SESSION["id"] = $respuesta["id"];
 					$_SESSION["nombre"] = $respuesta["nombre"];
 					$_SESSION["foto"] = $respuesta["foto"];

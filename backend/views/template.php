@@ -38,7 +38,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <body class="hold-transition skin-blue sidebar-mini login-page">
 
-<?php include('modules/login.php'); ?>
+<?php  
+session_start();
+
+if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"] === "ok") {
+  echo '<div class="wrapper">';
+  include 'modules/header.php';
+  include 'modules/sidebar.php';
+  if (isset($_GET["ruta"])) {
+    if ($_GET["ruta"] == "inicio") {
+      include 'modules/'.$_GET["ruta"].'.php';
+    }
+  }
+  echo '</div>';
+} else {
+  include 'modules/login.php';
+}
+
+?>
 
 <!-- REQUIRED JS SCRIPTS -->
 
