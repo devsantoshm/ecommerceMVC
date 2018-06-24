@@ -50,6 +50,7 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
       include 'modules/'.$_GET["ruta"].'.php';
     }
   }
+  include 'modules/footer.php';
   echo '</div>';
 } else {
   include 'modules/login.php';

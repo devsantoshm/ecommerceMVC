@@ -24,7 +24,7 @@ class ManagersController
 					$_SESSION["perfil"] = $respuesta["perfil"];
 
 					echo '<script>
-							window.location = "index.php?ruta=inicio";
+							window.location = "inicio";
 						</script>';
 				} else {
 					echo '<br>
