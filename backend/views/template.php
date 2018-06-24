@@ -23,6 +23,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="views/dist/css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="views/plugins/iCheck/square/blue.css">
+   <!-- Morris chart -->
+  <link rel="stylesheet" href="views/bower_components/morris.js/morris.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,6 +36,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  
+  <!-- REQUIRED JS SCRIPTS -->
+  <!-- jQuery 3 -->
+  <script src="views/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="views/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="views/dist/js/adminlte.min.js"></script>
+
+  <script src="views/plugins/iCheck/icheck.min.js"></script>
+  <script>
+    $(function () {
+      $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
+      });
+      /*jquery knob*/
+      $('.knob').knob();
+    });
+  </script>
+  <!-- Morris.js charts -->
+  <script src="views/bower_components/raphael/raphael.min.js"></script>
+  <script src="views/bower_components/morris.js/morris.min.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="views/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+  <!-- jvectormap -->
+  <script src="views/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+  <script src="views/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+  <!-- ChartJS -->
+  <script src="views/bower_components/Chart.js/Chart.js"></script>
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini login-page">
@@ -57,26 +91,6 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
 }
 
 ?>
-
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="views/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="views/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="views/dist/js/adminlte.min.js"></script>
-
-<script src="views/plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
 
 </body>
 </html>
