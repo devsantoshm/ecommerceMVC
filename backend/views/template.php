@@ -55,6 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       });
       /*jquery knob*/
       $('.knob').knob();
+      $('.sidebar-menu').tree();
     });
   </script>
   <!-- Morris.js charts -->
@@ -80,13 +81,31 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
   include 'modules/header.php';
   include 'modules/sidebar.php';
   if (isset($_GET["ruta"])) {
-    if ($_GET["ruta"] == "inicio") {
+    if ($_GET["ruta"] == "inicio" ||
+        $_GET["ruta"] == "comercio" ||
+        $_GET["ruta"] == "slide" ||
+        $_GET["ruta"] == "categorias" ||
+        $_GET["ruta"] == "subcategorias" ||
+        $_GET["ruta"] == "productos" ||
+        $_GET["ruta"] == "banner" ||
+        $_GET["ruta"] == "ventas" ||
+        $_GET["ruta"] == "visitas" ||
+        $_GET["ruta"] == "usuarios" ||
+        $_GET["ruta"] == "mensajes" ||
+        $_GET["ruta"] == "perfiles" ||
+        $_GET["ruta"] == "perfil" ||
+        $_GET["ruta"] == "salir") {
+      
       include 'modules/'.$_GET["ruta"].'.php';
+    
     }
   }
+
   include 'modules/footer.php';
   echo '</div>';
+
 } else {
+  // Al no tener la sesion iniciada siempre va a tener login.php
   include 'modules/login.php';
 }
 
