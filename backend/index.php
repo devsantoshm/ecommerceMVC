@@ -25,6 +25,9 @@ require_once "models/ProfilesModel.php";
 require_once "controllers/SalesController.php";
 require_once "models/SalesModel.php";
 
+require_once "controllers/VisitsController.php";
+require_once "models/VisitsModel.php";
+
 require_once "controllers/SlideController.php";
 require_once "models/SlideModel.php";
 

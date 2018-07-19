@@ -69,9 +69,10 @@ class PaypalController
 		//Agregamos las URLs después de realizar el pago, o cuando el pago es cancelado
 		//importante agregar la url principal en la API developers de Paypal
 		$urlFron = Route::urlFronPaypal();
+		$pago = $datos["subtotal"];
 
 		$redirectUrls = new RedirectUrls();
-		$redirectUrls->setReturnUrl("$urlFron/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos."&cantidad=".$cantidadProductos)
+		$redirectUrls->setReturnUrl("$urlFron/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos."&cantidad=".$cantidadProductos."&pago=".$pago)
 		    ->setCancelUrl("$urlFron/carrito-de-compras");
 
 		//Agregamos todas las características del pago

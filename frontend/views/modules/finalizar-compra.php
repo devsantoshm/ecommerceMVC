@@ -26,6 +26,8 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 	$productos = explode("-", $_GET['productos']);
 	$cantidad = explode("-", $_GET['cantidad']);
 
+	$pago = $_GET['pago'];
+
 	//Capturamos el id del pago que arroja paypal
 	$paymentId = $_GET['paymentId'];
 
@@ -64,7 +66,8 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 						"metodo" => "paypal",
 						"email" => $emailComprador,
 						"direccion" => $direccion,
-						"pais" => $pais);
+						"pais" => $pais,
+						"pago" => $pago);
 
 		$respuesta = CarController::newShopping($datos);
 
