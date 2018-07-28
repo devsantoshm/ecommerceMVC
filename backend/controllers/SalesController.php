@@ -9,6 +9,14 @@ class SalesController
 
 		return $response; 
 	}
+
+	public function showSales()
+	{
+		$table = "shopping";
+		$response = SalesModel::showSales($table);
+
+		return $response; 
+	}
 }
 
 ?>
