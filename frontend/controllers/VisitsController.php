@@ -2,7 +2,7 @@
 
 class VisitsController
 {
-	static public function saveIp($ip, $pais)
+	static public function saveIp($ip, $pais, $codigo)
 	{
 		$table = "visitspeople";
 		$visita = 1;
@@ -46,7 +46,7 @@ class VisitsController
 			if (!$seleccionarPais) {
 				//SI NO EXISTE PAIS AGREGAR NUEVO PAIS
 				$cantidad = 1;
-				$insertarPais = VisitsModel::insertCountry($tableCountry, $pais, $cantidad);
+				$insertarPais = VisitsModel::insertCountry($tableCountry, $pais, $codigo, $cantidad);
 			} else {
 				//SI EXISTE EL PAIS ACTUALIZAR UNA NUEVA VISITA
 				$actualizarCantidad = $seleccionarPais["cantidad"] + 1;

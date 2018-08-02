@@ -9,6 +9,14 @@ class VisitsController
 
 		return $response; 
 	}
+
+	static public function showCountries($orden)
+	{
+		$table = "visitscountry";
+		$response = VisitsModel::showCountries($table, $orden);
+
+		return $response; 
+	}
 }
 
 ?>

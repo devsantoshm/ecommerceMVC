@@ -1,12 +1,13 @@
 <?php  
 //$ip = $_SERVER['REMOTE_ADDR'];
-$ip = "159.202.197.216";
+$ip = "115.202.198.216";
 //www.geoplugin.net me permite recuperar datos de una determinada ip
 //para recuperar información desde múltiples fuentes file_get_contents(filename)
 $informacionPais = file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip);
 $datosPais = json_decode($informacionPais);
 $pais = $datosPais->geoplugin_countryName;
-$enviarIp = VisitsController::saveIp($ip, $pais);
+$codigo = $datosPais->geoplugin_countryCode;
+$enviarIp = VisitsController::saveIp($ip, $pais, $codigo);
 
 $totalVisitas = VisitsController::showTotalVisits();
 

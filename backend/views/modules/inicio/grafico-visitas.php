@@ -1,3 +1,10 @@
+<?php  
+
+$paises = VisitsController::showCountries("cantidad");
+$totalVisitas = VisitsController::showVisitsTotal();
+
+?>
+
 <div class="box box-solid bg-light-blue-gradient">
   <div class="box-header">
     <!-- tools box -->
@@ -20,22 +27,14 @@
   <!-- /.box-body-->
   <div class="box-footer no-border">
     <div class="row">
-      <div class="col-md-3 col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
-        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#3999CC">
-        <div class="knob-label">Argentina</div>
-      </div>
-      <div class="col-md-3 col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
-        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#3999CC">
-        <div class="knob-label">Colombia</div>
-      </div>
-      <div class="col-md-3 col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
-        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#3999CC">
-        <div class="knob-label">España</div>
-      </div>
-      <div class="col-md-3 col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
-        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#3999CC">
-        <div class="knob-label">México</div>
-      </div>
+      <?php  
+      for($i = 0; $i < 4; $i++){
+        echo '<div class="col-md-3 col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
+              <input type="text" class="knob" data-readonly="true" value="'.round($paises[$i]["cantidad"]*100/$totalVisitas["total"]).'" data-width="60" data-height="60" data-fgColor="#3999CC">
+              <div class="knob-label">'.$paises[$i]["pais"].'</div>
+            </div>';
+      }
+      ?>
     </div>
     <!-- /.row -->
   </div>
@@ -43,17 +42,15 @@
 <script>
 // jvectormap data
   var visitorsData = {
-    US: 398, // USA
-    SA: 400, // Saudi Arabia
-    CA: 1000, // Canada
-    DE: 500, // Germany
-    FR: 760, // France
-    CN: 300, // China
-    AU: 700, // Australia
-    BR: 600, // Brazil
-    IN: 800, // India
-    GB: 320, // Great Britain
-    RU: 3000 // Russia
+    <?php  
+
+    foreach ($paises as $key => $value) {
+      echo $value["codigo"].' : '.$value["cantidad"].',';
+    }
+
+    echo $value["codigo"].' : '.$value["cantidad"];
+
+    ?>
   };
   // World map by jvectormap
   $('#world-map').vectorMap({
@@ -79,7 +76,7 @@
     },
     onRegionLabelShow: function (e, el, code) {
       if (typeof visitorsData[code] != 'undefined')
-        el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
+        el.html(el.html() + ': ' + visitorsData[code] + ' visitas');
     }
   });
 </script>

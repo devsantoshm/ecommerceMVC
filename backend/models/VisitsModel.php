@@ -11,6 +11,14 @@ class VisitsModel
 		$stmt->execute();
 		return $stmt->fetch();
 	}
+
+	//mostrar paises por la cantidad mas alta de visitantes
+	static public function showCountries($table, $orden)
+	{
+		$stmt = Conexion::conectar()->prepare("select * from $table order by $orden desc");
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
 }
 
 ?>

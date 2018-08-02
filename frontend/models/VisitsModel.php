@@ -35,11 +35,12 @@ class VisitsModel
 		return $stmt->fetch();
 	}
 
-	static public function insertCountry($table, $pais, $cantidad)
+	static public function insertCountry($table, $pais, $codigo, $cantidad)
 	{
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $table(pais, cantidad) VALUES(:pais, :cantidad)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $table(pais, codigo, cantidad) VALUES(:pais, :codigo, :cantidad)");
 
 		$stmt->bindParam(":pais", $pais, PDO::PARAM_STR);
+		$stmt->bindParam(":codigo", $codigo, PDO::PARAM_STR);
 		$stmt->bindParam(":cantidad", $cantidad, PDO::PARAM_STR);
 
 		if($stmt->execute())
