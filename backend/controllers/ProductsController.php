@@ -9,6 +9,14 @@ class ProductsController
 
 		return $response; 
 	}
+
+	static public function showSalesTotal()
+	{
+		$table = "products";
+		$response = ProductsModel::showSalesTotal($table);
+
+		return $response; 
+	}
 }
 
 ?>

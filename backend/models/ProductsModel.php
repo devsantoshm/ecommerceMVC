@@ -12,6 +12,13 @@ class ProductsModel
 		
 		return $stmt->fetchAll();
 	}
+
+	static public function showSalesTotal($table)
+	{
+		$stmt = Conexion::conectar()->prepare("select SUM(ventas) as total from $table");
+		$stmt->execute();
+		return $stmt->fetch();
+	}
 }
 
 ?>
