@@ -1,0 +1,5 @@
+<?php  
+
+$plantilla = CommerceController::selectTemplate();
+
+?>
