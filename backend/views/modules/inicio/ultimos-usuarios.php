@@ -1,3 +1,8 @@
+<?php  
+$usuarios = UsersController::showUsersTotal("fecha");
+$urlFron = Route::urlFron();
+
+?>
 <div class="box box-danger">
   <div class="box-header with-border">
     <h3 class="box-title">Últimos usuarios registrados</h3>
@@ -10,46 +15,38 @@
   <!-- /.box-header -->
   <div class="box-body no-padding">
     <ul class="users-list clearfix">
-      <li>
-        <img src="views/dist/img/user1-128x128.jpg" alt="User Image">
-        <a class="users-list-name" href="#">Alexander Pierce</a>
-        <span class="users-list-date">Today</span>
-      </li>
-      <li>
-        <img src="views/dist/img/user8-128x128.jpg" alt="User Image">
-        <a class="users-list-name" href="#">Norman</a>
-        <span class="users-list-date">Yesterday</span>
-      </li>
-      <li>
-        <img src="views/dist/img/user7-128x128.jpg" alt="User Image">
-        <a class="users-list-name" href="#">Jane</a>
-        <span class="users-list-date">12 Jan</span>
-      </li>
-      <li>
-        <img src="views/dist/img/user6-128x128.jpg" alt="User Image">
-        <a class="users-list-name" href="#">John</a>
-        <span class="users-list-date">12 Jan</span>
-      </li>
-      <li>
-        <img src="views/dist/img/user2-160x160.jpg" alt="User Image">
-        <a class="users-list-name" href="#">Alexander</a>
-        <span class="users-list-date">13 Jan</span>
-      </li>
-      <li>
-        <img src="views/dist/img/user5-128x128.jpg" alt="User Image">
-        <a class="users-list-name" href="#">Sarah</a>
-        <span class="users-list-date">14 Jan</span>
-      </li>
-      <li>
-        <img src="views/dist/img/user4-128x128.jpg" alt="User Image">
-        <a class="users-list-name" href="#">Nora</a>
-        <span class="users-list-date">15 Jan</span>
-      </li>
-      <li>
-        <img src="views/dist/img/user3-128x128.jpg" alt="User Image">
-        <a class="users-list-name" href="#">Nadia</a>
-        <span class="users-list-date">15 Jan</span>
-      </li>
+    <?php
+      if (count($usuarios) > 8) {
+        $totalUsuarios = 8;
+      } else {
+        $totalUsuarios = count($usuarios);
+      }
+
+      for($i = 0; $i < $totalUsuarios; $i++){
+        if ($usuarios[$i]["foto"] != "") {
+          if ($usuarios[$i]["modo"] != "directo") {
+            echo '<li>
+              <img src="'.$usuarios[$i]["foto"].'" alt="User Image" style="width:70%;">
+              <a class="users-list-name" href="#">'.$usuarios[$i]["nombre"].'</a>
+              <span class="users-list-date">'.date('d-m-Y',strtotime($usuarios[$i]["fecha"])).'</span>
+            </li>';
+          } else {
+            echo '<li>
+              <img src="'.$urlFron.$usuarios[$i]["foto"].'" alt="User Image" style="width:70%;">
+              <a class="users-list-name" href="#">'.$usuarios[$i]["nombre"].'</a>
+              <span class="users-list-date">'.date('d-m-Y',strtotime($usuarios[$i]["fecha"])).'</span>
+            </li>';            
+          }
+          
+        } else {
+          echo '<li>
+              <img src="views/img/usuarios/default/anonymous.png" alt="User Image" style="width:70%;">
+              <a class="users-list-name" href="#">'.$usuarios[$i]["nombre"].'</a>
+              <span class="users-list-date">'.date('d-m-Y',strtotime($usuarios[$i]["fecha"])).'</span>
+            </li>';
+        }
+      }
+    ?>
     </ul>
     <!-- /.users-list -->
   </div>
