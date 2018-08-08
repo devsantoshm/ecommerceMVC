@@ -9,6 +9,14 @@ class CommerceController
 
 		return $response; 
 	}
+
+	//ACTUALIZAR LOGO O ICONO
+	static public function updateLogoIcon($item, $valor)
+	{
+		$table = "template";
+		$id = 1;
+		
+	}
 }
 
 ?>

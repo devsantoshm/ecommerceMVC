@@ -69,6 +69,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ChartJS -->
   <script src="views/bower_components/Chart.js/Chart.js"></script>
 
+  <script src="views/plugins/sweetalert2/sweetalert2.all.js"></script>
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
@@ -110,6 +112,6 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
 }
 
 ?>
-
+<script src="views/js/gestorComercio.js"></script>
 </body>
 </html>
