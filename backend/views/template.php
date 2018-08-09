@@ -23,8 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="views/dist/css/skins/skin-blue.min.css">
   <link rel="stylesheet" href="views/plugins/iCheck/square/blue.css">
-   <!-- Morris chart -->
+  <!-- Morris chart -->
   <link rel="stylesheet" href="views/bower_components/morris.js/morris.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="views/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,18 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="views/dist/js/adminlte.min.js"></script>
 
   <script src="views/plugins/iCheck/icheck.min.js"></script>
-  <script>
-    $(function () {
-      $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '20%' // optional
-      });
-      /*jquery knob*/
-      $('.knob').knob();
-      $('.sidebar-menu').tree();
-    });
-  </script>
+
   <!-- Morris.js charts -->
   <script src="views/bower_components/raphael/raphael.min.js"></script>
   <script src="views/bower_components/morris.js/morris.min.js"></script>
@@ -68,8 +59,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="views/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
   <!-- ChartJS -->
   <script src="views/bower_components/Chart.js/Chart.js"></script>
-
+  <!-- SweetAlert 2 https://sweetalert2.github.io/-->
   <script src="views/plugins/sweetalert2/sweetalert2.all.js"></script>
+  <!-- bootstrap color picker https://farbelous.github.io/bootstrap-colorpicker/v2/-->
+  <script src="views/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 
 </head>
 
@@ -112,6 +105,8 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
 }
 
 ?>
+<script src="views/js/plantilla.js"></script>
 <script src="views/js/gestorComercio.js"></script>
+
 </body>
 </html>

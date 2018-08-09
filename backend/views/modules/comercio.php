@@ -18,6 +18,7 @@
         <div class="col-md-6">
         <?php  
         include "comercio/logotipo.php";
+        include "comercio/colores.php";
         ?>
         </div>
         <div class="col-md-6">
