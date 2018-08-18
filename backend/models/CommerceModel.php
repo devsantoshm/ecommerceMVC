@@ -41,7 +41,26 @@ class CommerceModel
 			return "error";
 		}
 
-		//$stmt->close();
+		$stmt->close();
+		$stmt = null;
+	}
+
+	static public function updateScript($table, $id, $datos)
+	{
+		$stmt = Conexion::conectar()->prepare("update $table set apiFacebook = :apiFacebook, pixelFacebook = :pixelFacebook, googleAnalytics = :googleAnalytics where id = :id");
+		$stmt->bindParam(":apiFacebook", $datos["apiFacebook"], PDO::PARAM_STR);
+		$stmt->bindParam(":pixelFacebook", $datos["pixelFacebook"], PDO::PARAM_STR);
+		$stmt->bindParam(":googleAnalytics", $datos["googleAnalytics"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+		
+		if($stmt->execute()){
+			return "ok";
+		}
+		else{ 
+			return "error";
+		}
+
+		$stmt->close();
 		$stmt = null;
 	}
 }

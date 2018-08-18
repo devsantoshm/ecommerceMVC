@@ -274,3 +274,35 @@ $("#guardarRedesSociales").click(function(){
 			}
 		});
 })
+
+$(".cambioScript").change(function(){
+	var apiFacebook = $("#apiFacebook").val()
+	var pixelFacebook = $("#pixelFacebook").val()
+	var googleAnalytics = $("#googleAnalytics").val()
+
+	$("#guardarScript").click(function(){
+		var datos = new FormData()
+		datos.append("apiFacebook", apiFacebook)
+		datos.append("pixelFacebook", pixelFacebook)
+		datos.append("googleAnalytics", googleAnalytics)
+
+		$.ajax({
+			url:"ajax/AjaxCommerce.php",
+			method: "POST",
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(respuesta){
+				if(respuesta == "ok"){
+					swal({
+				      title: "Cambios guardados",
+				      text: "¡La plantilla ha sido actualizada correctamente!",
+				      type: "success",
+				      confirmButtonText: "¡Cerrar!"
+				    });
+				}		
+			}
+		});
+	})
+})

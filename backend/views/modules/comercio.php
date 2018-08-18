@@ -23,7 +23,9 @@
         ?>
         </div>
         <div class="col-md-6">
-          <h1>BLOQUE 2</h1>
+          <?php  
+          include "comercio/codigos.php";
+          ?>
         </div>
       </div>
     </section>

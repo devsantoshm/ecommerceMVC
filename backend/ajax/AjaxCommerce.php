@@ -56,6 +56,21 @@ class AjaxCommerce
 
 		echo $response;
 	}
+
+	public $apiFacebook;
+	public $pixelFacebook;
+	public $googleAnalytics;
+
+	public function ajaxChangeScript()
+	{	
+		$datos = array("apiFacebook" => $this->apiFacebook,
+						"pixelFacebook" => $this->pixelFacebook,
+						"googleAnalytics" => $this->googleAnalytics);
+
+		$response = CommerceController::updateScript($datos);
+
+		echo $response; //convertir un array en un string
+	}
 }
 
 if (isset($_FILES["imagenLogo"])) {
@@ -83,5 +98,13 @@ if (isset($_POST["redesSociales"])) {
 	$redesSociales = new AjaxCommerce();
 	$redesSociales->redesSociales = $_POST["redesSociales"];
 	$redesSociales->ajaxChangeRed();	
+}
+
+if (isset($_POST["apiFacebook"])) {
+	$script = new AjaxCommerce();
+	$script->apiFacebook = $_POST["apiFacebook"];
+	$script->pixelFacebook = $_POST["pixelFacebook"];
+	$script->googleAnalytics = $_POST["googleAnalytics"];
+	$script->ajaxChangeScript();	
 }
 

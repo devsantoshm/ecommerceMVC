@@ -121,6 +121,15 @@ class CommerceController
 
 		return $response; 
 	}
+
+	static public function updateScript($datos)
+	{
+		$table = "template";
+		$id = 1;
+		$response = CommerceModel::updateScript($table, $id, $datos);
+
+		return $response; 
+	}
 }
 
 ?>
