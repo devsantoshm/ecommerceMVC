@@ -30,12 +30,18 @@ a:visited, a:link, a:focus, a:hover, a:active{
 	background: rgba(0,0,0,0);
 }
 
+/*=============================================
+REDES SOCIALES
+=============================================*/
+
 .redSocial{
 	width:30px;
 	height:30px;
 	text-align: center;
-	line-height: 30px;
+	line-height:30px;
 }
+
+/*FACEBOOK*/
 
 .facebookBlanco{
 	color:white;
@@ -48,6 +54,67 @@ a:visited, a:link, a:focus, a:hover, a:active{
 .facebookColor{
 	color:white;
 	background:#46639f;
+}
+
+/*YOUTUBE*/
+
+.youtubeColor{
+	color:white;
+	background:#d6513e;
+}
+
+.youtubeBlanco{
+	color:white;
+}
+
+.youtubeNegro{
+	color:black;
+}
+
+/*TWITTER*/
+
+.twitterColor{
+	color:white;
+	background:#0ab2e6;
+}
+
+.twitterBlanco{
+	color:white;
+}
+
+.twitterNegro{
+	color:black;
+}
+
+/*GOOGLE PLUS*/
+
+.google-plusColor{
+	color:white;
+	background:#d71617;
+}
+
+.google-plusBlanco{
+	color:white;
+}
+
+.google-plusNegro{
+	color:black;
+}
+
+/*INSTAGRAM*/
+
+.instagramColor{
+	color:white;
+	background:linear-gradient(45deg, #fca925, #ee1d5f,  #6350a2);
+
+}
+
+.instagramBlanco{
+	color:white;
+}
+
+.instagramNegro{
+	color:black;
 }
 
 .error404, .verificar{

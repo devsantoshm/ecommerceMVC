@@ -18,6 +18,9 @@ class CommerceController
 
 		$plantilla = CommerceModel::selectTemplate($table);
 
+		//mientras no sea la imagen puedo enviar el valor del json redes socia
+		$valorNuevo = $valor;
+
 		//CAMBIANDO LOGOTIPO O ICONO
 		if (isset($valor["tmp_name"])) {
 			//getimagesize — Obtener el tamaño de una imagen
@@ -108,6 +111,15 @@ class CommerceController
 		$respuesta = CommerceModel::updateLogoIcon($table, $id, $item, $valorNuevo);
 
 		return $respuesta;
+	}
+
+	static public function updateColors($datos)
+	{
+		$table = "template";
+		$id = 1;
+		$response = CommerceModel::updateColors($table, $id, $datos);
+
+		return $response; 
 	}
 }
 

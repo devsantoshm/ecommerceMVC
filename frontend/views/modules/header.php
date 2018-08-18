@@ -53,11 +53,13 @@ if ($cliente->getAccessToken()) {
 					$social = TemplateController::templateStyle();
 					$jsonRedesSociales = json_decode($social["redesSociales"], true); // convierte el string en un array
 					foreach ($jsonRedesSociales as $item) {
-						echo '<li>
+						if ($item["activo"] != 0) {
+							echo '<li>
 								<a href="'.$item["url"].'" target="_blank">
 									<i class="fa '.$item["red"].' redSocial '.$item["estilo"].'" aria-hidden="true"></i>
 								</a>
 							</li>';
+						}
 					}
 					?>
 				</ul>

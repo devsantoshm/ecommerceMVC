@@ -19,10 +19,11 @@
         <?php  
         include "comercio/logotipo.php";
         include "comercio/colores.php";
+        include "comercio/redSocial.php";
         ?>
         </div>
         <div class="col-md-6">
-        
+          <h1>BLOQUE 2</h1>
         </div>
       </div>
     </section>
