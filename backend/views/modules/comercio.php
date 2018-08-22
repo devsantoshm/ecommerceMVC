@@ -25,6 +25,7 @@
         <div class="col-md-6">
           <?php  
           include "comercio/codigos.php";
+          include "comercio/configuracion.php";
           ?>
         </div>
       </div>

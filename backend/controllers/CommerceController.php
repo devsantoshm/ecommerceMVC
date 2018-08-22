@@ -130,6 +130,23 @@ class CommerceController
 
 		return $response; 
 	}
+
+	static public function selectCommerce()
+	{
+		$table = "commerce";
+		$response = CommerceModel::selectCommerce($table);
+
+		return $response; 
+	}
+
+	static public function updateInformation($datos)
+	{
+		$table = "commerce";
+		$id = 1;
+		$response = CommerceModel::updateInformation($table, $id, $datos);
+
+		return $response; 
+	}
 }
 
 ?>

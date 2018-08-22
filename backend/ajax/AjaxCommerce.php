@@ -71,6 +71,34 @@ class AjaxCommerce
 
 		echo $response; //convertir un array en un string
 	}
+
+	public $impuesto;
+	public $envioNacional; 
+	public $envioInternacional;
+	public $tasaMinimaNal; 
+	public $tasaMinimaInt; 
+	public $seleccionarPais; 
+	public $modoPaypal; 
+	public $clienteIdPaypal;
+	public $llaveSecretaPaypal;
+
+	public function ajaxChangeInformation()
+	{	
+		$datos = array("impuesto" => $this->impuesto,
+						"envioNacional" => $this->envioNacional,
+						"envioInternacional" => $this->envioInternacional,
+						"tasaMinimaNal" => $this->tasaMinimaNal,
+						"tasaMinimaInt" => $this->tasaMinimaInt,
+						"seleccionarPais" => $this->seleccionarPais,
+						"modoPaypal" => $this->modoPaypal,
+						"clienteIdPaypal" => $this->clienteIdPaypal,
+						"llaveSecretaPaypal" => $this->llaveSecretaPaypal
+						);
+
+		$response = CommerceController::updateInformation($datos);
+
+		echo $response; //convertir un array en un string
+	}
 }
 
 if (isset($_FILES["imagenLogo"])) {
@@ -106,5 +134,19 @@ if (isset($_POST["apiFacebook"])) {
 	$script->pixelFacebook = $_POST["pixelFacebook"];
 	$script->googleAnalytics = $_POST["googleAnalytics"];
 	$script->ajaxChangeScript();	
+}
+
+if (isset($_POST["impuesto"])) {
+	$information = new AjaxCommerce();
+	$information->impuesto = $_POST["impuesto"];
+	$information->envioNacional = $_POST["envioNacional"];
+	$information->envioInternacional = $_POST["envioInternacional"];
+	$information->tasaMinimaNal = $_POST["tasaMinimaNal"];
+	$information->tasaMinimaInt = $_POST["tasaMinimaInt"];
+	$information->seleccionarPais = $_POST["seleccionarPais"];
+	$information->modoPaypal = $_POST["modoPaypal"];
+	$information->clienteIdPaypal = $_POST["clienteIdPaypal"];
+	$information->llaveSecretaPaypal = $_POST["llaveSecretaPaypal"];
+	$information->ajaxChangeInformation();	
 }
 
