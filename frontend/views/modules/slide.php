@@ -16,14 +16,27 @@
 			<li>
 				<img src="<?php echo $urlBack.$slide["imgFondo"] ?>" alt="">
 				<div class="slideOpciones <?php echo $slide["tipoSlide"] ?>">
-					<img class="imgProducto" src="<?php echo $urlBack.$slide["imgProducto"] ?>" style="top:<?php echo $estiloImgProducto["top"] ?>; right: <?php echo $estiloImgProducto["right"] ?>; width: <?php echo $estiloImgProducto["width"] ?>; left: <?php echo $estiloImgProducto["left"] ?>;">
+					
+					<?php if ($slide["imgProducto"] != "") {
+						
+					echo '<img class="imgProducto" src="'.$urlBack.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'; right:'.$estiloImgProducto["right"].'; width:'.$estiloImgProducto["width"].'; left:'.$estiloImgProducto["left"].';">';
+					} 
+					?>
+
 					<div class="textosSlide" style="top:<?php echo $estiloTextoSlide["top"] ?>; left: <?php echo $estiloTextoSlide["left"] ?>; width: <?php echo $estiloTextoSlide["width"] ?>; right: <?php echo $estiloTextoSlide["right"] ?>;">
 						<h1 style="color: <?php echo $titulo1["color"] ?>"><?php echo $titulo1["texto"] ?></h1>
 						<h2 style="color: <?php echo $titulo2["color"] ?>"><?php echo $titulo2["texto"] ?></h2>
 						<h3 style="color: <?php echo $titulo3["color"] ?>"><?php echo $titulo3["texto"] ?></h3>
-						<a href="<?php echo $slide["url"] ?>">
-							<?php echo $slide["boton"] ?>
-						</a>
+						<?php  
+						if ($slide["boton"] != "") {
+						
+						echo '<a href="'.$slide["url"].'">
+								<button class="btn btn-default backColor text-uppercase">
+								'.$slide["boton"].'<span class="fa fa-chevron-right"></span>
+								</button>	
+							</a>';
+						}
+						?>
 					</div>
 				</div>
 			</li>

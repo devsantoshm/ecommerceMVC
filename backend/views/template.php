@@ -40,6 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <link rel="stylesheet" href="views/css/plantilla.css">
+  <link rel="stylesheet" href="views/css/slide.css">
   
   <!-- REQUIRED JS SCRIPTS -->
   <!-- jQuery 3 -->

@@ -132,7 +132,7 @@ if ($cliente->getAccessToken()) {
 					</p>
 				</div>
 				<div class="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12" id="buscador">
-					<input type="search" name="buscar" class="form-control" placeholder="Buscar...">
+					<input type="search" name="buscar" class="form-control input-lg" placeholder="Buscar...">
 					<span class="input-group-btn">
 						<a href="<?php echo $urlFron ?>buscador/1/recientes">
 							<button class="btn btn-default backColor" type="submit">
@@ -198,19 +198,19 @@ if ($cliente->getAccessToken()) {
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input type="text" name="regUsuario" id="regUsuario" class="form-control" placeholder="Nombre Completo" required>
+						<input type="text" name="regUsuario" id="regUsuario" class="form-control input-lg" placeholder="Nombre Completo" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input type="email" name="regEmail" id="regEmail" class="form-control" placeholder="Correo Electrónico" required>
+						<input type="email" name="regEmail" id="regEmail" class="form-control input-lg" placeholder="Correo Electrónico" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input type="password" name="regPassword" id="regPassword" class="form-control" placeholder="Contraseña" required>
+						<input type="password" name="regPassword" id="regPassword" class="form-control input-lg" placeholder="Contraseña" required>
 					</div>
 				</div>
 				<!-- iubenda condiciones de uso y politicas de privacidad -->
@@ -254,13 +254,13 @@ if ($cliente->getAccessToken()) {
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input type="email" name="ingEmail" id="ingEmail" class="form-control" placeholder="Correo Electrónico" required>
+						<input type="email" name="ingEmail" id="ingEmail" class="form-control input-lg" placeholder="Correo Electrónico" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input type="password" name="ingPassword" id="ingPassword" class="form-control" placeholder="Contraseña" required>
+						<input type="password" name="ingPassword" id="ingPassword" class="form-control input-lg" placeholder="Contraseña" required>
 					</div>
 				</div>
 				<?php  
@@ -290,7 +290,7 @@ if ($cliente->getAccessToken()) {
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input type="email" name="passEmail" id="passEmail" class="form-control" placeholder="Correo Electrónico" required>
+						<input type="email" name="passEmail" id="passEmail" class="form-control input-lg" placeholder="Correo Electrónico" required>
 					</div>
 				</div>
 				<?php  

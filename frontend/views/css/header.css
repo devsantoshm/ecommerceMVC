@@ -24,7 +24,7 @@ header #btnCategorias{
 }
 
 header #btnCategorias p{
-	line-height: 40px;
+	line-height: 46px;
 	margin-bottom: 0px;
 }
 
@@ -37,12 +37,12 @@ header #buscador{
 }
 
 header #buscador input{
-	padding: 19px;
+
 	border-radius: 0;
 }
 
 header #buscador button{
-	padding: 9px;
+	padding: 12px;
 	border: 1px solid silver;
 	border-radius: 0;
 }
@@ -52,13 +52,13 @@ header #carrito{
 }
 
 header #carrito button{
-	padding: 9px 15px;
+	padding: 11px 15px;
 	border: 1px solid silver;
 	border-radius: 0;
 }
 
 header #carrito p{
-	padding: 2px;
+	padding: 4px;
 	padding-left: 60px;
 	border: 1px solid #aaa;
 	font-size: 12px;
@@ -133,9 +133,9 @@ header #categorias hr{
 	border: 1px solid #eee;
 }
 
-.modalFormulario form input[type="text"], .modalFormulario form input[type="email"], .modalFormulario form input[type="password"]{
+/* .modalFormulario form input[type="text"], .modalFormulario form input[type="email"], .modalFormulario form input[type="password"]{
 	padding: 25px;
-}
+} */
 
 .modalFormulario form input[type="submit"]{
 	padding: 15px;
