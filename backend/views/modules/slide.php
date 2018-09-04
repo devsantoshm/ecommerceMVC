@@ -24,7 +24,7 @@ $slides = SlideController::showSlide();
           <ul class="todo-list">
         
         <?php 
-        foreach ($slides as $slide) {
+        foreach ($slides as $key => $slide) {
           //Cuando es TRUE, los object devueltos serán convertidos a array asociativos
           $estiloImgProducto = json_decode($slide["estiloImgProducto"], true);
           $estiloTextoSlide = json_decode($slide["estiloTextoSlide"], true);
@@ -51,7 +51,10 @@ $slides = SlideController::showSlide();
                 echo '</a>
                 </h4>
                 <div class="btn-group pull-right">
-                  <button class="btn btn-primary guardarSlide"><i class="fa fa-floppy-o"></i></button>
+                  <button class="btn btn-primary guardarSlide" 
+                  id="'.$slide["id"].'"
+                  nombreSlide="'.$slide["nombre"].'">
+                  <i class="fa fa-floppy-o"></i></button>
                   <button class="btn btn-danger eliminarSlide"><i class="fa fa-times"></i></button>
                 </div>
               </div>
@@ -61,7 +64,7 @@ $slides = SlideController::showSlide();
                     <div class="box-body">
                       <div class="form-group">
                         <label>Nombre del Slide:</label>
-                        <input type="text" class="form-control nombreSlide" value="'.$slide["nombre"].'">
+                        <input type="text" class="form-control nombreSlide" indice="'.$key.'" value="'.$slide["nombre"].'">
                       </div>
                     </div>
                   </div>

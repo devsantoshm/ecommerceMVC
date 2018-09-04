@@ -29,6 +29,34 @@ class AjaxSlide
 
 		echo $response; //convertir un array en un string
 	}
+
+	public $id;
+	public $orden;
+
+	public function ajaxOrdenSlide()
+	{	
+		$datos = array("id" => $this->id,
+						"orden" => $this->orden
+						);
+
+		$response = SlideController::updateOrderSlide($datos);
+
+		echo $response; //convertir un array en un string
+	}
+
+	public $nombre;
+
+	public function ajaxNameSlide()
+	{	
+		$datos = array("id" => $this->id,
+						"nombre" => $this->nombre
+						);
+
+		$response = SlideController::updateNameSlide($datos);
+
+		echo $response; //convertir un array en un string
+	}
+
 }
 
 if (isset($_POST["crearSlide"])) {
@@ -42,5 +70,21 @@ if (isset($_POST["crearSlide"])) {
 	$crearSlide->boton = $_POST["boton"];
 	$crearSlide->url = $_POST["url"];
 	$crearSlide->ajaxCreateSlide();	
+}
+
+//ACTUALIZAR ORDEN SLIDE
+if (isset($_POST["idSlide"])) {
+	$ordenSlide = new AjaxSlide();
+	$ordenSlide->id = $_POST["idSlide"];
+	$ordenSlide->orden = $_POST["orden"];
+	$ordenSlide->ajaxOrdenSlide();	
+}
+
+//ACTUALIZAR NOMBRE SLIDE
+if (isset($_POST["id"])) {
+	$nombreSlide = new AjaxSlide();
+	$nombreSlide->id = $_POST["id"];
+	$nombreSlide->nombre = $_POST["nombre"];
+	$nombreSlide->ajaxNameSlide();	
 }
 

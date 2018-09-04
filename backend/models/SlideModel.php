@@ -36,6 +36,40 @@ class SlideModel
 		$stmt->close();
 		$stmt = null;
 	}
+
+	static public function updateOrderSlide($table, $datos)
+	{
+		$stmt = Conexion::conectar()->prepare("UPDATE $table SET orden = :orden where id = :id");
+		$stmt->bindParam(":orden", $datos["orden"], PDO::PARAM_INT);
+		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+		
+		if($stmt->execute()){
+			return "ok";
+		}
+		else{ 
+			return "error";
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
+
+	static public function updateNameSlide($table, $datos)
+	{
+		$stmt = Conexion::conectar()->prepare("UPDATE $table SET nombre = :nombre where id = :id");
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_INT);
+		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+		
+		if($stmt->execute()){
+			return "ok";
+		}
+		else{ 
+			return "error";
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
 }
 
 ?>

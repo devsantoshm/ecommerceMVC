@@ -24,6 +24,22 @@ class SlideController{
 
 		return $respuesta;
 	}
+
+	static public function updateOrderSlide($datos)
+	{
+		$tabla = "slide";
+		$respuesta = SlideModel::updateOrderSlide($tabla, $datos);
+
+		return $respuesta;
+	}
+
+	static public function updateNameSlide($datos)
+	{
+		$tabla = "slide";
+		$respuesta = SlideModel::updateNameSlide($tabla, $datos);
+
+		return $respuesta;
+	}
 }
 
 ?>
