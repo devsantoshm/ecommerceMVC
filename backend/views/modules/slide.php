@@ -66,20 +66,28 @@ $slides = SlideController::showSlide();
                         <label>Nombre del Slide:</label>
                         <input type="text" class="form-control nombreSlide" indice="'.$key.'" value="'.$slide["nombre"].'">
                       </div>
+                      <div class="form-group">
+                        <input type="hidden" class="tipoSlide" value="'.$slide["tipoSlide"].'">
+                        <label>Tipo de Slide:</label>
+                        <label class="checkbox-inline selTipoSlide">
+                          <input class="tipoSlideIzq" type="radio" value="slideOpcion1" name="tipoSlide'.$key.'" indice="'.$key.'">
+                          Izquierda
+                        </label>
+                        <label class="checkbox-inline selTipoSlide">
+                          <input class="tipoSlideDer" type="radio" value="slideOpcion2" name="tipoSlide'.$key.'" indice="'.$key.'">
+                          Derecha
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="slide">
                   <img src="'.$slide["imgFondo"].'" alt="">
-                  <div class="slideOpciones '.$slide["tipoSlide"].'">';
-                    
-                    if ($slide["imgProducto"] != "") {
-                      
-                    echo '<img class="imgProducto" src="'.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'; right:'.$estiloImgProducto["right"].'; width:'.$estiloImgProducto["width"].'; left:'.$estiloImgProducto["left"].';">';
-                    } 
-                    
+                  <div class="slideOpciones '.$slide["tipoSlide"].'">
+                       
+                    <img class="imgProducto" src="'.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'; right:'.$estiloImgProducto["right"].'; width:'.$estiloImgProducto["width"].'; left:'.$estiloImgProducto["left"].';">   
 
-                    echo '<div class="textosSlide" style="top:'.$estiloTextoSlide["top"].'; left:'.$estiloTextoSlide["left"].'; width:'.$estiloTextoSlide["width"].'; right:'.$estiloTextoSlide["right"].'">
+                    <div class="textosSlide" style="top:'.$estiloTextoSlide["top"].'; left:'.$estiloTextoSlide["left"].'; width:'.$estiloTextoSlide["width"].'; right:'.$estiloTextoSlide["right"].'">
                       <h1 style="color:'.$titulo1["color"].'">'.$titulo1["texto"].'</h1>
                       <h2 style="color:'.$titulo2["color"].'">'.$titulo2["texto"].'</h2>
                       <h3 style="color:'.$titulo3["color"].'">'.$titulo3["texto"].'</h3>';

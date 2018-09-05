@@ -79,8 +79,13 @@ $('.todo-list').sortable({
     }
 })
 
+//VARIABLES GLOBALES PARA CAMBIOS DEL SLIDE
 //GUARDAR TODOS LOS BOTONES QUE TIENEN LA CLASE GUARDARSLIDE
 var guardarSlide = $(".guardarSlide")
+var tipoSlide = $(".tipoSlide")
+var tipoSlideIzq = $(".tipoSlideIzq")
+var tipoSlideDer = $(".tipoSlideDer")
+var slideOpciones = $(".slideOpciones")
 
 //ACTUALIZAR NOMBRE SLIDE
 $(".nombreSlide").change(function(){
@@ -89,6 +94,40 @@ $(".nombreSlide").change(function(){
 
 	$(guardarSlide[indiceSlide]).attr("nombreSlide", nombre)
 })
+
+//CHECKED PARA EL TIPO DE SLIDE
+for (var i = 0; i < tipoSlide.length; i++) {
+	if($(tipoSlide[i]).val() == "slideOpcion1"){
+		$(tipoSlideIzq[i]).parent().addClass("checked")
+	}else{
+		$(tipoSlideDer[i]).parent().addClass("checked")
+	}
+}
+
+//CAMBIO DE TIPO DE SLIDE
+for (var i = 0; i < tipoSlide.length; i++) {
+	$("input[name='tipoSlide"+i+"']").on("ifChecked", function(){
+		//slideopcion1 o slideiopcion2
+		var tipoSlide = $(this).val()
+		var indice = $(this).attr("indice")
+		var slide = $(".slide")
+
+		$(slideOpciones[indice]).addClass(tipoSlide)
+
+		var anchoSlide = $(slide[indice]).css("width").replace(/px/, " ")
+
+		if (tipoSlide == "slideOpcion1") {
+			//obtengo el ancho del inicio hasta la imagen
+			var posHImagen = $(slideOpciones[indice]).children("img").css("left").replace(/px/, " ")
+			// distancia en porcentajes
+			var nuevaPosHImagen = posHImagen*100/anchoSlide
+		} else {
+			var posHImagen = $(slideOpciones[indice]).children("img").css("right").replace(/px/, " ")
+			var nuevaPosHImagen = posHImagen*100/anchoSlide
+		}
+
+	})
+}
 
 //GUARDAR SLIDE
 $(".guardarSlide").click(function(){
