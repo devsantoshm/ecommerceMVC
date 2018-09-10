@@ -67,7 +67,9 @@ $slides = SlideController::showSlide();
                         <input type="text" class="form-control nombreSlide" indice="'.$key.'" value="'.$slide["nombre"].'">
                       </div>
                       <div class="form-group">
+
                         <input type="hidden" class="tipoSlide" value="'.$slide["tipoSlide"].'">
+
                         <label>Tipo de Slide:</label>
                         <label class="checkbox-inline selTipoSlide">
                           <input class="tipoSlideIzq" type="radio" value="slideOpcion1" name="tipoSlide'.$key.'" indice="'.$key.'">
@@ -83,6 +85,7 @@ $slides = SlideController::showSlide();
                 </div>
                 <div class="slide">
                   <img src="'.$slide["imgFondo"].'" alt="">
+                  
                   <div class="slideOpciones '.$slide["tipoSlide"].'">
                        
                     <img class="imgProducto" src="'.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'; right:'.$estiloImgProducto["right"].'; width:'.$estiloImgProducto["width"].'; left:'.$estiloImgProducto["left"].';">   

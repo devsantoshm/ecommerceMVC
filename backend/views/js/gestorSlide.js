@@ -109,21 +109,32 @@ for (var i = 0; i < tipoSlide.length; i++) {
 	$("input[name='tipoSlide"+i+"']").on("ifChecked", function(){
 		//slideopcion1 o slideiopcion2
 		var tipoSlide = $(this).val()
-		var indice = $(this).attr("indice")
+		var indiceSlide = $(this).attr("indice")
 		var slide = $(".slide")
 
-		$(slideOpciones[indice]).addClass(tipoSlide)
+		$(slideOpciones[indiceSlide]).addClass(tipoSlide)
 
-		var anchoSlide = $(slide[indice]).css("width").replace(/px/, " ")
+		var anchoSlide = $(slide[indiceSlide]).css("width").replace(/px/, " ") //reemplazar el ancho del slide por vacio
 
 		if (tipoSlide == "slideOpcion1") {
 			//obtengo el ancho del inicio hasta la imagen
-			var posHImagen = $(slideOpciones[indice]).children("img").css("left").replace(/px/, " ")
+			var posHImagen = $(slideOpciones[indiceSlide]).children("img").css("left").replace(/px/, " ")
 			// distancia en porcentajes
-			var nuevaPosHImagen = posHImagen*100/anchoSlide
+			var nuevaPosHImagen = posHImagen*100/anchoSlide;
+			$(slideOpciones[indiceSlide]).children("img").css({"left": "", "right": nuevaPosHImagen+"%"})
+
+			var posHTexto = $(slideOpciones[indiceSlide]).children(".textosSlide").css("right").replace(/px/, " ");
+			var nuevaPosHTexto = posHTexto*100/anchoSlide
+			$(slideOpciones[indiceSlide]).children(".textosSlide").css({"left": nuevaPosHTexto+"%", "right": "", "text-align": "left"})
+
 		} else {
-			var posHImagen = $(slideOpciones[indice]).children("img").css("right").replace(/px/, " ")
+			var posHImagen = $(slideOpciones[indiceSlide]).children("img").css("right").replace(/px/, " ")
 			var nuevaPosHImagen = posHImagen*100/anchoSlide
+			$(slideOpciones[indiceSlide]).children("img").css({"left": nuevaPosHImagen+"%", "right": ""})
+
+			var posHTexto = $(slideOpciones[indiceSlide]).children(".textosSlide").css("left").replace(/px/, " ");
+			var nuevaPosHTexto = posHTexto*100/anchoSlide
+			$(slideOpciones[indiceSlide]).children(".textosSlide").css({"left": "", "right": nuevaPosHTexto+"%", "text-align": "right"})
 		}
 
 	})
