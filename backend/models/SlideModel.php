@@ -54,10 +54,13 @@ class SlideModel
 		$stmt = null;
 	}
 
-	static public function updateNameSlide($table, $datos)
+	static public function updateSlide($table, $datos)
 	{
-		$stmt = Conexion::conectar()->prepare("UPDATE $table SET nombre = :nombre where id = :id");
-		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_INT);
+		$stmt = Conexion::conectar()->prepare("UPDATE $table SET nombre = :nombre, tipoSlide = :tipoSlide, estiloImgProducto = :estiloImgProducto, estiloTextoSlide = :estiloTextoSlide where id = :id");
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipoSlide", $datos["tipoSlide"], PDO::PARAM_STR);
+		$stmt->bindParam(":estiloImgProducto", $datos["estiloImgProducto"], PDO::PARAM_STR);
+		$stmt->bindParam(":estiloTextoSlide", $datos["estiloTextoSlide"], PDO::PARAM_STR);
 		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 		
 		if($stmt->execute()){

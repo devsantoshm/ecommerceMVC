@@ -33,10 +33,10 @@ class SlideController{
 		return $respuesta;
 	}
 
-	static public function updateNameSlide($datos)
+	static public function updateSlide($datos)
 	{
 		$tabla = "slide";
-		$respuesta = SlideModel::updateNameSlide($tabla, $datos);
+		$respuesta = SlideModel::updateSlide($tabla, $datos);
 
 		return $respuesta;
 	}

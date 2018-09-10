@@ -6,6 +6,7 @@ class AjaxSlide
 {
 	public $imgFondo;
 	public $tipoSlide;
+	public $estiloImgProducto;
 	public $estiloTextoSlide;
 	public $titulo1;
 	public $titulo2;
@@ -46,13 +47,16 @@ class AjaxSlide
 
 	public $nombre;
 
-	public function ajaxNameSlide()
+	public function ajaxChangeSlide()
 	{	
 		$datos = array("id" => $this->id,
-						"nombre" => $this->nombre
+						"nombre" => $this->nombre,
+						"tipoSlide" => $this->tipoSlide,
+						"estiloImgProducto" => $this->estiloImgProducto,
+						"estiloTextoSlide" => $this->estiloTextoSlide
 						);
 
-		$response = SlideController::updateNameSlide($datos);
+		$response = SlideController::updateSlide($datos);
 
 		echo $response; //convertir un array en un string
 	}
@@ -85,6 +89,9 @@ if (isset($_POST["id"])) {
 	$nombreSlide = new AjaxSlide();
 	$nombreSlide->id = $_POST["id"];
 	$nombreSlide->nombre = $_POST["nombre"];
-	$nombreSlide->ajaxNameSlide();	
+	$nombreSlide->tipoSlide = $_POST["tipoSlide"];
+	$nombreSlide->estiloImgProducto = $_POST["estiloImgProducto"];
+	$nombreSlide->estiloTextoSlide = $_POST["estiloTextoSlide"];
+	$nombreSlide->ajaxChangeSlide();	
 }
 

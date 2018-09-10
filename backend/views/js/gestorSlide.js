@@ -122,20 +122,30 @@ for (var i = 0; i < tipoSlide.length; i++) {
 			// distancia en porcentajes
 			var nuevaPosHImagen = posHImagen*100/anchoSlide;
 			$(slideOpciones[indiceSlide]).children("img").css({"left": "", "right": nuevaPosHImagen+"%"})
+			$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", "")
+			$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", nuevaPosHImagen)
 
 			var posHTexto = $(slideOpciones[indiceSlide]).children(".textosSlide").css("right").replace(/px/, " ");
 			var nuevaPosHTexto = posHTexto*100/anchoSlide
 			$(slideOpciones[indiceSlide]).children(".textosSlide").css({"left": nuevaPosHTexto+"%", "right": "", "text-align": "left"})
+			$(guardarSlide[indiceSlide]).attr("estiloTextoSlideRight", "")
+			$(guardarSlide[indiceSlide]).attr("estiloTextoSlideLeft", nuevaPosHTexto)
 
 		} else {
 			var posHImagen = $(slideOpciones[indiceSlide]).children("img").css("right").replace(/px/, " ")
 			var nuevaPosHImagen = posHImagen*100/anchoSlide
 			$(slideOpciones[indiceSlide]).children("img").css({"left": nuevaPosHImagen+"%", "right": ""})
+			$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", "")
+			$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", nuevaPosHImagen)
 
 			var posHTexto = $(slideOpciones[indiceSlide]).children(".textosSlide").css("left").replace(/px/, " ");
 			var nuevaPosHTexto = posHTexto*100/anchoSlide
 			$(slideOpciones[indiceSlide]).children(".textosSlide").css({"left": "", "right": nuevaPosHTexto+"%", "text-align": "right"})
+			$(guardarSlide[indiceSlide]).attr("estiloTextoSlideLeft", "")
+			$(guardarSlide[indiceSlide]).attr("estiloTextoSlideRight", nuevaPosHTexto)
 		}
+
+		$(guardarSlide[indiceSlide]).attr("tipoSlide", tipoSlide)
 
 	})
 }
@@ -144,10 +154,30 @@ for (var i = 0; i < tipoSlide.length; i++) {
 $(".guardarSlide").click(function(){
 	var id = $(this).attr("id")
 	var nombre = $(this).attr("nombreSlide")
+	var tipoSlide = $(this).attr("tipoSlide")
+	var estiloImgProductoTop = $(this).attr("estiloImgProductoTop")
+	var estiloImgProductoRight = $(this).attr("estiloImgProductoRight")
+	var estiloImgProductoLeft = $(this).attr("estiloImgProductoLeft")
+	var estiloImgProductoWidth = $(this).attr("estiloImgProductoWidth")
+	var estiloImgProducto = {"top": estiloImgProductoTop,
+							"right": estiloImgProductoRight,
+							"left": estiloImgProductoLeft,
+							"width": estiloImgProductoWidth}
+	var estiloTextoSlideTop = $(this).attr("estiloTextoSlideTop")
+	var estiloTextoSlideRight = $(this).attr("estiloTextoSlideRight")
+	var estiloTextoSlideLeft = $(this).attr("estiloTextoSlideLeft")
+	var estiloTextoSlideWidth = $(this).attr("estiloTextoSlideWidth")
+	var estiloTextoSlide = {"top": estiloTextoSlideTop,
+							"right": estiloTextoSlideRight,
+							"left": estiloTextoSlideLeft,
+							"width": estiloTextoSlideWidth}
 
 	var datos = new FormData()
 	datos.append("id", id)
 	datos.append("nombre", nombre)
+	datos.append("tipoSlide", tipoSlide)
+	datos.append("estiloImgProducto", JSON.stringify(estiloImgProducto))
+	datos.append("estiloTextoSlide", JSON.stringify(estiloTextoSlide))
 
 	$.ajax({
 		url: "ajax/AjaxSlide.php",

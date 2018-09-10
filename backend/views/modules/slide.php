@@ -51,9 +51,20 @@ $slides = SlideController::showSlide();
                 echo '</a>
                 </h4>
                 <div class="btn-group pull-right">
+
                   <button class="btn btn-primary guardarSlide" 
                   id="'.$slide["id"].'"
-                  nombreSlide="'.$slide["nombre"].'">
+                  nombreSlide="'.$slide["nombre"].'"
+                  tipoSlide="'.$slide["tipoSlide"].'"
+                  estiloImgProductoTop="'.$estiloImgProducto["top"].'"
+                  estiloImgProductoRight="'.$estiloImgProducto["right"].'"
+                  estiloImgProductoLeft="'.$estiloImgProducto["left"].'"
+                  estiloImgProductoWidth="'.$estiloImgProducto["width"].'"
+                  estiloTextoSlideTop="'.$estiloTextoSlide["top"].'"
+                  estiloTextoSlideRight="'.$estiloTextoSlide["right"].'"
+                  estiloTextoSlideLeft="'.$estiloTextoSlide["left"].'"
+                  estiloTextoSlideWidth="'.$estiloTextoSlide["width"].'">
+
                   <i class="fa fa-floppy-o"></i></button>
                   <button class="btn btn-danger eliminarSlide"><i class="fa fa-times"></i></button>
                 </div>
@@ -85,12 +96,12 @@ $slides = SlideController::showSlide();
                 </div>
                 <div class="slide">
                   <img src="'.$slide["imgFondo"].'" alt="">
-                  
+
                   <div class="slideOpciones '.$slide["tipoSlide"].'">
                        
-                    <img class="imgProducto" src="'.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'; right:'.$estiloImgProducto["right"].'; width:'.$estiloImgProducto["width"].'; left:'.$estiloImgProducto["left"].';">   
+                    <img class="imgProducto" src="'.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'%; right:'.$estiloImgProducto["right"].'%; width:'.$estiloImgProducto["width"].'%; left:'.$estiloImgProducto["left"].'%;">   
 
-                    <div class="textosSlide" style="top:'.$estiloTextoSlide["top"].'; left:'.$estiloTextoSlide["left"].'; width:'.$estiloTextoSlide["width"].'; right:'.$estiloTextoSlide["right"].'">
+                    <div class="textosSlide" style="top:'.$estiloTextoSlide["top"].'%; left:'.$estiloTextoSlide["left"].'%; width:'.$estiloTextoSlide["width"].'%; right:'.$estiloTextoSlide["right"].'%">
                       <h1 style="color:'.$titulo1["color"].'">'.$titulo1["texto"].'</h1>
                       <h2 style="color:'.$titulo2["color"].'">'.$titulo2["texto"].'</h2>
                       <h3 style="color:'.$titulo3["color"].'">'.$titulo3["texto"].'</h3>';

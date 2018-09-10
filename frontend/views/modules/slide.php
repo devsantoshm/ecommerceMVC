@@ -19,11 +19,12 @@
 					
 					<?php if ($slide["imgProducto"] != "") {
 						
-					echo '<img class="imgProducto" src="'.$urlBack.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'; right:'.$estiloImgProducto["right"].'; width:'.$estiloImgProducto["width"].'; left:'.$estiloImgProducto["left"].';">';
+					echo '<img class="imgProducto" src="'.$urlBack.$slide["imgProducto"].'" style="top:'.$estiloImgProducto["top"].'%; right:'.$estiloImgProducto["right"].'%; width:'.$estiloImgProducto["width"].'%; left:'.$estiloImgProducto["left"].'%;">';
 					} 
 					?>
 
-					<div class="textosSlide" style="top:<?php echo $estiloTextoSlide["top"] ?>; left: <?php echo $estiloTextoSlide["left"] ?>; width: <?php echo $estiloTextoSlide["width"] ?>; right: <?php echo $estiloTextoSlide["right"] ?>;">
+					<div class="textosSlide" style="top:<?php echo $estiloTextoSlide["top"].'%' ?>; left: <?php echo $estiloTextoSlide["left"].'%' ?>; width: <?php echo $estiloTextoSlide["width"].'%' ?>; right: <?php echo $estiloTextoSlide["right"].'%' ?>;">
+
 						<h1 style="color: <?php echo $titulo1["color"] ?>"><?php echo $titulo1["texto"] ?></h1>
 						<h2 style="color: <?php echo $titulo2["color"] ?>"><?php echo $titulo2["texto"] ?></h2>
 						<h3 style="color: <?php echo $titulo3["color"] ?>"><?php echo $titulo3["texto"] ?></h3>
