@@ -54,6 +54,7 @@ $slides = SlideController::showSlide();
 
                   <button class="btn btn-primary guardarSlide" 
                   id="'.$slide["id"].'"
+                  indice="'.$key.'"
                   nombreSlide="'.$slide["nombre"].'"
                   tipoSlide="'.$slide["tipoSlide"].'"
                   estiloImgProductoTop="'.$estiloImgProducto["top"].'"
@@ -63,7 +64,9 @@ $slides = SlideController::showSlide();
                   estiloTextoSlideTop="'.$estiloTextoSlide["top"].'"
                   estiloTextoSlideRight="'.$estiloTextoSlide["right"].'"
                   estiloTextoSlideLeft="'.$estiloTextoSlide["left"].'"
-                  estiloTextoSlideWidth="'.$estiloTextoSlide["width"].'">
+                  estiloTextoSlideWidth="'.$estiloTextoSlide["width"].'"
+                  imgFondo="'.$slide["imgFondo"].'"
+                  rutaImgFondo="'.$slide["imgFondo"].'">
 
                   <i class="fa fa-floppy-o"></i></button>
                   <button class="btn btn-danger eliminarSlide"><i class="fa fa-times"></i></button>
@@ -91,11 +94,21 @@ $slides = SlideController::showSlide();
                           Derecha
                         </label>
                       </div>
+                      <div class="form-group">
+                        <label>Cambiar Imagen Fondo:</label>
+                        <br>
+                        <p class="help-block">
+                         <img src="'.$slide["imgFondo"].'" class="img-thumbnail previsualizarFondo" width="200px">
+                        </p>
+                        <input type="file" class="subirFondo" indice="'.$key.'">
+                        <p class="help-block">Tamaño recomendado 1600px * 520px</p>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="slide">
-                  <img src="'.$slide["imgFondo"].'" alt="">
+
+                  <img class="cambiarFondo" src="'.$slide["imgFondo"].'" alt="">
 
                   <div class="slideOpciones '.$slide["tipoSlide"].'">
                        

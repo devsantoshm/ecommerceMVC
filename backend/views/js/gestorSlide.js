@@ -153,6 +153,7 @@ for (var i = 0; i < tipoSlide.length; i++) {
 //GUARDAR SLIDE
 $(".guardarSlide").click(function(){
 	var id = $(this).attr("id")
+	var indiceSlide = $(this).attr("indice")
 	var nombre = $(this).attr("nombreSlide")
 	var tipoSlide = $(this).attr("tipoSlide")
 	var estiloImgProductoTop = $(this).attr("estiloImgProductoTop")
@@ -172,12 +173,32 @@ $(".guardarSlide").click(function(){
 							"left": estiloTextoSlideLeft,
 							"width": estiloTextoSlideWidth}
 
+	// CAPTURAMOS EL CAMBIO DE FONDO
+	var subirFondo = null
+
+	var imgFondo = $(this).attr("imgFondo")
+	// si imgfondo es vacio es por que estoy subiendo una nueva imagen para el fondo
+	if (imgFondo == "") {
+		subirFondo = $(".subirFondo")
+		// tomo la ruta antigua del archivo imagen a borrar
+		imgFondo = $(this).attr("rutaImgFondo")
+	}
+
 	var datos = new FormData()
 	datos.append("id", id)
 	datos.append("nombre", nombre)
 	datos.append("tipoSlide", tipoSlide)
 	datos.append("estiloImgProducto", JSON.stringify(estiloImgProducto))
 	datos.append("estiloTextoSlide", JSON.stringify(estiloTextoSlide))
+
+	//ENVIAMOS EL CAMBIO DE FONDO
+	datos.append("imgFondo", imgFondo)
+
+	if (subirFondo != null) {
+		datos.append("subirFondo", subirFondo[indiceSlide].files[0]) // enviando solamente el archivo imagen
+	}else{
+		datos.append("subirFondo", subirFondo)
+	}
 
 	$.ajax({
 		url: "ajax/AjaxSlide.php",
@@ -202,4 +223,48 @@ $(".guardarSlide").click(function(){
 			}
 		}
 	})	
+})
+
+var previsualizarFondo = $(".previsualizarFondo")
+
+//SUBIR IMAGEN FONDO SLIDE
+$(".subirFondo").change(function(){
+	var imagenFondo = this.files[0]
+	var indiceSlide = $(this).attr("indice")
+
+	if(imagenFondo["type"] != "image/jpeg" && imagenFondo["type"] != "image/png"){
+
+		$(".subirFondo").val("");
+
+		 swal({
+	      title: "Error al subir la imagen",
+	      text: "¡La imagen debe estar en formato JPG o PNG!",
+	      type: "error",
+	      confirmButtonText: "¡Cerrar!"
+	    });
+
+	}else if(imagenFondo["size"] > 2000000){
+
+		$(".subirFondo").val("");
+
+		 swal({
+	      title: "Error al subir la imagen",
+	      text: "¡La imagen no debe pesar más de 2MB!",
+	      type: "error",
+	      confirmButtonText: "¡Cerrar!"
+	    });
+
+	}else{
+		var datosImagen = new FileReader
+		datosImagen.readAsDataURL(imagenFondo)
+
+		$(datosImagen).on("load", function(event){
+			var rutaImagen = event.target.result
+			$(previsualizarFondo[indiceSlide]).attr("src", rutaImagen)
+			$(slideOpciones[indiceSlide]).parent().children('.cambiarFondo').attr("src", rutaImagen)
+			//limpiando el atributo imgFondo
+			$(guardarSlide[indiceSlide]).attr("imgFondo", "")
+		})
+	}
+
 })

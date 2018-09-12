@@ -46,6 +46,8 @@ class AjaxSlide
 	}
 
 	public $nombre;
+	//public $imgFondo; // trae la ruta de la imagen antigua
+	public $subirFondo; // trae archivo de la imagen nueva
 
 	public function ajaxChangeSlide()
 	{	
@@ -53,7 +55,9 @@ class AjaxSlide
 						"nombre" => $this->nombre,
 						"tipoSlide" => $this->tipoSlide,
 						"estiloImgProducto" => $this->estiloImgProducto,
-						"estiloTextoSlide" => $this->estiloTextoSlide
+						"estiloTextoSlide" => $this->estiloTextoSlide,
+						"imgFondo" => $this->imgFondo,
+						"subirFondo" => $this->subirFondo
 						);
 
 		$response = SlideController::updateSlide($datos);
@@ -86,12 +90,20 @@ if (isset($_POST["idSlide"])) {
 
 //ACTUALIZAR NOMBRE SLIDE
 if (isset($_POST["id"])) {
-	$nombreSlide = new AjaxSlide();
-	$nombreSlide->id = $_POST["id"];
-	$nombreSlide->nombre = $_POST["nombre"];
-	$nombreSlide->tipoSlide = $_POST["tipoSlide"];
-	$nombreSlide->estiloImgProducto = $_POST["estiloImgProducto"];
-	$nombreSlide->estiloTextoSlide = $_POST["estiloTextoSlide"];
-	$nombreSlide->ajaxChangeSlide();	
+	$slide = new AjaxSlide();
+	$slide->id = $_POST["id"];
+	$slide->nombre = $_POST["nombre"];
+	$slide->tipoSlide = $_POST["tipoSlide"];
+	$slide->estiloImgProducto = $_POST["estiloImgProducto"];
+	$slide->estiloTextoSlide = $_POST["estiloTextoSlide"];
+	$slide->imgFondo = $_POST["imgFondo"];
+	if (isset($_FILES["subirFondo"])) {
+		$slide->subirFondo = $_FILES["subirFondo"];
+	} else {
+		// si solo estoy cambiando el nombre del slide y no el fondo envio subitfondo igual a nulo
+		$slide->subirFondo = null;
+	}
+	
+	$slide->ajaxChangeSlide();	
 }
 
