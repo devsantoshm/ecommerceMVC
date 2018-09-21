@@ -66,7 +66,15 @@ $slides = SlideController::showSlide();
                   estiloTextoSlideLeft="'.$estiloTextoSlide["left"].'"
                   estiloTextoSlideWidth="'.$estiloTextoSlide["width"].'"
                   imgFondo="'.$slide["imgFondo"].'"
-                  rutaImgFondo="'.$slide["imgFondo"].'">
+                  rutaImgFondo="'.$slide["imgFondo"].'"
+                  imgProducto="'.$slide["imgProducto"].'"
+                  rutaImgProducto="'.$slide["imgProducto"].'"
+                  titulo1Texto="'.$titulo1["texto"].'"
+                  titulo1Color="'.$titulo1["color"].'"
+                  titulo2Texto="'.$titulo2["texto"].'"
+                  titulo2Color="'.$titulo2["color"].'"
+                  titulo3Texto="'.$titulo3["texto"].'"
+                  titulo3Color="'.$titulo3["color"].'">
 
                   <i class="fa fa-floppy-o"></i></button>
                   <button class="btn btn-danger eliminarSlide"><i class="fa fa-times"></i></button>
@@ -102,6 +110,49 @@ $slides = SlideController::showSlide();
                         </p>
                         <input type="file" class="subirFondo" indice="'.$key.'">
                         <p class="help-block">Tamaño recomendado 1600px * 520px</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-xs-12">
+                    <div class="box-body">
+            
+                      <div class="form-group">
+                        <label>Cambiar Imagen Producto:</label>
+                        <br>
+                        <p class="help-block">
+                         <img src="'.$slide["imgProducto"].'" class="img-thumbnail previsualizarProducto" width="200px">
+                        </p>
+                        <input type="file" class="subirImgProducto" indice="'.$key.'">
+                        <p class="help-block">Tamaño recomendado 600px * 600px</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-xs-12">
+                    <div class="box-body">
+            
+                      <div class="form-group">
+                        <label>Título 1:</label>
+                        <input type="text" class="form-control cambioTituloTexto1" indice="'.$key.'" value="'.$titulo1["texto"].'">
+                        <div class="input-group my-colorpicker">
+                          <input type="text" class="form-control cambioColorTexto1" indice="'.$key.'" value="'.$titulo1["color"].'">
+                          <div class="input-group-addon"><i></i></div>
+                        </div>   
+                      </div>
+                      <div class="form-group">
+                        <label>Título 2:</label>
+                        <input type="text" class="form-control cambioTituloTexto2" indice="'.$key.'" value="'.$titulo2["texto"].'">
+                        <div class="input-group my-colorpicker">
+                          <input type="text" class="form-control cambioColorTexto2" indice="'.$key.'" value="'.$titulo2["color"].'">
+                          <div class="input-group-addon"><i></i></div>
+                        </div>   
+                      </div>
+                      <div class="form-group">
+                        <label>Título 3:</label>
+                        <input type="text" class="form-control cambioTituloTexto3" indice="'.$key.'" value="'.$titulo3["texto"].'">
+                        <div class="input-group my-colorpicker">
+                          <input type="text" class="form-control cambioColorTexto3" indice="'.$key.'" value="'.$titulo3["color"].'">
+                          <div class="input-group-addon"><i></i></div>
+                        </div>   
                       </div>
                     </div>
                   </div>

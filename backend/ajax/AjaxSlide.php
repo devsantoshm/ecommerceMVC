@@ -8,6 +8,8 @@ class AjaxSlide
 	public $tipoSlide;
 	public $estiloImgProducto;
 	public $estiloTextoSlide;
+	public $imgProducto;
+	public $subirImgProducto;
 	public $titulo1;
 	public $titulo2;
 	public $titulo3;
@@ -57,7 +59,12 @@ class AjaxSlide
 						"estiloImgProducto" => $this->estiloImgProducto,
 						"estiloTextoSlide" => $this->estiloTextoSlide,
 						"imgFondo" => $this->imgFondo,
-						"subirFondo" => $this->subirFondo
+						"subirFondo" => $this->subirFondo,
+						"imgProducto" => $this->imgProducto,
+						"subirImgProducto" => $this->subirImgProducto,
+						"titulo1" => $this->titulo1,
+						"titulo2" => $this->titulo2,
+						"titulo3" => $this->titulo3
 						);
 
 		$response = SlideController::updateSlide($datos);
@@ -96,14 +103,29 @@ if (isset($_POST["id"])) {
 	$slide->tipoSlide = $_POST["tipoSlide"];
 	$slide->estiloImgProducto = $_POST["estiloImgProducto"];
 	$slide->estiloTextoSlide = $_POST["estiloTextoSlide"];
+	
 	$slide->imgFondo = $_POST["imgFondo"];
+	
 	if (isset($_FILES["subirFondo"])) {
 		$slide->subirFondo = $_FILES["subirFondo"];
 	} else {
 		// si solo estoy cambiando el nombre del slide y no el fondo envio subitfondo igual a nulo
 		$slide->subirFondo = null;
 	}
+
+	//CAMBIAR IMAGEN PRODUCTO
+	$slide->imgProducto = $_POST["imgProducto"];
 	
+	if (isset($_FILES["subirImgProducto"])) {
+		$slide->subirImgProducto = $_FILES["subirImgProducto"];
+	} else {
+		// si solo estoy cambiando el nombre del slide y no el fondo envio subitfondo igual a nulo
+		$slide->subirImgProducto = null;
+	}
+	
+	$slide->titulo1 = $_POST["titulo1"];
+	$slide->titulo2 = $_POST["titulo2"];
+	$slide->titulo3 = $_POST["titulo3"];
 	$slide->ajaxChangeSlide();	
 }
 

@@ -37,6 +37,7 @@ class SlideController{
 	{
 		$tabla = "slide";
 		$ruta1 = null;
+		$ruta2 = null;
 
 		//SI HAY CAMBIO DE FONDO
 		if ($datos["subirFondo"] != null) {
@@ -66,8 +67,8 @@ class SlideController{
 			}
 
 			if ($datos["subirFondo"]["type"] == "image/png") {
-				$ruta1 = $directorio."/fondo.jpg";
-				$origen = imagecreatefromjpeg($datos["subirFondo"]["tmp_name"]);
+				$ruta1 = $directorio."/fondo.png";
+				$origen = imagecreatefrompng($datos["subirFondo"]["tmp_name"]);
 				imagealphablending($destino, FALSE);
 				imagesavealpha($destino, TRUE);
 				imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
@@ -80,7 +81,45 @@ class SlideController{
 			$rutaFondo = $datos["imgFondo"]; // actualizo con la mimsa ruta vieja de la imagen
 		}
 
-		$respuesta = SlideModel::updateSlide($tabla, $rutaFondo, $datos);
+		//SI HAY CAMBIO DE IMAGEN DE PRODUCTO
+		if ($datos["subirImgProducto"] != null) {
+
+			//CREAMOS EL DIRECTORIO SI NO EXISTE
+			$directorio = "../views/img/slide/slide".$datos["id"];
+			if (!file_exists($directorio)) {
+				mkdir($directorio, 0755);
+			}
+
+			//CAPTURAMOS EL ANCHO Y ALTO DEL FONDO DEL SLIDE
+			list($ancho, $alto) = getimagesize($datos["subirImgProducto"]["tmp_name"]);
+			$nuevoAncho = 600;
+			$nuevoAlto = 600;
+
+			$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+			if ($datos["subirImgProducto"]["type"] == "image/jpeg") {
+				$ruta2 = $directorio."/producto.jpg";
+				$origen = imagecreatefromjpeg($datos["subirImgProducto"]["tmp_name"]);
+				imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+				imagejpeg($destino, $ruta2);
+			}
+
+			if ($datos["subirImgProducto"]["type"] == "image/png") {
+				$ruta2 = $directorio."/producto.png";
+				$origen = imagecreatefrompng($datos["subirImgProducto"]["tmp_name"]);
+				imagealphablending($destino, FALSE);
+				imagesavealpha($destino, TRUE);
+				imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+				imagepng($destino, $ruta2);
+			}
+
+			$rutaProducto = substr($ruta2, 3);//quitamos los ../
+
+		}else{
+			$rutaProducto = $datos["imgProducto"]; // actualizo con la mimsa ruta vieja de la imagen
+		}
+
+		$respuesta = SlideModel::updateSlide($tabla, $rutaFondo, $rutaProducto, $datos);
 
 		return $respuesta;
 	}
