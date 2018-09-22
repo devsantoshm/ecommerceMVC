@@ -125,6 +125,61 @@ $slides = SlideController::showSlide();
                         <input type="file" class="subirImgProducto" indice="'.$key.'">
                         <p class="help-block">Tamaño recomendado 600px * 600px</p>
                       </div>
+
+                      <div class="form-group">
+                        <label>Posición VERTICAL de la imagen del producto: </label>
+                        <input type="text" indice="'.$key.'" value="" class="slider form-control posVertical" 
+                          data-slider-min="0" 
+                          data-slider-max="50"
+                          data-slider-step="5"
+                          data-slider-value="'.$estiloImgProducto["top"].'" 
+                          data-slider-orientation="horizontal"
+                          data-slider-selection="before" 
+                          data-slider-tooltip="show" 
+                          data-slider-id="red">
+
+                        <label>Posición HORIZONTAL de la imagen del producto: </label>';
+
+                        if($slide["tipoSlide"] == "slideOpcion1"){
+
+                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontal" 
+                            tipoSlide = "'.$slide["tipoSlide"].'"
+                            data-slider-min="0" 
+                            data-slider-max="50"
+                            data-slider-step="5"
+                            data-slider-value="'.$estiloImgProducto["right"].'" 
+                            data-slider-orientation="horizontal"
+                            data-slider-selection="before" 
+                            data-slider-tooltip="show" 
+                            data-slider-id="blue">';
+
+                        }else{
+
+                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontal" 
+                          tipoSlide = "'.$slide["tipoSlide"].'"
+                          data-slider-min="0" 
+                          data-slider-max="50"
+                          data-slider-step="5"
+                          data-slider-value="'.$estiloImgProducto["left"].'" 
+                          data-slider-orientation="horizontal"
+                          data-slider-selection="before" 
+                          data-slider-tooltip="show" 
+                          data-slider-id="blue">';
+
+                        }
+
+                      echo '<label>ANCHO de la imagen del producto: </label>
+                        <input type="text" indice="'.$key.'" value="" class="slider form-control anchoImagen"
+                            data-slider-min="0" 
+                            data-slider-max="50"
+                            data-slider-step="5"
+                            data-slider-value="'.$estiloImgProducto["width"].'" 
+                            data-slider-orientation="horizontal"
+                            data-slider-selection="before" 
+                            data-slider-tooltip="show" 
+                            data-slider-id="green">
+                      </div>
+
                     </div>
                   </div>
                   <div class="col-md-4 col-xs-12">

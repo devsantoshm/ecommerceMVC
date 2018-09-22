@@ -27,6 +27,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="views/bower_components/morris.js/morris.css">
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="views/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+  <!-- Bootstrap Slider -->
+  <link rel="stylesheet" href="views/plugins/bootstrap-slider/slider.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,6 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="views/plugins/sweetalert2/sweetalert2.all.js"></script>
   <!-- bootstrap color picker https://farbelous.github.io/bootstrap-colorpicker/v2/-->
   <script src="views/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+  <script src="views/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 
 </head>
 

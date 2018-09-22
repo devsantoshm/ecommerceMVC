@@ -111,6 +111,9 @@ for (var i = 0; i < tipoSlide.length; i++) {
 		var tipoSlide = $(this).val()
 		var indiceSlide = $(this).attr("indice")
 		var slide = $(".slide")
+		var posHorizontal = $(".posHorizontal")
+
+		$(posHorizontal[indiceSlide]).attr("tipoSlide", tipoSlide)
 
 		$(slideOpciones[indiceSlide]).addClass(tipoSlide)
 
@@ -195,6 +198,61 @@ $(".cambioColorTexto3").change(function(){
 	var color3 = $(this).val()
 	$(slideOpciones[indiceSlide]).children('.textosSlide').children("h3").css({"color":color3})
 	$(guardarSlide[indiceSlide]).attr("titulo3Color", color3)
+})
+
+//CAMBIAR POSICION SLIDE
+
+//VERTICAL
+var posVertical = new Slider('.posVertical',{
+	formatter: function(value){
+
+		$(".posVertical").change(function(){
+			var indiceSlide = $(this).attr("indice")
+			$(slideOpciones[indiceSlide]).children('img').css({"top":value+"%"})
+			$(guardarSlide[indiceSlide]).attr("estiloImgProductoTop", value)
+
+		})
+
+		return value
+	}
+})
+
+//HORIZONTAL
+var posHorizontal = new Slider('.posHorizontal',{
+	formatter: function(value){
+		$(".posHorizontal").change(function(){
+
+			var tipoSlide = $(this).attr("tipoSlide");
+			var indiceSlide = $(this).attr("indice");
+
+			if(tipoSlide == "slideOpcion1"){
+				$(slideOpciones[indiceSlide]).children('img').css({"right":value+"%"});
+				$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", value);
+				$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", "");			
+			}else{
+				$(slideOpciones[indiceSlide]).children('img').css({"left":value+"%"});
+				$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", value);
+				$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", "");
+			}
+		})
+
+		return value
+	}
+})
+
+//ANCHO
+var anchoImagen = new Slider('.anchoImagen',{
+	formatter: function(value){
+		
+		$(".anchoImagen").change(function(){
+			var indiceSlide = $(this).attr("indice")
+			$(slideOpciones[indiceSlide]).children('img').css({"width":value+"%"})
+			$(guardarSlide[indiceSlide]).attr("estiloImgProductoWidth", value)
+
+		})
+
+		return value
+	}
 })
 
 //GUARDAR SLIDE
