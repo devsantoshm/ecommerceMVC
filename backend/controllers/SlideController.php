@@ -123,6 +123,40 @@ class SlideController{
 
 		return $respuesta;
 	}
+
+	public function deleteSlide()
+	{
+		if (isset($_GET["idSlide"])) {
+			if ($_GET["imgFondo"] != "views/img/slide/default/fondo.jpg") {
+				unlink($_GET["imgFondo"]);//unlink — Borra un fichero
+			}
+			if ($_GET["imgProducto"] != "") {
+				unlink($_GET["imgProducto"]);	
+			}
+
+			rmdir('views/img/slide/slide'.$_GET["idSlide"]);
+
+			$tabla = "slide";
+			$id = $_GET["idSlide"];
+
+			$respuesta = SlideModel::deleteSlide($tabla, $id);
+
+			if ($respuesta == "ok") {
+				echo'<script>
+				swal({
+				      type: "success",
+				      title: "El slide ha sido borrado correctamente",
+				      showConfirmButton: true,  
+				      confirmButtonText: "¡Cerrar!"
+				      }).then((result) => {
+						 if (result.value) {
+						 	window.location = "slide"
+						 }
+					})
+				</script>';
+			}
+		}
+	}		
 }
 
 ?>

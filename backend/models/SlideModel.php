@@ -80,6 +80,22 @@ class SlideModel
 		$stmt->close();
 		$stmt = null;
 	}
+
+	static public function deleteSlide($table, $id)
+	{
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $table where id = :id");
+		$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+		
+		if($stmt->execute()){
+			return "ok";
+		}
+		else{ 
+			return "error";
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
 }
 
 ?>

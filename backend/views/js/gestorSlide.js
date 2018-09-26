@@ -572,3 +572,25 @@ $(".subirImgProducto").change(function(){
 	}
 
 })
+
+//ELIMINAR SLIDE
+$(".eliminarSlide").click(function(){
+	var idSlide = $(this).attr("id")
+	var imgFondo = $(this).attr("imgFondo")
+	var imgProducto = $(this).attr("imgProducto")
+
+	swal({
+	      type: "warning",
+	      title: "¿Está seguro de borrar el slide?",
+	      text: "¡Si no lo está puede cancelar la acción!",
+	      showCancelButton: true,
+	      confirmButtonColor: '#3085d6',
+	      cancelButtonColor: '#d33',
+	      cancelButtonText: 'Cancelar',  
+	      confirmButtonText: "¡Si, borrar slide!"
+	      }).then((result) => {
+			 if (result.value) {
+			 	window.location = "index.php?ruta=slide&idSlide="+idSlide+"&imgFondo="+imgFondo+"&imgProducto="+imgProducto
+			 }
+		})
+})

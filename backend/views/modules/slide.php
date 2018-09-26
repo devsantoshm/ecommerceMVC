@@ -79,7 +79,12 @@ $slides = SlideController::showSlide();
                   url="'.$slide["url"].'">
 
                   <i class="fa fa-floppy-o"></i></button>
-                  <button class="btn btn-danger eliminarSlide"><i class="fa fa-times"></i></button>
+                  <button class="btn btn-danger eliminarSlide"
+                   id="'.$slide["id"].'"
+                   imgFondo="'.$slide["imgFondo"].'"
+                   imgProducto="'.$slide["imgProducto"].'">
+
+                  <i class="fa fa-times"></i></button>
                 </div>
               </div>
               <div id="collapse'.$slide["id"].'" class="panel-collapse collapse collapseSlide">
@@ -319,3 +324,8 @@ $slides = SlideController::showSlide();
     </section>
     <!-- /.content -->
   </div>
+
+  <?php 
+  $eliminarSlide = new SlideController();
+  $eliminarSlide->deleteSlide();
+  ?>
