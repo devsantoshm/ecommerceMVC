@@ -64,7 +64,9 @@ class AjaxSlide
 						"subirImgProducto" => $this->subirImgProducto,
 						"titulo1" => $this->titulo1,
 						"titulo2" => $this->titulo2,
-						"titulo3" => $this->titulo3
+						"titulo3" => $this->titulo3,
+						"boton" => $this->boton,
+						"url" => $this->url
 						);
 
 		$response = SlideController::updateSlide($datos);
@@ -126,6 +128,8 @@ if (isset($_POST["id"])) {
 	$slide->titulo1 = $_POST["titulo1"];
 	$slide->titulo2 = $_POST["titulo2"];
 	$slide->titulo3 = $_POST["titulo3"];
+	$slide->boton = $_POST["boton"];
+	$slide->url = $_POST["url"];
 	$slide->ajaxChangeSlide();	
 }
 

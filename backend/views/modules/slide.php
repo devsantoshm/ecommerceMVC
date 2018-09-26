@@ -74,7 +74,9 @@ $slides = SlideController::showSlide();
                   titulo2Texto="'.$titulo2["texto"].'"
                   titulo2Color="'.$titulo2["color"].'"
                   titulo3Texto="'.$titulo3["texto"].'"
-                  titulo3Color="'.$titulo3["color"].'">
+                  titulo3Color="'.$titulo3["color"].'"
+                  boton="'.$slide["boton"].'"
+                  url="'.$slide["url"].'">
 
                   <i class="fa fa-floppy-o"></i></button>
                   <button class="btn btn-danger eliminarSlide"><i class="fa fa-times"></i></button>
@@ -111,6 +113,14 @@ $slides = SlideController::showSlide();
                         <input type="file" class="subirFondo" indice="'.$key.'">
                         <p class="help-block">Tamaño recomendado 1600px * 520px</p>
                       </div>
+                      <div class="form-group">
+                        <label>Texto del botón:</label>
+                        <input type="text" class="form-control botonSlide" indice="'.$key.'" value="'.$slide["boton"].'" placheholder="EJEMPLO: IR AL PRODUCTO">
+                      </div>
+                      <div class="form-group">
+                        <label>Url del botón:</label>
+                        <input type="text" class="form-control urlSlide" indice="'.$key.'" value="'.$slide["url"].'" placheholder="EJEMPLO: http://www.google.com">
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-4 col-xs-12">
@@ -128,7 +138,7 @@ $slides = SlideController::showSlide();
 
                       <div class="form-group">
                         <label>Posición VERTICAL de la imagen del producto: </label>
-                        <input type="text" indice="'.$key.'" value="" class="slider form-control posVertical" 
+                        <input type="text" indice="'.$key.'" value="" class="slider form-control posVertical posVertical'.$key.'" 
                           data-slider-min="0" 
                           data-slider-max="50"
                           data-slider-step="5"
@@ -141,8 +151,8 @@ $slides = SlideController::showSlide();
                         <label>Posición HORIZONTAL de la imagen del producto: </label>';
 
                         if($slide["tipoSlide"] == "slideOpcion1"){
-
-                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontal" 
+                          /*Para no perder el estilo agrego posHorizontal y posHorizontal con número para que aparezca las palanquitas slide en todoas las imagenes*/
+                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontal posHorizontal'.$key.'" 
                             tipoSlide = "'.$slide["tipoSlide"].'"
                             data-slider-min="0" 
                             data-slider-max="50"
@@ -155,7 +165,7 @@ $slides = SlideController::showSlide();
 
                         }else{
 
-                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontal" 
+                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontal posHorizontal'.$key.'" 
                           tipoSlide = "'.$slide["tipoSlide"].'"
                           data-slider-min="0" 
                           data-slider-max="50"
@@ -169,7 +179,7 @@ $slides = SlideController::showSlide();
                         }
 
                       echo '<label>ANCHO de la imagen del producto: </label>
-                        <input type="text" indice="'.$key.'" value="" class="slider form-control anchoImagen"
+                        <input type="text" indice="'.$key.'" value="" class="slider form-control anchoImagen anchoImagen'.$key.'"
                             data-slider-min="0" 
                             data-slider-max="50"
                             data-slider-step="5"
@@ -209,6 +219,61 @@ $slides = SlideController::showSlide();
                           <div class="input-group-addon"><i></i></div>
                         </div>   
                       </div>
+
+                      <div class="form-group">
+                        <label>Posición VERTICAL del texto: </label>
+                        <input type="text" indice="'.$key.'" value="" class="slider form-control posVerticalTexto posVerticalTexto'.$key.'" 
+                          data-slider-min="0" 
+                          data-slider-max="50"
+                          data-slider-step="5"
+                          data-slider-value="'.$estiloTextoSlide["top"].'" 
+                          data-slider-orientation="horizontal"
+                          data-slider-selection="before" 
+                          data-slider-tooltip="show" 
+                          data-slider-id="red">
+
+                        <label>Posición HORIZONTAL del texto: </label>';
+
+                        if($slide["tipoSlide"] == "slideOpcion1"){
+                          /*Para no perder el estilo agrego posHorizontal y posHorizontal con número para que aparezca las palanquitas slide en todoas las imagenes*/
+                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontalTexto posHorizontalTexto'.$key.'" 
+                            tipoSlide = "'.$slide["tipoSlide"].'"
+                            data-slider-min="0" 
+                            data-slider-max="50"
+                            data-slider-step="5"
+                            data-slider-value="'.$estiloTextoSlide["left"].'" 
+                            data-slider-orientation="horizontal"
+                            data-slider-selection="before" 
+                            data-slider-tooltip="show" 
+                            data-slider-id="blue">';
+
+                        }else{
+
+                          echo '<input type="text" indice="'.$key.'" value="" class="slider form-control posHorizontalTexto posHorizontalTexto'.$key.'" 
+                          tipoSlide = "'.$slide["tipoSlide"].'"
+                          data-slider-min="0" 
+                          data-slider-max="50"
+                          data-slider-step="5"
+                          data-slider-value="'.$estiloTextoSlide["right"].'" 
+                          data-slider-orientation="horizontal"
+                          data-slider-selection="before" 
+                          data-slider-tooltip="show" 
+                          data-slider-id="blue">';
+
+                        }
+
+                      echo '<label>ANCHO del texto: </label>
+                        <input type="text" indice="'.$key.'" value="" class="slider form-control anchoTexto anchoTexto'.$key.'"
+                            data-slider-min="0" 
+                            data-slider-max="50"
+                            data-slider-step="5"
+                            data-slider-value="'.$estiloTextoSlide["width"].'" 
+                            data-slider-orientation="horizontal"
+                            data-slider-selection="before" 
+                            data-slider-tooltip="show" 
+                            data-slider-id="green">
+                      </div>
+
                     </div>
                   </div>
                 </div>
