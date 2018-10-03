@@ -15,24 +15,34 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Title</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+            Agregar categoría
+          </button>
         </div>
         <div class="box-body">
-          Start creating your amazing application!
+          <table class="table table-bordered table-striped dt-responsive tablaCategorias" width="100%">
+            <thead>
+              <tr>
+                <th style="width: 10px">#</th>
+                <th>Categoría</th>
+                <th>Ruta</th>
+                <th>Estado</th>
+                <th>Descripción</th>
+                <th>Palabras Claves</th>
+                <th>Portada</th>
+                <th>Tipo de Oferta</th>
+                <th>Valor Oferta</th>
+                <th>Imagen Oferta</th>
+                <th>Fin Oferta</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
       </div>
       <!-- /.box -->
     </section>

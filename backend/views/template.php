@@ -1,3 +1,4 @@
+ <?php session_start(); ?>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -29,6 +30,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="views/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
   <!-- Bootstrap Slider -->
   <link rel="stylesheet" href="views/plugins/bootstrap-slider/slider.css">
+    <!-- DataTables -->
+  <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,14 +74,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- bootstrap color picker https://farbelous.github.io/bootstrap-colorpicker/v2/-->
   <script src="views/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
   <script src="views/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+   <!-- DataTables https://datatables.net/-->
+  <script src="views/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="views/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+  <script src="views/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
 
 </head>
-
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
-
 <?php  
-session_start();
-
+//session_start();
 if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"] === "ok") {
   echo '<div class="wrapper">';
   include 'modules/header.php';
@@ -110,11 +116,11 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
   // Al no tener la sesion iniciada siempre va a tener login.php
   include 'modules/login.php';
 }
-
 ?>
 <script src="views/js/plantilla.js"></script>
 <script src="views/js/gestorComercio.js"></script>
 <script src="views/js/gestorSlide.js"></script>
+<script src="views/js/gestorCategorias.js"></script>
 
 </body>
 </html>
