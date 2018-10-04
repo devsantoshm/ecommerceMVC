@@ -1,9 +1,9 @@
 <?php  
 require_once "conexion.php";
 
-class CategoriesModel
+class HeadersModel
 {
-	static public function showCategories($table, $item, $valor)
+	static public function showHeaders($table, $item, $valor)
 	{
 		if ($item != null) {
 			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor");
