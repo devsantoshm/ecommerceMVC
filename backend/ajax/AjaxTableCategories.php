@@ -30,7 +30,7 @@ class AjaxTableCategories{
 				$estadoCategoria = 0;
 			}
 			
-			$estado = "<button class='btn ".$colorEstado." btn-xs' estadoCategoria='".$estadoCategoria." idCategoria='".$categories[$i]["id"]."'>".$textoEstado."</button>";
+			$estado = "<button class='btn ".$colorEstado." btn-xs btnActivar' estadoCategoria='".$estadoCategoria."' idCategoria='".$categories[$i]["id"]."'>".$textoEstado."</button>";
 
 			$item = "ruta";
 			$valor = $categories[$i]["ruta"];
@@ -38,13 +38,32 @@ class AjaxTableCategories{
 			$headers = HeadersController::showHeaders($item, $valor);
 
 			if ($headers["portada"] != "") {
-				$imgPortada = "<img class='img-thumbnail' src='".$headers["portada"]."' width='100px'>";
+				$imgPortada = "<img class='img-thumbnail imgPortadaCategorias' src='".$headers["portada"]."' width='100px'>";
 			} else {
-				$imgPortada = "<img class='img-thumbnail' src='views/img/cabeceras/default/default.jpg' width='100px'>";
+				$imgPortada = "<img class='img-thumbnail imgPortadaCategorias' src='views/img/cabeceras/default/default.jpg' width='100px'>";
 			}
-		
-			$imgOfertas = "<img class='img-thumbnail' src='views/img/ofertas/cursos.jpg' width='100px'>";
-			$acciones = "<div class='btn-group'><button class='btn btn-warning'><i class='fa fa-pencil'></i></button><button class='btn btn-danger'><i class='fa fa-times'></i></button></div>";
+
+			if ($categories[$i]["oferta"] != 0) {
+				if ($categories[$i]["precioOferta"] != 0) {
+					$tipoOferta = "PRECIO";
+					$valorOferta = "$ ".$categories[$i]["precioOferta"];
+				} else {
+					$tipoOferta = "DESCUENTO";
+					$valorOferta = $categories[$i]["descuentoOferta"]." %";
+				}
+				
+			} else {
+				$tipoOferta = "No tiene oferta";
+				$valorOferta = 0;
+			}
+			
+			if ($categories[$i]["imgOferta"] != "") {
+				$imgOfertas = "<img class='img-thumbnail imgOfertaCategorias' src='".$categories[$i]["imgOferta"]."' width='100px'>";
+			} else {
+				$imgOfertas = "<img class='img-thumbnail imgOfertaCategorias' src='views/img/ofertas/default/default.jpg' width='100px'>";
+			}
+			
+			$acciones = "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' idCategoria='".$categories[$i]["id"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' idCategoria='".$categories[$i]["id"]."' imgPortada='".$headers["portada"]."' rutaCabecera='".$categories[$i]["ruta"]."' imgOferta='".$categories[$i]["imgOferta"]."'><i class='fa fa-times'></i></button></div>";
 
 			$datosJson .= '[
 			      "'.($i+1).'",
@@ -54,10 +73,10 @@ class AjaxTableCategories{
 			      "'.$headers["descripcion"].'",
 			      "'.$headers["palabrasClave"].'",
 			      "'.$imgPortada.'",
-			      "descuento",
-			      "80%",
+			      "'.$tipoOferta.'",
+			      "'.$valorOferta.'",
 			      "'.$imgOfertas.'",
-			      "Fechas",
+			      "'.$categories[$i]["finOferta"].'",
 			      "'.$acciones.'"
 			    ],';
 		}
