@@ -10,6 +10,9 @@ require_once "models/BannerModel.php";
 require_once "controllers/CategoriesController.php";
 require_once "models/CategoriesModel.php";
 
+require_once "controllers/subCategoriesController.php";
+require_once "models/SubCategoriesModel.php";
+
 require_once "controllers/CommerceController.php";
 require_once "models/CommerceModel.php";
 

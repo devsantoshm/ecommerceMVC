@@ -129,19 +129,20 @@ if (isset($_GET["ruta"])) {
 	$valor = $rutas[0]; //$valor = $_GET["ruta"];
 	$rutaCategorias = ProductController::showCategories($item, $valor);
 	//var_dump($rutaCategorias['ruta']);
-	if ($valor == $rutaCategorias['ruta']) 
+	if ($valor == $rutaCategorias['ruta'] && $rutaCategorias["estado"] == 1)//valida el estado activo 
 		$ruta = $valor;
 
 	$rutaSubCategorias = ProductController::showSubCategories($item, $valor);
 	//var_dump($rutaSubCategorias[0]['ruta']);
 	// este foreach se realiza por que estoy enviando un fetchAll
 	foreach ($rutaSubCategorias as $subCat) {
-		if ($valor == $subCat['ruta']) 
+		if ($valor == $subCat['ruta'] && $subCat["estado"] == 1) 
 			$ruta = $valor;
 	}
 
 	$rutaProductos = ProductController::showInfoProduct($item, $valor);
-	if ($rutas[0] == $rutaProductos['ruta']) 
+	if ($rutas[0] == $rutaProductos['ruta'] && $rutaProductos["estado"] == 1) 
+		//si ruta productos estado es 1, entonces que me permita capturar la ruta que viene en la url
 		$infoProducto = $rutas[0];
 
 	if ($ruta != null || $rutas[0] == "articulos-gratis" || $rutas[0] == "lo-mas-vendido" || $rutas[0] == "lo-mas-visto") 

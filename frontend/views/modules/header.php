@@ -157,6 +157,7 @@ if ($cliente->getAccessToken()) {
 			$valor = null;
 			$categories = ProductController::showCategories($item, $valor);
 			foreach ($categories as $cat) {
+				if ($cat["estado"] != 0) {
 			?>
 			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 				<h4>
@@ -175,7 +176,7 @@ if ($cliente->getAccessToken()) {
 					<?php } ?>
 				</ul>
 			</div>
-			<?php } ?>
+			<?php } } ?>
 		</div>
 	</div>
 </header>

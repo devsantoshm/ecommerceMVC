@@ -71,6 +71,7 @@
 
 			$products = null;
 			$listProducts = null;
+			$estado = 1;
 			$ordenar = "id";
 
 			if (isset($rutas[3])) {
@@ -80,6 +81,7 @@
 			}
 
 			if(!$products){
+				$estado = null;
 				echo '<div class="col-xs-12 text-center error404">
 						<h1><small>¡Oops!</small></h1>
 						<h2>Aún no hay productos en esta sección</h2>
@@ -87,7 +89,9 @@
 			}else{ ?>
 				<ul class="grid0">
 					<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
-					<?php foreach ($products as $key => $value) { ?>
+					<?php foreach ($products as $key => $value) { 
+						if ($value["estado"] != 0) {	
+						?>
 					<li class="col-md-3 col-sm-6 col-xs-12">
 						<figure>
 							<a href="<?php echo $value['ruta'] ?>" class="pixelProducto">
@@ -144,11 +148,23 @@
 							</div>
 						</div>
 					</li>
-					<?php } ?>
+					<?php }else{
+							$estado = 0;
+						} 
+					} 
+
+					if ($estado == 0) {
+						echo '<div class="col-xs-12 text-center error404">
+							<h1><small>¡Oops!</small></h1>
+							<h2>Aún no hay productos en esta sección</h2>
+						</div>';
+					}
+					?>
 				</ul>
 				<ul class="list0" style="display: none;">
 					<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
-					<?php foreach ($products as $key => $value) { ?>
+					<?php foreach ($products as $key => $value) { 
+						if ($value["estado"] != 0) { ?>
 					<li class="col-xs-12">
 						<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 							<figure>
@@ -204,82 +220,96 @@
 						</div>
 						<div class="col-xs-12"><hr></div>
 					</li>
-					<?php } ?>
+					<?php }else{
+							$estado = 0;
+						} 
+					} 
+
+					if ($estado == 0) {
+						echo '<div class="col-xs-12 text-center error404">
+							<h1><small>¡Oops!</small></h1>
+							<h2>Aún no hay productos en esta sección</h2>
+						</div>';
+					}
+					?>
 				</ul>
 			<?php } ?>
 			<!-- clearfix, permite formatear el float left y mantener la paginacion centrada -->
 			<div class="clearfix"></div>
 			<center>
 			<?php 
-			if (count($listProducts) != 0) {
-				$pagProducts = ceil(count($listProducts)/12); //redondea de 23.333 a 24 páginas
-				if ($pagProducts > 6) {
-					if($rutas[1] == 1){
-						echo '<ul class="pagination">';
-						for ($i=1; $i <= 4; $i++) { 
-							echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
-						}
-						echo '<li class="disabled"><a>...</a></li>
-							  <li id="item'.$pagProducts.'"><a href="'.$urlFron.$rutas[0].'/'.$pagProducts.'/'.$rutas[2].'/'.$rutas[3].'">'.$pagProducts.'</a></li>
-							  <li><a href="'.$urlFron.$rutas[0].'/2/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-							</ul>';
-					} else if($rutas[1] == $pagProducts){
-						echo '<ul class="pagination">
-								<li><a href="'.$urlFron.$rutas[0].'/'.($pagProducts-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-								<li id="item1"><a href="'.$urlFron.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
-								<li class="disabled"><a>...</a></li>';
-						for ($i=($pagProducts-3); $i <= $pagProducts; $i++) { 
-							echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
-						}
-						echo '</ul>';
-					} else if($rutas[1] != $pagProducts && $rutas[1] != 1 
-							  && $rutas[1] < ($pagProducts/2) && $rutas[1] < ($pagProducts-3)){
-						
-						$numPagActual = $rutas[1];
+			if ($estado != 0) {
+	
+				if (count($listProducts) != 0) {
+					$pagProducts = ceil(count($listProducts)/12); //redondea de 23.333 a 24 páginas
+					if ($pagProducts > 6) {
+						if($rutas[1] == 1){
+							echo '<ul class="pagination">';
+							for ($i=1; $i <= 4; $i++) { 
+								echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
+							}
+							echo '<li class="disabled"><a>...</a></li>
+								  <li id="item'.$pagProducts.'"><a href="'.$urlFron.$rutas[0].'/'.$pagProducts.'/'.$rutas[2].'/'.$rutas[3].'">'.$pagProducts.'</a></li>
+								  <li><a href="'.$urlFron.$rutas[0].'/2/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+								</ul>';
+						} else if($rutas[1] == $pagProducts){
+							echo '<ul class="pagination">
+									<li><a href="'.$urlFron.$rutas[0].'/'.($pagProducts-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+									<li id="item1"><a href="'.$urlFron.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
+									<li class="disabled"><a>...</a></li>';
+							for ($i=($pagProducts-3); $i <= $pagProducts; $i++) { 
+								echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
+							}
+							echo '</ul>';
+						} else if($rutas[1] != $pagProducts && $rutas[1] != 1 
+								  && $rutas[1] < ($pagProducts/2) && $rutas[1] < ($pagProducts-3)){
+							
+							$numPagActual = $rutas[1];
 
-						echo '<ul class="pagination">
-								<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
-						for ($i=$numPagActual; $i <= ($numPagActual+3); $i++) { 
-							echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
-						}
-						echo '<li class="disabled"><a>...</a></li>
-							  <li id="item'.$pagProducts.'"><a href="'.$urlFron.$rutas[0].'/'.$pagProducts.'/'.$rutas[2].'/'.$rutas[3].'">'.$pagProducts.'</a></li>
-							  <li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual+1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-							</ul>';
-					} else if($rutas[1] != $pagProducts && $rutas[1] != 1 
-							  && $rutas[1] >= ($pagProducts/2) && $rutas[1] < ($pagProducts-3)){
-						
-						$numPagActual = $rutas[1];
+							echo '<ul class="pagination">
+									<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
+							for ($i=$numPagActual; $i <= ($numPagActual+3); $i++) { 
+								echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
+							}
+							echo '<li class="disabled"><a>...</a></li>
+								  <li id="item'.$pagProducts.'"><a href="'.$urlFron.$rutas[0].'/'.$pagProducts.'/'.$rutas[2].'/'.$rutas[3].'">'.$pagProducts.'</a></li>
+								  <li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual+1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+								</ul>';
+						} else if($rutas[1] != $pagProducts && $rutas[1] != 1 
+								  && $rutas[1] >= ($pagProducts/2) && $rutas[1] < ($pagProducts-3)){
+							
+							$numPagActual = $rutas[1];
 
-						echo '<ul class="pagination">
-								<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-								<li id="item1"><a href="'.$urlFron.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
-								<li class="disabled"><a>...</a></li>';
-						for ($i=$numPagActual; $i <= ($numPagActual+3); $i++) { 
-							echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
+							echo '<ul class="pagination">
+									<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+									<li id="item1"><a href="'.$urlFron.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
+									<li class="disabled"><a>...</a></li>';
+							for ($i=$numPagActual; $i <= ($numPagActual+3); $i++) { 
+								echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
+							}
+							echo '<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual+1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+								</ul>';
+						} else {
+							
+							$numPagActual = $rutas[1];
+
+							echo '<ul class="pagination">
+									<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+									<li id="item1"><a href="'.$urlFron.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
+									<li class="disabled"><a>...</a></li>';
+							for ($i=($pagProducts-3); $i <= $pagProducts; $i++) { 
+								echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
+							}
+							echo '</ul>';
 						}
-						echo '<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual+1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-							</ul>';
 					} else {
-						
-						$numPagActual = $rutas[1];
-
-						echo '<ul class="pagination">
-								<li><a href="'.$urlFron.$rutas[0].'/'.($numPagActual-1).'/'.$rutas[2].'/'.$rutas[3].'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-								<li id="item1"><a href="'.$urlFron.$rutas[0].'/1/'.$rutas[2].'/'.$rutas[3].'">1</a></li>
-								<li class="disabled"><a>...</a></li>';
-						for ($i=($pagProducts-3); $i <= $pagProducts; $i++) { 
+						echo '<ul class="pagination">';
+						for ($i=1; $i <= $pagProducts; $i++) { 
 							echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
 						}
 						echo '</ul>';
-					}
-				} else {
-					echo '<ul class="pagination">';
-					for ($i=1; $i <= $pagProducts; $i++) { 
-						echo '<li id="item'.$i.'"><a href="'.$urlFron.$rutas[0].'/'.$i.'/'.$rutas[2].'/'.$rutas[3].'">'.$i.'</a></li>';
-					}
-					echo '</ul>';
-				}		
+					}		
+				}
 			}
 			?>
 			</center>

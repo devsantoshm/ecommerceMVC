@@ -31,16 +31,16 @@
 
 	if ($titulosModulos[1] == "LO MÁS VENDIDO") {
 		$ordenar = "ventas";
-		$item = null;
-		$valor = null;
+		$item = "estado";
+		$valor = 1;
 		$modo = "DESC";
 		$ventas = ProductController::showProducts($ordenar, $item, $valor, $base, $tope, $modo);
 	}
 
 	if ($titulosModulos[2] == "LO MÁS VISTO") {
 		$ordenar = "vistas";
-		$item = null;
-		$valor = null;
+		$item = "estado";
+		$valor = 1;
 		$modo = "DESC";
 		$vistas = ProductController::showProducts($ordenar, $item, $valor, $base, $tope, $modo);
 	}
@@ -88,7 +88,9 @@ for ($i=0; $i < count($titulosModulos); $i++) {
 		</div>
 		<ul class="grid<?php echo $i ?>">
 			<!-- col-lg-3 no se pone por que el col-md-3 lo reemplaza -->
-			<?php foreach ($modulos[$i] as $key => $value) { ?>
+			<?php foreach ($modulos[$i] as $key => $value) { 
+				if ($value["estado"] != 0) {
+			?>
 			<li class="col-md-3 col-sm-6 col-xs-12">
 				<figure>
 					<a href="<?php echo $value['ruta'] ?>" class="pixelProducto">
@@ -144,11 +146,12 @@ for ($i=0; $i < count($titulosModulos); $i++) {
 					</div>
 				</div>
 			</li>
-			<?php } ?>
+			<?php } }?>
 		</ul>
 		<ul class="list<?php echo $i ?>" style="display: none;">
 			<!-- con solo poner col-xs-12 ya afecta al resto de pantallas-->
-			<?php foreach ($modulos[$i] as $key => $value) { ?>
+			<?php foreach ($modulos[$i] as $key => $value) { 
+				if ($value["estado"] != 0) {?>
 			<li class="col-xs-12">
 				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 					<figure>
@@ -204,7 +207,7 @@ for ($i=0; $i < count($titulosModulos); $i++) {
 				</div>
 				<div class="col-xs-12"><hr></div>
 			</li>
-			<?php } ?>
+			<?php } }?>
 		</ul>
 	</div>
 </div>
