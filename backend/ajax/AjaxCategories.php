@@ -1,5 +1,5 @@
 <?php
-//require_once "../controllers/CategoriesController.php";
+require_once "../controllers/CategoriesController.php";
 require_once "../models/CategoriesModel.php";
 
 //require_once "../controllers/SubCategoriesController.php";
@@ -21,6 +21,19 @@ class AjaxCategories{
 
  		echo $response;
  	}
+
+ 	public $validarCategoria;
+
+ 	public function validateCategory()
+ 	{	
+ 		$item = "categoria";
+ 		$valor = $this->validarCategoria;
+
+ 		$response = CategoriesController::showCategories($item, $valor);
+
+ 		echo json_encode($response);
+ 	}
+
 }
 
 /*=============================================
@@ -31,4 +44,11 @@ if (isset($_POST["activarCategoria"])) {
 	$activarCategoria->activarCategoria = $_POST["activarCategoria"];
 	$activarCategoria->activarId = $_POST["activarId"];
 	$activarCategoria->activateCategory();
+}
+
+//VALIDAR NO REPETIR CATEGORIA
+if (isset($_POST["validarCategoria"])) {
+	$validarCategoria = new AjaxCategories();
+	$validarCategoria->validarCategoria = $_POST["validarCategoria"];
+	$validarCategoria->validateCategory();
 }

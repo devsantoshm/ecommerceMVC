@@ -81,3 +81,48 @@ $(".tablaCategorias tbody").on("click", ".btnActivar", function(){
 		$(this).attr('estadoCategoria', 0)
 	}
 })
+
+//REVISAR SI LA CATEGORIA YA EXISTE
+$(".validarCategoria").change(function(){
+	$(".alert").remove()
+	var categoria = $(this).val()
+	var datos = new FormData()
+	datos.append("validarCategoria", categoria)
+
+	$.ajax({
+		url: "ajax/AjaxCategories.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function(response){
+			//console.log("response", response);
+			if (response) {
+				$(".validarCategoria").parent().after('<div class="alert alert-warning">Esta categoría ya existe en la bd</div>')
+				$(".validarCategoria").val("")
+			}
+		}
+	})
+})
+
+//RUTA CATEGORIA
+function limpiarUrl(texto){
+	var texto  = texto.toLowerCase()
+	texto = texto.replace(/[á]/, 'a')
+	texto = texto.replace(/[é]/, 'e')
+	texto = texto.replace(/[í]/, 'i')
+	texto = texto.replace(/[ó]/, 'o')
+	texto = texto.replace(/[ú]/, 'u')
+	texto = texto.replace(/[ñ]/, 'n')
+	texto = texto.replace(/ /g, '-')
+
+	return texto
+}
+
+$(".tituloCategoria").change(function(){
+	$(".rutaCategoria").val(
+		limpiarUrl($(".tituloCategoria").val())
+	)
+})
