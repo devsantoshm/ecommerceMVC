@@ -7,3 +7,17 @@ $('input').iCheck({
 $('.knob').knob();
 $('.sidebar-menu').tree();
 $('.my-colorpicker').colorpicker();
+
+//Tags Input
+$(".tagsInput").tagsinput({
+	maxTags: 10,
+	confirmKeys: [44],
+	cancelConfirmKeysOnEmpty: false,
+	trimValue: false
+})
+
+$(".bootstrap-tagsinput").css({
+	"padding":"11px",
+	"width":"100%",
+	"border-radius":"1px"
+})

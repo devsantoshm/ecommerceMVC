@@ -33,6 +33,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- DataTables -->
   <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+    <!-- Bootstrap Tags input -->
+  <link rel="stylesheet" href="views/plugins/tags/bootstrap-tagsinput.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -79,6 +81,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="views/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
   <script src="views/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+
+  <script src="views/plugins/tags/bootstrap-tagsinput.min.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
