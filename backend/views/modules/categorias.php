@@ -100,12 +100,12 @@
                 <div class="col-xs-6">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                    <input type="number" class="form-control input-lg valorOferta precioOferta" name="precioOferta" min="0" step="any" placeholder="Precio">
+                    <input type="number" class="form-control input-lg valorOferta" id="precioOferta" name="precioOferta" min="0" step="any" placeholder="Precio">
                   </div>
                 </div>
                 <div class="col-xs-6">
                   <div class="input-group">
-                    <input type="number" class="form-control input-lg valorOferta descuentoOferta" name="descuentoOferta" min="0" placeholder="Descuento">
+                    <input type="number" class="form-control input-lg valorOferta" id="descuentoOferta" name="descuentoOferta" min="0" placeholder="Descuento">
                     <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                   </div>
                 </div>
@@ -118,6 +118,12 @@
                   </span>
                 </div>
               </div>
+              <div class="form-group">
+                <div class="panel">SUBIR FOTO OFERTA</div>
+                <input type="file" name="fotoOferta" class="fotoOferta">
+                <p class="help-block">Tamaño recomendado 640px * 430px <br> Peso máximo de la foto 2MB</p>
+                <img src="views/img/ofertas/default/default.jpg" class="img-thumbnail previsualizarOferta" width="100px">
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -125,6 +131,10 @@
             <button type="submit" class="btn btn-primary">Guardar categoría</button>
           </div>
         </form>
+        <?php  
+          $crearCategoria = new CategoriesController();
+          $crearCategoria->createCategory();
+        ?>
       </div>
     </div>
   </div>
