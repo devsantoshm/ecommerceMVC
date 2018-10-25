@@ -258,3 +258,137 @@ $(".valorOferta").change(function(){
 		$("#precioOferta").val(0)
 	}
 })
+
+//EDITAR CATEGORIA
+$(".tablaCategorias tbody").on("click", ".btnEditarCategoria", function(){
+	var idCategoria = $(this).attr("idCategoria")
+
+	var datos = new FormData()
+	datos.append("idCategoria", idCategoria)
+
+	$.ajax({
+		url: "ajax/AjaxCategories.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function(response){
+
+			$("#modalEditarCategoria .editarIdCategoria").val(response["id"])
+
+			$("#modalEditarCategoria .tituloCategoria").val(response["categoria"])
+			$("#modalEditarCategoria .rutaCategoria").val(response["ruta"])
+
+			$("#modalEditarCategoria .tituloCategoria").change(function(){
+				$("#modalEditarCategoria .rutaCategoria").val(
+					limpiarUrl($("#modalEditarCategoria .tituloCategoria").val())
+				)
+			})
+
+			//TRAEMOS DATOS DE CABECERA
+			var datosCabecera = new FormData()
+			datosCabecera.append("ruta", response["ruta"])
+
+			$.ajax({
+				url: "ajax/AjaxHeaders.php",
+				method: "POST",
+				data: datosCabecera,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType:"json",
+				success: function(response){
+
+					$("#modalEditarCategoria .editarIdCabecera").val(response["id"])
+
+					$("#modalEditarCategoria .descripcionCategoria").val(response["descripcion"])
+
+					if (response["palabrasClave"] != null) {
+						$(".editarPalabrasClaves").html(
+				              '<div class="input-group">'+
+				                '<span class="input-group-addon"><i class="fa fa-key"></i></span>'+
+				                '<input type="text" name="pClavesCategoria" class="form-control input-lg pClavesCategoria tagsInput" data-role="tagsInput" value="'+response["palabrasClave"]+'" required>'+
+				              '</div>'
+				        )
+
+				        $("#modalEditarCategoria .pClavesCategoria").tagsinput('items')
+
+				        $(".bootstrap-tagsinput").css({
+							"padding":"11px",
+							"width":"100%",
+							"border-radius":"1px"
+						})
+					}else{
+						$(".editarPalabrasClaves").html(
+				              '<div class="input-group">'+
+				                '<span class="input-group-addon"><i class="fa fa-key"></i></span>'+
+				                '<input type="text" name="pClavesCategoria" class="form-control input-lg pClavesCategoria tagsInput" data-role="tagsInput" placeholder="Ingresar palabras claves" required>'+
+				              '</div>'
+				        )
+
+				        $("#modalEditarCategoria .pClavesCategoria").tagsinput('items')
+
+				        $(".bootstrap-tagsinput").css({
+							"padding":"11px",
+							"width":"100%",
+							"border-radius":"1px"
+						})
+					}
+
+					$("#modalEditarCategoria .previsualizarPortada").attr("src", response["portada"])
+					$("#modalEditarCategoria .antiguaFotoPortada").val(response["portada"])
+				}
+			})
+
+			//PREGUNTAMOS SI EXISTE OFERTA
+			if (response["oferta"] != 0) {
+				$("#modalEditarCategoria .selActivarOferta").val("oferta")
+				$("#modalEditarCategoria .datosOferta").show()
+				$("#modalEditarCategoria .valorOferta").prop("required", true)
+				$("#modalEditarCategoria #precioOferta").val(response["precioOferta"])
+				$("#modalEditarCategoria #descuentoOferta").val(response["descuentoOferta"])
+
+				if (response["precioOferta"] != 0) {
+					$("#modalEditarCategoria #precioOferta").prop("readonly", true)
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", false)
+				}
+
+				if (response["descuentoOferta"] != 0) {
+					$("#modalEditarCategoria #precioOferta").prop("readonly", false)
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", true)
+				}
+
+				$("#modalEditarCategoria .previsualizarOferta").attr("src", response["imgOferta"])
+				$("#modalEditarCategoria .antiguaFotoOferta").val(response["imgOferta"])
+				$("#modalEditarCategoria .finOferta").val(response["finOferta"])
+			}else{
+				$("#modalEditarCategoria .selActivarOferta").val("")
+				$("#modalEditarCategoria .datosOferta").hide()
+				$("#modalEditarCategoria .valorOferta").prop("required", false)
+				$("#modalEditarCategoria .previsualizarOferta").attr("src", "views/img/ofertas/default/default.jpg")
+				$("#modalEditarCategoria .antiguaFotoOferta").val(response["imgOferta"])
+			}
+
+			$("#modalEditarCategoria .selActivarOferta").change(function(){
+				activarOferta($(this).val())
+			})
+
+			$("#modalEditarCategoria .valorOferta").change(function(){
+				if ($(this).attr("id") == "precioOferta") {
+					$("#modalEditarCategoria #precioOferta").prop("readonly", true)//Set the property and value
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", false)
+					$("#modalEditarCategoria #descuentoOferta").val(0)
+				}
+
+				if ($(this).attr("id") == "descuentoOferta") {
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", true)//Set the property and value
+					$("#modalEditarCategoria #precioOferta").prop("readonly", false)
+					$("#modalEditarCategoria #precioOferta").val(0)
+				}
+			})
+
+		}
+	})
+})

@@ -34,6 +34,18 @@ class AjaxCategories{
  		echo json_encode($response);
  	}
 
+ 	public $idCategoria;
+
+ 	public function editCategory()
+ 	{	
+ 		$item = "id";
+ 		$valor = $this->idCategoria;
+
+ 		$response = CategoriesController::showCategories($item, $valor);
+
+ 		echo json_encode($response);
+ 	}
+
 }
 
 /*=============================================
@@ -51,4 +63,10 @@ if (isset($_POST["validarCategoria"])) {
 	$validarCategoria = new AjaxCategories();
 	$validarCategoria->validarCategoria = $_POST["validarCategoria"];
 	$validarCategoria->validateCategory();
+}
+
+if (isset($_POST["idCategoria"])) {
+	$editCategory = new AjaxCategories();
+	$editCategory->idCategoria = $_POST["idCategoria"];
+	$editCategory->editCategory();
 }
