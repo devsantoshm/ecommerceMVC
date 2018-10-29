@@ -36,6 +36,28 @@ class ProductsModel
 		$stmt->close();
 		$stmt = null;
 	}
+
+	static public function updateOfertaProductos($table, $datos, $ofertadoPor)
+	{
+		$stmt = Conexion::conectar()->prepare("UPDATE $table SET $ofertadoPor = :ofertadoPor, oferta = :oferta, precioOferta = :precioOferta, descuentoOferta = :descuentoOferta, imgOferta = :imgOferta, finOferta = :finOferta WHERE id_categoria = :id_categoria");
+		$stmt->bindParam(":ofertadoPor", $datos["oferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":oferta", $datos["oferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":precioOferta", $datos["precioOferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":descuentoOferta", $datos["descuentoOferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":imgOferta", $datos["imgOferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":finOferta", $datos["finOferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_categoria", $datos["id"], PDO::PARAM_INT);
+		
+		if($stmt->execute()){
+			return "ok";
+		}
+		else{ 
+			return "error";
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
 }
 
 ?>
