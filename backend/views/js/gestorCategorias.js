@@ -392,3 +392,26 @@ $(".tablaCategorias tbody").on("click", ".btnEditarCategoria", function(){
 		}
 	})
 })
+
+//ELIMINAR CATEGORIA
+$(".tablaCategorias tbody").on("click", ".btnEliminarCategoria", function(){
+	var idCategoria = $(this).attr("idCategoria")
+	var imgOferta = $(this).attr("imgOferta")
+	var rutaCabecera = $(this).attr("rutaCabecera")
+	var imgPortada = $(this).attr("imgPortada")
+
+	swal({
+      title: "¿Está seguro de borrar la categoría?",
+      text: "¡Si no lo está puede candelar la acción!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',  
+      confirmButtonText: "¡Si, borrar categoría!"
+      }).then(function(result){
+		 if (result.value) {
+		 	window.location = "index.php?ruta=categorias&idCategoria="+idCategoria+"&imgOferta="+imgOferta+"&rutaCabecera="+rutaCabecera+"&imgPortada="+imgPortada;
+		 }
+    });
+})

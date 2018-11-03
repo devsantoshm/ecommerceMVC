@@ -60,5 +60,21 @@ class HeadersModel
 		$stmt->close();
 		$stmt = null;
 	}
+
+	static public function deleteHeader($table, $datos)
+	{
+		
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $table where ruta = :ruta");
+		$stmt->bindParam(":ruta", $datos, PDO::PARAM_STR);
+		
+		if($stmt->execute()){
+			return "ok";
+		}else{
+			return "error";
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
 }
 ?>

@@ -234,6 +234,10 @@
       </div>
     </div>
   </div>
+  <?php  
+    $eliminarCategoria = new CategoriesController();
+    $eliminarCategoria->deleteCategory();
+  ?>
   <!-- BLOUEO DE LA TECLA ENTER -->
   <script>
     $(document).keydown(function(e){
