@@ -2,10 +2,10 @@
 
 class SubCategoriesController
 {	
-	static public function showCategories($item, $valor)
+	static public function showSubCategories($item, $valor)
 	{
-		$tabla = "categories";
-		$response = CategoriesModel::showCategories($tabla, $item, $valor);
+		$tabla = "subcategories";
+		$response = SubCategoriesModel::showSubCategories($tabla, $item, $valor);
 
 		return $response;
 	}

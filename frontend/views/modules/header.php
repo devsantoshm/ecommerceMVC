@@ -171,9 +171,11 @@ if ($cliente->getAccessToken()) {
 					$valor = $cat["id"];
 					$subcategories = ProductController::showSubCategories($item, $valor); 
 					foreach ($subcategories as $subcat) {
+						if ($subcat["estado"] != 0) {
 					?>
-					<li><a href="<?php echo $urlFron.$subcat["ruta"] ?>" class="pixelSubCategorias" titulo="<?php echo $subcat["subcategoria"] ?>"><?php echo $subcat["subcategoria"] ?></a></li>
-					<?php } ?>
+						<li><a href="<?php echo $urlFron.$subcat["ruta"] ?>" class="pixelSubCategorias" titulo="<?php echo $subcat["subcategoria"] ?>"><?php echo $subcat["subcategoria"] ?></a></li>
+					<?php }
+					} ?>
 				</ul>
 			</div>
 			<?php } } ?>

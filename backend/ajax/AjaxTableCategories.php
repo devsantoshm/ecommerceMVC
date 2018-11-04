@@ -46,7 +46,7 @@ class AjaxTableCategories{
 			if ($categories[$i]["oferta"] != 0) {
 				if ($categories[$i]["precioOferta"] != 0) {
 					$tipoOferta = "PRECIO";
-					$valorOferta = "$ ".$categories[$i]["precioOferta"];
+					$valorOferta = "$ ".number_format($categories[$i]["precioOferta"], 2);
 				} else {
 					$tipoOferta = "DESCUENTO";
 					$valorOferta = $categories[$i]["descuentoOferta"]." %";
