@@ -28,14 +28,14 @@ class AjaxSubCategories{
  		echo $response;
  	}
 
- 	public $validarCategoria;
+ 	public $validarSubCategoria;
 
- 	public function validateCategory()
+ 	public function validateSubCategory()
  	{	
- 		$item = "categoria";
- 		$valor = $this->validarCategoria;
+ 		$item = "subcategoria";
+ 		$valor = $this->validarSubCategoria;
 
- 		$response = CategoriesController::showCategories($item, $valor);
+ 		$response = SubCategoriesController::showSubCategories($item, $valor);
 
  		echo json_encode($response);
  	}
@@ -65,10 +65,10 @@ if (isset($_POST["activarSubCategoria"])) {
 }
 
 //VALIDAR NO REPETIR CATEGORIA
-if (isset($_POST["validarCategoria"])) {
-	$validarCategoria = new AjaxCategories();
-	$validarCategoria->validarCategoria = $_POST["validarCategoria"];
-	$validarCategoria->validateCategory();
+if (isset($_POST["validarSubCategoria"])) {
+	$validarSubCategoria = new AjaxSubCategories();
+	$validarSubCategoria->validarSubCategoria = $_POST["validarSubCategoria"];
+	$validarCategoria->validateSubCategory();
 }
 
 if (isset($_POST["idCategoria"])) {

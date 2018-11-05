@@ -90,7 +90,7 @@ $(".validarSubCategoria").change(function(){
 	datos.append("validarSubCategoria", Subcategoria)
 
 	$.ajax({
-		url: "ajax/AjaxCategories.php",
+		url: "ajax/AjaxSubCategories.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -99,8 +99,8 @@ $(".validarSubCategoria").change(function(){
 		dataType: "json",
 		success: function(response){
 			//console.log("response", response);
-			if (response) {
-				$(".validarSubCategoria").parent().after('<div class="alert alert-warning">Esta categoría ya existe en la bd</div>')
+			if (response.length != 0) {//el modelo Subcategorias devuelve un fetchAll
+				$(".validarSubCategoria").parent().after('<div class="alert alert-warning">Esta Subcategoría ya existe en la bd</div>')
 				$(".validarSubCategoria").val("")
 			}
 		}

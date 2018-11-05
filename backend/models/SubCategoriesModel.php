@@ -48,11 +48,35 @@ class SubCategoriesModel
 			$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor");
 			$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
 			$stmt->execute();
-			return $stmt->fetch();
+			return $stmt->fetchAll();//traeme las subcategorias que hacen parte de una categoria
 		} else {
 			$stmt = Conexion::conectar()->prepare("select * from $table order by id desc");
 			$stmt->execute();
 			return $stmt->fetchAll();
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
+
+	static public function createSubCategory($tabla, $datos)
+	{
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(subcategoria, id_categoria, ruta, estado, oferta, precioOferta, descuentoOferta, imgOferta, finOferta) VALUES (:subcategoria, :id_categoria, :ruta, :estado, :oferta, :precioOferta, :descuentoOferta, :imgOferta, :finOferta)");
+
+		$stmt->bindParam(":subcategoria", $datos["subcategoria"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_categoria", $datos["idCategoria"], PDO::PARAM_STR);
+		$stmt->bindParam(":ruta", $datos["ruta"], PDO::PARAM_STR);
+		$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+		$stmt->bindParam(":oferta", $datos["oferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":precioOferta", $datos["precioOferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":descuentoOferta", $datos["descuentoOferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":imgOferta", $datos["imgOferta"], PDO::PARAM_STR);
+		$stmt->bindParam(":finOferta", $datos["finOferta"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+			return "ok";
+		}else{
+			return "error";
 		}
 
 		$stmt->close();

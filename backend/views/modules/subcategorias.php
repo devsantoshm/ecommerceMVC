@@ -50,38 +50,55 @@
     <!-- /.content -->
   </div>
 
-  <!-- MODAL AGREGAR CATEGORIA -->
-  <div class="modal fade" id="modalAgregarCategoria">
+  <!-- MODAL AGREGAR SUBCATEGORIA -->
+  <div class="modal fade" id="modalAgregarSubCategoria">
     <div class="modal-dialog">
       <div class="modal-content">
         <form method="post" enctype="multipart/form-data">
           <div class="modal-header" style="background: #3c8dbc; color: white">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Agregar categoría</h4>
+            <h4 class="modal-title">Agregar subcategoría</h4>
           </div>
           <div class="modal-body">
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                <input type="text" name="tituloCategoria" class="form-control input-lg validarCategoria tituloCategoria" placeholder="Ingresar Categoría" required>
+                <input type="text" name="tituloSubCategoria" class="form-control input-lg validarSubCategoria tituloSubCategoria" placeholder="Ingresar SubCategoría" required>
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-link"></i></span>
-                <input type="text" name="rutaCategoria" class="form-control input-lg rutaCategoria" placeholder="Ruta url para la categoría" readonly required>
+                <input type="text" name="rutaSubCategoria" class="form-control input-lg rutaSubCategoria" placeholder="Ruta url para la subcategoría" readonly required>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <select class="form-control input-lg seleccionarCategoria" name="seleccionarCategoria" required>
+                  <option value="">Seleccionar categoría</option>
+                  <?php
+                  $item = null;
+                  $valor = null; 
+
+                  $categorias = CategoriesController::showCategories($item, $valor);
+                  foreach ($categorias as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["categoria"].'</option>';
+                  }
+                  ?>
+                </select>
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                <textarea maxlength="120" class="form-control input-lg" name="descripcionCategoria" rows="3" placeholder="Ingresar descripción categoría" required></textarea>
+                <textarea maxlength="120" class="form-control input-lg" name="descripcionSubCategoria" rows="3" placeholder="Ingresar descripción subcategoría" required></textarea>
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                <input type="text" name="pClavesCategoria" class="form-control input-lg pClavesCategoria tagsInput" data-role="tagsInput" placeholder="Ingresar palabras claves" required>
+                <input type="text" name="pClavesSubCategoria" class="form-control input-lg pClavesSubCategoria tagsInput" data-role="tagsInput" placeholder="Ingresar palabras claves" required>
               </div>
             </div>
             <div class="form-group">
@@ -129,12 +146,12 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-            <button type="submit" class="btn btn-primary">Guardar categoría</button>
+            <button type="submit" class="btn btn-primary">Guardar subcategoría</button>
           </div>
         </form>
         <?php  
-          $crearCategoria = new CategoriesController();
-          $crearCategoria->createCategory();
+          $crearSubCategoria = new SubCategoriesController();
+          $crearSubCategoria->createSubCategory();
         ?>
       </div>
     </div>
