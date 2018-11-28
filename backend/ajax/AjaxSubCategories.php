@@ -40,14 +40,14 @@ class AjaxSubCategories{
  		echo json_encode($response);
  	}
 
- 	public $idCategoria;
+ 	public $idSubCategoria;
 
- 	public function editCategory()
+ 	public function editSubCategory()
  	{	
  		$item = "id";
- 		$valor = $this->idCategoria;
+ 		$valor = $this->idSubCategoria;
 
- 		$response = CategoriesController::showCategories($item, $valor);
+ 		$response = SubCategoriesController::showSubCategories($item, $valor);
 
  		echo json_encode($response);
  	}
@@ -71,8 +71,8 @@ if (isset($_POST["validarSubCategoria"])) {
 	$validarCategoria->validateSubCategory();
 }
 
-if (isset($_POST["idCategoria"])) {
-	$editCategory = new AjaxCategories();
-	$editCategory->idCategoria = $_POST["idCategoria"];
-	$editCategory->editCategory();
+if (isset($_POST["idSubCategoria"])) {
+	$editSubCategory = new AjaxSubCategories();
+	$editSubCategory->idSubCategoria = $_POST["idSubCategoria"];
+	$editSubCategory->editSubCategory();
 }

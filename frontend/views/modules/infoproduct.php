@@ -122,17 +122,21 @@ $urlFron = Route::urlFront();
 				} else {
 					if($infoproducto["nuevo"] == 0){
 						echo '<h1 class="text-muted text-uppercase">'.$infoproducto["titulo"].'
-							<br>
-							<small><span class="label label-warning">'.$infoproducto["descuentoOferta"].'% off</span></small>
-						</h1>';
+							<br>';
+							if($infoproducto["precio"] != 0){
+								echo '<small><span class="label label-warning">'.$infoproducto["descuentoOferta"].'% off</span></small>';
+							}
+						echo '</h1>';
 					}else{
 						echo '<h1 class="text-muted text-uppercase">'.$infoproducto["titulo"].'
-								<br>
-								<small>
-									<span class="label label-warning">Nuevo</span>
-									<span class="label label-warning">'.$infoproducto["descuentoOferta"].'% off</span>
-								</small>
-							</h1>';
+								<br>';
+								if($infoproducto["precio"] != 0){
+									echo '<small>
+										<span class="label label-warning">Nuevo</span>
+										<span class="label label-warning">'.$infoproducto["descuentoOferta"].'% off</span>
+									</small>';
+								}
+							echo '</h1>';
 					}		 
 				}
 				if ($infoproducto["precio"] == 0) {
@@ -627,7 +631,7 @@ $urlFron = Route::urlFront();
 						<?php 
 							if($value['nuevo'] != 0)
 								echo '<span class="label label-warning fontSize">Nuevo</span> ';
-							if($value['oferta'] != 0)
+							if($value['oferta'] != 0 && $value['precio'] != 0)
 							  	echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
 						?>
 					</a>

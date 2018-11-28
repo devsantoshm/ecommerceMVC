@@ -157,33 +157,50 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalEditarCategoria">
+  <div class="modal fade" id="modalEditarSubCategoria">
     <div class="modal-dialog">
       <div class="modal-content">
         <form method="post" enctype="multipart/form-data">
           <div class="modal-header" style="background: #3c8dbc; color: white">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Editar categoría</h4>
+            <h4 class="modal-title">Editar subcategoría</h4>
           </div>
           <div class="modal-body">
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                <input type="text" name="editarTituloCategoria" class="form-control input-lg validarCategoria tituloCategoria" placeholder="Ingresar Categoría" required>
-                <input type="hidden" name="editarIdCategoria" class="editarIdCategoria">
+                <input type="text" name="editarTituloSubCategoria" class="form-control input-lg validarSubCategoria tituloSubCategoria" required>
+                <input type="hidden" name="editarIdSubCategoria" class="editarIdSubCategoria">
                 <input type="hidden" name="editarIdCabecera" class="editarIdCabecera">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-link"></i></span>
-                <input type="text" name="rutaCategoria" class="form-control input-lg rutaCategoria" placeholder="Ruta url para la categoría" readonly required>
+                <input type="text" name="rutaSubCategoria" class="form-control input-lg rutaSubCategoria" readonly required>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                <select class="form-control input-lg seleccionarCategoria" name="seleccionarCategoria" required>
+                  <option class="optionEditarCategoria"></option>
+                  <?php
+                  $item = null;
+                  $valor = null; 
+
+                  $categorias = CategoriesController::showCategories($item, $valor);
+                  foreach ($categorias as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["categoria"].'</option>';
+                  }
+                  ?>
+                </select>
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                <textarea maxlength="120" class="form-control input-lg descripcionCategoria" name="descripcionCategoria" rows="3" placeholder="Ingresar descripción categoría" required></textarea>
+                <textarea maxlength="120" class="form-control input-lg descripcionSubCategoria" name="descripcionSubCategoria" rows="3" required></textarea>
               </div>
             </div>
             <div class="form-group editarPalabrasClaves">
@@ -242,19 +259,19 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-            <button type="submit" class="btn btn-primary">Guardar categoría</button>
+            <button type="submit" class="btn btn-primary">Guardar subcategoría</button>
           </div>
         </form>
         <?php  
-          $editarCategoria = new CategoriesController();
-          $editarCategoria->editCategory();
+          $editarSubCategoria = new SubCategoriesController();
+          $editarSubCategoria->editSubCategory();
         ?>
       </div>
     </div>
   </div>
   <?php  
-    $eliminarCategoria = new CategoriesController();
-    $eliminarCategoria->deleteCategory();
+    $eliminarSubCategoria = new SubCategoriesController();
+    $eliminarSubCategoria->deleteSubCategory();
   ?>
   <!-- BLOUEO DE LA TECLA ENTER -->
   <script>

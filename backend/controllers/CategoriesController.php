@@ -398,17 +398,27 @@ class CategoriesController
 
 				foreach ($traerProductos as $key => $value) {
 					if ($datos["oferta"] != 0 && $datos["precioOferta"] == 0) {
-						$precioOfertaActualizado = $value["precio"] - ($value["precio"]*$datos["descuentoOferta"]/100);
-						$descuentoOfertaActualizado = $datos["descuentoOferta"];
+						if ($value["precio"] != 0) {
+							$precioOfertaActualizado = $value["precio"] - ($value["precio"]*$datos["descuentoOferta"]/100);
+							$descuentoOfertaActualizado = $datos["descuentoOferta"];
+						}else{
+							$precioOfertaActualizado = 0;
+							$descuentoOfertaActualizado = 0;
+						}
 					}
 
 					if ($datos["oferta"] != 0 && $datos["descuentoOferta"] == 0) {
-						$precioOfertaActualizado = $datos["precioOferta"];
-						$descuentoOfertaActualizado = 100 - ($datos["precioOferta"]*100/$value["precio"]);
+						if ($value["precio"] != 0) {
+							$precioOfertaActualizado = $datos["precioOferta"];
+							$descuentoOfertaActualizado = 100 - ($datos["precioOferta"]*100/$value["precio"]);	
+						}else{
+							$precioOfertaActualizado = 0;
+							$descuentoOfertaActualizado = 0;
+						}
 					}
-				}
 
-				ProductsModel::updateOfertaProductos("products", $datos, "ofertadoPorCategoria", $precioOfertaActualizado, $descuentoOfertaActualizado);
+					ProductsModel::updateOfertaProductos("products", $datos, "ofertadoPorCategoria", $precioOfertaActualizado, $descuentoOfertaActualizado, $value["id"]);
+				}
 
 				HeadersModel::editHeader("headers", $datos);
 
@@ -478,7 +488,7 @@ class CategoriesController
 
 			// QUITAR LAS CATEGORIAS DE LAS PRODUCTOS
 			$traerProductos = ProductsModel::showProducts("products", "id_categoria", $_GET["idCategoria"]);
-			if (traerProductos) {
+			if ($traerProductos) {
 				foreach ($traerProductos as $key => $value) {
 					$item1 = "id_categoria";
 					$valor1 = 0;

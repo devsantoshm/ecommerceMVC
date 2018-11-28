@@ -1,13 +1,13 @@
 //ejemplo para verificar el formato json
-/*$.ajax({
-	url:"ajax/AjaxTableSubCategories.php",
+$.ajax({
+	url:"ajax/AjaxTableProducts.php",
 	succes:function(response){
 		console.log("response", response);
 	}
-})*/
+})
 
-$(".tablaSubCategorias").DataTable({
-	 "ajax": "ajax/AjaxTableSubCategories.php",
+$(".tablaProductos").DataTable({
+	 "ajax": "ajax/AjaxTableProducts.php",
 	 "deferRender": true,
 	 "retrieve": true,
 	 "processing": true,
@@ -42,16 +42,16 @@ $(".tablaSubCategorias").DataTable({
 
 //ACTIVAR CATEGORIA
 //aplicar on una vez se cargo el documento html funcione el evento click
-$(".tablaSubCategorias tbody").on("click", ".btnActivar", function(){
-	var idSubCategoria = $(this).attr("idSubCategoria")
-	var estadoSubCategoria = $(this).attr("estadoSubCategoria")
+$(".tablaCategorias tbody").on("click", ".btnActivar", function(){
+	var idCategoria = $(this).attr("idCategoria")
+	var estadoCategoria = $(this).attr("estadoCategoria")
 
 	var datos = new FormData()
-	datos.append("activarId", idSubCategoria)
-	datos.append("activarSubCategoria", estadoSubCategoria)
+	datos.append("activarId", idCategoria)
+	datos.append("activarCategoria", estadoCategoria)
 
 	$.ajax({
-		url: "ajax/AjaxSubCategories.php",
+		url: "ajax/AjaxCategories.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -69,28 +69,28 @@ $(".tablaSubCategorias tbody").on("click", ".btnActivar", function(){
 		}
 	})
 
-	if (estadoSubCategoria == 0) {
+	if (estadoCategoria == 0) {
 		$(this).removeClass('btn-success')
 		$(this).addClass('btn-danger')
 		$(this).html('Desactivado')
-		$(this).attr('estadoSubCategoria', 1)
+		$(this).attr('estadoCategoria', 1)
 	} else {
 		$(this).addClass('btn-success')
 		$(this).removeClass('btn-danger')
 		$(this).html('Activado')
-		$(this).attr('estadoSubCategoria', 0)
+		$(this).attr('estadoCategoria', 0)
 	}
 })
 
-//REVISAR SI LA SubCATEGORIA YA EXISTE
-$(".validarSubCategoria").change(function(){
+//REVISAR SI LA CATEGORIA YA EXISTE
+$(".validarCategoria").change(function(){
 	$(".alert").remove()
-	var Subcategoria = $(this).val()
+	var categoria = $(this).val()
 	var datos = new FormData()
-	datos.append("validarSubCategoria", Subcategoria)
+	datos.append("validarCategoria", categoria)
 
 	$.ajax({
-		url: "ajax/AjaxSubCategories.php",
+		url: "ajax/AjaxCategories.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -99,15 +99,15 @@ $(".validarSubCategoria").change(function(){
 		dataType: "json",
 		success: function(response){
 			//console.log("response", response);
-			if (response.length != 0) {//el modelo Subcategorias devuelve un fetchAll
-				$(".validarSubCategoria").parent().after('<div class="alert alert-warning">Esta Subcategoría ya existe en la bd</div>')
-				$(".validarSubCategoria").val("")
+			if (response) {
+				$(".validarCategoria").parent().after('<div class="alert alert-warning">Esta categoría ya existe en la bd</div>')
+				$(".validarCategoria").val("")
 			}
 		}
 	})
 })
 
-//RUTA SubCATEGORIA
+//RUTA CATEGORIA
 function limpiarUrl(texto){
 	var texto  = texto.toLowerCase()
 	texto = texto.replace(/[á]/, 'a')
@@ -121,9 +121,9 @@ function limpiarUrl(texto){
 	return texto
 }
 
-$(".tituloSubCategoria").change(function(){
-	$(".rutaSubCategoria").val(
-		limpiarUrl($(".tituloSubCategoria").val())
+$(".tituloCategoria").change(function(){
+	$(".rutaCategoria").val(
+		limpiarUrl($(".tituloCategoria").val())
 	)
 })
 
@@ -259,62 +259,37 @@ $(".valorOferta").change(function(){
 	}
 })
 
-//EDITAR SubCATEGORIA
-$(".tablaSubCategorias tbody").on("click", ".btnEditarSubCategoria", function(){
-	var idSubCategoria = $(this).attr("idSubCategoria")
+//EDITAR CATEGORIA
+$(".tablaCategorias tbody").on("click", ".btnEditarCategoria", function(){
+	var idCategoria = $(this).attr("idCategoria")
 
 	var datos = new FormData()
-	datos.append("idSubCategoria", idSubCategoria)
+	datos.append("idCategoria", idCategoria)
 
 	$.ajax({
-		url: "ajax/AjaxSubCategories.php",
+		url: "ajax/AjaxCategories.php",
 		method: "POST",
 		data: datos,
 		cache: false,
 		contentType: false,
 		processData: false,
 		dataType: "json",
-		success: function(response){//retorna un fetchall la bd
+		success: function(response){
 
-			$("#modalEditarSubCategoria .editarIdSubCategoria").val(response[0]["id"])
+			$("#modalEditarCategoria .editarIdCategoria").val(response["id"])
 
-			$("#modalEditarSubCategoria .tituloSubCategoria").val(response[0]["categoria"])
-			$("#modalEditarSubCategoria .rutaSubCategoria").val(response[0]["ruta"])
+			$("#modalEditarCategoria .tituloCategoria").val(response["categoria"])
+			$("#modalEditarCategoria .rutaCategoria").val(response["ruta"])
 
-			$("#modalEditarSubCategoria .tituloSubCategoria").change(function(){
-				$("#modalEditarSubCategoria .rutaSubCategoria").val(
-					limpiarUrl($("#modalEditarSubCategoria .tituloSubCategoria").val())
+			$("#modalEditarCategoria .tituloCategoria").change(function(){
+				$("#modalEditarCategoria .rutaCategoria").val(
+					limpiarUrl($("#modalEditarCategoria .tituloCategoria").val())
 				)
 			})
 
-			//TRAEMOS LA CATEGORIA
-			if (response[0]["id_categoria"] != 0) {
-				
-				var datosCategoria = new FormData()
-				datosCategoria.append("idCategoria", response[0]["id_categoria"])
-
-				$.ajax({
-				url: "ajax/AjaxCategories.php",
-				method: "POST",
-				data: datosCategoria,
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType:"json",
-				success: function(response){
-
-					$("#modalEditarSubCategoria .seleccionarCategoria").val(response["id"])
-					$("#modalEditarSubCategoria .optionEditarCategoria").html(response["categoria"])
-				}
-			})
-
-			}else{
-				$("#modalEditarSubCategoria .optionEditarCategoria").html("SIN CATEGORIA")
-			}
-
 			//TRAEMOS DATOS DE CABECERA
 			var datosCabecera = new FormData()
-			datosCabecera.append("ruta", response[0]["ruta"])
+			datosCabecera.append("ruta", response["ruta"])
 
 			$.ajax({
 				url: "ajax/AjaxHeaders.php",
@@ -326,19 +301,19 @@ $(".tablaSubCategorias tbody").on("click", ".btnEditarSubCategoria", function(){
 				dataType:"json",
 				success: function(response){
 
-					$("#modalEditarSubCategoria .editarIdCabecera").val(response["id"])
+					$("#modalEditarCategoria .editarIdCabecera").val(response["id"])
 
-					$("#modalEditarSubCategoria .descripcionSubCategoria").val(response["descripcion"])
+					$("#modalEditarCategoria .descripcionCategoria").val(response["descripcion"])
 
 					if (response["palabrasClave"] != null) {
 						$(".editarPalabrasClaves").html(
 				              '<div class="input-group">'+
 				                '<span class="input-group-addon"><i class="fa fa-key"></i></span>'+
-				                '<input type="text" name="pClavesSubCategoria" class="form-control input-lg pClavesSubCategoria tagsInput" data-role="tagsInput" value="'+response["palabrasClave"]+'">'+
+				                '<input type="text" name="pClavesCategoria" class="form-control input-lg pClavesCategoria tagsInput" data-role="tagsInput" value="'+response["palabrasClave"]+'" required>'+
 				              '</div>'
 				        )
 
-				        $("#modalEditarSubCategoria .pClavesSubCategoria").tagsinput('items')
+				        $("#modalEditarCategoria .pClavesCategoria").tagsinput('items')
 
 				        $(".bootstrap-tagsinput").css({
 							"padding":"11px",
@@ -349,11 +324,11 @@ $(".tablaSubCategorias tbody").on("click", ".btnEditarSubCategoria", function(){
 						$(".editarPalabrasClaves").html(
 				              '<div class="input-group">'+
 				                '<span class="input-group-addon"><i class="fa fa-key"></i></span>'+
-				                '<input type="text" name="pClavesSubCategoria" class="form-control input-lg pClavesSubCategoria tagsInput" data-role="tagsInput">'+
+				                '<input type="text" name="pClavesCategoria" class="form-control input-lg pClavesCategoria tagsInput" data-role="tagsInput" placeholder="Ingresar palabras claves" required>'+
 				              '</div>'
 				        )
 
-				        $("#modalEditarSubCategoria .pClavesSubCategoria").tagsinput('items')
+				        $("#modalEditarCategoria .pClavesCategoria").tagsinput('items')
 
 				        $(".bootstrap-tagsinput").css({
 							"padding":"11px",
@@ -362,55 +337,55 @@ $(".tablaSubCategorias tbody").on("click", ".btnEditarSubCategoria", function(){
 						})
 					}
 
-					$("#modalEditarSubCategoria .previsualizarPortada").attr("src", response["portada"])
-					$("#modalEditarSubCategoria .antiguaFotoPortada").val(response["portada"])
+					$("#modalEditarCategoria .previsualizarPortada").attr("src", response["portada"])
+					$("#modalEditarCategoria .antiguaFotoPortada").val(response["portada"])
 				}
 			})
 
 			//PREGUNTAMOS SI EXISTE OFERTA
-			if (response[0]["oferta"] != 0) {
-				$("#modalEditarSubCategoria .selActivarOferta").val("oferta")
-				$("#modalEditarSubCategoria .datosOferta").show()
-				$("#modalEditarSubCategoria .valorOferta").prop("required", true)
-				$("#modalEditarSubCategoria #precioOferta").val(response[0]["precioOferta"])
-				$("#modalEditarSubCategoria #descuentoOferta").val(response[0]["descuentoOferta"])
+			if (response["oferta"] != 0) {
+				$("#modalEditarCategoria .selActivarOferta").val("oferta")
+				$("#modalEditarCategoria .datosOferta").show()
+				$("#modalEditarCategoria .valorOferta").prop("required", true)
+				$("#modalEditarCategoria #precioOferta").val(response["precioOferta"])
+				$("#modalEditarCategoria #descuentoOferta").val(response["descuentoOferta"])
 
-				if (response[0]["precioOferta"] != 0) {
-					$("#modalEditarSubCategoria #precioOferta").prop("readonly", true)
-					$("#modalEditarSubCategoria #descuentoOferta").prop("readonly", false)
+				if (response["precioOferta"] != 0) {
+					$("#modalEditarCategoria #precioOferta").prop("readonly", true)
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", false)
 				}
 
-				if (response[0]["descuentoOferta"] != 0) {
-					$("#modalEditarSubCategoria #precioOferta").prop("readonly", false)
-					$("#modalEditarSubCategoria #descuentoOferta").prop("readonly", true)
+				if (response["descuentoOferta"] != 0) {
+					$("#modalEditarCategoria #precioOferta").prop("readonly", false)
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", true)
 				}
 
-				$("#modalEditarSubCategoria .previsualizarOferta").attr("src", response[0]["imgOferta"])
-				$("#modalEditarSubCategoria .antiguaFotoOferta").val(response[0]["imgOferta"])
-				$("#modalEditarSubCategoria .finOferta").val(response[0]["finOferta"])
+				$("#modalEditarCategoria .previsualizarOferta").attr("src", response["imgOferta"])
+				$("#modalEditarCategoria .antiguaFotoOferta").val(response["imgOferta"])
+				$("#modalEditarCategoria .finOferta").val(response["finOferta"])
 			}else{
-				$("#modalEditarSubCategoria .selActivarOferta").val("")
-				$("#modalEditarSubCategoria .datosOferta").hide()
-				$("#modalEditarSubCategoria .valorOferta").prop("required", false)
-				$("#modalEditarSubCategoria .previsualizarOferta").attr("src", "views/img/ofertas/default/default.jpg")
-				$("#modalEditarSubCategoria .antiguaFotoOferta").val(response[0]["imgOferta"])
+				$("#modalEditarCategoria .selActivarOferta").val("")
+				$("#modalEditarCategoria .datosOferta").hide()
+				$("#modalEditarCategoria .valorOferta").prop("required", false)
+				$("#modalEditarCategoria .previsualizarOferta").attr("src", "views/img/ofertas/default/default.jpg")
+				$("#modalEditarCategoria .antiguaFotoOferta").val(response["imgOferta"])
 			}
 
-			$("#modalEditarSubCategoria .selActivarOferta").change(function(){
+			$("#modalEditarCategoria .selActivarOferta").change(function(){
 				activarOferta($(this).val())
 			})
 
-			$("#modalEditarSubCategoria .valorOferta").change(function(){
+			$("#modalEditarCategoria .valorOferta").change(function(){
 				if ($(this).attr("id") == "precioOferta") {
-					$("#modalEditarSubCategoria #precioOferta").prop("readonly", true)//Set the property and value
-					$("#modalEditarSubCategoria #descuentoOferta").prop("readonly", false)
-					$("#modalEditarSubCategoria #descuentoOferta").val(0)
+					$("#modalEditarCategoria #precioOferta").prop("readonly", true)//Set the property and value
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", false)
+					$("#modalEditarCategoria #descuentoOferta").val(0)
 				}
 
 				if ($(this).attr("id") == "descuentoOferta") {
-					$("#modalEditarSubCategoria #descuentoOferta").prop("readonly", true)//Set the property and value
-					$("#modalEditarSubCategoria #precioOferta").prop("readonly", false)
-					$("#modalEditarSubCategoria #precioOferta").val(0)
+					$("#modalEditarCategoria #descuentoOferta").prop("readonly", true)//Set the property and value
+					$("#modalEditarCategoria #precioOferta").prop("readonly", false)
+					$("#modalEditarCategoria #precioOferta").val(0)
 				}
 			})
 
@@ -419,24 +394,24 @@ $(".tablaSubCategorias tbody").on("click", ".btnEditarSubCategoria", function(){
 })
 
 //ELIMINAR CATEGORIA
-$(".tablaSubCategorias tbody").on("click", ".btnEliminarSubCategoria", function(){
-	var idSubCategoria = $(this).attr("idSubCategoria")
+$(".tablaCategorias tbody").on("click", ".btnEliminarCategoria", function(){
+	var idCategoria = $(this).attr("idCategoria")
 	var imgOferta = $(this).attr("imgOferta")
 	var rutaCabecera = $(this).attr("rutaCabecera")
 	var imgPortada = $(this).attr("imgPortada")
 
 	swal({
-      title: "¿Está seguro de borrar la subcategoría?",
+      title: "¿Está seguro de borrar la categoría?",
       text: "¡Si no lo está puede candelar la acción!",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',  
-      confirmButtonText: "¡Si, borrar subcategoría!"
+      confirmButtonText: "¡Si, borrar categoría!"
       }).then(function(result){
 		 if (result.value) {
-		 	window.location = "index.php?ruta=subcategorias&idSubCategoria="+idSubCategoria+"&imgOferta="+imgOferta+"&rutaCabecera="+rutaCabecera+"&imgPortada="+imgPortada;
+		 	window.location = "index.php?ruta=categorias&idCategoria="+idCategoria+"&imgOferta="+imgOferta+"&rutaCabecera="+rutaCabecera+"&imgPortada="+imgPortada;
 		 }
     });
 })

@@ -143,7 +143,7 @@ $titulo3 = json_decode($banner["titulo3"], true);
 								<?php 
 									if($value['nuevo'] != 0)
 										echo '<span class="label label-warning fontSize">Nuevo</span> ';
-									if($value['oferta'] != 0)
+									if($value['oferta'] != 0 && $value['precio'] != 0)
 									  	echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
 								?>
 							</a>
@@ -204,7 +204,7 @@ $titulo3 = json_decode($banner["titulo3"], true);
 										echo $value['titulo'].'<br>';
 										if($value['nuevo'] != 0)
 											echo '<span class="label label-warning">Nuevo</span> ';
-										if($value['oferta'] != 0)
+										if($value['oferta'] != 0 && $value['precio'] != 0)
 										  	echo '<span class="label label-warning">'.$value["descuentoOferta"].'% off</span>';
 									?>
 								</a>

@@ -37,16 +37,16 @@ class ProductsModel
 		$stmt = null;
 	}
 
-	static public function updateOfertaProductos($table, $datos, $ofertadoPor, $precioOfertaActualizado, $descuentoOfertaActualizado)
+	static public function updateOfertaProductos($table, $datos, $ofertadoPor, $precioOfertaActualizado, $descuentoOfertaActualizado, $idOferta)
 	{
-		$stmt = Conexion::conectar()->prepare("UPDATE $table SET $ofertadoPor = :ofertadoPor, oferta = :oferta, precioOferta = :precioOferta, descuentoOferta = :descuentoOferta, imgOferta = :imgOferta, finOferta = :finOferta WHERE id_categoria = :id_categoria");
+		$stmt = Conexion::conectar()->prepare("UPDATE $table SET $ofertadoPor = :ofertadoPor, oferta = :oferta, precioOferta = :precioOferta, descuentoOferta = :descuentoOferta, imgOferta = :imgOferta, finOferta = :finOferta WHERE id = :id");
 		$stmt->bindParam(":ofertadoPor", $datos["oferta"], PDO::PARAM_STR);
 		$stmt->bindParam(":oferta", $datos["oferta"], PDO::PARAM_STR);
 		$stmt->bindParam(":precioOferta", $precioOfertaActualizado, PDO::PARAM_STR);
 		$stmt->bindParam(":descuentoOferta", $descuentoOfertaActualizado, PDO::PARAM_STR);
 		$stmt->bindParam(":imgOferta", $datos["imgOferta"], PDO::PARAM_STR);
 		$stmt->bindParam(":finOferta", $datos["finOferta"], PDO::PARAM_STR);
-		$stmt->bindParam(":id_categoria", $datos["id"], PDO::PARAM_INT);
+		$stmt->bindParam(":id", $idOferta, PDO::PARAM_INT);
 		
 		if($stmt->execute()){
 			return "ok";
