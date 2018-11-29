@@ -42,16 +42,16 @@ $(".tablaProductos").DataTable({
 
 //ACTIVAR CATEGORIA
 //aplicar on una vez se cargo el documento html funcione el evento click
-$(".tablaCategorias tbody").on("click", ".btnActivar", function(){
-	var idCategoria = $(this).attr("idCategoria")
-	var estadoCategoria = $(this).attr("estadoCategoria")
+$(".tablaProductos tbody").on("click", ".btnActivar", function(){
+	var idProducto = $(this).attr("idProducto")
+	var estadoProducto = $(this).attr("estadoProducto")
 
 	var datos = new FormData()
-	datos.append("activarId", idCategoria)
-	datos.append("activarCategoria", estadoCategoria)
+	datos.append("activarId", idProducto)
+	datos.append("activarProducto", estadoProducto)
 
 	$.ajax({
-		url: "ajax/AjaxCategories.php",
+		url: "ajax/AjaxProducts.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -69,16 +69,16 @@ $(".tablaCategorias tbody").on("click", ".btnActivar", function(){
 		}
 	})
 
-	if (estadoCategoria == 0) {
+	if (estadoProducto == 0) {
 		$(this).removeClass('btn-success')
 		$(this).addClass('btn-danger')
 		$(this).html('Desactivado')
-		$(this).attr('estadoCategoria', 1)
+		$(this).attr('estadoProducto', 1)
 	} else {
 		$(this).addClass('btn-success')
 		$(this).removeClass('btn-danger')
 		$(this).html('Activado')
-		$(this).attr('estadoCategoria', 0)
+		$(this).attr('estadoProducto', 0)
 	}
 })
 
