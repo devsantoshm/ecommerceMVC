@@ -82,15 +82,15 @@ $(".tablaProductos tbody").on("click", ".btnActivar", function(){
 	}
 })
 
-//REVISAR SI LA CATEGORIA YA EXISTE
-$(".validarCategoria").change(function(){
+//REVISAR SI EL PRODUCTO YA EXISTE
+$(".validarProducto").change(function(){
 	$(".alert").remove()
-	var categoria = $(this).val()
+	var producto = $(this).val()
 	var datos = new FormData()
-	datos.append("validarCategoria", categoria)
+	datos.append("validarProducto", producto)
 
 	$.ajax({
-		url: "ajax/AjaxCategories.php",
+		url: "ajax/AjaxProducts.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -98,16 +98,16 @@ $(".validarCategoria").change(function(){
 		processData: false,
 		dataType: "json",
 		success: function(response){
-			//console.log("response", response);
-			if (response) {
-				$(".validarCategoria").parent().after('<div class="alert alert-warning">Esta categoría ya existe en la bd</div>')
-				$(".validarCategoria").val("")
+			console.log("response", response.length);
+			if (response.length != 0) {
+				$(".validarProducto").parent().after('<div class="alert alert-warning">Esta producto ya existe en la bd</div>')
+				$(".validarProducto").val("")
 			}
 		}
 	})
 })
 
-//RUTA CATEGORIA
+//RUTA PRODUCTO
 function limpiarUrl(texto){
 	var texto  = texto.toLowerCase()
 	texto = texto.replace(/[á]/, 'a')
@@ -121,297 +121,534 @@ function limpiarUrl(texto){
 	return texto
 }
 
-$(".tituloCategoria").change(function(){
-	$(".rutaCategoria").val(
-		limpiarUrl($(".tituloCategoria").val())
+$(".tituloProducto").change(function(){
+	$(".rutaProducto").val(
+		limpiarUrl($(".tituloProducto").val())
 	)
 })
 
+/*AGREGAR MULTIMEDIA*/
+var tipo = null
+
+$(".seleccionarTipo").change(function(){
+	tipo = $(this).val()
+	if (tipo == "virtual") {
+		$(".multimediaVirtual").show()
+		$(".multimediaFisica").hide()
+		$(".detallesVirtual").show()
+		$(".detallesFisicos").hide()
+
+	} else {
+		$(".multimediaFisica").show()
+		$(".multimediaVirtual").hide()
+		$(".detallesFisicos").show()
+		$(".detallesVirtual").hide()
+	}
+})
+
 /*=============================================
-SUBIENDO LA FOTO DE PORTADA DE LA CATEGORÍA
+AGREGAR MULTIMEDIA CON DROPZONE
 =============================================*/
+var arrayFiles = [];
+
+$(".multimediaFisica").dropzone({
+
+	url: "/",
+	addRemoveLinks: true,
+	acceptedFiles: "image/jpeg, image/png",
+	maxFilesize: 2,
+	maxFiles: 10,
+	init: function(){
+
+		this.on("addedfile", function(file){
+
+			arrayFiles.push(file);
+
+			// console.log("arrayFiles", arrayFiles);
+		})
+
+		this.on("removedfile", function(file){
+
+			var index = arrayFiles.indexOf(file);
+
+			arrayFiles.splice(index, 1);
+
+			// console.log("arrayFiles", arrayFiles);
+		})
+	}
+})
+
+/*=============================================
+SELECCIONAR SUBCATEGORÍA
+=============================================*/
+$(".seleccionarCategoria").change(function(){
+
+	var categoria = $(this).val();
+
+	$(".seleccionarSubCategoria").html(""); // el html se resetee cada vexz que cambio de categoria
+
+	$("#modalEditarProducto .seleccionarSubCategoria").html("");
+
+	var datos = new FormData();
+	datos.append("idCategoria", categoria);
+
+	 $.ajax({
+	    url:"ajax/AjaxSubCategories.php",
+	    method:"POST",
+	    data: datos,
+	    cache: false,
+	    contentType: false,
+	    processData: false,
+	    dataType: "json",
+	    success:function(respuesta){
+	    	
+	    	// console.log("respuesta", respuesta);
+
+	    	$(".entradaSubcategoria").show();
+
+	    	respuesta.forEach(funcionForEach);
+
+	        function funcionForEach(item, index){
+
+	        	$(".seleccionarSubCategoria").append(
+
+    				'<option value="'+item["id"]+'">'+item["subcategoria"]+'</option>'
+
+    			)
+
+	        }
+
+	    }
+
+	})
+
+})
+
+/*=============================================
+SUBIENDO LA FOTO DE PORTADA
+=============================================*/
+var imagenPortada = null;
 
 $(".fotoPortada").change(function(){
 
-	var imagen = this.files[0];
-
+	imagenPortada = this.files[0];
+	
 	/*=============================================
   	VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
   	=============================================*/
-  	if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-		$(".fotoPortada").val("");
-
-		swal({
-	      title: "Error al subir la imagen",
-	      text: "¡La imagen debe estar en formato JPG o PNG!",
-	      type: "error",
-	      confirmButtonText: "¡Cerrar!"
-	    });
-
-		return;
-
-  	}else if(imagen["size"] > 2000000){
+  	if(imagenPortada["type"] != "image/jpeg" && imagenPortada["type"] != "image/png"){
 
   		$(".fotoPortada").val("");
 
-		swal({
-	      title: "Error al subir la imagen",
-	      text: "¡La imagen no debe pesar más de 2MB!",
-	      type: "error",
-	      confirmButtonText: "¡Cerrar!"
-	    });
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen debe estar en formato JPG o PNG!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
 
-		return;
+  	}else if(imagenPortada["size"] > 2000000){
+
+  		$(".fotoPortada").val("");
+
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen no debe pesar más de 2MB!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
 
   	}else{
 
   		var datosImagen = new FileReader;
-  		datosImagen.readAsDataURL(imagen);
+  		datosImagen.readAsDataURL(imagenPortada);
 
   		$(datosImagen).on("load", function(event){
-		
+
   			var rutaImagen = event.target.result;
 
   			$(".previsualizarPortada").attr("src", rutaImagen);
 
-		})
+  		})
+
   	}
+
 })
 
-$(".fotoOferta").change(function(){
+/*=============================================
+SUBIENDO LA FOTO PRINCIPAL
+=============================================*/
+var imagenFotoPrincipal = null;
 
-	var imagen = this.files[0];
+$(".fotoPrincipal").change(function(){
 
+	imagenFotoPrincipal = this.files[0];
+	
 	/*=============================================
   	VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
   	=============================================*/
-  	if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
+  	if(imagenFotoPrincipal["type"] != "image/jpeg" && imagenFotoPrincipal["type"] != "image/png"){
 
-		$(".fotoOferta").val("");
+  		$(".fotoPrincipal").val("");
 
-		swal({
-	      title: "Error al subir la imagen",
-	      text: "¡La imagen debe estar en formato JPG o PNG!",
-	      type: "error",
-	      confirmButtonText: "¡Cerrar!"
-	    });
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen debe estar en formato JPG o PNG!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
 
-		return;
+  	}else if(imagenFotoPrincipal["size"] > 2000000){
 
-  	}else if(imagen["size"] > 2000000){
+  		$(".fotoPrincipal").val("");
 
-  		$(".fotoOferta").val("");
-
-		swal({
-	      title: "Error al subir la imagen",
-	      text: "¡La imagen no debe pesar más de 2MB!",
-	      type: "error",
-	      confirmButtonText: "¡Cerrar!"
-	    });
-
-		return;
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen no debe pesar más de 2MB!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
 
   	}else{
 
   		var datosImagen = new FileReader;
-  		datosImagen.readAsDataURL(imagen);
+  		datosImagen.readAsDataURL(imagenFotoPrincipal);
 
   		$(datosImagen).on("load", function(event){
-		
+
+  			var rutaImagen = event.target.result;
+
+  			$(".previsualizarPrincipal").attr("src", rutaImagen);
+
+  		})
+
+  	}
+
+})
+
+/*=============================================
+SUBIENDO LA FOTO DE LA OFERTA
+=============================================*/
+var imagenOferta = null;
+
+$(".fotoOferta").change(function(){
+
+	imagenOferta = this.files[0];
+	
+	/*=============================================
+  	VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
+  	=============================================*/
+
+  	if(imagenOferta["type"] != "image/jpeg" && imagenOferta["type"] != "image/png"){
+
+  		$(".fotoOferta").val("");
+
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen debe estar en formato JPG o PNG!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
+
+  	}else if(imagenOferta["size"] > 2000000){
+
+  		$(".fotoOferta").val("");
+
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen no debe pesar más de 2MB!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
+
+  	}else{
+
+  		var datosImagen = new FileReader;
+  		datosImagen.readAsDataURL(imagenOferta);
+
+  		$(datosImagen).on("load", function(event){
+
   			var rutaImagen = event.target.result;
 
   			$(".previsualizarOferta").attr("src", rutaImagen);
 
-		})
+  		})
+
   	}
 })
 
-//ACTIVAR OFERTA
-function activarOferta(evento){
-	if (evento == "oferta") {
-		$(".datosOferta").show()
-		$(".valorOferta").prop("required", true)//Set the property and value
-		$(".valorOferta").val("")
-	} else {
-		$(".datosOferta").hide()
-		$(".valorOferta").prop("required", false)//Set the property and value
-		$(".valorOferta").val("")
+
+/*=============================================
+ACTIVAR OFERTA
+=============================================*/
+function activarOferta(event){
+
+	if(event == "oferta"){
+
+		$(".datosOferta").show();
+		$(".valorOferta").prop("required",true);
+		$(".valorOferta").val("");
+
+	}else{
+
+		$(".datosOferta").hide();
+		$(".valorOferta").prop("required",false);
+		$(".valorOferta").val("");
+
 	}
 }
 
 $(".selActivarOferta").change(function(){
+
 	activarOferta($(this).val())
+
 })
 
-$(".valorOferta").change(function(){
+/*=============================================
+VALOR OFERTA
+=============================================*/
+$("#modalAgregarProducto .valorOferta").change(function(){
 
-	if ($(this).attr("id") == "precioOferta") {
-		$("#precioOferta").prop("readonly", true)//Set the property and value
-		$("#descuentoOferta").prop("readonly", false)
-		$("#descuentoOferta").val(0)
-	}
+	if($(".precio").val()!= 0){
 
-	if ($(this).attr("id") == "descuentoOferta") {
-		$("#descuentoOferta").prop("readonly", true)//Set the property and value
-		$("#precioOferta").prop("readonly", false)
-		$("#precioOferta").val(0)
+		if($(this).attr("tipo") == "oferta"){
+
+			var descuento = 100 - (Number($(this).val())*100/Number($(".precio").val()));
+
+			$(".precioOferta").prop("readonly",true);
+			$(".descuentoOferta").prop("readonly",false);
+			$(".descuentoOferta").val(Math.ceil(descuento));	
+
+		}
+
+		if($(this).attr("tipo") == "descuento"){
+
+			var oferta = Number($(".precio").val())-(Number($(this).val())*Number($(".precio").val())/100);
+			
+			$(".descuentoOferta").prop("readonly",true);
+			$(".precioOferta").prop("readonly",false);
+			$(".precioOferta").val(oferta);
+		}
+
+	}else{
+
+	 swal({
+	      title: "Error al agregar la oferta",
+	      text: "¡Primero agregue un precio al producto!",
+	      type: "error",
+	      confirmButtonText: "¡Cerrar!"
+	    });
+
+	 $(".precioOferta").val(0);
+	 $(".descuentoOferta").val(0);
+
+	 return;
 	}
 })
 
-//EDITAR CATEGORIA
-$(".tablaCategorias tbody").on("click", ".btnEditarCategoria", function(){
-	var idCategoria = $(this).attr("idCategoria")
+/*=============================================
+CAMBIAR EL PRECIO
+=============================================*/
+$(".precio").change(function(){
 
-	var datos = new FormData()
-	datos.append("idCategoria", idCategoria)
+	$(".precioOferta").val(0);
+	$(".descuentoOferta").val(0);
+
+})
+
+/*=============================================
+GUARDAR EL PRODUCTO
+=============================================*/
+var multimediaFisica = null;
+var multimediaVirtual = null;
+
+$(".guardarProducto").click(function(){
+
+	/*=============================================
+	PREGUNTAMOS SI LOS CAMPOS OBLIGATORIOS ESTÁN LLENOS
+	=============================================*/
+	if($(".tituloProducto").val() != "" && 
+	   $(".seleccionarTipo").val() != "" && 
+	   $(".seleccionarCategoria").val() != "" &&
+	   $(".seleccionarSubCategoria").val() != "" &&
+	   $(".descripcionProducto").val() != "" &&
+	   $(".pClavesProducto").val() != ""){
+
+		/*=============================================
+	   	PREGUNTAMOS SI VIENEN IMÁGENES PARA MULTIMEDIA O LINK DE YOUTUBE
+	   	=============================================*/
+	   	if(tipo != "virtual"){
+
+	   		if(arrayFiles.length > 0 && $(".rutaProducto").val() != ""){
+
+	   			var listaMultimedia = [];
+	   			var finalFor = 0;
+
+	   			for(var i = 0; i < arrayFiles.length; i++){
+
+	   				var datosMultimedia = new FormData();
+	   				datosMultimedia.append("file", arrayFiles[i]);
+					datosMultimedia.append("ruta", $(".rutaProducto").val());
+
+					$.ajax({
+						url:"ajax/AjaxProducts.php",
+						method: "POST",
+						data: datosMultimedia,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(respuesta){
+							
+							listaMultimedia.push({"foto" : respuesta.substr(3)})
+							multimediaFisica = JSON.stringify(listaMultimedia);
+							multimediaVirtual = null;
+
+							if(multimediaFisica == null){
+
+							 	swal({
+							      title: "El campo de multimedia no debe estar vacío",
+							      type: "error",
+							      confirmButtonText: "¡Cerrar!"
+							    });
+
+							 	return;
+
+							}
+
+							if((finalFor + 1) == arrayFiles.length){
+
+								agregarMiProducto(multimediaFisica); 
+								finalFor = 0; 
+
+							}
+
+							finalFor++;
+						}
+
+					})
+	   			}
+	   		}
+
+	   	}else{
+
+	   		multimediaVirtual = $(".multimedia").val();
+	   		multimediaFisica = null;
+
+	   		if(multimediaVirtual == null){	
+
+ 			 swal({
+			      title: "El campo de multimedia no debe estar vacío",
+			      type: "error",
+			      confirmButtonText: "¡Cerrar!"
+			    });
+
+ 			  return;
+			
+			}	
+
+			agregarMiProducto(multimediaVirtual); 	
+
+	   	}	
+
+	}else{
+
+		 swal({
+	      title: "Llenar todos los campos obligatorios",
+	      type: "error",
+	      confirmButtonText: "¡Cerrar!"
+	    });
+
+		return;
+	}
+
+})
+
+function agregarMiProducto(imagen)
+{
+	/*=============================================
+	ALMACENAMOS TODOS LOS CAMPOS DE PRODUCTO
+	=============================================*/
+	var tituloProducto = $(".tituloProducto").val();
+	var rutaProducto = $(".rutaProducto").val();
+	var seleccionarTipo = $(".seleccionarTipo").val();
+   	var seleccionarCategoria = $(".seleccionarCategoria").val();
+    var seleccionarSubCategoria = $(".seleccionarSubCategoria").val();
+    var descripcionProducto = $(".descripcionProducto").val();
+    var pClavesProducto = $(".pClavesProducto").val();
+    var precio = $(".precio").val();
+    var peso = $(".peso").val();
+    var entrega = $(".entrega").val();
+    var selActivarOferta = $(".selActivarOferta").val();
+    var precioOferta = $(".precioOferta").val();
+    var descuentoOferta = $(".descuentoOferta").val();
+    var finOferta = $(".finOferta").val();
+
+    if(seleccionarTipo == "virtual"){
+
+		var detalles = {"Clases": $(".detalleClases").val(),
+	       				"Tiempo": $(".detalleTiempo").val(),
+	       				"Nivel": $(".detalleNivel").val(),
+	       				"Acceso": $(".detalleAcceso").val(),
+	       				"Dispositivo": $(".detalleDispositivo").val(),
+	   					"Certificado": $(".detalleCertificado").val()};
+	}else{
+
+		var detalles = {"Talla": $(".detalleTalla").tagsinput('items'),
+		       			"Color": $(".detalleColor").tagsinput('items'),
+		       			"Marca": $(".detalleMarca").tagsinput('items')};
+
+	}
+
+	var detallesString = JSON.stringify(detalles);
+
+ 	var datosProducto = new FormData();
+	datosProducto.append("tituloProducto", tituloProducto);
+	datosProducto.append("rutaProducto", rutaProducto);
+	datosProducto.append("seleccionarTipo", seleccionarTipo);	
+	datosProducto.append("detalles", detallesString);	
+	datosProducto.append("seleccionarCategoria", seleccionarCategoria);
+	datosProducto.append("seleccionarSubCategoria", seleccionarSubCategoria);
+	datosProducto.append("descripcionProducto", descripcionProducto);
+	datosProducto.append("pClavesProducto", pClavesProducto);
+	datosProducto.append("precio", precio);
+	datosProducto.append("peso", peso);
+	datosProducto.append("entrega", entrega);
+
+	datosProducto.append("multimedia", imagen);
+
+	datosProducto.append("fotoPortada", imagenPortada);
+	datosProducto.append("fotoPrincipal", imagenFotoPrincipal);
+	datosProducto.append("selActivarOferta", selActivarOferta);
+	datosProducto.append("precioOferta", precioOferta);
+	datosProducto.append("descuentoOferta", descuentoOferta);
+	datosProducto.append("finOferta", finOferta);
+	datosProducto.append("fotoOferta", imagenOferta);
 
 	$.ajax({
-		url: "ajax/AjaxCategories.php",
+		url:"ajax/AjaxProducts.php",
 		method: "POST",
-		data: datos,
+		data: datosProducto,
 		cache: false,
 		contentType: false,
 		processData: false,
-		dataType: "json",
-		success: function(response){
+		success: function(respuesta){
+			
+			console.log("respuesta", respuesta);
+			if(respuesta == "ok"){
 
-			$("#modalEditarCategoria .editarIdCategoria").val(response["id"])
+				swal({
+				  type: "success",
+				  title: "El producto ha sido guardado correctamente",
+				  showConfirmButton: true,
+				  confirmButtonText: "Cerrar"
+				  }).then(function(result){
+					if (result.value) {
 
-			$("#modalEditarCategoria .tituloCategoria").val(response["categoria"])
-			$("#modalEditarCategoria .rutaCategoria").val(response["ruta"])
+					window.location = "productos";
 
-			$("#modalEditarCategoria .tituloCategoria").change(function(){
-				$("#modalEditarCategoria .rutaCategoria").val(
-					limpiarUrl($("#modalEditarCategoria .tituloCategoria").val())
-				)
-			})
-
-			//TRAEMOS DATOS DE CABECERA
-			var datosCabecera = new FormData()
-			datosCabecera.append("ruta", response["ruta"])
-
-			$.ajax({
-				url: "ajax/AjaxHeaders.php",
-				method: "POST",
-				data: datosCabecera,
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType:"json",
-				success: function(response){
-
-					$("#modalEditarCategoria .editarIdCabecera").val(response["id"])
-
-					$("#modalEditarCategoria .descripcionCategoria").val(response["descripcion"])
-
-					if (response["palabrasClave"] != null) {
-						$(".editarPalabrasClaves").html(
-				              '<div class="input-group">'+
-				                '<span class="input-group-addon"><i class="fa fa-key"></i></span>'+
-				                '<input type="text" name="pClavesCategoria" class="form-control input-lg pClavesCategoria tagsInput" data-role="tagsInput" value="'+response["palabrasClave"]+'" required>'+
-				              '</div>'
-				        )
-
-				        $("#modalEditarCategoria .pClavesCategoria").tagsinput('items')
-
-				        $(".bootstrap-tagsinput").css({
-							"padding":"11px",
-							"width":"100%",
-							"border-radius":"1px"
-						})
-					}else{
-						$(".editarPalabrasClaves").html(
-				              '<div class="input-group">'+
-				                '<span class="input-group-addon"><i class="fa fa-key"></i></span>'+
-				                '<input type="text" name="pClavesCategoria" class="form-control input-lg pClavesCategoria tagsInput" data-role="tagsInput" placeholder="Ingresar palabras claves" required>'+
-				              '</div>'
-				        )
-
-				        $("#modalEditarCategoria .pClavesCategoria").tagsinput('items')
-
-				        $(".bootstrap-tagsinput").css({
-							"padding":"11px",
-							"width":"100%",
-							"border-radius":"1px"
-						})
 					}
-
-					$("#modalEditarCategoria .previsualizarPortada").attr("src", response["portada"])
-					$("#modalEditarCategoria .antiguaFotoPortada").val(response["portada"])
-				}
-			})
-
-			//PREGUNTAMOS SI EXISTE OFERTA
-			if (response["oferta"] != 0) {
-				$("#modalEditarCategoria .selActivarOferta").val("oferta")
-				$("#modalEditarCategoria .datosOferta").show()
-				$("#modalEditarCategoria .valorOferta").prop("required", true)
-				$("#modalEditarCategoria #precioOferta").val(response["precioOferta"])
-				$("#modalEditarCategoria #descuentoOferta").val(response["descuentoOferta"])
-
-				if (response["precioOferta"] != 0) {
-					$("#modalEditarCategoria #precioOferta").prop("readonly", true)
-					$("#modalEditarCategoria #descuentoOferta").prop("readonly", false)
-				}
-
-				if (response["descuentoOferta"] != 0) {
-					$("#modalEditarCategoria #precioOferta").prop("readonly", false)
-					$("#modalEditarCategoria #descuentoOferta").prop("readonly", true)
-				}
-
-				$("#modalEditarCategoria .previsualizarOferta").attr("src", response["imgOferta"])
-				$("#modalEditarCategoria .antiguaFotoOferta").val(response["imgOferta"])
-				$("#modalEditarCategoria .finOferta").val(response["finOferta"])
-			}else{
-				$("#modalEditarCategoria .selActivarOferta").val("")
-				$("#modalEditarCategoria .datosOferta").hide()
-				$("#modalEditarCategoria .valorOferta").prop("required", false)
-				$("#modalEditarCategoria .previsualizarOferta").attr("src", "views/img/ofertas/default/default.jpg")
-				$("#modalEditarCategoria .antiguaFotoOferta").val(response["imgOferta"])
+				})
 			}
-
-			$("#modalEditarCategoria .selActivarOferta").change(function(){
-				activarOferta($(this).val())
-			})
-
-			$("#modalEditarCategoria .valorOferta").change(function(){
-				if ($(this).attr("id") == "precioOferta") {
-					$("#modalEditarCategoria #precioOferta").prop("readonly", true)//Set the property and value
-					$("#modalEditarCategoria #descuentoOferta").prop("readonly", false)
-					$("#modalEditarCategoria #descuentoOferta").val(0)
-				}
-
-				if ($(this).attr("id") == "descuentoOferta") {
-					$("#modalEditarCategoria #descuentoOferta").prop("readonly", true)//Set the property and value
-					$("#modalEditarCategoria #precioOferta").prop("readonly", false)
-					$("#modalEditarCategoria #precioOferta").val(0)
-				}
-			})
-
 		}
 	})
-})
-
-//ELIMINAR CATEGORIA
-$(".tablaCategorias tbody").on("click", ".btnEliminarCategoria", function(){
-	var idCategoria = $(this).attr("idCategoria")
-	var imgOferta = $(this).attr("imgOferta")
-	var rutaCabecera = $(this).attr("rutaCabecera")
-	var imgPortada = $(this).attr("imgPortada")
-
-	swal({
-      title: "¿Está seguro de borrar la categoría?",
-      text: "¡Si no lo está puede candelar la acción!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',  
-      confirmButtonText: "¡Si, borrar categoría!"
-      }).then(function(result){
-		 if (result.value) {
-		 	window.location = "index.php?ruta=categorias&idCategoria="+idCategoria+"&imgOferta="+imgOferta+"&rutaCabecera="+rutaCabecera+"&imgPortada="+imgPortada;
-		 }
-    });
-})
+}

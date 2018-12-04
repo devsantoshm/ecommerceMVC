@@ -30,34 +30,99 @@ class AjaxProducts{
  		echo $respuesta;
  	}
 
- 	public $validarCategoria;
+ 	public $validarProducto;
 
- 	public function validateCategory()
+ 	public function validateProduct()
  	{	
- 		$item = "categoria";
- 		$valor = $this->validarCategoria;
+ 		$item = "titulo";
+ 		$valor = $this->validarProducto;
 
- 		$response = CategoriesController::showCategories($item, $valor);
+ 		$response = ProductsController::showProducts($item, $valor);
 
  		echo json_encode($response);
  	}
 
- 	public $idCategoria;
+ 	/*=============================================
+	RECIBIR MULTIMEDIA
+	=============================================*/
+	public $imagenMultimedia;
+	public $rutaMultimedia;	
 
- 	public function editCategory()
- 	{	
- 		$item = "id";
- 		$valor = $this->idCategoria;
+	public function  recibirMultimedia(){
 
- 		$response = CategoriesController::showCategories($item, $valor);
+		$datos = $this->imagenMultimedia;
+		$ruta = $this->rutaMultimedia;
 
- 		echo json_encode($response);
- 	}
+		$respuesta = ProductsController::uploadMultimedia($datos, $ruta);
+
+		echo $respuesta;
+	}
+
+	/*=============================================
+	GUARDAR PRODUCTO Y EDITAR PRODUCTO
+	=============================================*/	
+	public $tituloProducto;
+	public $rutaProducto;
+	public $seleccionarTipo;
+	public $detalles;			
+	public $seleccionarCategoria;
+	public $seleccionarSubCategoria;
+	public $descripcionProducto;
+	public $pClavesProducto;
+	public $precio;
+	public $peso;
+	public $entrega;
+	public $multimedia;
+	public $fotoPortada;
+	public $fotoPrincipal;
+	public $selActivarOferta;
+	public $precioOferta;
+	public $descuentoOferta;
+	public $finOferta;
+	public $fotoOferta;
+
+	public $id;
+	public $antiguaFotoPortada;
+	public $antiguaFotoPrincipal;
+	public $antiguaFotoOferta;
+	public $idCabecera;
+
+	public function createProduct(){
+
+		$datos = array(
+			"tituloProducto"=>$this->tituloProducto,
+			"rutaProducto"=>$this->rutaProducto,
+			"tipo"=>$this->seleccionarTipo,
+			"detalles"=>$this->detalles,					
+			"categoria"=>$this->seleccionarCategoria,
+			"subCategoria"=>$this->seleccionarSubCategoria,
+			"descripcionProducto"=>$this->descripcionProducto,
+			"pClavesProducto"=>$this->pClavesProducto,
+			"precio"=>$this->precio,
+			"peso"=>$this->peso,
+			"entrega"=>$this->entrega,
+			"multimedia"=>$this->multimedia,
+			"fotoPortada"=>$this->fotoPortada,
+			"fotoPrincipal"=>$this->fotoPrincipal,
+			"selActivarOferta"=>$this->selActivarOferta,
+			"precioOferta"=>$this->precioOferta,
+			"descuentoOferta"=>$this->descuentoOferta,
+			"fotoOferta"=>$this->fotoOferta,
+			"finOferta"=>$this->finOferta
+			);
+
+		$respuesta = ProductsController::createProduct($datos);
+
+		//echo json_encode($respuesta);
+
+		echo $respuesta;
+
+	}
 
 }
 
 /*=============================================
-ACTIVAR CATEGORÍA
+ACTIVAR PRODUCTO
 =============================================*/ 
 if (isset($_POST["activarProducto"])) {
 	$activarProducto = new AjaxProducts();
@@ -66,15 +131,77 @@ if (isset($_POST["activarProducto"])) {
 	$activarProducto->activateProduct();
 }
 
-//VALIDAR NO REPETIR CATEGORIA
-if (isset($_POST["validarCategoria"])) {
-	$validarCategoria = new AjaxCategories();
-	$validarCategoria->validarCategoria = $_POST["validarCategoria"];
-	$validarCategoria->validateCategory();
+//VALIDAR NO REPETIR PRODUCTO
+if (isset($_POST["validarProducto"])) {
+	$validarProducto = new AjaxProducts();
+	$validarProducto->validarProducto = $_POST["validarProducto"];
+	$validarProducto->validateProduct();
 }
 
-if (isset($_POST["idCategoria"])) {
-	$editCategory = new AjaxCategories();
-	$editCategory->idCategoria = $_POST["idCategoria"];
-	$editCategory->editCategory();
+#RECIBIR ARCHIVOS MULTIMEDIA
+#-----------------------------------------------------------
+if(isset($_FILES["file"])){
+	$multimedia = new AjaxProducts();
+	$multimedia -> imagenMultimedia = $_FILES["file"];
+	$multimedia -> rutaMultimedia = $_POST["ruta"];
+	$multimedia -> recibirMultimedia();
 }
+
+#CREAR PRODUCTO
+#-----------------------------------------------------------
+if(isset($_POST["tituloProducto"])){
+
+	$producto = new AjaxProducts();
+	$producto -> tituloProducto = $_POST["tituloProducto"];
+	$producto -> rutaProducto = $_POST["rutaProducto"];
+	$producto -> seleccionarTipo = $_POST["seleccionarTipo"];
+	$producto -> detalles = $_POST["detalles"];		
+	$producto -> seleccionarCategoria = $_POST["seleccionarCategoria"];
+	$producto -> seleccionarSubCategoria = $_POST["seleccionarSubCategoria"];
+	$producto -> descripcionProducto = $_POST["descripcionProducto"];
+	$producto -> pClavesProducto = $_POST["pClavesProducto"];
+	$producto -> precio = $_POST["precio"];
+	$producto -> peso = $_POST["peso"];
+	$producto -> entrega = $_POST["entrega"];
+	$producto -> multimedia = $_POST["multimedia"];
+
+	if(isset($_FILES["fotoPortada"])){
+
+		$producto -> fotoPortada = $_FILES["fotoPortada"];
+
+	}else{
+
+		$producto -> fotoPortada = null;
+
+	}	
+
+	if(isset($_FILES["fotoPrincipal"])){
+
+		$producto -> fotoPrincipal = $_FILES["fotoPrincipal"];
+
+	}else{
+
+		$producto -> fotoPrincipal = null;
+
+	}	
+
+	$producto -> selActivarOferta = $_POST["selActivarOferta"];
+	$producto -> precioOferta = $_POST["precioOferta"];
+	$producto -> descuentoOferta = $_POST["descuentoOferta"];	
+
+	if(isset($_FILES["fotoOferta"])){
+
+		$producto -> fotoOferta = $_FILES["fotoOferta"];
+
+	}else{
+
+		$producto -> fotoOferta = null;
+
+	}	
+
+	$producto -> finOferta = $_POST["finOferta"];
+
+	$producto -> createProduct();
+}
+
+

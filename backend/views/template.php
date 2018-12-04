@@ -37,6 +37,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="views/plugins/tags/bootstrap-tagsinput.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="views/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- Dropzone -->
+  <link rel="stylesheet" href="views/plugins/dropzone/dropzone.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,6 +88,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="views/plugins/tags/bootstrap-tagsinput.min.js"></script>
   <script src="views/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+  <script src="views/plugins/dropzone/dropzone.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">

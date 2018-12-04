@@ -178,7 +178,7 @@ class AjaxTableProducts{
 					"'.$estado.'",
 					"'.$products[$i]["tipo"].'",
 					"'.$cabeceras["descripcion"].'",
-				  	"'.$cabeceras["palabrasClaves"].'",
+				  	"'.$cabeceras["palabrasClave"].'",
 				  	"'.$imagenPortada.'",
 				  	"'.$imagenPrincipal.'",
 			 	  	"'.$vistaMultimedia.'",
