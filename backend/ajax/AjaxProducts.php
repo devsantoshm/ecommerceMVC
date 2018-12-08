@@ -119,6 +119,58 @@ class AjaxProducts{
 
 	}
 
+	/*=============================================
+	TRAER PRODUCTOS
+	=============================================*/	
+	public $idProducto;
+
+	public function getProduct(){
+
+		$item = "id";
+		$valor = $this->idProducto;
+
+		$respuesta = ProductsController::showProducts($item, $valor);
+
+		echo json_encode($respuesta);
+
+	}
+
+	/*=============================================
+	EDITAR PRODUCTOS
+	=============================================*/	
+	public function editProduct(){
+
+		$datos = array(
+			"idProducto"=>$this->id,
+			"tituloProducto"=>$this->tituloProducto,
+			"rutaProducto"=>$this->rutaProducto,
+			"tipo"=>$this->seleccionarTipo,
+			"detalles"=>$this->detalles,					
+			"categoria"=>$this->seleccionarCategoria,
+			"subCategoria"=>$this->seleccionarSubCategoria,
+			"descripcionProducto"=>$this->descripcionProducto,
+			"pClavesProducto"=>$this->pClavesProducto,
+			"precio"=>$this->precio,
+			"peso"=>$this->peso,
+			"entrega"=>$this->entrega,
+			"multimedia"=>$this->multimedia,
+			"fotoPortada"=>$this->fotoPortada,
+			"fotoPrincipal"=>$this->fotoPrincipal,
+			"selActivarOferta"=>$this->selActivarOferta,
+			"precioOferta"=>$this->precioOferta,
+			"descuentoOferta"=>$this->descuentoOferta,
+			"fotoOferta"=>$this->fotoOferta,
+			"finOferta"=>$this->finOferta,
+			"antiguaFotoPortada"=>$this->antiguaFotoPortada,
+			"antiguaFotoPrincipal"=>$this->antiguaFotoPrincipal,
+			"antiguaFotoOferta"=>$this->antiguaFotoOferta,
+			"idCabecera"=>$this->idCabecera
+			);
+
+		$respuesta = ProductsController::editProduct($datos);
+
+		echo $respuesta;
+	}
 }
 
 /*=============================================
@@ -203,5 +255,82 @@ if(isset($_POST["tituloProducto"])){
 
 	$producto -> createProduct();
 }
+
+/*=============================================
+TRAER PRODUCTO
+=============================================*/
+if(isset($_POST["idProducto"])){
+
+	$traerProducto = new AjaxProducts();
+	$traerProducto -> idProducto = $_POST["idProducto"];
+	$traerProducto -> getProduct();
+}
+
+/*=============================================
+EDITAR PRODUCTO
+=============================================*/
+if(isset($_POST["id"])){
+
+	$editarProducto = new AjaxProducts();
+	$editarProducto -> id = $_POST["id"];
+	$editarProducto -> tituloProducto = $_POST["editarProducto"];
+	$editarProducto -> rutaProducto = $_POST["rutaProducto"];
+	$editarProducto -> seleccionarTipo = $_POST["seleccionarTipo"];
+	$editarProducto -> detalles = $_POST["detalles"];		
+	$editarProducto -> seleccionarCategoria = $_POST["seleccionarCategoria"];
+	$editarProducto -> seleccionarSubCategoria = $_POST["seleccionarSubCategoria"];
+	$editarProducto -> descripcionProducto = $_POST["descripcionProducto"];
+	$editarProducto -> pClavesProducto = $_POST["pClavesProducto"];
+	$editarProducto -> precio = $_POST["precio"];
+	$editarProducto -> peso = $_POST["peso"];
+	$editarProducto -> entrega = $_POST["entrega"];
+	$editarProducto -> multimedia = $_POST["multimedia"];
+
+	if(isset($_FILES["fotoPortada"])){
+
+		$editarProducto -> fotoPortada = $_FILES["fotoPortada"];
+
+	}else{
+
+		$editarProducto -> fotoPortada = null;
+
+	}	
+
+	if(isset($_FILES["fotoPrincipal"])){
+
+		$editarProducto -> fotoPrincipal = $_FILES["fotoPrincipal"];
+
+	}else{
+
+		$editarProducto -> fotoPrincipal = null;
+
+	}	
+
+	$editarProducto -> selActivarOferta = $_POST["selActivarOferta"];
+	$editarProducto -> precioOferta = $_POST["precioOferta"];
+	$editarProducto -> descuentoOferta = $_POST["descuentoOferta"];	
+
+	if(isset($_FILES["fotoOferta"])){
+
+		$editarProducto -> fotoOferta = $_FILES["fotoOferta"];
+
+	}else{
+
+		$editarProducto -> fotoOferta = null;
+
+	}	
+
+	$editarProducto -> finOferta = $_POST["finOferta"];
+
+	$editarProducto -> antiguaFotoPortada = $_POST["antiguaFotoPortada"];
+	$editarProducto -> antiguaFotoPrincipal = $_POST["antiguaFotoPrincipal"];
+	$editarProducto -> antiguaFotoOferta = $_POST["antiguaFotoOferta"];
+	$editarProducto -> idCabecera = $_POST["idCabecera"];
+
+	$editarProducto -> editProduct();
+
+}
+
+
 
 
