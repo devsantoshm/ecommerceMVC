@@ -100,8 +100,18 @@ for ($i=0; $i < count($titulosModulos); $i++) {
 				<h4><small>
 					<a href="<?php echo $value['ruta'] ?>" class="pixelProducto"><?php echo $value['titulo'] ?>
 						<br><span style="color: rgba(0,0,0,0);">-</span>
-						<?php 
-							if($value['nuevo'] != 0)
+						<?php
+							/*fechaProducto = 26/02/2018
+							fechaActual = 25/03/2018  - 30 dias
+							fechaNueva = 25/02/2018
+
+							fechaNueva < fechaProducto = Nuevo
+							fechaNueva > fechaProducto = No Nuevo*/
+							$fecha = date('Y-m-d');
+							$fechaActual = strtotime('-30 day', strtotime($fecha));
+							$fechaNueva = date('Y-m-d', $fechaActual);
+
+							if($fechaNueva < $value['fecha'])
 								echo '<span class="label label-warning fontSize">Nuevo</span> ';
 							if($value['oferta'] != 0 && $value['precio'] != 0)
 							  	echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
@@ -163,7 +173,12 @@ for ($i=0; $i < count($titulosModulos); $i++) {
 						<a href="<?php echo $value['ruta'] ?>" class="pixelProducto">
 							<?php 
 								echo $value['titulo'].'<br>';
-								if($value['nuevo'] != 0)
+
+								$fecha = date('Y-m-d');
+								$fechaActual = strtotime('-30 day', strtotime($fecha));
+								$fechaNueva = date('Y-m-d', $fechaActual);
+
+								if($fechaNueva < $value['fecha'])
 									echo '<span class="label label-warning">Nuevo</span> ';
 								if($value['oferta'] != 0 && $value['precio'] != 0)
 								  	echo '<span class="label label-warning">'.$value["descuentoOferta"].'% off</span>';

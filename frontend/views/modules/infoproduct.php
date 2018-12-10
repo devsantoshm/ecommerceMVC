@@ -111,8 +111,13 @@ $urlFron = Route::urlFront();
 				echo '</div>';
 
 				if ($infoproducto["oferta"] == 0) {
-					if($infoproducto["nuevo"] == 0){
+					$fecha = date('Y-m-d');
+					$fechaActual = strtotime('-30 day', strtotime($fecha));
+					$fechaNueva = date('Y-m-d', $fechaActual);
+
+					if($fechaNueva > $infoproducto['fecha']){
 						echo '<h1 class="text-muted text-uppercase">'.$infoproducto["titulo"].'</h1>';
+					}
 					}else{
 						echo '<h1 class="text-muted text-uppercase">'.$infoproducto["titulo"].'
 								<br>
@@ -120,7 +125,11 @@ $urlFron = Route::urlFront();
 							</h1>';
 					}
 				} else {
-					if($infoproducto["nuevo"] == 0){
+					$fecha = date('Y-m-d');
+					$fechaActual = strtotime('-30 day', strtotime($fecha));
+					$fechaNueva = date('Y-m-d', $fechaActual);
+
+					if($fechaNueva > $infoproducto['fecha']){
 						echo '<h1 class="text-muted text-uppercase">'.$infoproducto["titulo"].'
 							<br>';
 							if($infoproducto["precio"] != 0){
@@ -630,7 +639,11 @@ $urlFron = Route::urlFront();
 						<a href="<?php echo $urlFron.$value['ruta'] ?>" class="pixelProducto"><?php echo $value['titulo'] ?>
 							<br><span style="color: rgba(0,0,0,0);">-</span>
 							<?php 
-								if($value['nuevo'] != 0)
+								$fecha = date('Y-m-d');
+								$fechaActual = strtotime('-30 day', strtotime($fecha));
+								$fechaNueva = date('Y-m-d', $fechaActual);
+
+								if($fechaNueva < $value['fecha'])
 									echo '<span class="label label-warning fontSize">Nuevo</span> ';
 								if($value['oferta'] != 0 && $value['precio'] != 0)
 								  	echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
