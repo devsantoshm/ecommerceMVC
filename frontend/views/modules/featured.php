@@ -3,18 +3,15 @@
 	$ruta = "sin-categoria";
 	$banner = ProductController::showBanner($ruta);
 
-	$titulo1 = json_decode($banner["titulo1"], true);
-	$titulo2 = json_decode($banner["titulo2"], true);
-	$titulo3 = json_decode($banner["titulo3"], true);
+	if ($banner != null) {
+		if ($banner['estado'] != 0) {
+			echo '<figure class="banner">
+				<img src="'.$urlBack.$banner["img"].'" class="img-responsive" width="100%">
+			</figure>';
+		}
+	}
 ?>
-<figure class="banner">
-	<img src="<?php echo $urlBack.$banner['img'] ?>" class="img-responsive" width="100%">
-	<div class="textoBanner <?php echo $banner['estilo'] ?>">
-		<h1 style="color:<?php echo $titulo1['color'] ?>"><?php echo $titulo1['texto'] ?></h1>
-		<h2 style="color:<?php echo $titulo2['color'] ?>"><strong><?php echo $titulo2['texto'] ?></strong></h2>
-		<h3 style="color:<?php echo $titulo3['color'] ?>"><?php echo $titulo3['texto'] ?></h3>
-	</div>
-</figure>
+
 <?php 
 	$titulosModulos = array("ARTÍCULOS GRATUITOS", "LO MÁS VENDIDO", "LO MÁS VISTO");
 	$rutaModulos = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
