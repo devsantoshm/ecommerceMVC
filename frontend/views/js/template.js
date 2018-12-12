@@ -136,6 +136,22 @@ for (var i = 0; i < finOferta.length; i++) {
 	});
 }
 
+/*=============================================
+CONTADOR DE TIEMPO OFERTAS PRODUCTOS
+=============================================*/
+var finOferta2 = $('.countdown2').attr("finOferta");
+
+$('.countdown2').dsCountDown({
+	endDate: new Date(finOferta2),
+	theme: 'black',
+	titleDays: 'Dias', 
+	titleHours: 'Horas', 
+	titleMinutes: 'Min', 
+	titleSeconds: 'Seg'
+
+});
+
+
 //EVENTOS PIXEL DE FACEBOOK
 $(".pixelCategorias").click(function(){
 	var titulo = $(this).attr("titulo")

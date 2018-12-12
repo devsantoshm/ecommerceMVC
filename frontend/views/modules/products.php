@@ -4,20 +4,156 @@ $urlFron = Route::urlFront();
 $ruta = $rutas[0];
 $banner = ProductController::showBanner($ruta);
 
-$titulo1 = json_decode($banner["titulo1"], true);
-$titulo2 = json_decode($banner["titulo2"], true);
-$titulo3 = json_decode($banner["titulo3"], true);
+date_default_timezone_set('America/Lima');
+
+$fecha = date('Y-m-d');
+$hora = date('H:i:s');
+
+$fechaActual = $fecha.' '.$hora;
+
+if($banner != null){ 
+	if ($banner["estado"] != 0) {
+		echo '<figure class="banner">
+			<img src="'.$urlBack.$banner["img"].'" class="img-responsive" width="100%">';
+			if ($banner["ruta"] != "sin-categoria") {
+				
+				/*=============================================
+				BANNER PARA CATEGORÍAS
+				=============================================*/
+				if($banner["tipo"] == "categorias"){
+
+					$item = "ruta";
+					$valor = $banner["ruta"];
+
+					$ofertas = ProductController::showCategories($item, $valor);
+
+					if($ofertas["oferta"] == 1){
+
+						echo '<div class="textoBanner textoIzq">
+							<h1 style="color:#fff" class="text-uppercase">'.$ofertas["categoria"].'</h1>
+						</div>
+
+						<div class="textoBanner textoDer">
+							<h1 style="color:#fff">OFERTAS ESPECIALES</h1>';
+
+							if($ofertas["precioOferta"] != 0){
+								
+								echo '<h2 style="color:#fff"><strong>Todos los productos a $ '.$ofertas["precioOferta"].'</strong></h2>';
+
+							}
+
+							if($ofertas["descuentoOferta"] != 0){
+							
+								echo '<h2 style="color:#fff"><strong>Todos los productos con '.$ofertas["descuentoOferta"].'% OFF</strong></h2>';
+							}
+
+						echo '<h3 class="col-md-0 col-sm-0 col-xs-0" style="color:#fff">
+							
+							La oferta termina en<br>
+
+							<div class="countdown2" finOferta="'.$ofertas["finOferta"].'">
+
+						</h3>';
+
+						$datetime1 = new DateTime($ofertas["finOferta"]);
+						$datetime2 = new DateTime($fechaActual);
+
+						$interval = date_diff($datetime1, $datetime2);
+
+						$finOferta = $interval->format('%a');
+
+						if($finOferta == 0){
+
+							echo '<h3 class="col-lg-0" style="color:#fff">La oferta termina hoy</h3>';
+
+						}else if($finOferta == 1){
+	
+							echo '<h3 class="col-lg-0" style="color:#fff">La oferta termina en '.$finOferta.' día</h3>';
+	
+						}else{
+	
+							echo '<h3 class="col-lg-0" style="color:#fff">La oferta termina en '.$finOferta.' días</h3>';
+	
+						}
+
+						echo '</div>';
+					}
+				}
+
+				/*=============================================
+				BANNER PARA SUBCATEGORÍAS
+				=============================================*/
+
+				if($banner["tipo"] == "subcategorias"){
+
+					$item = "ruta";
+					$valor = $banner["ruta"];
+
+					$ofertas = ProductController::showSubCategories($item, $valor);
+
+					if($ofertas[0]["oferta"] == 1){
+
+						echo '<div class="textoBanner textoIzq">
+
+							<h1 style="color:#fff" class="text-uppercase">'.$ofertas[0]["subcategoria"].'</h1>
+
+						</div>
+
+						<div class="textoBanner textoDer">
+						
+							<h1 style="color:#fff">OFERTAS ESPECIALES</h1>';
+
+							if($ofertas[0]["precioOferta"] != 0){
+								
+								echo '<h2 style="color:#fff"><strong>Todos los productos a $ '.$ofertas[0]["precioOferta"].'</strong></h2>';
+
+							}
+
+							if($ofertas[0]["descuentoOferta"] != 0){
+							
+								echo '<h2 style="color:#fff"><strong>Todos los productos con '.$ofertas[0]["descuentoOferta"].'% OFF</strong></h2>';
+							}
+
+						echo '<h3 class="col-md-0 col-sm-0 col-xs-0" style="color:#fff">
+							
+							La oferta termina en<br>
+
+							<div class="countdown2" finOferta="'.$ofertas[0]["finOferta"].'">
+
+						</h3>';
+
+						$datetime1 = new DateTime($ofertas[0]["finOferta"]);
+						$datetime2 = new DateTime($fechaActual);
+
+						$interval = date_diff($datetime1, $datetime2);
+
+						$finOferta = $interval->format('%a');
+
+						if($finOferta == 0){
+
+							echo '<h3 class="col-lg-0" style="color:#fff">La oferta termina hoy</h3>';
+
+						}else if($finOferta == 1){
+	
+							echo '<h3 class="col-lg-0" style="color:#fff">La oferta termina en '.$finOferta.' día</h3>';
+	
+						}else{
+	
+							echo '<h3 class="col-lg-0" style="color:#fff">La oferta termina en '.$finOferta.' días</h3>';
+	
+						}
+
+						echo '</div>';
+
+					}
+					
+				}
+			}
+
+		echo '</figure>';
+	}
+}
 ?>
-<?php if($banner != null){ ?>
-<figure class="banner">
-	<img src="<?php echo $urlBack.$banner['img'] ?>" class="img-responsive" width="100%">
-	<div class="textoBanner <?php echo $banner['estilo'] ?>">
-		<h1 style="color:<?php echo $titulo1['color'] ?>"><?php echo $titulo1['texto'] ?></h1>
-		<h2 style="color:<?php echo $titulo2['color'] ?>"><strong><?php echo $titulo2['texto'] ?></strong></h2>
-		<h3 style="color:<?php echo $titulo3['color'] ?>"><?php echo $titulo3['texto'] ?></h3>
-	</div>
-</figure>
-<?php } ?>
 <div class="container-fluid well well-sm barraProductos">
 	<div class="container">
 		<div class="row">
