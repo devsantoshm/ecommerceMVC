@@ -134,6 +134,7 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
 <script src="views/js/gestorCategorias.js"></script>
 <script src="views/js/gestorSubCategorias.js"></script>
 <script src="views/js/gestorProductos.js"></script>
+<script src="views/js/gestorBanner.js"></script>
 
 </body>
 </html>
