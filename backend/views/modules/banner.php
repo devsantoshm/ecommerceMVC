@@ -59,6 +59,120 @@
 
 </div>
 
+<!--=====================================
+MODAL AGREGAR BANNER
+======================================-->
+<div id="modalAgregarBanner" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+    
+    <div class="modal-content">
+      
+      <form method="post" enctype="multipart/form-data">
+        
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+          <h4 class="modal-title">Agregar banner</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+        <div class="modal-body">
+
+          <div class="box-body">
+            
+            <!--=====================================
+            ENTRADA PARA SUBIR IMAGEN DEL BANNER
+            ======================================-->
+            <div class="form-group">
+              
+              <div class="panel">SUBIR IMAGEN BANNER</div>
+
+                <input type="file" class="fotoBanner" name="fotoBanner" required>
+
+                <p class="help-block">Tamaño recomendado 550px * 1600px <br> Peso máximo de la foto 2MB</p>
+
+                <img src="views/img/banner/default/default.jpg" class="img-thumbnail previsualizarBanner" width="100%">
+
+            </div>
+
+            <!--=====================================
+            SELECCIONAR TIPO BANNER
+            ======================================-->
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <select class="form-control input-lg seleccionarTipoBanner" name="tipoBanner" required>
+                  
+                  <option value="">Selecionar tipo</option>
+                  <option value="sin-categoria">Sin Categoría</option>
+                  <option value="categories">Categorías</option>
+                  <option value="subcategories">SubCategorías</option>            
+  
+                </select>
+
+              </div>
+
+            </div>
+
+            <!--=====================================
+            AGREGAR RUTA DEL BANNER
+            ======================================-->
+            <div class="form-group  entradaRutaBanner" style="display:none">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <select class="form-control input-lg seleccionarRutaBanner" name="rutaBanner">
+
+                </select>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar banner</button>
+
+        </div>
+  
+      </form>
+
+      <?php
+       
+          $crearBanner = new BannerController();
+          $crearBanner -> createBanner();
+
+      ?>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 
 
 
