@@ -73,6 +73,57 @@ class BannerModel
 
 	}
 
+	/*=============================================
+	EDITAR BANNER
+	=============================================*/
+	static public function updateBanner($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET ruta = :ruta, tipo = :tipo, img = :img WHERE id = :id");
+
+		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_STR);
+		$stmt->bindParam(":ruta", $datos["ruta"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":img", $datos["img"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
+
+	/*=============================================
+	ELIMINAR BANNER
+	=============================================*/
+	static public function deleteBanner($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
 }
 
 ?>

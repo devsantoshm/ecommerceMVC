@@ -238,6 +238,122 @@ $(document).on("change", ".seleccionarRutaBanner, .seleccionarTipoBanner", funct
 	})
 })
 
+/*=============================================
+EDITAR BANNER
+=============================================*/
+$(".tablaBanner tbody").on("click", ".btnEditarBanner", function(){
+
+	$(".alert").remove();
+	$("#modalEditarBanner .entradaRutaBanner").hide();
+
+	var idBanner = $(this).attr("idBanner");
+
+	var datos = new FormData();
+	datos.append("idBanner", idBanner);
+
+	$.ajax({
+
+		url:"ajax/AjaxBanner.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function(respuesta){
+			console.log("respuesta", respuesta);
+			
+			$("#modalEditarBanner .idBanner").val(respuesta["id"]);
+
+			/*=============================================
+			CARGAMOS LA IMAGEN DE BANNER
+			=============================================*/
+			$("#modalEditarBanner .previsualizarBanner").attr("src", respuesta["img"]);
+			$("#modalEditarBanner .antiguaFotoBanner").val(respuesta["img"]);
+
+			/*=============================================
+			CARGAMOS EL TIPO DE BANNER
+			=============================================*/
+			$("#modalEditarBanner .seleccionarTipoBanner").val(respuesta["tipo"]);
+			$("#modalEditarBanner .optionEditarTipoBanner").html(respuesta["tipo"]);
+
+			/*=============================================
+			CARGAMOS LA RUTA DEL BANNER
+			=============================================*/
+			if(respuesta["tipo"] != "sin-categoria"){
+
+				$("#modalEditarBanner .entradaRutaBanner").show();
+
+				$("#modalEditarBanner .seleccionarRutaBanner").html(
+
+					' <option class="optionEditarRutaBanner"></option>'
+				);
+
+				$("#modalEditarBanner .optionEditarRutaBanner").val(respuesta["ruta"]);
+
+				$("#modalEditarBanner .optionEditarRutaBanner").html(respuesta["ruta"]);
+
+				$("#modalEditarBanner .seleccionarRutaBanner").attr("name","rutaBanner");
+
+				var datos = new FormData();
+				datos.append("tabla", respuesta["tipo"]);
+
+				 $.ajax({
+				    url:"ajax/AjaxBanner.php",
+				    method:"POST",
+				    data: datos,
+				    cache: false,
+				    contentType: false,
+				    processData: false,
+				    dataType: "json",
+				    success:function(respuesta){
+
+			    		respuesta.forEach(funcionForEach);
+
+				        function funcionForEach(item, index){
+
+				        	$("#modalEditarBanner .seleccionarRutaBanner").append(
+
+			    				'<option value="'+item["ruta"]+'">'+item["ruta"]+'</option>'
+			    			)
+				        }
+				    }
+			    })
+			}
+		}
+	})
+})
+
+/*=============================================
+ELIMINAR BANNER
+=============================================*/
+$(".tablaBanner tbody").on("click", ".btnEliminarBanner", function(){
+
+	var idBanner = $(this).attr("idBanner");
+  	var imgBanner = $(this).attr("imgBanner");
+
+	swal({
+    	title: '¿Está seguro de borrar el banner?',
+    	text: "¡Si no lo está puede cancelar la accíón!",
+    	type: 'warning',
+    	showCancelButton: true,
+    	confirmButtonColor: '#3085d6',
+      	cancelButtonColor: '#d33',
+      	cancelButtonText: 'Cancelar',
+      	confirmButtonText: 'Si, borrar banner!'
+	 	}).then(function(result){
+
+    	if(result.value){
+
+      	window.location = "index.php?ruta=banner&idBanner="+idBanner+"&imgBanner="+imgBanner;
+
+    	}
+  	})
+})
+
+
+
+
 
 
 

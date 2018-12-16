@@ -54,7 +54,6 @@ class AjaxBanner{
   /*=============================================
   VALIDAR RUTA BANNER PARA NO REPETIRLA EN EL FRONTEND
   =============================================*/ 
-
   public $validarRuta;
 
     public function ajaxValidarRuta(){
@@ -68,6 +67,21 @@ class AjaxBanner{
 
     }
 
+   /*=============================================
+    EDITAR BANNER
+    =============================================*/ 
+    public $idBanner;
+
+    public function ajaxEditarBanner(){
+
+      $item = "id";
+      $valor = $this->idBanner;
+
+      $respuesta = BannerController::showBanner($item, $valor);
+
+      echo json_encode($respuesta);
+
+    }
 }
 
 /*=============================================
@@ -103,3 +117,15 @@ if(isset( $_POST["validarRuta"])){
   $valRuta -> ajaxValidarRuta();
 
 }
+
+/*=============================================
+EDITAR BANNER
+=============================================*/
+if(isset($_POST["idBanner"])){
+
+  $editar = new AjaxBanner();
+  $editar -> idBanner = $_POST["idBanner"];
+  $editar -> ajaxEditarBanner();
+
+}
+

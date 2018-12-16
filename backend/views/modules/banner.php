@@ -172,6 +172,130 @@ MODAL AGREGAR BANNER
 
 </div>
 
+<!--=====================================
+MODAL EDITAR BANNER
+======================================-->
+<div id="modalEditarBanner" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+    
+    <div class="modal-content">
+
+      <form method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+          <h4 class="modal-title">Editar banner</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+        <div class="modal-body">
+          
+          <div class="box-body">
+
+            <!--=====================================
+            ENTRADA PARA EDITAR FOTO DE BANNER
+            ======================================-->
+            <div class="form-group">
+
+              <input type="hidden" class="idBanner" name="idBanner">
+              
+              <div class="panel">CAMBIAR IMAGEN DE BANNER</div>
+
+               <input type="file" class="fotoBanner" name="fotoBanner">
+               <input type="hidden" class="antiguaFotoBanner" name="antiguaFotoBanner">
+
+               <p class="help-block">Tamaño recomendado 550px * 1600px <br> Peso máximo de la foto 2MB</p>
+
+                <img src="views/img/banner/default/default.jpg" class="img-thumbnail previsualizarBanner" width="100%">
+
+            </div>
+
+           <!--=====================================
+            ENTRADA PARA SELECCIONAR EL TIPO DE BANNER
+            ======================================-->
+            <div class="form-group">
+              
+                <div class="input-group">
+              
+                  <span class="input-group-addon"><i class="fa fa-bookmark-o"></i></span> 
+
+                   <select type="text" class="form-control input-lg seleccionarTipoBanner" required name="editarTipoBanner">
+
+                    <option class="optionEditarTipoBanner"></option>
+                    <option value="sin-categoria">Sin Categoría</option>
+                    <option value="categories">Categorías</option>
+                    <option value="subcategories">SubCategorías</option>     
+
+                   </select>
+
+                </div>
+
+            </div>
+
+            <!--=====================================
+            EDITAR RUTA BANNER
+            ======================================-->
+            <div class="form-group entradaRutaBanner" style="display:none">
+                
+                <div class="input-group">
+              
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                  <select class="form-control input-lg seleccionarRutaBanner">
+
+                  </select>
+
+                </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar cambios banner</button>
+
+        </div>
+
+      </form>
+
+      <?php
+        
+        $editarBanner = new BannerController();
+        $editarBanner -> updateBanner();
+
+      ?>
+
+    </div>
+
+  </div>
+
+</div>
+
+ <?php
+        
+    $eliminarBanner = new BannerController();
+    $eliminarBanner -> deleteBanner();
+
+  ?>
+
+
 
 
 
