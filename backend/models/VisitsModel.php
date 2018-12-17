@@ -19,6 +19,21 @@ class VisitsModel
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+
+	/*=============================================
+	MOSTRAR VISITAS
+	=============================================*/	
+	static public function showVisits($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+		$stmt = null;
+	}
 }
 
 ?>

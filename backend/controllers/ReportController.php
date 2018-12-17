@@ -132,6 +132,38 @@ class ReportController{
 					");
 
 			}
+
+			/*=============================================
+			REPORTE DE VISITAS
+			=============================================*/
+			if($_GET["reporte"] == "visitspeople"){	
+
+				echo utf8_decode("<table border='0'> 
+
+					<tr> 
+						<td style='font-weight:bold; border:1px solid #eee;'>IP</td> 
+						<td style='font-weight:bold; border:1px solid #eee;'>PAÍS</td>
+						<td style='font-weight:bold; border:1px solid #eee;'>VISITAS</td>
+						<td style='font-weight:bold; border:1px solid #eee;'>FECHA</td>	
+					</tr>");
+
+				foreach ($reporte as $key => $value) {
+
+					 echo utf8_decode("<tr>
+				 			
+	 						<td style='border:1px solid #eee;'>".$value["ip"]."</td>
+	 						<td style='border:1px solid #eee;'>".$value["pais"]."</td>
+	 						<td style='border:1px solid #eee;'>".$value["visitas"]."</td>
+	 						<td style='border:1px solid #eee;'>".$value["fecha"]."</td>
+					  	 
+					  	 </tr>"); 		
+							
+				}
+	
+				echo "</table>";
+
+			}
+
 		}
 	}
 }

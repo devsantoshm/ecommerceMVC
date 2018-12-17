@@ -17,6 +17,19 @@ class VisitsController
 
 		return $response; 
 	}
+
+	/*=============================================
+	MOSTRAR VISITAS
+	=============================================*/
+	static public function showVisits(){
+
+		$tabla = "visitspeople";
+	
+		$respuesta = VisitsModel::showVisits($tabla);
+		
+		return $respuesta;
+	}
+
 }
 
 ?>

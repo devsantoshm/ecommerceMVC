@@ -28,8 +28,8 @@ $totalVisitas = VisitsController::showVisitsTotal();
   <div class="box-footer no-border">
     <div class="row">
       <?php  
-      for($i = 0; $i < 4; $i++){
-        echo '<div class="col-md-3 col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
+      for($i = 0; $i < 3; $i++){
+        echo '<div class="col-md-4 col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
               <input type="text" class="knob" data-readonly="true" value="'.round($paises[$i]["cantidad"]*100/$totalVisitas["total"]).'" data-width="60" data-height="60" data-fgColor="#3999CC">
               <div class="knob-label">'.$paises[$i]["pais"].'</div>
             </div>';
