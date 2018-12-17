@@ -34,7 +34,7 @@
 
         <div class="box-tools">
 
-          <a href="views/modules/reportes.php?reporte=compras">
+          <a href="views/modules/reportes.php?reporte=shopping">
             
               <button class="btn btn-success">Descargar reporte en Excel</button>
 

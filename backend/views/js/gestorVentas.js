@@ -59,7 +59,7 @@ $(".tablaVentas tbody").on("click", ".btnEnvio", function(){
 
   		$.ajax({
 
-  		url:"ajax/ventas.ajax.php",
+  		url:"ajax/AjaxSales.php",
   		method: "POST",
 	  	data: datos,
 	  	cache: false,
