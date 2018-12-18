@@ -164,6 +164,61 @@ class ReportController{
 
 			}
 
+			/*=============================================
+			REPORTE DE USUARIOS
+			=============================================*/
+			if($_GET["reporte"] == "users"){	
+
+				echo utf8_decode("<table border='0'> 
+
+					<tr> 
+						<td style='font-weight:bold; border:1px solid #eee;'>NOMBRE</td> 
+						<td style='font-weight:bold; border:1px solid #eee;'>EMAIL</td>
+						<td style='font-weight:bold; border:1px solid #eee;'>MODO</td>
+						<td style='font-weight:bold; border:1px solid #eee;'>ESTADO</td>
+						<td style='font-weight:bold; border:1px solid #eee;'>FECHA</td>	
+					</tr>");
+
+				foreach ($reporte as $key => $value) {
+
+					 echo utf8_decode("<tr>
+				 			
+ 						<td style='border:1px solid #eee;'>".$value["nombre"]."</td>
+ 						<td style='border:1px solid #eee;'>".$value["email"]."</td>
+ 						<td style='border:1px solid #eee;'>".$value["modo"]."</td>
+ 						<td style='border:1px solid #eee;'>");
+
+					/*=============================================
+  					REVISAR ESTADO
+  					=============================================*/
+		  			if($value["modo"] == "directo"){
+
+			  			if( $value["verificacion"] == 1){
+			  				
+		  					$estado = "Desactivado";			  			
+
+			  			}else{
+			  				
+			  				$estado = "Activado";
+			  			
+			  			}		  			
+
+			  		}else{
+
+			  			$estado = "Activado";
+
+			  		}
+
+				 	echo utf8_decode($estado."</td>
+				 					<td style='border:1px solid #eee;'>".$value["fecha"]."</td>
+			 					  	 
+			 					  </tr>"); 		
+				}
+
+				echo "</table>";
+
+			}
+
 		}
 	}
 }
