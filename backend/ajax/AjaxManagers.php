@@ -25,6 +25,23 @@ class AjaxManagers{
 
 		echo $respuesta;
 	}
+
+	/*=============================================
+	EDITAR PERFIL
+	=============================================*/	
+	public $idPerfil;
+
+	public function showEditProfile(){
+
+		$item = "id";
+		$valor = $this->idPerfil;
+
+		$respuesta = ManagersController::showManagers($item, $valor);
+
+		echo json_encode($respuesta);
+
+	}
+
 }
 
 /*=============================================
@@ -36,5 +53,16 @@ if(isset($_POST["activarPerfil"])){
 	$activarPerfil -> activarPerfil = $_POST["activarPerfil"];
 	$activarPerfil -> activarId = $_POST["activarId"];
 	$activarPerfil -> updateActivateManager();
+
+}
+
+/*=============================================
+EDITAR PERFIL
+=============================================*/
+if(isset($_POST["idPerfil"])){
+
+	$editar = new AjaxManagers();
+	$editar -> idPerfil = $_POST["idPerfil"];
+	$editar -> showEditProfile();
 
 }

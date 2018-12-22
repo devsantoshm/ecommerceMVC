@@ -250,3 +250,149 @@ MODAL AGREGAR PERFIL
 
 </div>
 
+<!--=====================================
+MODAL EDITAR PERFIL
+======================================-->
+<div id="modalEditarPerfil" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Editar Perfil</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- ENTRADA PARA EL NOMBRE -->
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
+
+                <input type="hidden" id="idPerfil" name="idPerfil">
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL EMAIL -->
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
+
+                <input type="email" class="form-control input-lg" id="editarEmail" name="editarEmail" value="" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LA CONTRASEÑA -->
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+
+                <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña">
+
+                <input type="hidden" id="passwordActual" name="passwordActual">
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-users"></i></span> 
+
+                <select class="form-control input-lg" name="editarPerfil">
+                  
+                  <option value="" id="editarPerfil"></option>
+
+                  <option value="administrador">Administrador</option>
+
+                  <option value="editor">Editor</option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SUBIR FOTO -->
+            <div class="form-group">
+              
+              <div class="panel">SUBIR FOTO</div>
+
+              <input type="file" class="nuevaFoto" name="editarFoto">
+
+              <p class="help-block">Peso máximo de la foto 2MB</p>
+
+              <img src="views/img/perfiles/default/anonymous.png" class="img-thumbnail previsualizar avatar" width="100px">
+
+              <input type="hidden" name="fotoActual" id="fotoActual">
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Modificar Perfil</button>
+
+        </div>
+
+        <?php
+
+          $editarPerfil = new ManagersController();
+          $editarPerfil -> editProfile();
+
+        ?> 
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<?php
+
+  $eliminarPerfil = new ManagersController();
+  $eliminarPerfil -> deleteProfile();
+
+?> 
+
+

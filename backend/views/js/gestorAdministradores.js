@@ -88,6 +88,82 @@ $(".nuevaFoto").change(function(){
     })
 
   }
-  
+
 })
+
+/*=============================================
+EDITAR PERFIL
+=============================================*/
+$(".tablaPerfiles").on("click", ".btnEditarPerfil", function(){
+
+  var idPerfil = $(this).attr("idPerfil");
+  
+  var datos = new FormData();
+  datos.append("idPerfil", idPerfil);
+
+  $.ajax({
+
+    url:"ajax/AjaxManagers.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+    success: function(respuesta){ 
+
+      $("#editarNombre").val(respuesta["nombre"]);
+      $("#idPerfil").val(respuesta["id"]);
+      $("#editarEmail").val(respuesta["email"]);
+      $("#editarPerfil").html(respuesta["perfil"]);
+      $("#editarPerfil").val(respuesta["perfil"]);
+      $("#fotoActual").val(respuesta["foto"]);
+      $("#passwordActual").val(respuesta["password"]);
+
+      if(respuesta["foto"] != ""){
+
+        $(".avatar").attr("src", respuesta["foto"]);
+
+      } else {
+
+        $(".avatar").attr("src", "views/img/perfiles/default/anonymous.png");
+
+      }
+
+    }
+
+  })
+
+})
+
+/*=============================================
+ELIMINAR USUARIO
+=============================================*/
+$(".tablaPerfiles").on("click", ".btnEliminarPerfil", function(){
+
+  var idPerfil = $(this).attr("idPerfil");
+  var fotoPerfil = $(this).attr("fotoPerfil");
+
+
+  swal({
+    title: '¿Está seguro de borrar el perfil?',
+    text: "¡Si no lo está puede cancelar la accíón!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, borrar perfil!'
+  }).then(function(result){
+
+    if(result.value){
+
+      window.location = "index.php?ruta=perfiles&idPerfil="+idPerfil+"&fotoPerfil="+fotoPerfil;
+
+    }
+
+  })
+
+})
+
 

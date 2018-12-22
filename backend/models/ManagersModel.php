@@ -84,6 +84,59 @@ class ManagersModel
 
 	}
 
+	/*=============================================
+	EDITAR PERFIL
+	=============================================*/
+	static public function editProfile($tabla, $datos){
+	
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, email = :email, password = :password, perfil = :perfil, foto = :foto WHERE id = :id");
+
+		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt -> bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
+		$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	ELIMINAR PERFIL
+	=============================================*/
+	static public function deleteProfile($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+		$stmt = null;
+
+	}
+
 }
 
 ?>
