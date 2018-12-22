@@ -117,8 +117,8 @@ $urlFron = Route::urlFront();
 
 					if($fechaNueva > $infoproducto['fecha']){
 						echo '<h1 class="text-muted text-uppercase">'.$infoproducto["titulo"].'</h1>';
-					}
-					}else{
+					
+					} else{
 						echo '<h1 class="text-muted text-uppercase">'.$infoproducto["titulo"].'
 								<br>
 								<small><span class="label label-warning">Nuevo</span></small>

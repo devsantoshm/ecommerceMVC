@@ -1,40 +1,120 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Gestor Perfiles
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Gestor Perfiles</li>
-      </ol>
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Title</h3>
+  <section class="content-header">
+    
+    <h1>
+      
+      Administrar perfiles
+    
+    </h1>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          Start creating your amazing application!
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
+    <ol class="breadcrumb">
+      
+      <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      
+      <li class="active">Administrar perfiles</li>
+    
+    </ol>
+
+  </section>
+
+  <section class="content">
+
+    <div class="box">
+
+      <div class="box-header with-border">
+  
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarPerfil">
+          
+          Agregar perfil
+
+        </button>
+
       </div>
-      <!-- /.box -->
-    </section>
-    <!-- /.content -->
-  </div>
+
+      <div class="box-body">
+        
+        <table class="table table-bordered table-striped dt-responsive tablaPerfiles" width="100%">
+         
+          <thead>
+           
+           <tr>
+             
+             <th style="width:10px">#</th>
+             <th>Nombre</th>
+             <th>Email</th>
+             <th>Foto</th>
+             <th>Perfil</th>
+             <th>Estado</th>
+             <th>Acciones</th>
+
+           </tr> 
+
+          </thead>
+
+          <tbody>
+
+            <?php
+
+            $item = null;
+            $valor = null;
+
+            $perfiles = ManagersController::showManagers($item, $valor);
+
+            foreach ($perfiles as $key => $value){
+
+               echo ' <tr>
+                        <td>'.($key+1).'</td>
+                        <td>'.$value["nombre"].'</td>
+                        <td>'.$value["email"].'</td>';
+
+                       if($value["foto"] != ""){
+
+                        echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+
+                       }else{
+
+                          echo '<td><img src="views/img/perfiles/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+
+                      }
+
+                      echo '<td>'.$value["perfil"].'</td>';
+
+                       if($value["estado"] != 0){
+
+                        echo '<td><button class="btn btn-success btn-xs btnActivar" idPerfil="'.$value["id"].'" estadoPerfil="0">Activado</button></td>';
+
+                      }else{
+
+                        echo '<td><button class="btn btn-danger btn-xs btnActivar" idPerfil="'.$value["id"].'" estadoPerfil="1">Desactivado</button></td>';
+
+                      } 
+
+                       echo '<td>
+
+                        <div class="btn-group">
+                            
+                          <button class="btn btn-warning btnEditarPerfil" idPerfil="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarPerfil"><i class="fa fa-pencil"></i></button>
+
+                          <button class="btn btn-danger btnEliminarPerfil" idPerfil="'.$value["id"].'" fotoPerfil="'.$value["foto"].'"><i class="fa fa-times"></i></button>
+
+                        </div>  
+
+                      </td>
+
+                    </tr>';            
+            }
+
+            ?>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

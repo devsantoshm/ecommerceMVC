@@ -15,18 +15,31 @@ class ManagersController
 				$respuesta = ManagersModel::loginManager($table, $item, $valor);
 
 				if ($respuesta["email"] == $_POST["ingEmail"] && $respuesta["password"] == $_POST["ingPassword"]) {
-					$_SESSION["validarSesionBackend"] = "ok";
-					$_SESSION["id"] = $respuesta["id"];
-					$_SESSION["nombre"] = $respuesta["nombre"];
-					$_SESSION["foto"] = $respuesta["foto"];
-					$_SESSION["email"] = $respuesta["email"];
-					$_SESSION["password"] = $respuesta["password"];
-					$_SESSION["perfil"] = $respuesta["perfil"];
 
-					echo '<script>
-							window.location = "inicio";
-						</script>';
+					if ($respuesta["estado"] == 1) {
+						
+					
+						$_SESSION["validarSesionBackend"] = "ok";
+						$_SESSION["id"] = $respuesta["id"];
+						$_SESSION["nombre"] = $respuesta["nombre"];
+						$_SESSION["foto"] = $respuesta["foto"];
+						$_SESSION["email"] = $respuesta["email"];
+						$_SESSION["password"] = $respuesta["password"];
+						$_SESSION["perfil"] = $respuesta["perfil"];
+
+						echo '<script>
+								window.location = "inicio";
+							</script>';
+
+					} else {
+
+						echo '<br>
+						<div class="alert alert-warning">Este usuario aún no está activado</div>';
+
+					}
+
 				} else {
+
 					echo '<br>
 						<div class="alert alert-danger">Error al ingresar vuelva a intentarlo</div>';
 				}
@@ -34,6 +47,19 @@ class ManagersController
 			}
 		}
 	}
+
+	/*=============================================
+	MOSTRAR ADMINISTRADORES
+	=============================================*/
+	static public function showManagers($item, $valor){
+
+		$tabla = "managers";
+
+		$respuesta = ManagersModel::loginManager($tabla, $item, $valor);
+
+		return $respuesta;
+	}
+
 }
 
 ?>

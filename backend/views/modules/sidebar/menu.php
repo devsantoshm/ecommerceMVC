@@ -20,6 +20,5 @@
 	<li><a href="ventas"><i class="fa fa-shopping-cart"></i> <span>Gestor Ventas</span></a></li>
 	<li><a href="visitas"><i class="fa fa-map-marker"></i> <span>Gestor Visitas</span></a></li>
 	<li><a href="usuarios"><i class="fa fa-users"></i> <span>Gestor Usuarios</span></a></li>
-	<li><a href="mensajes"><i class="fa fa-envelope"></i> <span>Gestor Mensajes</span></a></li>
 	<li><a href="perfiles"><i class="fa fa-key"></i> <span>Gestor Perfiles</span></a></li>
 </ul>
