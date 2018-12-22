@@ -55,6 +55,35 @@ class ManagersModel
 
 	}
 
+	/*=============================================
+	REGISTRO DE PERFIL
+	=============================================*/
+	static public function createProfile($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, email, password, perfil, foto, estado) VALUES (:nombre, :email, :password, :perfil, :foto, :estado)");
+
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		$stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
+		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";	
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}
+
 }
 
 ?>
