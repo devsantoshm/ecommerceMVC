@@ -40,6 +40,9 @@ require_once "models/SlideModel.php";
 require_once "controllers/UsersController.php";
 require_once "models/UsersModel.php";
 
+require_once "controllers/NotificationsController.php";
+require_once "models/NotificationsModel.php";
+
 require_once "models/routes.php";
 
 $template = new TemplateController();

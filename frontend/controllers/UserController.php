@@ -24,6 +24,17 @@ class UserController
 				$respuesta = UserModel::registerUser($tabla, $datos);
 
 				if ($respuesta == "ok") {
+
+					/*=============================================
+					ACTUALIZAR NOTIFICACIONES NUEVOS USUARIOS
+					=============================================*/
+					$traerNotificaciones = NotificationsController::showNotifications();
+
+					$nuevoUsuario = $traerNotificaciones["nuevosUsuarios"] + 1;
+
+					NotificationsModel::updateNotifications("notifications", "nuevosUsuarios", $nuevoUsuario);
+
+
 					//Verificación correo electrónico
 					date_default_timezone_set("America/Lima");
 					$urlFron = Route::urlFront();
@@ -379,9 +390,21 @@ class UserController
 
 				return;
 			}
+
 			$emailRepetido = true;
+
 		} else {
+
 			$response1 = UserModel::registerUser($table, $datos);
+
+			/*=============================================
+			ACTUALIZAR NOTIFICACIONES NUEVOS USUARIOS
+			=============================================*/
+			$traerNotificaciones = NotificationsController::showNotifications();
+
+			$nuevoUsuario = $traerNotificaciones["nuevosUsuarios"] + 1;
+
+			NotificationsModel::updateNotifications("notifications", "nuevosUsuarios", $nuevoUsuario);
 		}
 		
 		if ($emailRepetido || $response1 == "ok") {

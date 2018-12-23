@@ -17,6 +17,9 @@ require_once "models/CarModel.php";
 require_once "controllers/VisitsController.php";
 require_once "models/VisitsModel.php";
 
+require_once "controllers/NotificationsController.php";
+require_once "models/NotificationsModel.php";
+
 require_once "models/routes.php";
 
 require_once "extensiones/PHPMailer/PHPMailerAutoload.php";
