@@ -7,14 +7,14 @@ class ManagersController
 		if (isset($_POST["ingEmail"])) {
 			if (preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["ingEmail"]) &&
 			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])) {
-				//$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+				$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 				$table = "managers";
 				$item = "email";
 				$valor = $_POST["ingEmail"];
 
 				$respuesta = ManagersModel::loginManager($table, $item, $valor);
 
-				if ($respuesta["email"] == $_POST["ingEmail"] && $respuesta["password"] == $_POST["ingPassword"]) {
+				if ($respuesta["email"] == $_POST["ingEmail"] && $respuesta["password"] == $encriptar) {
 
 					if ($respuesta["estado"] == 1) {
 						

@@ -1,18 +1,27 @@
 <!--=====================================
 USUARIOS
 ======================================-->	
-
 <!-- user-menu -->
 <li class="dropdown user user-menu">
 
 	<!-- dropdown-toggle -->
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	
-	<img src="views/img/usuarios/default/anonymous.png" class="user-image" alt="User Image">
+		<?php
 
+		if($_SESSION["foto"] == ""){
+
+			echo '<img src="views/img/perfiles/default/anonymous.png" class="user-image" alt="User Image">';
+
+		}else{
+
+			echo '<img src="'.$_SESSION["foto"].'" class="user-image" alt="User Image">';
+
+		}
+
+		?>	
 		
-		
-		<span class="hidden-xs">Sistema Ecommerce</span>
+		<span class="hidden-xs"><?php echo $_SESSION["nombre"]; ?></span>
 	
 	</a>
 	<!-- dropdown-toggle -->
@@ -21,23 +30,30 @@ USUARIOS
 	<ul class="dropdown-menu">
 
 		<li class="user-header">
+		
+			<?php
 
-			<img src="views/img/usuarios/default/anonymous.png" class="img-circle" alt="User Image">'
+			if($_SESSION["foto"] == ""){
+
+				echo '<img src="views/img/perfiles/default/anonymous.png" class="user-image" alt="User Image">';
+
+			}else{
+
+				echo '<img src="'.$_SESSION["foto"].'" class="user-image" alt="User Image">';
+
+			}
+
+			?>	
 
 			<p>
-				Sistema Ecommerce
+			<?php echo $_SESSION["nombre"]; ?>
+			<h4 style="color:white"><?php echo $_SESSION["perfil"]; ?></h4>
 			</p>
 		
 		</li>
 
 		<li class="user-footer">
 	
-			<div class="pull-left">
-			
-				<a href="salir" class="btn btn-default btn-flat">Perfil</a>
-			
-			</div>
-
 			<div class="pull-right">
 			
 				<a href="salir" class="btn btn-default btn-flat">Salir</a>

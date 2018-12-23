@@ -1,3 +1,19 @@
+<?php
+
+if($_SESSION["perfil"] != "administrador"){
+
+echo '<script>
+
+  window.location = "inicio";
+
+</script>';
+
+return; //cancelamos cualquier proceso en adelante
+
+}
+
+?>
+
 <div class="content-wrapper">
   
    <section class="content-header">

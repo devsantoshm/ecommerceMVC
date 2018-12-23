@@ -118,6 +118,11 @@ if (isset($_SESSION["validarSesionBackend"]) && $_SESSION["validarSesionBackend"
       include 'modules/'.$_GET["ruta"].'.php';
     
     }
+
+  } else {
+
+    include 'modules/inicio.php';
+
   }
 
   include 'modules/footer.php';

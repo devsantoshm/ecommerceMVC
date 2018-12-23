@@ -26,13 +26,13 @@ $urlFron = Route::urlFron();
         if ($usuarios[$i]["foto"] != "") {
           if ($usuarios[$i]["modo"] != "directo") {
             echo '<li>
-              <img src="'.$usuarios[$i]["foto"].'" alt="User Image" style="width:70%;">
+              <img src="'.$usuarios[$i]["foto"].'" alt="User Image" style="width:100px;">
               <a class="users-list-name" href="#">'.$usuarios[$i]["nombre"].'</a>
               <span class="users-list-date">'.date('d-m-Y',strtotime($usuarios[$i]["fecha"])).'</span>
             </li>';
           } else {
             echo '<li>
-              <img src="'.$urlFron.$usuarios[$i]["foto"].'" alt="User Image" style="width:70%;">
+              <img src="'.$urlFron.$usuarios[$i]["foto"].'" alt="User Image" style="width:100px;">
               <a class="users-list-name" href="#">'.$usuarios[$i]["nombre"].'</a>
               <span class="users-list-date">'.date('d-m-Y',strtotime($usuarios[$i]["fecha"])).'</span>
             </li>';            
@@ -40,7 +40,7 @@ $urlFron = Route::urlFron();
           
         } else {
           echo '<li>
-              <img src="views/img/usuarios/default/anonymous.png" alt="User Image" style="width:70%;">
+              <img src="views/img/usuarios/default/anonymous.png" alt="User Image" style="width:100px;">
               <a class="users-list-name" href="#">'.$usuarios[$i]["nombre"].'</a>
               <span class="users-list-date">'.date('d-m-Y',strtotime($usuarios[$i]["fecha"])).'</span>
             </li>';
