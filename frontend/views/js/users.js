@@ -112,11 +112,11 @@ $("#btnCambiarFoto").click(function(){
 $("#datosImagen").change(function(){
 	var imagen = this.files[0];
 	//console.log("imagen", imagen)
-	if (imagen["type"] != "image/jpeg") {
+	if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
 		$("#datosImagen").val("");
 		swal({
 			  title:"Error al subir la imagen",
-			  text: "¡La imagen debe estas en formato JPG!",
+			  text: "¡La imagen debe estas en formato JPG o PNG!",
 			  type: "error",
 			  confirmButtonText: "Cerrar",
 			  closeOnConfirm: false

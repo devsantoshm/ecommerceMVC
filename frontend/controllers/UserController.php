@@ -458,10 +458,6 @@ class UserController
 				}else{
 					mkdir($directorio, 0755);//crear carpeta con permisos de escritura y lectura
 				}
-				//Guardamos la imagen en el directorio
-				//produce números aleatorios cuatro veces más rápido que el promedio proporcionado por la libc rand().
-				$aleatorio = mt_rand(100, 999);
-				$ruta = "views/img/usuarios/".$_POST["idUsuario"]."/".$aleatorio.".jpg";
 
 				//Modificamos tamaño de la foto
 				/*$info = array('café', 'marrón', 'cafeína');
@@ -471,14 +467,43 @@ class UserController
 				list($ancho, $alto) = getimagesize($_FILES["datosImagen"]["tmp_name"]); //Obtener el tamaño de una imagen
 				$nuevoAncho = 500;
 				$nuevoAlto = 500;
-				//Crea una nueva imagen a partir de un fichero o de una URL
-				$origen = imagecreatefromjpeg($_FILES["datosImagen"]["tmp_name"]);
-				//Crear una nueva imagen de color verdadero
-				$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-				//Copia y cambia el tamaño de parte de una imagen copia una porción de una imagen a otra imagen, devuelve true
-				imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-				//imprimir la imagen
-				imagejpeg($destino, $ruta);
+
+				//Guardamos la imagen en el directorio
+				//produce números aleatorios cuatro veces más rápido que el promedio proporcionado por la libc rand().
+				$aleatorio = mt_rand(100, 999);
+
+				if ($_FILES["datosImagen"]["type"] == "image/jpeg") {
+
+					$ruta = "views/img/usuarios/".$_POST["idUsuario"]."/".$aleatorio.".jpg";
+
+					//Crea una nueva imagen a partir de un fichero o de una URL
+					$origen = imagecreatefromjpeg($_FILES["datosImagen"]["tmp_name"]);
+					//Crear una nueva imagen de color verdadero
+					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+					//Copia y cambia el tamaño de parte de una imagen copia una porción de una imagen a otra imagen, devuelve true
+					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+					//imprimir la imagen
+					imagejpeg($destino, $ruta);
+				}
+
+				if ($_FILES["datosImagen"]["type"] == "image/png") {
+
+					$ruta = "views/img/usuarios/".$_POST["idUsuario"]."/".$aleatorio.".png";
+
+					//Crea una nueva imagen a partir de un fichero o de una URL
+					$origen = imagecreatefrompng($_FILES["datosImagen"]["tmp_name"]);
+					//Crear una nueva imagen de color verdadero
+					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+					//Copia y cambia el tamaño de parte de una imagen copia una porción de una imagen a otra imagen, devuelve true
+
+					imagealphablending($destino, FALSE);
+    			
+    				imagesavealpha($destino, TRUE);
+    				
+					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+					//imprimir la imagen
+					imagepng($destino, $ruta);
+				}
 
 			} else {
 				$ruta = $_POST["fotoUsuario"];				
