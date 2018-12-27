@@ -24,6 +24,11 @@ class CarModel
 			return "ok";
 		else
 			return "error";
+
+
+		$stmt->close();
+		$tmt =null;
+
 	}
 
 	static public function verifyProduct($table, $data)

@@ -1,3 +1,11 @@
+$("#buscador a").click(function(){
+	
+	if ($("#buscador input").val() == "") {
+		$("#buscador a").attr("href", "");
+	}
+	
+})
+
 $("#buscador input").change(function(){
 	var busqueda = $("#buscador input").val();
 	var expresion = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]*$/;

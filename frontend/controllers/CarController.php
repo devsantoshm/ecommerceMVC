@@ -13,6 +13,20 @@ class CarController
 		$table = "shopping";
 		$response = CarModel::newShopping($table, $data);
 
+		if($respuesta == "ok"){
+
+			/*=============================================
+			ACTUALIZAR NOTIFICACIONES NUEVAS VENTAS
+			=============================================*/
+			$traerNotificaciones = NotificationsController::showNotifications();
+
+			$nuevaVenta = $traerNotificaciones["nuevasVentas"] + 1;
+
+			NotificationsModel::updateNotifications("notifications", "nuevasVentas", $nuevaVenta);
+
+
+		}
+
 		return $response;
 	}
 

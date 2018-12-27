@@ -36,6 +36,8 @@ function avanzar(){
 	else
 		item++
 
+	interrumpirCiclo = true //corregir movimiento rápido de los slides
+
 	movimientoSlide(item);
 }
 

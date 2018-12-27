@@ -24,6 +24,7 @@ $urlFron = Route::urlFront();
 			?>
 			<?php if($infoproducto["tipo"] == "fisico"){ ?>
 			<div class="col-md-5 col-sm-6 col-xs-12 visorImg">
+				<!-- mientras no tenga multimedia  if($multimedia != null) no lo muestro -->
 				<figure class="visor">
 					<?php for ($i=0; $i < count($multimedia); $i++) { 
 					echo '<img id="lupa'.($i+1).'" class="img-thumbnail" src="'.$urlBack.$multimedia[$i]["foto"].'" alt="'.$infoproducto["titulo"].'"></img>';	

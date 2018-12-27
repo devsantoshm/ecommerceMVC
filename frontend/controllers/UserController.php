@@ -448,7 +448,9 @@ class UserController
 		if (isset($_POST["editarNombre"])) {
 			//calidar imagen
 			$ruta = "";
-			if (isset(($_FILES["datosImagen"]["tmp_name"]))) {
+
+			// Si existe imagen y viene con información
+			if (isset(($_FILES["datosImagen"]["tmp_name"])) && !empty($_FILES["datosImagen"]["tmp_name"])) {
 				//si existe una imagen en la BD
 				$directorio = "views/img/usuarios/".$_POST["idUsuario"];
 				if (!empty($_POST["fotoUsuario"])) {
@@ -478,6 +480,8 @@ class UserController
 				//imprimir la imagen
 				imagejpeg($destino, $ruta);
 
+			} else {
+				$ruta = $_POST["fotoUsuario"];				
 			}
 			if ($_POST["editarPassword"] == "") {
 				$password = $_POST["passUsuario"];

@@ -13,7 +13,7 @@ class SalesModel
 
 	static public function showSales($table)
 	{
-		$stmt = Conexion::conectar()->prepare("select * from $table");
+		$stmt = Conexion::conectar()->prepare("select * from $table ORDER BY id DESC");
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
