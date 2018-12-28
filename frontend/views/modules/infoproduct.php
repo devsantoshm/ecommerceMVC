@@ -386,6 +386,9 @@ $urlFron = Route::urlFront();
 			?>
 			<ul class="nav nav-tabs">
 				<?php  
+
+				$cantidadCalificacion = 0;
+
 				if ($cantidad == 0) {
 					echo '<li class="active"><a>ESTE PRODUCTO NO TIENE COMENTARIOS</a></li>
 						<li></li>';
@@ -393,10 +396,15 @@ $urlFron = Route::urlFront();
 					echo '<li class="active"><a>COMENTARIOS '.$cantidad.'</a></li>
 						<li><a id="verMas" href="">Ver más</a></li>';
 					$sumaCalificacion = 0;
-					for ($i=0; $i < $cantidad; $i++) { 
-						$sumaCalificacion += $comentarios[$i]["calificacion"];
+					
+					foreach ($comentarios as $key => $value) {
+						if ($value["calificacion"] != 0) {
+							$cantidadCalificacion += count($value["id"]);
+							$sumaCalificacion += $value["calificacion"];
+						}
 					}
-					$promedio = round($sumaCalificacion/$cantidad, 1);//redondeamos a un decimal 3.8
+
+					$promedio = round($sumaCalificacion/$cantidadCalificacion, 1);//redondeamos a un decimal 3.8
 					echo '<li class="pull-right"><a class="text-muted">PROMEDIO DE CALIFICACIÓN: '.$promedio.' |';
 					if ($promedio > 0 && $promedio <= 0.5) {
 						echo '<i class="fa fa-star-half-o text-success"></i>
