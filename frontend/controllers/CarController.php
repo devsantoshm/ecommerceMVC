@@ -15,6 +15,9 @@ class CarController
 
 		if($respuesta == "ok"){
 
+			$tabla = "comments";
+			UserModel::insertComment($tabla, $datos);
+
 			/*=============================================
 			ACTUALIZAR NOTIFICACIONES NUEVAS VENTAS
 			=============================================*/
