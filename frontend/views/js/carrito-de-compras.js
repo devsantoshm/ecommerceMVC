@@ -113,6 +113,7 @@ $(".agregarCarrito").click(function(){
 					  closeOnConfirm: false
 					})
 
+					// Cancelamos todo lo que estaba haciendo el código con el return
 					return;
 				}
 			}
@@ -358,6 +359,7 @@ $("#btnCheckout").click(function(){
 			return total + numero
 		}
 
+
 		//reduce() aplica una función a un acumulador y a cada valor de un array (de izquierda a derecha) para reducirlo a un único valor.
 		var sumaTotalPeso = cantidadPeso.reduce(sumaArrayPeso)
 
@@ -373,85 +375,86 @@ $("#btnCheckout").click(function(){
 		function checkTipo(tipo){
 			return tipo == "fisico"
 		} 
-
-		//EXISTEN PRODUCTOS FISICOS
-		if (tipoArray.find(checkTipo) == "fisico") {
-			//para que no siga mostrando el mensaje de divisa no selecciono pais
-			$(".seleccionePais").html('<select class="form-control" id="seleccionarPais" required>'+
-									'<option value="">Seleccione el país</option>'+
-									'</select>');
-
-			$(".formEnvio").show()
-
-			$(".btnPagar").attr("tipo", "fisico");
-
-			$.ajax({
-				url: rutaFron+"views/js/plugins/countries.json",
-				type: "GET",
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType: "json",
-				success: function(respuesta){
-					respuesta.forEach(seleccionarPais)
-					function seleccionarPais(item, indec){
-						var pais = item.name
-						var codPais = item.code
-
-						$("#seleccionarPais").append('<option value="'+codPais+'">'+pais+'</option>')
-					}
-				}
-			})
-
-			//Evaluar tasas de envio si el producto es físico
-			$("#seleccionarPais").change(function(){
-
-				//remover la alerta después de seleccionar país
-				$(".alert").remove();
-
-				$("#cambiarDivisa").val("USD") //para que regrese a dolares despues de seleccionar el pais
-				$(".cambioDivisa").html("USD")
-				//retornar cambio de divisa a dolar luego de cambiar de país
-				$(".valorSubtotal").html((1 * Number($(".valorSubtotal").attr("valor"))).toFixed(2))
-				$(".valorTotalEnvio").html((1 * Number($(".valorTotalEnvio").attr("valor"))).toFixed(2))
-				$(".valorTotalImpuesto").html((1 * Number($(".valorTotalImpuesto").attr("valor"))).toFixed(2))
-				$(".valorTotalCompra").html((1 * Number($(".valorTotalCompra").attr("valor"))).toFixed(2))
-			
-				var valorItem = $(".valorItem")
-
-				for (var i = 0; i < valorItem.length; i++) {
-					$(valorItem[i]).html((1 * Number($(valorItem[i]).attr("valor"))).toFixed(2))
-				}
-
-				var pais = $(this).val()
-				var tasaPais = $("#tasaPais").val()
-
-				if (pais == tasaPais) {
-					var resultadoPeso = sumaTotalPeso * $("#envioNacional").val()
-					if (resultadoPeso < $("#tasaMinimaNal").val()) {
-						$(".valorTotalEnvio").html($("#tasaMinimaNal").val())
-						$(".valorTotalEnvio").attr("valor", $("#tasaMinimaNal").val())
-					} else {
-						$(".valorTotalEnvio").html(resultadoPeso)
-						$(".valorTotalEnvio").attr("valor", resultadoPeso)
-					}
-				}else{
-					var resultadoPeso = sumaTotalPeso * $("#envioInternacional").val()
-					if (resultadoPeso < $("#tasaMinimaInt").val()) {
-						$(".valorTotalEnvio").html($("#tasaMinimaInt").val())
-						$(".valorTotalEnvio").attr("valor", $("#tasaMinimaInt").val())
-					} else {
-						$(".valorTotalEnvio").html(resultadoPeso)
-						$(".valorTotalEnvio").attr("valor", resultadoPeso)
-					}
-				}
-
-				sumaTotalCompra()
-			})
-		} else{
-			$(".btnPagar").attr("tipo", "virtual");
-		}
 	}
+
+	//EXISTEN PRODUCTOS FISICOS
+	if (tipoArray.find(checkTipo) == "fisico") {
+		//para que no siga mostrando el mensaje de divisa no selecciono pais
+		$(".seleccionePais").html('<select class="form-control" id="seleccionarPais" required>'+
+								'<option value="">Seleccione el país</option>'+
+								'</select>');
+
+		$(".formEnvio").show()
+
+		$(".btnPagar").attr("tipo", "fisico");
+
+		$.ajax({
+			url: rutaFron+"views/js/plugins/countries.json",
+			type: "GET",
+			cache: false,
+			contentType: false,
+			processData: false,
+			dataType: "json",
+			success: function(respuesta){
+				respuesta.forEach(seleccionarPais)
+				function seleccionarPais(item, indec){
+					var pais = item.name
+					var codPais = item.code
+
+					$("#seleccionarPais").append('<option value="'+codPais+'">'+pais+'</option>')
+				}
+			}
+		})
+
+		//Evaluar tasas de envio si el producto es físico
+		$("#seleccionarPais").change(function(){
+
+			//remover la alerta después de seleccionar país
+			$(".alert").remove();
+
+			$("#cambiarDivisa").val("USD") //para que regrese a dolares despues de seleccionar el pais
+			$(".cambioDivisa").html("USD")
+			//retornar cambio de divisa a dolar luego de cambiar de país
+			$(".valorSubtotal").html((1 * Number($(".valorSubtotal").attr("valor"))).toFixed(2))
+			$(".valorTotalEnvio").html((1 * Number($(".valorTotalEnvio").attr("valor"))).toFixed(2))
+			$(".valorTotalImpuesto").html((1 * Number($(".valorTotalImpuesto").attr("valor"))).toFixed(2))
+			$(".valorTotalCompra").html((1 * Number($(".valorTotalCompra").attr("valor"))).toFixed(2))
+		
+			var valorItem = $(".valorItem")
+
+			for (var i = 0; i < valorItem.length; i++) {
+				$(valorItem[i]).html((1 * Number($(valorItem[i]).attr("valor"))).toFixed(2))
+			}
+
+			var pais = $(this).val()
+			var tasaPais = $("#tasaPais").val()
+
+			if (pais == tasaPais) {
+				var resultadoPeso = sumaTotalPeso * $("#envioNacional").val()
+				if (resultadoPeso < $("#tasaMinimaNal").val()) {
+					$(".valorTotalEnvio").html($("#tasaMinimaNal").val())
+					$(".valorTotalEnvio").attr("valor", $("#tasaMinimaNal").val())
+				} else {
+					$(".valorTotalEnvio").html(resultadoPeso)
+					$(".valorTotalEnvio").attr("valor", resultadoPeso)
+				}
+			}else{
+				var resultadoPeso = sumaTotalPeso * $("#envioInternacional").val()
+				if (resultadoPeso < $("#tasaMinimaInt").val()) {
+					$(".valorTotalEnvio").html($("#tasaMinimaInt").val())
+					$(".valorTotalEnvio").attr("valor", $("#tasaMinimaInt").val())
+				} else {
+					$(".valorTotalEnvio").html(resultadoPeso)
+					$(".valorTotalEnvio").attr("valor", resultadoPeso)
+				}
+			}
+
+			sumaTotalCompra()
+		})
+	} else{
+		$(".btnPagar").attr("tipo", "virtual");
+	}
+	
 })
 
 //SUMA TOTAL DE LA COMPRA
