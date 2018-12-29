@@ -33,15 +33,23 @@ if (isset($rutas[1]) && isset($rutas[2]) && isset($rutas[3])) {
 	$confirmarCompra = UserController::showShopping($item, $valor);
 	//var_dump($confirmarCompra);
 	//devuelve un fetchAll
-	if ($confirmarCompra[0]["id_usuario"] == $idUsuario && $confirmarCompra[0]["id_producto"] == $idProducto) {
+	if ($confirmarCompra[0]["id_usuario"] == $idUsuario &&
+		$confirmarCompra[0]["id_usuario"] == $_SESSION["id"] &&
+		$confirmarCompra[0]["id_producto"] == $idProducto) {
+
 		echo "<center><h1>BIENVENIDO AL CURSO</h1></center>";
+
 	} else {
+
 		echo '<div class="col-xs-12 text-center error404">
 				<h1><small>¡Oops!</small></h1>
 				<h2>No tienes acceso a este producto</h2>
 			</div>';
+
 	}
+
 } else {
+	
 	echo '<div class="col-xs-12 text-center error404">
 			<h1><small>¡Oops!</small></h1>
 			<h2>No tienes acceso a este producto</h2>
