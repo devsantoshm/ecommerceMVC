@@ -54,7 +54,11 @@ class ProductModel
 		$stmt = Conexion::conectar()->prepare("select * from $table where $item = :valor");
 		$stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
 		$stmt->execute();
+		
 		return $stmt->fetch();
+
+		$stmt -> close();
+		$stmt = null;
 	}
 
 	static public function listProducts($table, $ordenar, $item, $valor)

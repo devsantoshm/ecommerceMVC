@@ -20,6 +20,22 @@ class AjaxProduct
 
 		echo $response; //convertir un array en un string
 	}
+
+	/*=============================================
+	TRAER EL PRODUCTO DE ACUERDO AL ID
+	=============================================*/
+	public $id;
+
+	public function ajaxTraerProducto(){
+
+		$item = "id";
+		$valor = $this->id;
+
+		$respuesta = ProductController::showInfoProduct($item, $valor);
+
+		echo json_encode($respuesta);
+	}
+
 }
 
 if (isset($_POST["valor"])) {
@@ -29,3 +45,12 @@ if (isset($_POST["valor"])) {
 	$view->ruta = $_POST["ruta"];
 	$view->ajaxViewProduct();	
 }
+
+if(isset($_POST["id"])){
+
+	$producto = new AjaxProduct();
+	$producto -> id = $_POST["id"];
+	$producto -> ajaxTraerProducto();
+
+}
+

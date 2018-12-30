@@ -13,49 +13,154 @@ if (localStorage.getItem("listaProductos") != null) {
 	listaCarrito.forEach(funcionForEach);
 	//ejecuta la función indicada una vez por cada elemento del array.
 	function funcionForEach(item, index){
-		//console.log("item", item.idProducto);
-		$(".cuerpoCarrito").append(
-			'<div class="row itemCarrito">'+
-				/*<!-- ocupara para dispositivo grande, mediano y pequeño de una sola columna -->*/
-				'<div class="col-sm-1 col-xs-12">'+
-					'<br>'+
-					'<center>'+
-						'<button class="btn btn-default backColor quitarItemCarrito" idProducto="'+item.idProducto+'" peso="'+item.peso+'">'+
-							'<i class="fa fa-times"></i>'+
-						'</button>'+
-					'</center>'+
-				'</div>'+
-				'<div class="col-sm-1 col-xs-12">'+
-					'<figure>'+
-						'<img src="'+item.imagen+'" class="img-thumbnail">'+
-					'</figure>'+
-				'</div>'+
-				'<div class="col-sm-4 col-xs-12">'+
-					'<br>'+
-					'<p class="tituloCarritoCompra text-left">'+item.titulo+'</p>'+
-				'</div>'+
-				'<div class="col-md-2 col-sm-1 col-xs-12">'+
-					'<br>'+
-					'<p class="precioCarritoCompra text-center">USD $<span>'+item.precio+'</span></p>'+
-				'</div>'+
-				'<div class="col-md-2 col-sm-3 col-xs-8">'+
-					'<br>'+
-					'<div class="col-xs-8">'+
-						'<center>'+
-							'<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'" precio="'+item.precio+'" idProducto="'+item.idProducto+'">'+
-						'</center>'+
-					'</div>'+
-				'</div>'+
-				'<div class="col-md-2 col-sm-1 col-xs-4 text-center">'+
-					'<br>'+
-					'<p class="subTotal'+item.idProducto+' subtotales"><strong>USD $<span>'+item.precio+'</span></strong></p>'+
-				'</div>'+
-			'</div>'+
-			'<div class="clearfix"></div>'+
-			'<hr id="idhr'+item.idProducto+'">');
+		
+		var datosProducto = new FormData();
+		var precio = 0;
 
-		//Evitar manipular la cantidad en productos virtuales
-		$(".cantidadItem[tipo='virtual']").attr("readonly", "true");
+		datosProducto.append("id", item.idProducto);
+
+		$.ajax({
+
+			url:rutaFron+"ajax/AjaxProduct.php",
+			method:"POST",
+			data: datosProducto,
+			cache: false,
+			contentType: false,
+			processData:false,
+			dataType: "json",
+			success: function(respuesta){
+				// SI NO VIENE OFERTA
+				if(respuesta["precioOferta"] == 0){
+
+					precio = respuesta["precio"];
+
+				}else{
+
+					precio = respuesta["precioOferta"];
+				}
+
+				$(".cuerpoCarrito").append(
+
+					'<div clas="row itemCarrito">'+
+						
+						'<div class="col-sm-1 col-xs-12">'+
+							
+							'<br>'+
+
+							'<center>'+
+								
+								'<button class="btn btn-default backColor quitarItemCarrito" idProducto="'+item.idProducto+'" peso="'+item.peso+'">'+
+									
+									'<i class="fa fa-times"></i>'+
+
+								'</button>'+
+
+							'</center>'+	
+
+						'</div>'+
+						'<div class="col-sm-1 col-xs-12">'+
+							
+							'<figure>'+
+								
+								'<img src="'+item.imagen+'" class="img-thumbnail">'+
+
+							'</figure>'+
+
+						'</div>'+
+						'<div class="col-sm-4 col-xs-12">'+
+
+							'<br>'+
+
+							'<p class="tituloCarritoCompra text-left">'+item.titulo+'</p>'+
+
+						'</div>'+
+						'<div class="col-md-2 col-sm-1 col-xs-12">'+
+
+							'<br>'+
+
+							'<p class="precioCarritoCompra text-center">USD $<span>'+precio+'</span></p>'+
+
+						'</div>'+
+						'<div class="col-md-2 col-sm-3 col-xs-8">'+
+
+							'<br>'+	
+
+							'<div class="col-xs-8">'+
+
+								'<center>'+
+								
+									'<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'" precio="'+item.precio+'" idProducto="'+item.idProducto+'" item="'+index+'">'+	
+
+								'</center>'+
+
+							'</div>'+
+
+						'</div>'+
+						'<div class="col-md-2 col-sm-1 col-xs-4 text-center">'+
+							
+							'<br>'+
+
+							'<p class="subTotal'+index+' subtotales">'+
+								
+								'<strong>USD $<span>'+item.precio+'</span></strong>'+
+
+							'</p>'+
+
+						'</div>'+
+						
+					'</div>'+
+
+					'<div class="clearfix"></div>'+
+
+					'<hr>');
+
+				/*=============================================
+				EVITAR MANIPULAR LA CANTIDAD EN PRODUCTOS VIRTUALES
+				=============================================*/
+				$(".cantidadItem[tipo='virtual']").attr("readonly","true");
+
+				/*=============================================
+				ACTUALIZAR SUBTOTAL
+				=============================================*/
+				var precioCarritoCompra = $(".cuerpoCarrito .precioCarritoCompra span");
+				var cantidadItem = $(".cuerpoCarrito .cantidadItem");
+
+				for(var i = 0; i < precioCarritoCompra.length; i++){
+
+					var precioCarritoCompraArray = $(precioCarritoCompra[i]).html();
+					var cantidadItemArray = $(cantidadItem[i]).val();
+					var idProductoArray = $(cantidadItem[i]).attr("idProducto");
+
+					$(".subTotal"+i).html('<strong>USD $<span>'+(precioCarritoCompraArray*cantidadItemArray)+'</span></strong>')
+
+					sumaSubtotales();
+					cestaCarrito(precioCarritoCompra.length);
+
+				}			
+
+			}
+		
+		})
+
+		/*=============================================
+		ACTUALIZAR SUBTOTAL
+		=============================================*/
+		var precioCarritoCompra = $(".cuerpoCarrito .precioCarritoCompra span");
+		var cantidadItem = $(".cuerpoCarrito .cantidadItem");
+
+		for(var i = 0; i < precioCarritoCompra.length; i++){
+
+			var precioCarritoCompraArray = $(precioCarritoCompra[i]).html();
+			var cantidadItemArray = $(cantidadItem[i]).val();
+			var idProductoArray = $(cantidadItem[i]).attr("idProducto");
+
+			$(".subTotal"+i).html('<strong>USD $<span>'+(precioCarritoCompraArray*cantidadItemArray)+'</span></strong>')
+
+			sumaSubtotales();
+			cestaCarrito(precioCarritoCompra.length);
+
+		}
+
 	}
 }else{
 	$(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
@@ -160,11 +265,12 @@ $(".agregarCarrito").click(function(){
 	}
 })
 
-$(".quitarItemCarrito").click(function(){
+//DAR CLICK A ELEMENTOS DEL DOM QUE CARGUEN DESPUÉS DEL AJAX
+$(document).on("click", ".quitarItemCarrito", function(){
 	$(this).parent().parent().parent().remove()
 
-	var id=$(this).attr("idProducto")
-	$("#idhr"+id).remove()
+	/*var id=$(this).attr("idProducto")
+	$("#idhr"+id).remove()*/
 
 	//me trae todos los button que hay en cuerpoCarrito después de haber eliminado un item
 	var idProducto = $(".cuerpoCarrito button")
@@ -217,13 +323,14 @@ $(".quitarItemCarrito").click(function(){
 })
 
 //Generar subtotal después de cambiar cantidad
-$(".cantidadItem").change(function(){
+$(document).on("change", ".cantidadItem", function(){
 	var cantidad = $(this).val()
 	var precio = $(this).attr("precio")
 	var idProducto = $(this).attr("idProducto")
+	var item = $(this).attr("item");
 	//var cantidadItem = $(".cantidadItem") //captura el array de etiquetas con esa clase
 
-	$(".subTotal"+idProducto).html('<strong>USD $<span>'+(Math.abs(cantidad*precio))+'</span></strong>')
+	$(".subTotal"+item).html('<strong>USD $<span>'+(Math.abs(cantidad*precio))+'</span></strong>')
 
 	//actualizar la cantidad en el localstorage
 	var idProducto = $(".cuerpoCarrito button")
