@@ -91,6 +91,7 @@
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.scrollUp.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/jquery.flexslider.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/sweetalert.min.js"></script>
+	<script src="<?php echo $route; ?>views/js/plugins/md5-min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/dscountdown.min.js"></script>
 	<script src="<?php echo $route; ?>views/js/plugins/knob.jquery.js"></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>

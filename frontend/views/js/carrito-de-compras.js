@@ -398,10 +398,10 @@ function sumaSubtotales(){
 	//reduce() aplica una función a un acumulador y a cada valor de un array (de izquierda a derecha) para reducirlo a un único valor.
 	var sumaTotal = arraySumaSubtotales.reduce(sumaArraySubtotales)
 
-	$(".sumaSubTotal").html('<strong>USD $<span>'+sumaTotal+'</span></strong>')
-	$(".sumaCesta").html(sumaTotal)
+	$(".sumaSubTotal").html('<strong>USD $<span>'+(sumaTotal).toFixed(2)+'</span></strong>')
+	$(".sumaCesta").html((sumaTotal).toFixed(2))
 
-	localStorage.setItem("sumaCesta", sumaTotal)
+	localStorage.setItem("sumaCesta", (sumaTotal).toFixed(2))
 }
 
 //Actualizar cesta al cambiar cantidad
@@ -572,6 +572,8 @@ function sumaTotalCompra(){
 
 	$(".valorTotalCompra").html(sumaTotalTasas.toFixed(2));
 	$(".valorTotalCompra").attr("valor", sumaTotalTasas.toFixed(2));
+
+	localStorage.setItem("total", hex_md5($(".valorTotalCompra").html()))
 }
 
 var metodoPago = "paypal"
@@ -631,28 +633,71 @@ $("#cambiarDivisa").change(function(){
 		processData: false,
 		dataType: "jsonp", //cruce de origen solicitado para traer informacion de otro servidor
 		success: function(respuesta){
-			//console.log("respuesta", respuesta);
-			var divisaString = JSON.stringify(respuesta)
-			console.log("divisaString", divisaString); //divisaString {"USD_GBP":{"val":0.73811}}
-			var conversion = divisaString.substr(18,4) //extract parts of the string
 			
-			// error von usd divisaString {"USD_USD":{"val":1}}
-			if (divisa == "USD") {
-				conversion = 1
-			}
+			var conversion = (respuesta["USD_"+divisa]["val"]).toFixed(2);
 
-			$(".cambioDivisa").html(divisa)
+	    	$(".cambioDivisa").html(divisa);
+	    	
+	    	if(divisa == "USD"){
 
-			$(".valorSubtotal").html((Number(conversion) * Number($(".valorSubtotal").attr("valor"))).toFixed(2))
-			$(".valorTotalEnvio").html((Number(conversion) * Number($(".valorTotalEnvio").attr("valor"))).toFixed(2))
-			$(".valorTotalImpuesto").html((Number(conversion) * Number($(".valorTotalImpuesto").attr("valor"))).toFixed(2))
-			$(".valorTotalCompra").html((Number(conversion) * Number($(".valorTotalCompra").attr("valor"))).toFixed(2))
-		
-			var valorItem = $(".valorItem")
+	    		$(".valorSubtotal").html($(".valorSubtotal").attr("valor"))
+		    	$(".valorTotalEnvio").html($(".valorTotalEnvio").attr("valor"))
+		    	$(".valorTotalImpuesto").html($(".valorTotalImpuesto").attr("valor"))
+		    	$(".valorTotalCompra").html($(".valorTotalCompra").attr("valor"))
 
-			for (var i = 0; i < valorItem.length; i++) {
-				$(valorItem[i]).html((Number(conversion) * Number($(valorItem[i]).attr("valor"))).toFixed(2))
-			}
+		    	var valorItem = $(".valorItem");
+
+		    	localStorage.setItem("total",hex_md5($(".valorTotalCompra").html()));
+
+		    	for(var i = 0; i < valorItem.length; i++){
+
+		    		$(valorItem[i]).html($(valorItem[i]).attr("valor"));
+
+		    	}
+	    		
+	    	}else{
+	
+		    	$(".valorSubtotal").html(
+		    		
+		    		Math.ceil(Number(conversion) * Number($(".valorSubtotal").attr("valor"))*100)/100
+
+		    	)
+
+		    	$(".valorTotalEnvio").html(
+
+		    		(Number(conversion) * Number($(".valorTotalEnvio").attr("valor"))).toFixed(2)
+
+		    	)
+
+		    	$(".valorTotalImpuesto").html(
+
+		    		(Number(conversion) * Number($(".valorTotalImpuesto").attr("valor"))).toFixed(2)
+
+		    	)
+
+		    	$(".valorTotalCompra").html(
+
+		    		(Number(conversion) * Number($(".valorTotalCompra").attr("valor"))).toFixed(2)
+
+		    	)
+
+		    	var valorItem = $(".valorItem");
+
+		    	localStorage.setItem("total",hex_md5($(".valorTotalCompra").html()));
+
+		    	for(var i = 0; i < valorItem.length; i++){
+
+		    		$(valorItem[i]).html(
+		    			
+		    			(Number(conversion) * Number($(valorItem[i]).attr("valor"))).toFixed(2)
+
+		    		);
+
+		    	}
+
+		    }
+
+	    	sumaTotalCompra();
 		}
 	})
 })
@@ -668,6 +713,7 @@ $(".btnPagar").click(function(){
 
 	var divisa = $("#cambiarDivisa").val()
 	var total = $(".valorTotalCompra").html()
+	var totalEncriptado = localStorage.getItem("total")
 	var impuesto = $(".valorTotalImpuesto").html()
 	var envio = $(".valorTotalEnvio").html()
 	var subtotal = $(".valorSubtotal").html()
@@ -692,6 +738,7 @@ $(".btnPagar").click(function(){
 
 	datos.append("divisa", divisa)
 	datos.append("total", total)
+	datos.append("totalEncriptado", totalEncriptado)
 	datos.append("impuesto", impuesto)
 	datos.append("envio", envio)
 	datos.append("subtotal", subtotal)
