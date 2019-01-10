@@ -89,7 +89,7 @@ if (localStorage.getItem("listaProductos") != null) {
 
 								'<center>'+
 								
-									'<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'" precio="'+item.precio+'" idProducto="'+item.idProducto+'" item="'+index+'">'+	
+									'<input type="number" class="form-control cantidadItem" min="1" value="'+item.cantidad+'" tipo="'+item.tipo+'" precio="'+precio+'" idProducto="'+item.idProducto+'" item="'+index+'">'+	
 
 								'</center>'+
 
@@ -102,7 +102,7 @@ if (localStorage.getItem("listaProductos") != null) {
 
 							'<p class="subTotal'+index+' subtotales">'+
 								
-								'<strong>USD $<span>'+item.precio+'</span></strong>'+
+								'<strong>USD $<span>'+(Number(item.cantidad)*Number(precio))+'</span></strong>'+
 
 							'</p>'+
 
@@ -123,7 +123,11 @@ if (localStorage.getItem("listaProductos") != null) {
 				ACTUALIZAR SUBTOTAL
 				=============================================*/
 				var precioCarritoCompra = $(".cuerpoCarrito .precioCarritoCompra span");
-				var cantidadItem = $(".cuerpoCarrito .cantidadItem");
+
+				cestaCarrito(precioCarritoCompra.length);
+				sumaSubtotales();
+				
+				/*var cantidadItem = $(".cuerpoCarrito .cantidadItem");
 
 				for(var i = 0; i < precioCarritoCompra.length; i++){
 
@@ -136,7 +140,7 @@ if (localStorage.getItem("listaProductos") != null) {
 					sumaSubtotales();
 					cestaCarrito(precioCarritoCompra.length);
 
-				}			
+				}*/			
 
 			}
 		
@@ -207,7 +211,7 @@ $(".agregarCarrito").click(function(){
 		} else {
 			var listaProductos = JSON.parse(localStorage.getItem("listaProductos"));
 			for (var i = 0; i < listaProductos.length; i++) {
-				if (listaProductos[i]["idProducto"] == idProducto) {
+				if (listaProductos[i]["idProducto"] == idProducto && listaProductos[i]["tipo"] == "virtual") {
 					swal({
 					  title:"El producto ya está agregado al carrito de compras",
 					  text: "",
