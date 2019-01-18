@@ -12,13 +12,14 @@ class CarModel
 
 	static public function newShopping($table, $data)
 	{
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $table(id_usuario, id_producto, metodo, email, direccion, pais) VALUES(:id_usuario, :id_producto, :metodo, :email, :direccion, :pais)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $table(id_usuario, id_producto, metodo, email, direccion, pais, pago) VALUES(:id_usuario, :id_producto, :metodo, :email, :direccion, :pais, :pago)");
 		$stmt->bindParam(":id_usuario", $data["id_usuario"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_producto", $data["id_producto"], PDO::PARAM_INT);
 		$stmt->bindParam(":metodo", $data["metodo"], PDO::PARAM_STR);
 		$stmt->bindParam(":email", $data["email"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $data["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":pais", $data["pais"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago", $data["pago"], PDO::PARAM_STR);
 
 		if($stmt->execute())
 			return "ok";
@@ -27,7 +28,7 @@ class CarModel
 
 
 		$stmt->close();
-		$tmt =null;
+		$stmt = null;
 
 	}
 

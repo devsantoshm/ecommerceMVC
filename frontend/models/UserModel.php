@@ -177,8 +177,8 @@ class UserModel
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (id_usuario, id_producto) VALUES (:id_usuario, :id_producto)");
 
-		$stmt->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
-		$stmt->bindParam(":id_producto", $datos["idProducto"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_usuario", $datos["id_usuario"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_producto", $datos["id_producto"], PDO::PARAM_INT);
 
 		if($stmt->execute()){ 
 
@@ -191,7 +191,7 @@ class UserModel
 		}
 
 		$stmt->close();
-		$tmt =null;
+		$stmt =null;
 	}
 
 }

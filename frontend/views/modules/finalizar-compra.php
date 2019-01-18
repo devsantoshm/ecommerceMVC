@@ -61,8 +61,8 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
 	//Actualizamos la base de datos
 	for($i = 0; $i < count($productos); $i++)
 	{
-		$datos = array("idUsuario" => $_SESSION["id"],
-						"idProducto" => $productos[$i],
+		$datos = array("id_usuario" => $_SESSION["id"],
+						"id_producto" => $productos[$i],
 						"metodo" => "paypal",
 						"email" => $emailComprador,
 						"direccion" => $direccion,

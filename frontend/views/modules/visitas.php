@@ -1,6 +1,6 @@
 <?php  
 //$ip = $_SERVER['REMOTE_ADDR'];
-$ip = "115.202.198.216";
+$ip = "183.172.160.190";
 //www.geoplugin.net me permite recuperar datos de una determinada ip
 //para recuperar información desde múltiples fuentes file_get_contents(filename)
 $informacionPais = file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip);

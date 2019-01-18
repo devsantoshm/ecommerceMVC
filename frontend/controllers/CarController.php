@@ -13,10 +13,10 @@ class CarController
 		$table = "shopping";
 		$response = CarModel::newShopping($table, $data);
 
-		if($respuesta == "ok"){
+		if($response == "ok"){
 
 			$tabla = "comments";
-			UserModel::insertComment($tabla, $datos);
+			UserModel::insertComment($tabla, $data);
 
 			/*=============================================
 			ACTUALIZAR NOTIFICACIONES NUEVAS VENTAS
@@ -26,7 +26,6 @@ class CarController
 			$nuevaVenta = $traerNotificaciones["nuevasVentas"] + 1;
 
 			NotificationsModel::updateNotifications("notifications", "nuevasVentas", $nuevaVenta);
-
 
 		}
 

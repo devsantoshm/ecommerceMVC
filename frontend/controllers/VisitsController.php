@@ -39,6 +39,16 @@ class VisitsController
 		}
 
 		if ($respuestaInsertarIp == "ok" || $respuestaActualizarIp == "ok") {
+
+			/*=============================================
+			ACTUALIZAR NOTIFICACIONES NUEVAS VISITAS
+			=============================================*/
+			$traerNotificaciones = NotificationsController::showNotifications();
+
+			$nuevaVisita = $traerNotificaciones["nuevasVisitas"] + 1;
+
+			NotificationsModel::updateNotifications("notifications", "nuevasVisitas", $nuevaVisita);
+
 			$tableCountry = "visitscountry";
 			//SELECCIONAR PAIS
 			$seleccionarPais = VisitsModel::selectCountry($tableCountry, $pais);
